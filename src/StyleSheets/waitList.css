@@ -4,4 +4,33 @@
     padding-top: 30px;
     padding-left: 20px;
     padding-right: 20px;
-};
+}
+
+.beta-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 111px;
+}
+
+.bbb {
+    height: 2em;
+    border-radius: 71px;
+    /* width: 44px; */
+    border: none;
+    background-color: #007AFF;
+    color: white;
+    font-size: 22px;
+    width: 107px;
+}
+
+.beta-text {
+    background: #E3E3E3;
+    padding: 0 10px;
+}
+
+.beta-button {
+    background: #E3E3E3;
+    padding: 0 10px;
+    padding-top: 5px;
+}

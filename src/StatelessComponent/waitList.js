@@ -9,6 +9,19 @@ function WaitList () {
                 <div className='logo'>Logo</div>
                 <div className='menu'>Menu</div>
             </div>
+            <div className='beta-container'>
+                <div className='beta-button'>
+                    <button className='bbb'>Beta</button>
+                </div>
+                <div className='beta-text'>
+                    <p style={{ marginLeft: '16px' }}>Shop With Certainty</p>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <h1>What You See Is What You Get</h1>
+                </div>
+            </div>
         </div>
     );
 };
