@@ -17,9 +17,9 @@ function WaitList () {
                     <p style={{ marginLeft: '16px' }}>Shop With Certainty</p>
                 </div>
             </div>
-            <div>
+            <div className='wis'>
                 <div>
-                    <h1>What You See Is What You Get</h1>
+                    <h1 className='wis-h'>What You See Is What You Get</h1>
                 </div>
             </div>
         </div>

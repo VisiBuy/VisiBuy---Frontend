@@ -27,10 +27,30 @@
 .beta-text {
     background: #E3E3E3;
     padding: 0 10px;
+    border-radius: 0 56px 56px 0;
 }
 
 .beta-button {
     background: #E3E3E3;
     padding: 0 10px;
     padding-top: 5px;
+    border-radius: 56px 0 0 56px;
+}
+
+.wis {
+    text-align: center;
+    position: relative;
+    top: 158px;
+    padding: 0 56px;
+}
+
+.wis-h {
+    font-size: 40px;
+    /* line-height: 48.76px; */
+    line-height: 56.76px;
+    font-weight: 700;
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif; /* Font for headings */
 }
