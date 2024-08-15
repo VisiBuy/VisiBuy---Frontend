@@ -34,7 +34,7 @@ function WaitList () {
                         <input style={{border: 'none', padding: '10px', background: '#E3E3E3'}}/>
                     </div>
                     <div>
-                        <button style={{border: 'none', padding: '10px', color: 'white', background: '#28A745'}}>Get Started</button>
+                        <button style={{border: 'none', padding: '10px', color: 'white', background: '#28A745', fontWeight: '400'}}>Get Started</button>
                     </div>
                 </div>
                 <p style={{textAlign: 'center', fontSize: '9px'}}>PS: Join our waitlist and be the first to know when we officially launch🎉.</p>
