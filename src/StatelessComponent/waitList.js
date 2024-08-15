@@ -31,7 +31,7 @@ function WaitList () {
             <div className='email-section-beta'>
                 <div className='input-section'>
                     <div>
-                        <input style={{border: 'none', padding: '10px'}}/>
+                        <input style={{border: 'none', padding: '10px', background: '#E3E3E3'}}/>
                     </div>
                     <div>
                         <button style={{border: 'none', padding: '10px', color: 'white', background: '#28A745'}}>Get Started</button>
