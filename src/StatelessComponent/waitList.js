@@ -31,13 +31,13 @@ function WaitList () {
             <div className='email-section-beta'>
                 <div className='input-section'>
                     <div>
-                        <input style={{border: 'none', padding: '10px', background: '#E3E3E3'}}/>
+                        <input style={{border: 'none', padding: '10px', background: '#E3E3E3', fontSize: '18px'}} placeholder='Enter Email Address'/>
                     </div>
                     <div>
-                        <button style={{border: 'none', padding: '10px', color: 'white', background: '#28A745', fontWeight: '400'}}>Get Started</button>
+                        <button style={{border: 'none', padding: '10px', color: 'white', background: '#28A745', fontWeight: '400', borderRadius: '7px'}}>Sign Up</button>
                     </div>
                 </div>
-                <p style={{textAlign: 'center', fontSize: '9px'}}>PS: Join our waitlist and be the first to know when we officially launch🎉.</p>
+                <p style={{textAlign: 'center', fontSize: '11px', padding: '0 56px'}}>PS: Join our waitlist and be the first to know when we officially launch🎉.</p>
             </div>
         </div>
     );

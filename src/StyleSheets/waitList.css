@@ -89,4 +89,15 @@ body {
 .input-section {
     display: flex;
     justify-content: center;
+    margin-left: 25px;
+    margin-right: 25px;
+    border: 1px solid #161616;
+    background: #E3E3E3;
+    padding-top: 6px;
+    border-radius: 10px;
+}
+
+input:focus {
+    border: none;
+    outline: none;
 }
