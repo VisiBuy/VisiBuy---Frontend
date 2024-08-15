@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     position: relative;
-    top: 111px;
+    top: 80px;
 }
 
 .bbb {
@@ -20,20 +20,21 @@
     border: none;
     background-color: #007AFF;
     color: white;
-    font-size: 22px;
-    width: 107px;
+    font-size: 12px;
+    width: 42px;
+    font-weight: 700
 }
 
 .beta-text {
     background: #E3E3E3;
-    padding: 0 10px;
+    padding: 0 5px;
     border-radius: 0 56px 56px 0;
 }
 
 .beta-button {
     background: #E3E3E3;
-    padding: 0 10px;
-    padding-top: 5px;
+    padding: 0 7px;
+    padding-top: 6px;
     border-radius: 56px 0 0 56px;
 }
 
@@ -41,7 +42,8 @@
     text-align: center;
     position: relative;
     top: 158px;
-    padding: 0 56px;
+    margin-top: -93px;
+    padding: 1px 62px;
 }
 
 .wis-h {
@@ -53,4 +55,38 @@
 
 h1, h2, h3 {
     font-family: 'Montserrat', sans-serif; /* Font for headings */
+}
+
+body {
+    font-family: 'Open Sans', sans-serif; /* Default font for body text */
+    overflow-x: hidden;
+}
+
+.logo {
+    max-width: 81px;
+}
+
+.p-div {
+    position: relative;
+    top: 142px;
+    left: 0px;
+    padding: 0 56px;
+    line-height: 26.76px;
+    /* width: 280px; */
+}
+
+.p-text {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.email-section-beta {
+    position: relative;
+    top: 166px;
+}
+
+.input-section {
+    display: flex;
+    justify-content: center;
 }
