@@ -26,7 +26,7 @@ function WaitList () {
                 </div>
             </div>
             <div className='p-div'>
-                <p className='p-text'>Visual Proof for Every Order: Ensuring You Get Exactly What You Ordered. Join Our Waitlist and Experience the Future of Online Shopping.</p>
+                <p className='p-text'>Visual Proof for Every Order: Ensuring You Get Exactly What You Ordered. Join Our Beta Program and Experience the Future of Online Shopping.</p>
             </div>
             <div className='email-section-beta'>
                 <div className='input-section'>
@@ -37,7 +37,7 @@ function WaitList () {
                         <button style={{border: 'none', padding: '10px', color: 'white', background: '#28A745', fontWeight: '400', borderRadius: '7px'}}>Sign Up</button>
                     </div>
                 </div>
-                <p style={{textAlign: 'center', fontSize: '11px', padding: '0 56px'}}>PS: Join our waitlist and be the first to know when we officially launch🎉.</p>
+                <p style={{textAlign: 'center', fontSize: '11px', padding: '0 56px'}}>PS: Join our beta program and be the first to know when we officially launch🎉.</p>
             </div>
         </div>
     );
