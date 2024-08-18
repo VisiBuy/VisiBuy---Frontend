@@ -3,7 +3,7 @@ import React from 'react';
 import '../StyleSheets/waitList.css';
 import logo from '../Images/VisiBuy - Colored.png'
 
-function WaitList () {
+function WaitList ( { email, emailHandler, submitHandler }) {
     return (
         <div>
             <div className='header-container'>
@@ -31,10 +31,10 @@ function WaitList () {
             <div className='email-section-beta'>
                 <div className='input-section'>
                     <div>
-                        <input style={{border: 'none', padding: '10px', background: '#E3E3E3', fontSize: '18px'}} placeholder='Enter Email Address'/>
+                        <input style={{border: 'none', padding: '10px', background: '#E3E3E3', fontSize: '18px'}} type='email' value={email} onChange={emailHandler} placeholder='Enter Email Address'/>
                     </div>
                     <div>
-                        <button style={{border: 'none', padding: '10px', color: 'white', background: '#28A745', fontWeight: '400', borderRadius: '7px'}}>Sign Up</button>
+                        <button style={{border: 'none', padding: '10px', color: 'white', background: '#28A745', fontWeight: '400', borderRadius: '7px'}} onClick={submitHandler}>Sign Up</button>
                     </div>
                 </div>
                 <p style={{textAlign: 'center', fontSize: '11px', padding: '0 56px'}}>PS: Join our beta program and be the first to know when we officially launch🎉.</p>
