@@ -36,13 +36,12 @@ function WaitListComp () {
                     event_category: 'User',
                     event_label: 'Sign Up',
                     value: 1, // Optional: Set a value if applicable
-                  });
+                });
 
                 window.fbq('track', 'CompleteRegistration', {
                 content_name: 'Sign Up',
                 content_category: 'User Actions',
-                value: 1, // Optional: Set a value if applicable
-                currency: 'USD'
+                email: email,
                 });
                 setButtonText('Sign Up');
                 return alert('Thank you for Signing Up');
