@@ -101,3 +101,33 @@ input:focus {
     border: none;
     outline: none;
 }
+
+.in-email {
+    border: none;
+    padding: 10px;
+    background: rgb(227, 227, 227);
+    font-size: 18px;
+}
+
+.bt-email {
+    border: none;
+    padding: 10px;
+    color: white;
+    background: rgb(40, 167, 69);
+    font-weight: 400;
+    border-radius: 7px;
+}
+
+@media only screen and (max-width: 320px) {
+    .email-section-beta {
+        padding-bottom: 44px;
+    }
+
+    .in-email {
+        font-size: 13px;
+    }
+
+    .bt-email {
+        padding: 7px;
+    }
+}

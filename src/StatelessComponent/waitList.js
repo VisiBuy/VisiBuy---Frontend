@@ -31,10 +31,10 @@ function WaitList ( { email, emailHandler, submitHandler, buttonText }) {
             <div className='email-section-beta'>
                 <div className='input-section'>
                     <div>
-                        <input style={{border: 'none', padding: '10px', background: '#E3E3E3', fontSize: '18px'}} type='email' value={email} onChange={emailHandler} placeholder='Enter Email Address'/>
+                        <input className='in-email' type='email' value={email} onChange={emailHandler} placeholder='Enter Email Address'/>
                     </div>
                     <div>
-                        <button style={{border: 'none', padding: '10px', color: 'white', background: '#28A745', fontWeight: '400', borderRadius: '7px'}} onClick={submitHandler}>{buttonText}</button>
+                        <button className='bt-email' onClick={submitHandler}>{buttonText}</button>
                     </div>
                 </div>
                 <p style={{textAlign: 'center', fontSize: '11px', padding: '0 56px'}}>PS: Join our beta program and be the first to know when we officially launch🎉.</p>
