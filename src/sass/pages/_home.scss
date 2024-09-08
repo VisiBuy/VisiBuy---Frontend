@@ -1,13 +1,31 @@
 .hero_section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    // justify-content: space-between;
+    justify-content: space-between;
     gap: 9.6rem;
     margin: 0 auto;
     padding: 6.4rem 9.6rem;
-    background-color: var(--color-tertiary);
-    font-family: $font-primary;;
+    // height: 85vh;
+    background: url("/line-bg 1.svg");
+    background-size: cover;
+    background-position: center;
+    // transform: translate(-6.67%, 0px);
+
+    color: var(--color-black);
+
+    background-color: var(--color-primary-80);
+
+
+    font-family: $font-primary;
+
+    .brand_section {
+        p {
+            background-color:;
+            border-radius: 1.6rem;
+        }
+    }
+
 
     & .hero_text_box {
         .hero_heading {
