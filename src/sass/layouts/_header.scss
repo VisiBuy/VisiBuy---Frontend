@@ -22,7 +22,7 @@
 
 .main_nav {
     display: flex;
-    gap: 12.8rem;
+    gap: 16rem;
     align-items: center;
     // justify-content: space-between;
     font-size: 1.6rem;
@@ -30,7 +30,7 @@
 
     & .main_nav_list {
         display: flex;
-        gap:4.8rem;
+        gap: 4.8rem;
         align-items: center;
     }
     
@@ -46,6 +46,11 @@
             color: var(--color-primary);
             // text-decoration: underline;
         }
+    }
+
+    & .main_nav_list_right {
+        display: flex;
+        gap: 4.8rem;
     }
 }
 

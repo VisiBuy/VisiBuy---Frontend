@@ -22,7 +22,7 @@ function Header() {
 
 					<Logo />
 
-					<ul className="main_nav_list">
+					<ul className="main_nav_list_right">
 						<li>
 							<a href="#login">Login</a>
 						</li>
