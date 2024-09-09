@@ -19,12 +19,12 @@ function Hero() {
 
 					<div className="waitlist_section">
 						<input type="email" placeholder="Enter Email Address" />
-						<button>Get Started</button>
+						<button className="cta_btn">Get Started</button>
+					</div>
 						{/* <span className="signup_response">
 							Thank you for joining the waitlist. You're part of the top list of
 							people to know when we launch🥂
 						</span> */}
-					</div>
 						<p className="waitlist_note">
 							PS: Join our mailing list and be the first to know when we
 							officially launch🎉.
