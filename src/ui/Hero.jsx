@@ -18,31 +18,21 @@ function Hero() {
 					</p>
 
 					<div className="waitlist_section">
-						<input type="email" placeholder="Enter Email Address" />{" "}
+						<input type="email" placeholder="Enter Email Address" />
 						<button>Get Started</button>
 						{/* <span className="signup_response">
 							Thank you for joining the waitlist. You're part of the top list of
 							people to know when we launch🥂
 						</span> */}
-						<p>
+					</div>
+						<p className="waitlist_note">
 							PS: Join our mailing list and be the first to know when we
 							officially launch🎉.
 						</p>
-					</div>
 
 					{/* <a className="cta_btn" href="#request_demo">
 							Request a Demo
 						</a> */}
-				</div>
-				<div className="hero_img_box">
-					<picture>
-						<img
-							src="./"
-							className="hero_img"
-							alt="hero_img"
-							type="image/png"
-						/>
-					</picture>
 				</div>
 			</section>
 		</>
