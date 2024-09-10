@@ -22,7 +22,7 @@ function ServicesTray({ navRef }) {
 	return (
 		<>
 			<section ref={navRef} className="services_container">
-				<div className="navigation_container">
+				<div className="services_navigation_container">
 					{Children.toArray(
 						servicesPage.map((nav) => {
 							return (
