@@ -39,8 +39,8 @@ function Footer() {
                     <ul className="footer_nav">
                         <li>
                             <a href="#" className="footer_link">FAQ</a>
-                            <a href="#" className="footer_link">Pricing</a>
                         </li>
+                            <li><a href="#" className="footer_link">Pricing</a></li>
                     </ul>
                 </div>
 
@@ -57,10 +57,10 @@ function Footer() {
                     <p className="footer_heading">Company</p>
                     <ul className="footer_nav">
                         <li>
-                            <a href="#" className="footer_link">About Us</a>
-                            <a href="#" className="footer_link">Terms of Service</a>
-                            <a href="#" className="footer_link">Privacy Policy</a>
-                        </li>
+                            <a href="#" className="footer_link">About Us</a></li>
+                            <li><a href="#" className="footer_link">Terms of Service</a></li>
+                            <li><a href="#" className="footer_link">Privacy Policy</a></li>
+                        
                     </ul>
                 </div>
             </div>

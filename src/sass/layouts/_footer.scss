@@ -8,7 +8,7 @@
 }
 
 .footer_grid {
-    grid-template-columns: 1.5fr  1fr 1fr 1fr;
+    grid-template-columns: 3.6fr 1fr 1fr 1fr;
     padding: 9.6rem 6.4rem;
 
     .footer_logo_col {
@@ -42,6 +42,37 @@
 
         .copyright {
             margin-top: 4.2rem;
+        }
+    }
+
+    .footer_nav_links_col {
+        display: flex;
+        gap: 3.2rem;
+        flex-direction: column;
+        color: var(--color-primary-80);
+        font-family: $font-secondary;
+
+        .footer_heading {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: $font-primary;
+        }
+
+        .footer_nav {
+            display: flex;
+            gap: 1.6rem;
+            flex-direction: column;
+            text-decoration: none;
+
+            & li {
+                list-style: none;
+                font-size: 1.2rem;
+            }
+
+            & a {
+                color: var(--color-primary-80);
+                text-decoration: none;
+            }
         }
     }
 }
