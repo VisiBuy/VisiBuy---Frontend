@@ -25,11 +25,7 @@
 		}
 
 		.subheading {
-			font-size: 1.4rem;
-
-			color: var(--color-primary-80);
-			text-transform: uppercase;
-			font-weight: 700;
+			@include subheading;
 		}
 
 		.heading_tertiary {
