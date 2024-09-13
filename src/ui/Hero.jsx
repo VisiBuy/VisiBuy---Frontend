@@ -14,7 +14,7 @@ function Hero() {
 					</h1>
 					<p className="hero_description">
 						Your all-in-one delivery verification platform to shop with ease and
-						certainity.
+						certainty.
 					</p>
 
 					<div className="waitlist_section">
