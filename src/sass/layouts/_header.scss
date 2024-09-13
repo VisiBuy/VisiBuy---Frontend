@@ -13,6 +13,8 @@
     background-color: var(--color-white);
     border-bottom: 1px solid var(--color-secondary);
     display: flex;
+    // flex: 1 1 0;
+    gap: 4.8rem;
     align-items: center;
     justify-items: center;
     justify-content: space-evenly;
@@ -22,7 +24,8 @@
 
 .main_nav {
     display: flex;
-    gap: 16rem;
+    gap: 20rem;
+    flex: auto 60% auto;
     align-items: center;
     // justify-content: space-between;
     font-size: 1.6rem;

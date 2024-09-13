@@ -1,4 +1,5 @@
 import Home from "./pages/Home";
+import Footer from "./ui/Footer";
 
 
 function App() {
@@ -7,6 +8,9 @@ function App() {
 			<main className="container">
 				<Home />
 			</main>
+			<footer className="footer">
+				<Footer />
+			</footer>
 		</>
 	);
 }
