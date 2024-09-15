@@ -13,11 +13,23 @@ function ServicesManagement() {
                 <div className="service_m-services">
                     <div className="services-rider">
                         <header className="services_heading">Your Riders</header>
-                        <div className="services_subheading">Seamlessly use ad manage your riders and drivers.</div>
+                        <div className="services_subheading">Seamlessly use and manage your riders and drivers.</div>
+
+                        <ul className="services_benefits">
+                            <li>Get SMS/Email Notifications when assigned a Delivery.</li>
+                            <li>Dashboard to update delivery progress.</li>
+                            <li>Invoice generation and receipts of delivery.</li>
+                        </ul>
                     </div>
                     <div className="services-customer">
                         <header className="services_heading">Your Customers</header>
                         <div className="services_subheading">Refine your customers experience to the next level.</div>
+
+                        <ul className="services_benefits">
+                            <li>Get SMS/Email Notifications when assigned a Delivery.</li>
+                            <li>Dashboard to update delivery progress.</li>
+                            <li>Invoice generation and receipts of delivery.</li>
+                        </ul>
                     </div>
                 </div>
 			</div>
