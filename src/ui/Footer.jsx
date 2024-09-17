@@ -41,12 +41,12 @@ function Footer() {
 				<p className="footer_heading">Product</p>
 				<ul className="footer_nav">
 					<li>
-						<a href="#" className="footer_link">
+						<a href="/faq" className="footer_link">
 							FAQ
 						</a>
 					</li>
 					<li>
-						<a href="#" className="footer_link">
+						<a href="/pricing" className="footer_link">
 							Pricing
 						</a>
 					</li>
@@ -57,7 +57,7 @@ function Footer() {
 				<p className="footer_heading">Resources</p>
 				<ul className="footer_nav">
 					<li>
-						<a href="#" className="footer_link">
+						<a href="/blog" className="footer_link">
 							Blog
 						</a>
 					</li>
@@ -68,17 +68,17 @@ function Footer() {
 				<p className="footer_heading">Company</p>
 				<ul className="footer_nav">
 					<li>
-						<a href="#" className="footer_link">
+						<a href="/about" className="footer_link">
 							About Us
 						</a>
 					</li>
 					<li>
-						<a href="#" className="footer_link">
+						<a href="/tos" className="footer_link">
 							Terms of Service
 						</a>
 					</li>
 					<li>
-						<a href="#" className="footer_link">
+						<a href="/privacy-policy" className="footer_link">
 							Privacy Policy
 						</a>
 					</li>
