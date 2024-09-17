@@ -8,10 +8,8 @@ import Pricing from "./pages/Pricing";
 import TOS from "./pages/TOS";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 
-import Footer from "./ui/Footer";
+import AppLayout from "./ui/AppLayout";
 
-
-import { Outlet } from "react-router-dom";
 import {
 	createBrowserRouter,
 	RouterProvider,
@@ -20,59 +18,52 @@ import {
 
 const router = createBrowserRouter([
 	{
-	  element: <AppLayout />,
-	  errorElement: <PageNotFound />,
-  
-	  children: [
-		{
-		  path: "/",
-		  element: <Home />,
-		},
-		{
-		  path: "/faq",
-		  element: <FAQ />,
-		  errorElement: <PageNotFound />,
-		},
-		{
-		  path: "/blog",
-		  element: <Blog />,
-		  errorElement: <PageNotFound />,
-		  },
-		  {
-			path: "/pricing",
-			element: <Pricing />,
-			errorElement: <PageNotFound />,
-		  },
-		  {
-			path: "/about",
-			element: <AboutUs />,
-			errorElement: <PageNotFound />,
-		  },
-		  {
-			path: "/tos",
-			element: <TOS />,
-			errorElement: <PageNotFound />,
-		  },
-		  {
-			path: "/privacy-policy",
-			element: <PrivacyPolicy />,
-			errorElement: <PageNotFound />,
-		  },
-	  ]
+		element: <AppLayout />,
+		errorElement: <PageNotFound />,
+	
+		children: [
+			{
+				path: "/",
+				element: <Home />,
+			},
+			{
+				path: "/faq",
+				element: <FAQ />,
+				//   errorElement: <PageNotFound />,
+			},
+			{
+				path: "/blog",
+				element: <Blog />,
+				//   errorElement: <PageNotFound />,
+			},
+			{
+				path: "/pricing",
+				element: <Pricing />,
+				// errorElement: <PageNotFound />,
+			},
+			{
+				path: "/about",
+				element: <AboutUs />,
+				// errorElement: <PageNotFound />,
+			},
+			{
+				path: "/tos",
+				element: <TOS />,
+				// errorElement: <PageNotFound />,
+			},
+			{
+				path: "/privacy-policy",
+				element: <PrivacyPolicy />,
+				// errorElement: <PageNotFound />,
+			},
+		]
 	},
   ]);
 
 
 function App() {
 	return (
-		<>
-			<main className="container">
-				<Outlet />
-			</main>
-			<footer className="footer">
-				<Footer />
-			</footer>
-		</>
+		<RouterProvider router={router} />
 	);
 }
 
