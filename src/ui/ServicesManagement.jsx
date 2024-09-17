@@ -17,7 +17,7 @@ function ServicesManagement() {
 							Seamlessly use and manage your riders and drivers.
 						</div>
 
-						<ul className="services_benefits">
+						<ul className="services_benefits" dir="auto">
 							<li>Get SMS/Email Notifications when assigned a Delivery.</li>
 							<li>Dashboard to update delivery progress.</li>
 							<li>Invoice generation and receipts of delivery.</li>
