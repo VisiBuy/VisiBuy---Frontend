@@ -1,6 +1,6 @@
 function CTA() {
 	return (
-		<section className="section_CTA">
+		<section className="cta_section">
 			<div className="cta">
 				<div className="cta_box">
 					<div className="cta_container">
