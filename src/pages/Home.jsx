@@ -7,16 +7,16 @@ import CtaForm from "../ui/CtaForm";
 import Hero from "../ui/Hero";
 import ServicesManagement from "../ui/ServicesManagement";
 import ServicesTray from "../ui/ServicesTray";
-// import Testimonials from "../ui/Testimonials";
+import Testimonials from "../ui/Testimonials";
 
 function Home() {
 	return (
 		<>
 			<Hero />
 			<ServicesTray />
-			<CtaForm />
+			{/* <CtaForm /> */}
 			<ServicesManagement />
-			{/* <Testimonials /> */}
+			<Testimonials />
 			<CTA />
 		</>
 	);

@@ -12,7 +12,7 @@ function CTA() {
 								All the capabilities you need to shop with certainty.
 							</h1>
 						</div>
-						<button className="cta_btn">Get Started</button>
+						<a href="#cta" className="cta_btn">Get Started</a>
 					</div>
 				</div>
 			</div>

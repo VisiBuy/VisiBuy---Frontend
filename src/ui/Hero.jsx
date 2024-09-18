@@ -22,7 +22,7 @@ function Hero() {
 						certainty.
 					</p>
 
-					<form className="waitlist_section" onSubmit={(e) => {e.preventDefault()}}>
+					<form className="waitlist_section" id="cta" onSubmit={(e) => {e.preventDefault()}}>
 						<div >
 						<input type="email" placeholder="Enter Email Address" value={email} onChange={emailHandler} required />
 						<button className="cta_btn" onClick={submitHandler} >{buttonText}</button>

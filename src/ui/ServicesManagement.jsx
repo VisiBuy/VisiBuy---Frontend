@@ -22,6 +22,9 @@ function ServicesManagement() {
 							<li>Dashboard to update delivery progress.</li>
 							<li>Invoice generation and receipts of delivery.</li>
 						</ul>
+						<div className="services_image">
+							<img src="src\sass\pages\assets\cart vector object.png" />
+						</div>
 					</div>
 					<div className="services-section services-customer">
 						<header className="services_heading">Your Customers</header>
@@ -34,6 +37,9 @@ function ServicesManagement() {
 							<li>Dashboard to update delivery progress.</li>
 							<li>Invoice generation and receipts of delivery.</li>
 						</ul>
+						<div className="services_image">
+							<img src="src\sass\pages\assets\cart vector object.png" />
+						</div>
 					</div>
 				</div>
 			</div>
