@@ -24,7 +24,7 @@ function Hero() {
 
 					<form className="waitlist_section" id="cta" onSubmit={(e) => {e.preventDefault()}}>
 						<div >
-						<input type="email" placeholder="Enter Email Address" value={email} onChange={emailHandler} required />
+						<input type="email" placeholder="Enter Email Address" value={email} onChange={emailHandler} autoComplete= "on" required />
 						<button className="cta_btn" onClick={submitHandler} >{buttonText}</button>
 							</div>
 					{ isSuccessful && <span className="signup_response">
