@@ -1,4 +1,9 @@
+import HandleWaitList from "../services/HandleWaitList";
+
 function Hero() {
+// HandleWaitList();
+	const { email, emailHandler, submitHandler, buttonText, message, isSuccessful } = HandleWaitList();
+
 	return (
 		<>
 			<section className="hero_section">
@@ -17,18 +22,19 @@ function Hero() {
 						certainty.
 					</p>
 
-					<div className="waitlist_section">
-						<input type="email" placeholder="Enter Email Address" />
-						<button className="cta_btn">Get Started</button>
-					</div>
-						{/* <span className="signup_response">
-							Thank you for joining the waitlist. You're part of the top list of
-							people to know when we launch🥂
-						</span> */}
-						<p className="waitlist_note">
-							PS: Join our mailing list and be the first to know when we
-							officially launch🎉.
-						</p>
+					<form className="waitlist_section" id="cta" onSubmit={(e) => {e.preventDefault()}}>
+						<div >
+						<input type="email" placeholder="Enter Email Address" value={email} onChange={emailHandler} required />
+						<button className="cta_btn" onClick={submitHandler} >{buttonText}</button>
+							</div>
+					{ isSuccessful && <span className="signup_response">
+					{message}
+						</span>}
+					</form>
+					<p className="waitlist_note">
+						PS: Join our mailing list and be the first to know when we
+						officially launch🎉.
+					</p>
 
 					{/* <a className="cta_btn" href="#request_demo">
 							Request a Demo

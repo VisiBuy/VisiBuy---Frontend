@@ -88,11 +88,15 @@
     }
     .waitlist_section {
         display: flex;
+        flex-direction: column;
+        gap: 2.4rem;
         align-items: center;
         font-size: 1.6rem;
         margin: 0 auto;
         margin-bottom: 2.4rem;
         font-family: $font-secondary;
+        transition: all moveInBottom 0.6s  ease-in-out;
+        // transition: all 0.2s;
 
         input {
             font-size: 1.6rem;
@@ -123,6 +127,7 @@
     }
 
     .signup_response {
+        // display: flex;
         width: 52rem;
         border-radius: 1rem;
         font-size: 1.6rem;

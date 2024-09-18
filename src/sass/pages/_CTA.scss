@@ -25,11 +25,7 @@
 		}
 
 		.subheading {
-			font-size: 1.4rem;
-
-			color: var(--color-primary-80);
-			text-transform: uppercase;
-			font-weight: 700;
+			@include subheading;
 		}
 
 		.heading_tertiary {
@@ -40,17 +36,20 @@
 			text-wrap: wrap;
 		}
 
-		button {
+		a {
 			// width: 30%;
 			display: inline-block;
-            padding: 2rem 2.8rem;
+            // padding: 2rem 2.8rem;
+            padding: 2rem;
             width: 24%;
             font-size: 1.6rem;
+			text-decoration: none;
             // display: inline-block;
             // flex-basis: 1;
 			cursor: pointer;
 			border: none;
 			align-self: end;
+			text-align: center;
 		}
 	}
 }

@@ -16,3 +16,12 @@
     row-gap: 9.6rem;
     margin-bottom: 9.6rem;
 }
+
+@mixin subheading {
+    font-size: 1.4rem;
+
+    color: var(--color-primary-80);
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: $font-secondary;
+}
