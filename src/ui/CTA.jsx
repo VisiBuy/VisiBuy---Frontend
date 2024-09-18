@@ -6,7 +6,7 @@ function CTA() {
 					<div className="cta_container">
 						<div>
 							<span className="subheading">
-								Scale your business and delivery at a cheaper rate
+								VisiBuy Visual Verification for your Peace of Mind.
 							</span>
 							<h1 className="heading_tertiary">
 								All the capabilities you need to shop with certainty.

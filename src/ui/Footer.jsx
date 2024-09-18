@@ -41,7 +41,8 @@ function Footer() {
 				<p className="footer_heading">Product</p>
 				<ul className="footer_nav">
 					<li>
-						<a href="#" className="footer_link">
+						{/* Added Visibuy FAQ link */}
+						<a href="https://visibuy.freshdesk.com" className="footer_link">
 							FAQ
 						</a>
 					</li>
