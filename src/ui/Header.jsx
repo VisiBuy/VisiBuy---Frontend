@@ -5,6 +5,8 @@ function Header() {
 		<>
 			<header className="header">
 				<nav className="main_nav">
+					<Logo />
+					
 					<ul className="main_nav_list">
 						{/* <li>
 							<a href="#home">Home</a>
@@ -20,7 +22,7 @@ function Header() {
 						</li>
 					</ul>
 
-					<Logo />
+					
 
 					<ul className="main_nav_list_right">
 						<li>
