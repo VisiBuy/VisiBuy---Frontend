@@ -1,0 +1,42 @@
+.vendor_section_container {
+	margin: 0 auto;
+	align-items: center;
+	margin-bottom: 2rem;
+
+	.vendor_section_heading {
+		text-align: center;
+		margin-bottom: 4.8rem;
+		color: var(--color-primary-80);
+		font-family: $font-primary;
+
+		.vendor_heading {
+			font-size: 6.4rem;
+			line-height: 1.2;
+			margin-bottom: 2.4rem;
+
+			span {
+				padding: 0.4rem 1.4rem;
+				border-radius: 2rem;
+				color: var(--color-white-10);
+				background-color: var(--color-tertiary);
+			}
+		}
+
+		.vendor_subheading {
+			font-size: 2.4rem;
+			font-family: $font-secondary;
+		}
+	}
+	div {
+		// display: block;
+		text-align: center;
+		margin: 0 auto;
+
+		a {
+			font-size: 1.6rem;
+            font-family: $font-secondary;
+			text-decoration: none;
+			padding: 2rem 2.4rem;
+		}
+	}
+}
