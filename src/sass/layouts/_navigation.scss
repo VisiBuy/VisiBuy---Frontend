@@ -27,16 +27,16 @@
 			transition: color 0.2s;
         }
 
-        .active {
-            @include ctaBtn;
-				font-weight: 500;
-				padding: 1.8rem 2.4rem;
-				// transition: all 0.6s cubic-bezier(0.785, 0.135, 0.15, 0.86) ease-in;
-				transition: all 0.2s;
-				// -webkit-transform: scaleX(1);
-				// -moz-transform: scaleX(1);
-				// -o-transform: scaleX(1);
-				transform: scaleX(1);
-        }
+    }
+    .active {
+        @include ctaBtn;
+            font-weight: 500;
+            padding: 1.8rem 2.4rem;
+            // transition: all 0.6s cubic-bezier(0.785, 0.135, 0.15, 0.86) ease-in;
+            transition: all 0.2s;
+            // -webkit-transform: scaleX(1);
+            // -moz-transform: scaleX(1);
+            // -o-transform: scaleX(1);
+            transform: scaleX(1);
     }
 }
