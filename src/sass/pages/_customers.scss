@@ -14,6 +14,7 @@
 
 		.customers_subheading {
 			font-size: 1.6rem;
+			font-family: $font-secondary;
 		}
 	}
 
@@ -69,7 +70,7 @@
                     line-height: 1.6;
                     text-align: left;
                     color: var(--color-gray-30);
-                    font-family: $font-primary;
+					font-family: $font-secondary;
                 }
             }
         }
