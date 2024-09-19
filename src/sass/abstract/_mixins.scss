@@ -25,3 +25,53 @@
     font-weight: 700;
     font-family: $font-secondary;
 }
+
+//MEDIA QUERY MANAGER
+
+/*
+Breakpoints
+    0 - 600px - Phone
+    768 - 860px -900px - Laptop/Tab View
+    1150px - Laptop-mid
+	1440px - laptop-L
+*/
+
+// @mixin respond($breakpoint) {
+// 	@if $breakpoint == phone {
+// 		@media only screen and (max-width: 37.5em) {
+// 			@content;
+// 		}
+// 	}
+
+// 	@if $breakpoint == tab-view {
+// 		@media only screen and (max-width: 56.25em) and (min-width: 37.5em) {
+// 			@content;
+// 		}
+// 	}
+
+// 	@if $breakpoint == laptop-mid {
+// 		@media only screen and (min-width: 56.25em) and (max-width: 71.87em) {
+// 			@content;
+// 		}
+// 	}
+
+// 	@if $breakpoint == laptop-L {
+//         @media only screen and (max-width: 90em) { @content };
+//     }
+// }
+
+
+@mixin respond ($breakpoint) {
+    @if $breakpoint == phone {
+        @media only screen and (max-width: 37.5em) { @content };    //600px
+    }
+    @if $breakpoint == tab-port {
+        @media only screen and (max-width: 56.25em) { @content };    //900px
+    }
+    @if $breakpoint == tab-land {
+        @media only screen and (max-width: 75em) { @content };   //1200px
+    }
+    @if $breakpoint == big-desktop {
+        @media only screen and (min-width: 112.5em) { @content };   //1800px
+    }
+}

@@ -1,7 +1,7 @@
     .logo {
         position: absolute;
         left: 50%;
-        top: 4%;
+        // top: 4%;
         transform: translateX(-50%);
         // display: flex;
         // gap: 1rem;
@@ -15,10 +15,17 @@
         }
     }
 
+.header-section {
+    position: fixed;
+    width: 100%;
+    margin-bottom: 4.8rem;
+}
 
 .header {
+    background-color: var(--color-primary-80);
     background-color: var(--color-white);
-    border-bottom: 1px solid var(--color-secondary);
+    // position: fixed;
+    // border-bottom: 1px solid var(--color-secondary);
     // display: flex;
     // flex: 1 1 0;
     gap: 4.8rem;
@@ -28,6 +35,16 @@
     justify-content: space-between;
     width: auto;
     padding: 2.4rem 4.8rem;
+
+    .menu-toggle {
+        display: none;
+        border: none;
+        background-color: var(--color-primary-80);
+        cursor: pointer;
+        text-align: center;
+        font-size: 3rem;
+        padding: 1.2rem 2.4rem;
+    }
 }
 
 .main_nav {
