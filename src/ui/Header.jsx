@@ -5,7 +5,7 @@ function Header() {
 		<>
 			<header className="header">
 				<nav className="main_nav">
-					<Logo />
+					
 					
 					<ul className="main_nav_list">
 						{/* <li>
@@ -22,7 +22,7 @@ function Header() {
 						</li>
 					</ul>
 
-					
+					<Logo />
 
 					<ul className="main_nav_list_right">
 						<li>
