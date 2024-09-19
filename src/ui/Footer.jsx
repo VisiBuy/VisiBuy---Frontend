@@ -20,7 +20,7 @@ function Footer() {
 						</a>
 					</li>
 					<li>
-						<a href="#">
+						<a href="https://www.facebook.com/profile.php?id=61563139237527&mibextid=LQQJ4d">
 							<FaFacebook />
 						</a>
 					</li>
