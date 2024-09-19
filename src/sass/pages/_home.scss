@@ -98,6 +98,11 @@
         transition: all moveInBottom 0.6s  ease-in-out;
         // transition: all 0.2s;
 
+        div {
+            display: flex;
+            align-items: center;
+        }
+
         input {
             font-size: 1.6rem;
             padding: 1.8rem;
