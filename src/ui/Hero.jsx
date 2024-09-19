@@ -18,7 +18,7 @@ function Hero() {
 						<span className="brand_highlight"></span>
 					</h1>
 					<p className="hero_description">
-						Your all-in-one delivery verification platform to shop with ease and
+						Your all-in-one verification plus delivery platform to shop with ease and
 						certainty.
 					</p>
 
