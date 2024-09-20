@@ -44,7 +44,7 @@ function Header() {
 					</ul>
 				</nav>
 				<button className="menu-toggle" onClick={toggleMenu}>
-					{menuOpen ? <FaXmark /> : <FaBarsStaggered />}
+					{menuOpen ? <FaBarsStaggered /> : <FaXmark />}
 				</button>
 			</header>
 			</div>
