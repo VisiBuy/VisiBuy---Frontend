@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 function HandleWaitList() {
 	const [email, setEmail] = useState("");
-	const [buttonText, setButtonText] = useState("Get Started");
+	const [buttonText, setButtonText] = useState("Get Early Access");
 	const [message, setMessage] = useState("");
     const [isSuccessful, setIsSuccessful] = useState(null);
 
@@ -32,9 +32,9 @@ function HandleWaitList() {
 
 	const submitHandler = async () => {
 		try {
-			setButtonText("Registering...");
+			setButtonText("Please wait...");
 			if (email === "") {
-				setButtonText("Get Started");
+				setButtonText("Get Early Access");
 				setMessage("Email is Required");
                 setIsSuccessful(false);
                 return;
@@ -59,23 +59,23 @@ function HandleWaitList() {
                     value: 1, // Optional: Set a value if applicable
                 });
 
-                // window.fbq('track', 'CompleteRegistration', {
-                // content_name: 'Sign Up',
-                // content_category: 'User Actions',
-                // email: email,
-                // });
-                setButtonText("Get Started");
+                window.fbq('track', 'CompleteRegistration', {
+                content_name: 'Sign Up',
+                content_category: 'User Actions',
+                email: email,
+                });
+                setButtonText("Get Early Access");
                 // setReq(true);
                 setEmail("");
                 setMessage("Thank you for joining the waitlist. You're part of the top list of people to know when we launch🥂");
                 setIsSuccessful(true);
             } else {
-                setButtonText("Get Started");
+                setButtonText("Get Early Access");
                 setMessage("Something Went Wrong. Try again.");
                 setIsSuccessful(false);
             }
 		} catch (error) {
-			setButtonText("Get Started");
+			setButtonText("Get Early Access");
             // setFeedback(false);
 			console.log(error);
 			setMessage("Something Went Wrong. Try again.");

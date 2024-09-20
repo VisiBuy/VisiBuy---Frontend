@@ -174,10 +174,10 @@
         button {
             // outline: none;
             // box-shadow: none;
-            padding: 1.6rem 2.4rem;
+            padding: 1.6rem;
             cursor: pointer;
             border: none;
-            margin-left: -12.8rem;
+            margin-left: -14rem;
 
             @include respond(tab-port) {
         padding: 1.8rem 1.4rem;
@@ -190,7 +190,7 @@
         padding: 1.6rem;
         text-align: center;
         text-wrap: nowrap;
-        margin-left: -11rem;
+        margin-left: -14rem;
     }
         }
     }
