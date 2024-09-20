@@ -4,23 +4,23 @@ function ServicesManagement() {
 			<div className="service_management_container">
 				<div className="service_m-textbox">
 					<span className="subheading service_m_subheading">
-						Tailor your customer&apos;s experience and yours too
+						Optimize Your Business with Visibuy
 					</span>
 					<h2 className="service_m-heading">
-						Manage your Deliveries and Riders
+						Effortless Delivery and Order Management
 					</h2>
 				</div>
 				<div className="service_m-services">
 					<div className="services-section services-rider">
 						<header className="services_heading">Your Riders</header>
 						<div className="services_subheading">
-							Seamlessly use and manage your riders and drivers.
+							Manage Your Deliveries and Riders Seamlessly
 						</div>
 
 						<ul className="services_benefits" dir="auto">
-							<li>Get SMS/Email Notifications when assigned a Delivery.</li>
-							<li>Dashboard to update delivery progress.</li>
-							<li>Invoice generation and receipts of delivery.</li>
+							<li>Automatic Assignment: Riders are assigned automatically.</li>
+							<li>Real-Time Tracking: Track deliveries easily.</li>
+							<li>Instant Notifications: Receive updates via SMS/Email.</li>
 						</ul>
 						<div className="services_image">
 							<img src="src\sass\pages\assets\cart vector object.png" />
@@ -33,9 +33,9 @@ function ServicesManagement() {
 						</div>
 
 						<ul className="services_benefits">
-							<li>Get SMS/Email Notifications when assigned a Delivery.</li>
-							<li>Dashboard to update delivery progress.</li>
-							<li>Invoice generation and receipts of delivery.</li>
+							<li>Improved Experience: Visual order confirmation.</li>
+							<li>Real-Time Updates: Instant SMS/Email alerts.</li>
+							<li>Order Tracking: Live delivery status.</li>
 						</ul>
 						<div className="services_image">
 							<img src="src\sass\pages\assets\cart vector object.png" />
