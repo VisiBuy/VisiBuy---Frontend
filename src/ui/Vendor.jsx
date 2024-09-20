@@ -4,7 +4,7 @@ function Vendor() {
 			<div className="vendor_section_container">
 				<div className="vendor_section_heading">
 					<h1 className="vendor_heading">
-						Join Our Exclusive <span>Beta</span> programme
+						Join Our Exclusive <span>Beta</span> pProgramme
 					</h1>
 					<p className="vendor_subheading">
 						Help shape the future of online verification shopping

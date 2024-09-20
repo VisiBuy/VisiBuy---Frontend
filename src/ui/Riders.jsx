@@ -4,7 +4,7 @@ function Riders() {
             <div className="riders_section_container">
                 <div className="riders_heading-text-box">
                     <h1 className="riders_heading">
-                        Become one of our Riders
+                        Be one of our Riders
                     </h1>
                     <p className="riders_subheading">
                     Quality Drivers. Great Prices. Tracking. Stress-Free Deliveries.

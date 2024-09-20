@@ -17,7 +17,6 @@ function Customers() {
 						{/* Don't Know how to arrange the benefits of visibuy. Check in the document. I guess youtube is not showing because its localhost */}
 
 						<div className="steps_container">
-
 							<div className="steps">
 							<div className="step_number-box">
 							<p className="step-number">01</p>
