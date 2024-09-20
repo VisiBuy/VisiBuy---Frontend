@@ -1,6 +1,14 @@
 .cta {
 	padding: 6.4rem 12.8rem;
 
+	@include respond(tab-port) {
+		padding: 4.8rem 6.4rem;
+	}
+
+	@include respond(tab-land) {
+		padding: 6.4rem;
+	}
+
 	.cta_box {
 		// display: flex;
 		// align-content: space-between;
@@ -11,6 +19,14 @@
 		font-family: $font-secondary;
 		color: var(--color-white-10);
 		background-color: var(--color-primary);
+
+		@include respond(tab-port) {
+			padding: 4.8rem 6.4rem;
+		}
+	
+		@include respond(tab-land) {
+			padding: 4.2rem;
+		}
 
 		.cta_container {
 			// background: url("/line-bg 1.svg");
@@ -26,6 +42,16 @@
 
 		.subheading {
 			@include subheading;
+
+			@include respond(tab-port) {
+				// padding: 4.8rem 6.4rem;
+				font-size: 1.4rem;;
+			}
+		
+			@include respond(tab-land) {
+				// padding: 6.4rem;
+				font-size: 1.2rem;
+			}
 		}
 
 		.heading_tertiary {
@@ -34,6 +60,16 @@
 			line-height: 1.2;
 			font-family: $font-primary;
 			text-wrap: wrap;
+
+			@include respond(tab-port) {
+				// padding: 4.8rem 6.4rem;
+				font-size: 3.4rem;
+			}
+		
+			@include respond(tab-land) {
+				// padding: 6.4rem;
+				font-size: 3.6rem;
+			}
 		}
 
 		a {
@@ -50,6 +86,19 @@
 			border: none;
 			align-self: end;
 			text-align: center;
+
+			@include respond(tab-port) {
+				// padding: 4.8rem 6.4rem;
+				font-size: 3.4rem;
+				width: 60%;
+			}
+		
+			@include respond(tab-land) {
+				// padding: 6.4rem;
+				width: 30%;
+				text-wrap: nowrap;
+				font-size: 1.4rem;
+			}
 		}
 	}
 }
