@@ -15,7 +15,7 @@
             // display: block;
             position: absolute;
             top: 40%;
-            left: 20%;
+            left: 15%;
             // font-size: 3.4rem;
         }
     
@@ -49,7 +49,7 @@
     justify-items: center;
     justify-content: space-between;
     width: auto;
-    padding: 3.2rem 4.8rem;
+    padding: 2.8rem 4.8rem;
 
     @include respond(tab-port) {
         // display: flex;
@@ -100,33 +100,17 @@
     font-size: 1.6rem;
     font-family: $font-primary;
 
-    &.open {
-        display: none;
-        // flex-direction: column;
-        // margin: 0 auto;
-        // gap: 4.8rem;
-        // padding: 4.8rem;
-        // background-color: var(--color-white);
-
-        @include respond(tab-port) {
-            // display: block;
-            // position: absolute;
-            // flex-direction: column;
-            // margin: 0 auto;
-            // gap: 4.8rem;
-            // padding: 4.8rem 6.4rem;
-            // font-size: 3.4rem;
-        }
     
-        @include respond(tab-land) {
-            // display: flex;
-            // flex-direction: column;
-            // gap: 4.8rem;
-            // padding: 6.4rem;
-            // font-size: 3.6rem;
-        }
-    }
 
+    .nav_container {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+        &.open {
+            display: none;
+        }
+        
     @include respond(tab-port) {
         // display: none;
         background-color: rgba(255, 255, 255, 0.6);
@@ -137,8 +121,6 @@
         left: 0;
         width: 100%;
         height: 100vh;
-        // display: block;
-        // transform: translateX(100%);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -148,10 +130,7 @@
         flex-direction: column;
         margin: 0 auto;
         gap: 6rem;
-        // margin-bottom: 4.8rem;
-        // display: none;
         padding: 4.8rem 6.4rem;
-        // font-size: 3.4rem;
     }
 
     @include respond(tab-land) {
@@ -161,6 +140,8 @@
         // padding: 6.4rem;
         // font-size: 3.6rem;
     }
+    }
+
 
     & .main_nav_list {
         display: flex;
@@ -177,11 +158,11 @@
         }
     
         @include respond(tab-land) {
-            // display: flex;
+            display: flex;
             // flex-direction: column;
             // gap: 4.8rem;
             // padding: 6.4rem;
-            // font-size: 3.6rem;
+            // font-weight: 500;
         }
     }
     
@@ -213,10 +194,11 @@
             gap: 3.2rem;
             // padding: 4.8rem 6.4rem;
             // font-size: 3.4rem;
+            font-weight: 500;
         }
     
         @include respond(tab-land) {
-            // display: flex;
+            display: flex;
             // flex-direction: column;
             // gap: 4.8rem;
             // padding: 6.4rem;
