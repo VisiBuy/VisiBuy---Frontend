@@ -1,6 +1,12 @@
 .cta {
 	padding: 6.4rem 12.8rem;
 
+	@include respond(phone) {
+		padding: 5.4rem 4.2rem!important;
+		display: block!important;
+		margin-bottom: 3.2rem!important;
+	}
+
 	@include respond(tab-port) {
 		padding: 4.8rem 6.4rem;
 	}
@@ -38,6 +44,11 @@
 			// flex: 60% 1fr;
 			gap: 6.4rem;
 			align-content: baseline;
+
+			@include respond(phone) {
+				display: block;
+				// margin-bottom: 3.2rem!important;
+			}
 		}
 
 		.subheading {
@@ -86,6 +97,12 @@
 			border: none;
 			align-self: end;
 			text-align: center;
+
+			@include respond(phone) {
+				display: block;
+				width: 100%!important;
+				margin-top: 3.2rem!important;
+			}
 
 			@include respond(tab-port) {
 				// padding: 4.8rem 6.4rem;

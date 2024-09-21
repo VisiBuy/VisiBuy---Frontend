@@ -115,9 +115,10 @@
         
     @include respond(tab-port) {
         // display: none;
-        background-color: rgba(255, 255, 255, 0.6);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        // background-color: rgba(255, 255, 255, 0.6);
+        background-color: var(--color-white-10);
+        // backdrop-filter: blur(10px);
+        // -webkit-backdrop-filter: blur(10px);
         // position: absolute;
         // top: 0;
         left: 0;
