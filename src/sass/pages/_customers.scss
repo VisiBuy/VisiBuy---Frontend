@@ -51,6 +51,14 @@
 
 		.iframe-div {
 			margin-bottom: 6.4rem;
+
+			iframe {
+
+			@include respond(phone) {
+				width: auto;
+			}
+			}
+
 		}
 	}
 

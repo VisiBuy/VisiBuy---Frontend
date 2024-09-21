@@ -15,9 +15,9 @@ function Home() {
 			<Hero />
 			<ServicesTray />
 			{/* <CtaForm /> */}
-			<ServicesManagement />
+			{/* <ServicesManagement /> */}
 			<Testimonials />
-			<CTA />
+			{/* <CTA /> */}
 		</>
 	);
 }

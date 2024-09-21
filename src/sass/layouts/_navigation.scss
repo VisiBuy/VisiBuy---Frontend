@@ -12,6 +12,11 @@
 	color: var(--color-black);
 	background-color: var(--color-primary-80);
 
+	@include respond(phone) {
+          width: auto!important;
+		  gap: 2rem!important;  
+	}
+
 	@include respond(tab-port) {
 		gap: 0rem;
 		width: 54rem;
