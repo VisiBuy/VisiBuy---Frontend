@@ -5,14 +5,22 @@
 .grid {
     @include grid;
     margin: 0 auto;
+
+    @include respond(phone) {
+         column-gap: 4.2rem;   
+    }
 }
 
 .footer_grid {
     grid-template-columns: 3.6fr 1fr 1fr 1fr;
     padding: 9.6rem 6.4rem;
 
+    @include respond(phone) {
+        padding: 4.2rem 2.4rem!important;    
+    }
+
     @include respond(tab-port) {
-				padding: 4.8rem 6.4rem;
+				padding: 4.8rem;
                 grid-template-columns: repeat(2, 1fr);
                 row-gap: 6.4rem;
 				
@@ -32,6 +40,10 @@
         font-size: 1.6rem;
         font-weight: 600;
         font-family: $font-primary;
+
+        .footer_logo_section {
+            // width: 6.4rem;
+        }
 
         // & :last-child {
         //     gap: 9.8rem;
