@@ -2,7 +2,8 @@
 	padding: 6.4rem 12.8rem;
 
 	@include respond(phone) {
-            padding: 4.8rem!important;
+		display: block;
+            padding: 3.6rem;
 	}
 
 	@include respond(tab-port) {
@@ -30,6 +31,10 @@
 			text-wrap: wrap;
 			font-family: $font-primary;
 
+			@include respond(phone) {
+				font-size: 4.2rem!important;
+			}
+
 			@include respond(tab-port) {
 				font-size: 5.4rem;
 			}
@@ -46,6 +51,11 @@
 		justify-content: center;
 		gap: 3.2rem;
 		margin: 0 auto;
+
+		@include respond(phone) {
+            display: block;
+			margin-bottom: 3.2rem!important;
+        }
 
 		@include respond(tab-port) {
 			flex-direction: column;
@@ -68,12 +78,21 @@
 			border-radius: 2.4rem;
 			overflow: hidden;
 
+			@include respond(phone) {
+				padding: 2.4rem;
+				margin-bottom: 4.8rem;
+			}
+
 			.services_heading {
 				font-size: 3.6rem;
 				font-family: $font-primary;
 				font-weight: 700;
 				text-wrap: nowrap;
 				margin-bottom: 2.4rem;
+
+				@include respond(phone) {
+					font-size: 3rem!important;
+				}
 
 				@include respond(tab-port) {
 					font-size: 4.8rem;
@@ -173,6 +192,11 @@
 				// overflow: hidden;
 				transform: translateX(20%);
 				transform: rotate(-15deg);
+
+				@include respond(phone) {
+					width: 200px;
+					height: 220px;
+				}
 
 				img {
 					// transform: translateX(20%);
