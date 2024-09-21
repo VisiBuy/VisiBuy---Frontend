@@ -12,6 +12,10 @@
 			font-size: 6.4rem;
 			margin-bottom: 1.2rem;
 
+			@include respond(phone) {
+				font-size: 3.2rem!important;
+			}
+
 			@include respond(tab-port) {
 				font-size: 5.4rem;
 				// margin-bottom: 2rem;
@@ -94,6 +98,12 @@
 				gap: 3.2rem;
 				align-items: center;
 				padding-bottom: 2.4rem;
+
+				@include respond(phone) {
+					// display: block;
+					// flex-wrap: wrap;
+					// flex-direction: ;
+				}
 			}
 
 			.step_number-box {
@@ -102,6 +112,10 @@
 				font-weight: 600;
 				color: var(--color-gray-60);
 				font-family: $font-primary;
+
+				@include respond(phone) {
+					font-size: 4.8rem;
+				}
 			}
 
 			.step_text-box {

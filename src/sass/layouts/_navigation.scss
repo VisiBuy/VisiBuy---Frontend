@@ -13,6 +13,7 @@
 	background-color: var(--color-primary-80);
 
 	@include respond(phone) {
+		// font-size: 1.2rem;
           width: auto!important;
 		  gap: 2rem!important;  
 	}
@@ -56,5 +57,9 @@
 		// -moz-transform: scaleX(1);
 		// -o-transform: scaleX(1);
 		transform: scaleX(1);
+
+		@include respond(phone) {
+			padding: 1.4rem 2rem;
+		}
 	}
 }
