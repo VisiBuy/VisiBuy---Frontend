@@ -2,7 +2,7 @@
   "name": "visibuy--frontend",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://visibuy.github.io/VisiBuy---Frontend/#/VisiBuy---Frontend",
+  "homepage": "https://visibuy.github.io/VisiBuy---Frontend/",
   "type": "module",
   "scripts": {
     "dev": "vite",
