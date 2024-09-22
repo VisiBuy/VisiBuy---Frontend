@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     react(),
   ],
-  // base: "/VisiBuy---Frontend",
+  base: process.env.NODE_ENV === 'production' ? '/VisiBuy---Frontend/' : '/',
   css: {
     preprocessorOptions: {
       scss: {
