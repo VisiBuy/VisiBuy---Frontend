@@ -1,0 +1,21 @@
+{
+  "name": "Visibuy",
+  "short_name": "Visibuy",
+  "description": "Revolutionizing online shopping with visual verification to ensure you get exactly what you ordered.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "theme_color": "#007BFF",
+  "background_color": "#F1F1F1",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
