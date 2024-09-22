@@ -23,7 +23,7 @@ const router = createHashRouter([
 	
 		children: [
 			{
-				path: "/",
+				path: "/VisiBuy---Frontend/",
 				element: <Home />,
 			},
 			{
