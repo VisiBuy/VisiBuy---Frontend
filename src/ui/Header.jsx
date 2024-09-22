@@ -21,22 +21,22 @@ function Header() {
 							<ul className="main_nav_list">
 								{/* Example of using Link for routing */}
 								<li>
-									<Link to="/#/features">Product</Link> {/* Update to Link */}
+									<Link to="/features">Product</Link> {/* Update to Link */}
 								</li>
 								<li>
-									<Link to="/#/about">About Us</Link> {/* Update to Link */}
+									<Link to="/about">About Us</Link> {/* Update to Link */}
 								</li>
 								<li>
-									<Link to="/#/pricing">Pricing</Link> {/* Update to Link */}
+									<Link to="/pricing">Pricing</Link> {/* Update to Link */}
 								</li>
 							</ul>
 
 							<ul className="main_nav_list_right">
 								<li>
-									<Link to="/#/login">Login</Link> {/* Update to Link */}
+									<Link to="/login">Login</Link> {/* Update to Link */}
 								</li>
 								<li>
-									<Link to="/#/signup" className="cta_btn"> {/* Update to Link */}
+									<Link to="/signup" className="cta_btn"> {/* Update to Link */}
 										Sign Up
 									</Link>
 								</li>
