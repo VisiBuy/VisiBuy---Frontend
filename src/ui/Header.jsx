@@ -5,7 +5,7 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { FaXmark } from "react-icons/fa6";
 
 function Header() {
-	const [menuOpen, setMenuOpen] = useState(true);
+	const [menuOpen, setMenuOpen] = useState(false);
 
 	const toggleMenu = () => {
 		setMenuOpen(prev => !prev);
