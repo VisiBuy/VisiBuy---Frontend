@@ -11,12 +11,12 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AppLayout from "./ui/AppLayout";
 
 import {
-	createBrowserRouter,
+	createHashRoute,
 	RouterProvider,
   } from "react-router-dom";
 
 
-const router = createBrowserRouter([
+const router = createHashRoute([
 	{
 		element: <AppLayout />,
 		errorElement: <PageNotFound />,
@@ -27,32 +27,32 @@ const router = createBrowserRouter([
 				element: <Home />,
 			},
 			{
-				path: "/VisiBuy---Frontend/faq",
+				path: "/faq",
 				element: <FAQ />,
 				//   errorElement: <PageNotFound />,
 			},
 			{
-				path: "/VisiBuy---Frontend/blog",
+				path: "/blog",
 				element: <Blog />,
 				//   errorElement: <PageNotFound />,
 			},
 			{
-				path: "/VisiBuy---Frontend/pricing",
+				path: "/pricing",
 				element: <Pricing />,
 				// errorElement: <PageNotFound />,
 			},
 			{
-				path: "/VisiBuy---Frontend/about",
+				path: "/about",
 				element: <AboutUs />,
 				// errorElement: <PageNotFound />,
 			},
 			{
-				path: "/VisiBuy---Frontend/tos",
+				path: "/tos",
 				element: <TOS />,
 				// errorElement: <PageNotFound />,
 			},
 			{
-				path: "/VisiBuy---Frontend/privacy-policy",
+				path: "/privacy-policy",
 				element: <PrivacyPolicy />,
 				// errorElement: <PageNotFound />,
 			},
