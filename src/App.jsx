@@ -11,12 +11,12 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AppLayout from "./ui/AppLayout";
 
 import {
-	createHashRoute,
+	createHashRouter,
 	RouterProvider,
   } from "react-router-dom";
 
 
-const router = createHashRoute([
+const router = createHashRouter([
 	{
 		element: <AppLayout />,
 		errorElement: <PageNotFound />,
