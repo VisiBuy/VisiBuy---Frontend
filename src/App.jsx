@@ -1,7 +1,3 @@
- /* eslint-disable */
-
-
-
 import Home from "./pages/Home";
 
 import PageNotFound from "./pages/PageNotFound";
@@ -62,6 +58,9 @@ const router = createBrowserRouter([
 			},
 		]
 	},
+	{
+		basename: "/VisiBuy---Frontend/"
+	}
   ]);
 
 
