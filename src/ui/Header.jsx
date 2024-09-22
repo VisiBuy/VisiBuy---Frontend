@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom"; // Import Link
 import Logo from "../ui/Logo";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { FaXmark } from "react-icons/fa6";
@@ -9,6 +10,7 @@ function Header() {
 	const toggleMenu = () => {
 		setMenuOpen(prev => !prev);
 	};
+
 	return (
 		<>
 			<div className="header-section">
@@ -17,34 +19,32 @@ function Header() {
 					<nav className="main_nav">
 						<div className={`nav_container ${menuOpen ? "open" : ""}`}>
 							<ul className="main_nav_list">
-								{/* <li>
-							<a href="#home">Home</a>
-						</li> */}
+								{/* Example of using Link for routing */}
 								<li>
-									<a href="#features">Product</a>
+									<Link to="/features">Product</Link> {/* Update to Link */}
 								</li>
 								<li>
-									<a href="/about">About Us</a>
+									<Link to="/about">About Us</Link> {/* Update to Link */}
 								</li>
 								<li>
-									<a href="#pricing">Pricing</a>
+									<Link to="/pricing">Pricing</Link> {/* Update to Link */}
 								</li>
 							</ul>
 
 							<ul className="main_nav_list_right">
 								<li>
-									<a href="#login">Login</a>
+									<Link to="/login">Login</Link> {/* Update to Link */}
 								</li>
 								<li>
-									<a href="#signup" className="cta_btn">
+									<Link to="/signup" className="cta_btn"> {/* Update to Link */}
 										Sign Up
-									</a>
+									</Link>
 								</li>
 							</ul>
 						</div>
 					</nav>
 					<button className="menu-toggle" onClick={toggleMenu}>
-						{menuOpen ? <FaBarsStaggered /> : <FaXmark />}
+						{menuOpen ? <FaXmark /> : <FaBarsStaggered />}
 					</button>
 				</header>
 			</div>
