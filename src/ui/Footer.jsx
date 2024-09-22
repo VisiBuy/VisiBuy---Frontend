@@ -42,7 +42,7 @@ function Footer() {
 				<ul className="footer_nav">
 					<li>
 						{/* Added Visibuy FAQ link */}
-						<a href="https://visibuy.freshdesk.com" className="footer_link">
+						<a href="https://visibuy.zohodesk.com/portal/" className="footer_link">
 							FAQ
 						</a>
 					</li>
