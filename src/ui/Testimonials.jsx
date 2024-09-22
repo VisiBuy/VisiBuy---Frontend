@@ -30,13 +30,13 @@ function Testimonials() {
                         </blockquote>
                         <p className="testimonial_name">&mdash; Favour Chika</p>
                     </figure>
-                    <figure className="testimonial">
+                    {/* <figure className="testimonial">
                         <span className="testimonial_img testimonial_img_4"  alt="customer-4"></span>
                         <blockquote className="testimonial_text">
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse impedit fuga pariatur, quam nam nemo praesentium earum, assumenda accusamus quia soluta architecto modi vitae voluptates placeat, numquam velit id hic!
                         </blockquote>
                         <p className="testimonial_name">&mdash; Derrick Mitchel</p>
-                    </figure>
+                    </figure> */}
                 </div>
 			</div>
 		</section>
