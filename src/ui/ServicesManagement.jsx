@@ -23,7 +23,7 @@ function ServicesManagement() {
 							<li>Instant Notifications: Receive updates via SMS/Email.</li>
 						</ul>
 						<div className="services_image">
-							<img src="../public/cart-vector-object.png" />
+							<img src="cart-vector-object.png" />
 						</div>
 					</div>
 					<div className="services-section services-customer">
@@ -38,7 +38,7 @@ function ServicesManagement() {
 							<li>Order Tracking: Live delivery status.</li>
 						</ul>
 						<div className="services_image">
-							<img src="public/cart-vector-object.png" />
+							<img src="cart-vector-object.png" />
 						</div>
 					</div>
 				</div>
