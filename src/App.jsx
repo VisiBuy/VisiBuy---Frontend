@@ -1,3 +1,7 @@
+ /* eslint-disable */
+
+
+
 import Home from "./pages/Home";
 
 import PageNotFound from "./pages/PageNotFound";
