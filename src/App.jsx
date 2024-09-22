@@ -27,7 +27,7 @@ const router = createBrowserRouter([
 	
 		children: [
 			{
-				path: "/",
+				path: "/VisiBuy---Frontend/",
 				element: <Home />,
 			},
 			{
