@@ -31,32 +31,32 @@ const router = createBrowserRouter([
 				element: <Home />,
 			},
 			{
-				path: "/faq",
+				path: "/VisiBuy---Frontend/faq",
 				element: <FAQ />,
 				//   errorElement: <PageNotFound />,
 			},
 			{
-				path: "/blog",
+				path: "/VisiBuy---Frontend/blog",
 				element: <Blog />,
 				//   errorElement: <PageNotFound />,
 			},
 			{
-				path: "/pricing",
+				path: "/VisiBuy---Frontend/pricing",
 				element: <Pricing />,
 				// errorElement: <PageNotFound />,
 			},
 			{
-				path: "/about",
+				path: "/VisiBuy---Frontend/about",
 				element: <AboutUs />,
 				// errorElement: <PageNotFound />,
 			},
 			{
-				path: "/tos",
+				path: "/VisiBuy---Frontend/tos",
 				element: <TOS />,
 				// errorElement: <PageNotFound />,
 			},
 			{
-				path: "/privacy-policy",
+				path: "/VisiBuy---Frontend/privacy-policy",
 				element: <PrivacyPolicy />,
 				// errorElement: <PageNotFound />,
 			},
