@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     react(),
   ],
-  base: "/VisiBuy---Frontend",
+  // base: "/VisiBuy---Frontend",
   css: {
     preprocessorOptions: {
       scss: {
