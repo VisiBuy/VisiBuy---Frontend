@@ -7,12 +7,13 @@ import Pricing from "./pages/Pricing";
 import TOS from "./pages/TOS";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AppLayout from "./ui/AppLayout";
-import { createHashRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const router = createHashRouter([
+const router = createBrowserRouter([
 	{
 		element: <AppLayout />,
 		errorElement: <PageNotFound />,
+		
 		children: [
 			{
 				path: "/",
@@ -43,10 +44,10 @@ const router = createHashRouter([
 				element: <PrivacyPolicy />,
 			},
 			// Catch-all route for 404
-			{
-				path: "*",
-				element: <PageNotFound />,
-			},
+			// {
+			// 	path: "*",
+			// 	element: <PageNotFound />,
+			// },
 		]
 	},
 ]);
