@@ -47,9 +47,7 @@ function Footer() {
 						</a>
 					</li>
 					<li>
-						<a href="/pricing" className="footer_link">
-							Pricing
-						</a>
+						<Link to="/pricing">Pricing</Link>
 					</li>
 				</ul>
 			</div>
@@ -57,11 +55,7 @@ function Footer() {
 			<div className="footer_nav_links_col">
 				<p className="footer_heading">Resources</p>
 				<ul className="footer_nav">
-					<li>
-						<a href="/blog" className="footer_link">
-							Blog
-						</a>
-					</li>
+					<Link to="/blog">Blog</Link>
 				</ul>
 			</div>
 
@@ -69,19 +63,13 @@ function Footer() {
 				<p className="footer_heading">Company</p>
 				<ul className="footer_nav">
 					<li>
-						<a href="/about" className="footer_link">
-							About Us
-						</a>
+						<Link to="/about">About</Link>
 					</li>
 					<li>
-						<a href="/tos" className="footer_link">
-							Terms of Service
-						</a>
+						<Link to="/terms">Terms of Service</Link>
 					</li>
 					<li>
-						<a href="/privacy-policy" className="footer_link">
-							Privacy Policy
-						</a>
+						<Link to="/policy">Privacy Policy</Link>
 					</li>
 				</ul>
 			</div>
