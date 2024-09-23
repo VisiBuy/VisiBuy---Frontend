@@ -7,55 +7,52 @@ import Pricing from "./pages/Pricing";
 import TOS from "./pages/TOS";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AppLayout from "./ui/AppLayout";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 
-const router = createBrowserRouter([
-	{
-		element: <AppLayout />,
-		errorElement: <PageNotFound />,
-		
-		children: [
-			{
-				path: "/",
-				element: <Home />,
-			},
-			{
-				path: "/faq",
-				element: <FAQ />,
-			},
-			{
-				path: "/blog",
-				element: <Blog />,
-			},
-			{
-				path: "/pricing",
-				element: <Pricing />,
-			},
-			{
-				path: "/about",
-				element: <AboutUs />,
-			},
-			{
-				path: "/tos",
-				element: <TOS />,
-			},
-			{
-				path: "/privacy-policy",
-				element: <PrivacyPolicy />,
-			},
-			// Catch-all route for 404
-			// {
-			// 	path: "*",
-			// 	element: <PageNotFound />,
-			// },
-		]
-	},
+const router = createHashRouter([
+  {
+    element: <AppLayout />,
+    errorElement: <PageNotFound />, // This will show when no routes match or an error occurs
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/faq",
+        element: <FAQ />,
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
+      },
+      {
+        path: "/pricing",
+        element: <Pricing />,
+      },
+      {
+        path: "/about",
+        element: <AboutUs />,
+      },
+      {
+        path: "/tos",
+        element: <TOS />,
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        // Catch-all route for undefined paths (404)
+        path: "*",
+        element: <PageNotFound />,
+      },
+    ],
+  },
 ]);
 
 function App() {
-	return (
-		<RouterProvider router={router} />
-	);
+  return <RouterProvider router={router} />;
 }
 
 export default App;
