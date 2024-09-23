@@ -9,6 +9,13 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AppLayout from "./ui/AppLayout";
 import { createHashRouter, RouterProvider } from "react-router-dom";
 
+
+// Using createHashRouter with Hash-based routing is better for GitHub Pages because:
+// - GitHub Pages serves static files and does not support server-side routing, meaning traditional routing (createBrowserRouter) would result in 404 errors when refreshing or navigating directly to non-root URLs.
+// - Hash-based routing (e.g., https://yourdomain.com/#/about) keeps the routing logic entirely on the client side, bypassing server involvement.
+// - It ensures your app works seamlessly across all routes without needing server configuration, making it ideal for static hosting like GitHub Pages.
+
+
 const router = createHashRouter([
   {
     element: <AppLayout />,
