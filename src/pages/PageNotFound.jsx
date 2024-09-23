@@ -1,4 +1,4 @@
-import { useRouteError} from "react-router-dom";
+import { Link, useRouteError} from "react-router-dom";
 
 import Header from "../ui/Header";
 import Footer from "../ui/Footer";
@@ -19,7 +19,7 @@ function PageNotFound() {
 							Sorry, this page does not exist or is currently under construction.
 						</p>
 
-						<a href="/" >&larr; Go back to homepage</a>
+						<Link to="/" >&larr; Go back to homepage</Link>
 					</div>
 				</section>
 			</main>
