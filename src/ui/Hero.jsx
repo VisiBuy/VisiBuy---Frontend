@@ -28,7 +28,7 @@ function Hero() {
 						<button className="cta_btn" onClick={submitHandler} >{buttonText}</button>
 							</div>
 					{ isSuccessful && <span className="signup_response">
-					{message}
+					<p>{message}</p>
 						</span>}
 					</form>
 					<p className="waitlist_note">
