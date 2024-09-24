@@ -1,12 +1,14 @@
+import { Link } from "react-router-dom";
+
 function Logo() {
     return (
-        <a href="/" className="logo">
+        <Link to="/" className="logo">
             <img
               className="logo_icon"
               alt="visibuy_logo"
               src="./VisiBuy - Black.png"
             />
-        </a>
+        </Link>
     );
 };
 

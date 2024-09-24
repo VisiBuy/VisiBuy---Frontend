@@ -10,8 +10,7 @@ function PageNotFound() {
 
 	return (
 		<>
-			<main className="container">
-				<Header />
+				{/* <Header /> */}
 				<section className="page_404_section">
 					<div className="page_404_container">
 						<h1>404</h1>
@@ -22,7 +21,6 @@ function PageNotFound() {
 						<Link to="/" >&larr; Go back to homepage</Link>
 					</div>
 				</section>
-			</main>
 			{/* <footer className="footer">
 				<Footer />
 			</footer> */}

@@ -9,6 +9,11 @@
 		color: var(--color-primary-80);
 		font-size: 16.4rem;
 		font-family: $font-primary;
+
+		@include respond(phone) {
+			font-size: 12rem;
+			margin-bottom: 2.4rem;
+		}
 	}
 
 	p {
