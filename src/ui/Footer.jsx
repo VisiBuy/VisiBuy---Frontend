@@ -49,7 +49,9 @@ function Footer() {
 				<ul className="footer_nav">
 					<li>
 						{/* Added Visibuy FAQ link */}
-						<Link to="https://visibuy.zohodesk.com/portal/" className="footer_link">
+						<Link
+							to="https://visibuy.zohodesk.com/portal/"
+							className="footer_link">
 							FAQ
 						</Link>
 					</li>
@@ -79,9 +81,9 @@ function Footer() {
 						<Link to="/terms">Terms of Service</Link>
 					</li>
 					<li>
-						<Link to="/policy">Privacy Policy</Link>
-          </li>
-          <li>
+						<Link to="/privacy-policy">Privacy Policy</Link>
+					</li>
+					<li>
 						<Link to="/aboutus" className="footer_link">
 							About Us
 						</Link>
@@ -91,11 +93,11 @@ function Footer() {
 							Terms of Service
 						</Link>
 					</li>
-					<li>
+					{/* <li>
 						<Link to="/privacy-policy" className="footer_link">
 							Privacy Policy
 						</Link>
-					</li>
+					</li> */}
 				</ul>
 			</div>
 		</div>
