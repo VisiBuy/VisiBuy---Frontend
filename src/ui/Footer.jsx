@@ -1,6 +1,7 @@
 import { FaFacebook, FaYoutube } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 function Footer() {
 	return (
@@ -47,14 +48,14 @@ function Footer() {
 				<ul className="footer_nav">
 					<li>
 						{/* Added Visibuy FAQ link */}
-						<a href="https://visibuy.zohodesk.com/portal/" className="footer_link">
+						<Link to="https://visibuy.zohodesk.com/portal/" className="footer_link">
 							FAQ
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="/pricing" className="footer_link">
+						<Link to="/pricings" className="footer_link">
 							Pricing
-						</a>
+						</Link>
 					</li>
 				</ul>
 			</div>
@@ -63,9 +64,9 @@ function Footer() {
 				<p className="footer_heading">Resources</p>
 				<ul className="footer_nav">
 					<li>
-						<a href="/blog" className="footer_link">
+						<Link to="/blogs" className="footer_link">
 							Blog
-						</a>
+						</Link>
 					</li>
 				</ul>
 			</div>
@@ -74,19 +75,19 @@ function Footer() {
 				<p className="footer_heading">Company</p>
 				<ul className="footer_nav">
 					<li>
-						<a href="/about" className="footer_link">
+						<Link to="/aboutus" className="footer_link">
 							About Us
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="/tos" className="footer_link">
+						<Link to="/toss" className="footer_link">
 							Terms of Service
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="/privacy-policy" className="footer_link">
+						<Link to="/privacy-policy" className="footer_link">
 							Privacy Policy
-						</a>
+						</Link>
 					</li>
 				</ul>
 			</div>
