@@ -3,6 +3,8 @@ import { FaInstagram } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
+import { Link } from "react-router-dom"; // Import Link
+
 function Footer() {
 	return (
 		<div className="grid footer_grid">
@@ -75,6 +77,12 @@ function Footer() {
 				<p className="footer_heading">Company</p>
 				<ul className="footer_nav">
 					<li>
+						<Link to="/terms">Terms of Service</Link>
+					</li>
+					<li>
+						<Link to="/policy">Privacy Policy</Link>
+          </li>
+          <li>
 						<Link to="/aboutus" className="footer_link">
 							About Us
 						</Link>

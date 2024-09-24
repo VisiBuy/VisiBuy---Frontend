@@ -23,9 +23,9 @@ function PageNotFound() {
 					</div>
 				</section>
 			</main>
-			<footer className="footer">
+			{/* <footer className="footer">
 				<Footer />
-			</footer>
+			</footer> */}
 			{/* <p>
 				<i>{error.statusText || error.message}</i>
 			</p> */}

@@ -1,6 +1,6 @@
 function Logo() {
     return (
-        <a href="#home" className="logo">
+        <a href="/" className="logo">
             <img
               className="logo_icon"
               alt="visibuy_logo"
