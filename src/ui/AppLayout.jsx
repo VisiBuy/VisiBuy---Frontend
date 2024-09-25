@@ -8,8 +8,10 @@ function AppLayout() {
 		<>
 			<main className="container">
 				<Header />
-				<Outlet />
 			</main>
+				<div>
+				<Outlet />
+				</div>
 			<footer className="footer">
 				<Footer />
 			</footer>
