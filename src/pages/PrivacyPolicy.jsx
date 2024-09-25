@@ -5,7 +5,7 @@ function PrivacyPolicy() {
             <h1>Privacy Policy for Visibuy Beta Program</h1>
             <div>
                 <p>
-                Effective Date: [Insert Date]
+                Effective Date: 23rd September, 2024
 
 Visibuy ("we," "our," or "us") is committed to protecting the privacy of users participating in the Visibuy Beta Program ("the Program"). This Privacy Policy outlines the types of information we collect, how we use and protect it, and your rights concerning that information. By participating in the Program, you agree to the terms of this policy.
 
