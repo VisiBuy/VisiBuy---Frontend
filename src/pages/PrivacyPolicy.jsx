@@ -1,24 +1,14 @@
 function PrivacyPolicy() {
-<<<<<<< HEAD
-    return (
-        <div>
-            {/* Added Text to the Privacy Policy, left to style it */}
-            <h1>Privacy Policy for Visibuy Beta Program</h1>
-            <div>
-                <p>
-                Effective Date: 23rd September, 2024
-=======
 	return (
 		<section className="pp-section">
 				<div className="pp-heading">
 					<h1>Privacy Policy for <br /> Visibuy Beta Program</h1>
 				</div>
 			<div className="pp-container">
->>>>>>> 333bbaa169eb297f173a9eca8b0d79e105b5193c
 
                 <div className="pp-description">
                     
-                    <span className="date-effective">Effective Date: [Insert Date]</span>
+                    <span className="date-effective">Effective Date: 23rd, September 2024</span>
 					<p className="pp-description-text">
 						{" "}
                         <div>
