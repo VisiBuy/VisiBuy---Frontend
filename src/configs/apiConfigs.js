@@ -1,0 +1,3 @@
+const API_BASE_URL = 'https://visibuy-backend-dev.onrender.com/api/v1';
+
+export default API_BASE_URL;

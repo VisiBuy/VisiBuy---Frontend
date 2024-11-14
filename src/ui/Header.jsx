@@ -36,7 +36,7 @@ function Header() {
 									<Link to="/login">Login</Link> {/* Update to Link */}
 								</li>
 								<li>
-									<Link to="/signups" className="cta_btn"> {/* Update to Link */}
+									<Link to="/register" className="cta_btn"> {/* Update to Link */}
 										Sign Up
 									</Link>
 								</li>
