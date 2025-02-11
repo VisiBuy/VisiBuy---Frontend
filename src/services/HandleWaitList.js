@@ -4,7 +4,7 @@ function HandleWaitList() {
 	const [email, setEmail] = useState("");
 	const [buttonText, setButtonText] = useState("Get Early Access");
 	const [message, setMessage] = useState("");
-    const [isSuccessful, setIsSuccessful] = useState(null);
+  const [isSuccessful, setIsSuccessful] = useState(null);
 
     // const [showMessage, setShowMessage] = useState(false);
 
