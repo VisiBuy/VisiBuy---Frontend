@@ -59,6 +59,7 @@ const BuyerTrackOrderPage: React.FC = () => {
   const [statusFilter, setStatusFilter] = useState<FilterStatus>("all");
   const [searchQuery, setSearchQuery] = useState("");
 
+  // Use mock data (no API fetch)
   // Assuming token is stored locally (or from Redux)
   const token = localStorage.getItem("auth-token") || "";
 
@@ -76,7 +77,7 @@ const BuyerTrackOrderPage: React.FC = () => {
 
   // Filter orders based on status and search query
   useEffect(() => {
-    let updated = [...uiOrders];
+    let updated = [...orders];
     if (statusFilter !== "all") {
       updated = updated.filter((order) => order.status === statusFilter);
     }
@@ -98,6 +99,7 @@ const BuyerTrackOrderPage: React.FC = () => {
     setSearchQuery(query);
   };
 
+  // useOutlet returns the element for a child route if it exists
   const outlet = useOutlet();
 
   return (
@@ -113,23 +115,20 @@ const BuyerTrackOrderPage: React.FC = () => {
             <SearchOrder onSearch={handleSearch} />
           </div>
 
-          {/* Optionally, show loading/error messages */}
-          {loading && <p>Loading orders...</p>}
-          {error && <p className="text-red-500">{error}</p>}
-
           {/* Row 2: OrderCards + PurchasingHistory */}
-          <div className="flex gap-24">
+          <div className="flex gap-12">
             <div className="flex-1 flex flex-col gap-4">
               {filteredOrders.map((order) => (
                 <OrderCard key={order.id} order={order} />
               ))}
             </div>
-            <div className="w-96 hidden lg:block">
+            <div className="w-64 hidden lg:block">
               <PurchasingHistory />
             </div>
           </div>
         </>
       ) : (
+        // When a child route (OrderDetailsPage) is active, render it and hide the controls.
         <div>{outlet}</div>
       )}
     </div>

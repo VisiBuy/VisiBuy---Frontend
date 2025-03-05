@@ -94,7 +94,7 @@ export function Pagination<T>({
           </Button>
         ))}
       <Button
-        disabled={isFetching || currentGroup === totalGroups}
+        disabled={isFetching ||totalPages === 0 || currentGroup === totalGroups}
         size="icon"
         onClick={handleNextGroup}
         className="rounded-full h-14 w-14 bg-light-gray border-light-gray "

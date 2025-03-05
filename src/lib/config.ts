@@ -65,11 +65,10 @@ export const dashboardConfig = createDashboardConfig({
   buyer: {
     basePath: "/dashboard/buyer",
     routes: {
-      home: "/",
-      dashboard: "/analytics", // ✅  buyersanalyticspage
+      home: "/", 
+      dashboard: "/analytics", // ✅  buyersanalyticspage 
       products: "/purchases",
       trackOrder: "/track-order",
-      // trackOrderDetails: "/track-order/view",
       carts: "/carts",
       notifications: "/notification",
       profile: "/profile",

@@ -13,7 +13,7 @@ const PurchasingHistory  = () => {
       </div>
 
       {/* White box below */}
-      <div className="bg-white shadow-lg px-6 py-12 mt-20 rounded-md">
+      <div className="bg-white shadow-lg px-6 py-12 rounded-md">
         <p className="text-sm text-gray-600">
           
         </p>

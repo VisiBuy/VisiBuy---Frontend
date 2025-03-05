@@ -4,6 +4,6 @@ import { useMutation } from "@tanstack/react-query";
 export function useCreateSellerFeedback() {
   return useMutation({
     mutationFn: (payload: FeedbackDto) =>
-      SellerFeedbackService.createSellerFeeback(payload),
+      SellerFeedbackService.createSellerFeedback(payload),
   });
 }
