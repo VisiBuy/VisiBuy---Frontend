@@ -31,13 +31,14 @@ const cartSummarySlice = createSlice({
   name: "cartSummary",
   initialState,
   reducers: {
-    calculateTotals: (state, action: PayloadAction<CartItem[]>) => {
-      const cartItems = action.payload;
+    calculateTotals: (state, action: PayloadAction<CartItem>) => {
+      const data = action.payload;
 
-      state.subtotal = cartItems.reduce(
-        (acc, item) => acc + item.price * item.quantity,
-        0
-      );
+      // state.subtotal = cartItems.reduce(
+      //   (acc, item) => acc + item.price * item.quantity,
+      //   0
+      // );
+      state.subtotal = data.price * data.quantity;
       state.deliveryFee = state.subtotal * 0.05;
       state.vat = state.subtotal * 0.075;
       state.total = state.subtotal + state.deliveryFee + state.vat;

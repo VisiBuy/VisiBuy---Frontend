@@ -7,18 +7,55 @@ import {
   calculateTotals,
   selectCartSummary,
 } from "@/modules/Buyer/features/cart/cartSummarySlice";
+import { Link, useNavigate, useParams } from "react-router-dom";
+
+interface CartItem {
+  _id: string;
+  brand: string;
+  model: string;
+  price: number;
+  quantity: number;
+  images: string;
+  color?: string[];
+  sizes?: number[];
+  storeName: string;
+}
 
 const CartSummary = () => {
   const dispatch = useDispatch();
+  const history = useNavigate();
+  const { id } = useParams();
+
   const cartItems = useSelector((state: RootState) => state.buyer.cart.items);
   const { subtotal, deliveryFee, vat, total } = useSelector(selectCartSummary);
 
   const [showDeliveryDetails, setShowDeliveryDetails] = useState(false);
 
+  // const products = useSelector(
+  //   (state: RootState) => state.buyer.product.products
+  // );
+  const [data, setData] = useState<CartItem | null>(null);
+
+  useEffect(() => {
+    // Find the product by matching the id with the `id` in the products array
+    const foundProduct = cartItems.find((p) => p._id === id); // Assuming id is a string from the URL
+    setData(foundProduct ?? null); // Set the product or null if not found
+  }, [id, cartItems]); // Re-run effect when id or products change
+
   // Recalculate totals whenever the cart changes
   useEffect(() => {
-    dispatch(calculateTotals(cartItems));
-  }, [cartItems, dispatch]);
+    if (data) {
+      dispatch(calculateTotals(data));
+    }
+  }, [data, dispatch]);
+
+  if (!data)
+    return (
+      <div className='max-w-3xl mx-auto p-4 md:p-6 bg-white rounded-lg shadow-lg'>
+        <h2 className='text-lg md:text-xl font-semibold mb-4'>Cart Summary</h2>
+        <p className='text-gray-500 text-center'>Your cart is empty.</p>
+      </div>
+    );
 
   return (
     <div className='max-w-3xl mx-auto p-4 md:p-6 bg-white rounded-lg shadow-lg'>
@@ -26,13 +63,12 @@ const CartSummary = () => {
 
       {/* Cart Items */}
       <div className='space-y-4'>
-        {cartItems.length > 0 ? (
-          cartItems.map((item) => (
-            <CartSummaryItem key={item._id} item={item} />
-          ))
+        {/* {data > 0 ? (
+          data.map((item) => )
         ) : (
           <p className='text-gray-500 text-center'>Your cart is empty.</p>
-        )}
+        )} */}
+        <CartSummaryItem key={data._id} item={data} />
       </div>
 
       {/* Delivery Details */}
@@ -74,15 +110,21 @@ const CartSummary = () => {
 
       {/* Actions */}
       <div className='mt-4 flex justify-between'>
-        <Button variant='outline' className='w-1/2 mr-2'>
+        <Button
+          variant='outline'
+          onClick={() => history(-1)}
+          className='w-1/2 mr-2'
+        >
           Cancel
         </Button>
-        <Button
-          variant='default'
-          className='w-1/2 bg-green-500 hover:bg-green-600'
+        <Link
+          className='w-1/2  rounded'
+          to={`/dashboard/buyer/carts/checkout/${data._id}`}
         >
-          Pay Now
-        </Button>
+          <Button className='w-full' variant='default'>
+            Pay Now
+          </Button>
+        </Link>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 interface Product {
   id: string;
-  image?: string;
+  images?: string;
   storeName: string;
   storeAvatar: string;
   productName: string;
@@ -27,7 +27,7 @@ const BuyerProductsPage = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  console.log("Products from Redux:", products);
+  // console.log("Products from Redux:", products);
   const filteredProducts = useSelector(selectFilteredProducts) || [];
   const filters = useSelector((state: any) => state.buyer.filters) || {};
   const [filtersApplied, setFiltersApplied] = useState(false);

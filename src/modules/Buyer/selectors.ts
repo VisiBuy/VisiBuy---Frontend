@@ -10,7 +10,7 @@ export const selectFilteredProducts = createSelector(
     return products.filter((product) => {
       const matchesSize =
         filters.size.length === 0 ||
-        product.sizes.some((size) => filters.size.includes(size));
+        product.size.some((size) => filters.size.includes(size));
       const matchesColor =
         filters.color.length === 0 ||
         product.color.some((color) => filters.color.includes(color));

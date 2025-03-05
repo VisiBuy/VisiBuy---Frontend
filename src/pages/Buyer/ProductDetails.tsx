@@ -13,7 +13,7 @@ interface Product {
   brand: string;
   model: string;
   description: string;
-  image: string;
+  images: string;
   storeName: string;
   storeAvatar: string;
   size?: number[];
@@ -54,7 +54,7 @@ function ProductDetails() {
     dispatch(updateQuantity({ id: data?._id, quantity: quantity - 1 }));
   };
   const handleMinusToQuantity = () => {
-    if (!data || quantity <= 1) return;
+    if (!data) return;
     dispatch(updateQuantity({ id: data?._id, quantity: quantity + 1 }));
   };
 
@@ -70,9 +70,9 @@ function ProductDetails() {
 
         {/* image */}
         <div className='h-[263px] flex justify-center'>
-          {data?.image && (
+          {data?.images && (
             <img
-              src={data.image}
+              src={data.images[0]}
               alt={data.model}
               className='w-[75%] h-[80%]'
             />
