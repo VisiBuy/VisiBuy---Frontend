@@ -1,25 +1,7 @@
 // src/modules/Buyer/features/track-order/trackOrderSlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchOrderHistory } from "../../lib/track-order/api";
-
-interface Order {
-  product: {
-    brand: string;
-    model: string;
-    title: string,
-    description: string,
-    price: string;
-  };
-  order_status: string;
-  buyer: {
-    fullName: string;
-  };
-  orderId: string;
-  invoiceID: string;
-  Size: string;
-  Color: string;
-  created_at: string;
-}
+import { Order } from "@/types/orders";
 
 interface TrackOrderState {
   orders: Order[];

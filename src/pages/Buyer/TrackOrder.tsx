@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { getOrderHistory } from "@/modules/Buyer/models/track-order/trackOrderSlice";
@@ -7,27 +7,9 @@ import SearchOrder from "@/modules/Buyer/features/track-order/components/SearchO
 import OrderCard from "@/modules/Buyer/features/track-order/components/OrderCard";
 import PurchasingHistory from "@/modules/Buyer/features/track-order/components/PurchasingHistory";
 import { TOrderStatus } from "@/types/status";
+import { Order } from "@/types/orders";
 
-// Import or define the 'Order' interface
-import {Order} from "@/modules/Buyer/features/track-order/components/OrderCard";
- 
 type FilterStatus = TOrderStatus | "all";
-
-interface OrderForCard {
-  id: string;
-  title: string;
-  description: string;
-  status: TOrderStatus;
-  time: string;
-}
-
-const transformOrder = (order: Order): OrderForCard => ({
-  id: order.orderNumber,
-  title: order.sneaker.model,
-  description: order.sneaker.brand,
-  status: order.order_status,
-  time: order.created_at,
-});
 
 const BuyerTrackOrderPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -52,14 +34,12 @@ const BuyerTrackOrderPage: React.FC = () => {
     setSearchQuery(query);
   };
 
-  const uiOrders = orders.map(transformOrder);
-
-  const filteredOrders = uiOrders.filter((order) => {
+  const filteredOrders = orders.filter((order: Order) => {
     const matchesStatus =
-      statusFilter === "all" || order.status === statusFilter;
+      statusFilter === "all" || order.order_status === statusFilter;
     const matchesSearch =
-      order.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.id.toLowerCase().includes(searchQuery.toLowerCase());
+      order.product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      order.orderId.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesStatus && matchesSearch;
   });
 
@@ -82,8 +62,8 @@ const BuyerTrackOrderPage: React.FC = () => {
 
       <div className="flex gap-24">
         <div className="flex-1 flex flex-col gap-4">
-          {filteredOrders.map((order) => (
-            <OrderCard key={order.id} order={order} />
+          {filteredOrders.map((order: Order) => (
+            <OrderCard key={order.orderId} order={order} />
           ))}
         </div>
         <div className="w-96 hidden lg:block">

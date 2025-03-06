@@ -9,29 +9,15 @@ import {
   fetchOrderStatus,
   verifyOrder,
 } from "@/modules/Buyer/lib/track-order/api";
-
-
-interface OrderDetailsData {
-  buyer: { fullName: string };
-  seller: { name: string };
-  created_at: string;
-  invoiceID: string;
-  product: {
-    name: string;
-    quantity: number;
-    price: string;
-  };
-}
+import { Order } from "@/types/orders";
 
 const BuyerOrderDetailsPage: React.FC = () => {
-  const { orderId } = useParams();
+  const { orderId } = useParams<{ orderId: string }>();
   const navigate = useNavigate();
   const token = localStorage.getItem("auth-token") || "";
 
   // State for dynamic order details fetched from the API
-  const [orderDetails, setOrderDetails] = useState<OrderDetailsData | null>(
-    null
-  );
+  const [orderDetails, setOrderDetails] = useState<Order | null>(null);
 
   // Verification states
   const [verificationStatus, setVerificationStatus] = useState<
@@ -48,7 +34,6 @@ const BuyerOrderDetailsPage: React.FC = () => {
       fetchOrderStatus(orderId)
         .then((data) => {
           setOrderDetails(data);
-          
         })
         .catch((err) => console.error(err));
     }
@@ -146,7 +131,7 @@ const BuyerOrderDetailsPage: React.FC = () => {
             {orderDetails ? (
               <div className="flex justify-between text-sm font-semibold text-gray-700 p-2 border-t border-gray-300">
                 <p>
-                  {orderDetails.product.quantity}x {orderDetails.product.name}
+                  {orderDetails.product.quantity}x {orderDetails.product.title}
                 </p>
                 <p>#{orderDetails.product.price}</p>
               </div>
