@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy to Staging
 
 on:
   push:
@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 18.18.1
 
@@ -25,6 +25,9 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Create CNAME file for staging
+        run: echo "staging.visibuy.com.ng" > ./dist/CNAME
+
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v4
         with:
@@ -32,10 +35,10 @@ jobs:
           path: ./dist
 
   deploy:
-    name: Deploy
+    name: Deploy to Staging
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/develop'
+    if: github.ref == 'refs/heads/develop' 
 
     steps:
       - name: Download artifact
@@ -49,4 +52,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          cname: staging.visibuy.com.ng
