@@ -1,6 +1,7 @@
 // src/modules/Buyer/features/track-order/trackOrderSlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchOrderHistory } from "../../lib/track-order/api";
+
 interface Order {
   sneaker: {
     brand: string;
@@ -36,10 +37,13 @@ export const getOrderHistory = createAsyncThunk(
   "trackOrder/getOrderHistory",
   async (token: string, { rejectWithValue }) => {
     try {
-      const data = await fetchOrderHistory(token);
+      const data = await fetchOrderHistory();
       return data;
     } catch (error: any) {
-      return rejectWithValue(error.message);
+      // Return a custom error message
+      return rejectWithValue(
+        "Failed to fetch order history. Please try again later."
+      );
     }
   }
 );
@@ -61,7 +65,11 @@ const trackOrderSlice = createSlice({
       })
       .addCase(getOrderHistory.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        // Ensure action.payload is a string before assigning
+        state.error =
+          typeof action.payload === "string"
+            ? action.payload
+            : "An unexpected error occurred.";
       });
   },
 });

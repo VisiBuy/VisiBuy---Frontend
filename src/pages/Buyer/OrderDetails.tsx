@@ -45,7 +45,7 @@ const BuyerOrderDetailsPage: React.FC = () => {
   // Fetch order status details dynamically from the API
   useEffect(() => {
     if (orderId) {
-      fetchOrderStatus(orderId, token)
+      fetchOrderStatus(orderId)
         .then((data) => {
           setOrderDetails(data);
           // Optionally update verificationStatus based on fetched data
@@ -67,7 +67,7 @@ const BuyerOrderDetailsPage: React.FC = () => {
     try {
       setIsVerifying(true);
       // Call the verifyOrder API; using "verified" status
-      await verifyOrder(orderId, "verified", token);
+      await verifyOrder(orderId, "verified");
       setVerificationStatus("verified");
       setIsButtonVerified(true);
       setShowFeedbackModal(true);

@@ -1,108 +1,87 @@
+import { axiosWithAuth } from "@/lib/client";
+
 /**
  * Track Order
  * GET /order/history
- * Headers: auth-token: <token>
  */
-export async function fetchOrderHistory(token: string) {
-  const response = await fetch("/order/history", {
-    method: "GET",
-    headers: {
-      "auth-token": token,
-    },
-  });
-  if (!response.ok) {
+export async function fetchOrderHistory() {
+  try {
+    const response = await axiosWithAuth.get("/order/history");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching order history:", error);
     throw new Error("Failed to fetch order history");
   }
-  return response.json();
 }
 
 /**
  * Get Order Status
  * GET /order/:order_id/status
- * Headers: auth-token: <token>
  */
-export async function fetchOrderStatus(orderId: string, token: string) {
-  const response = await fetch(`/order/${orderId}/status`, {
-    method: "GET",
-    headers: {
-      "auth-token": token,
-    },
-  });
-  if (!response.ok) {
+export async function fetchOrderStatus(orderId: string) {
+  try {
+    const response = await axiosWithAuth.get(`/order/${orderId}/status`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching order status:", error);
     throw new Error("Failed to fetch order status");
   }
-  return response.json();
 }
 
 /**
- * Verify Visual Verification
+ * Verify Order
  * POST /verify
- * Headers: auth-token: <token> (buyer)
- * Body: { order_id, status: 'verified' | 'canceled' }
  */
 export async function verifyOrder(
   orderId: string,
-  status: "verified" | "canceled",
-  token: string
+  status: "verified" | "canceled"
 ) {
-  const response = await fetch("/verify", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "auth-token": token,
-    },
-    body: JSON.stringify({ order_id: orderId, status }),
-  });
-  if (!response.ok) {
+  try {
+    const response = await axiosWithAuth.post("/verify", {
+      order_id: orderId,
+      status,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error verifying order:", error);
     throw new Error("Failed to verify order");
   }
-  return response.json();
 }
 
 /**
- * Get Visual Verification
+ * Get Verification Images
  * GET /image?order_id=...
- * Headers: auth-token: <token>
  */
-export async function fetchVerificationImages(orderId: string, token: string) {
-  const response = await fetch(`/image?order_id=${orderId}`, {
-    method: "GET",
-    headers: {
-      "auth-token": token,
-    },
-  });
-  if (!response.ok) {
+export async function fetchVerificationImages(orderId: string) {
+  try {
+    const response = await axiosWithAuth.get(`/image`, {
+      params: { order_id: orderId },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching verification images:", error);
     throw new Error("Failed to fetch verification images");
   }
-  return response.json();
 }
 
 /**
- * Feedback and Reporting
+ * Submit Feedback
  * POST /feedback
- * Headers: auth-token: <token>
- * Body: { order_id, rating, comments? }
  */
 export async function submitFeedback(
   orderId: string,
   rating: number,
-  comments: string | undefined,
-  token: string
+  comments?: string
 ) {
-  const response = await fetch("/feedback", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "auth-token": token,
-    },
-    body: JSON.stringify({
+  try {
+    const response = await axiosWithAuth.post("/feedback", {
       order_id: orderId,
       rating,
       comments,
-    }),
-  });
-  if (!response.ok) {
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error submitting feedback:", error);
     throw new Error("Failed to submit feedback");
   }
-  return response.json();
 }
