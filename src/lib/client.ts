@@ -35,7 +35,7 @@ axiosWithAuth.interceptors.response.use(
       
 
       try {
-        localStorage.setItem('redirectPath', window.location.pathname + window.location.search);
+        window.localStorage.setItem('redirectPath', window.location.pathname + window.location.search);
         
         // If no refresh token or refresh fails, handle logout
         handleLogout();

@@ -11,7 +11,7 @@ import {
 } from "@/modules/Buyer/lib/track-order/api";
 
 
-interface OrderStatusData {
+interface OrderDetailsData {
   buyer: { fullName: string };
   seller: { name: string };
   created_at: string;
@@ -29,7 +29,7 @@ const BuyerOrderDetailsPage: React.FC = () => {
   const token = localStorage.getItem("auth-token") || "";
 
   // State for dynamic order details fetched from the API
-  const [orderDetails, setOrderDetails] = useState<OrderStatusData | null>(
+  const [orderDetails, setOrderDetails] = useState<OrderDetailsData | null>(
     null
   );
 
@@ -48,8 +48,7 @@ const BuyerOrderDetailsPage: React.FC = () => {
       fetchOrderStatus(orderId)
         .then((data) => {
           setOrderDetails(data);
-          // Optionally update verificationStatus based on fetched data
-          // e.g., setVerificationStatus(data.verificationStatus);
+          
         })
         .catch((err) => console.error(err));
     }

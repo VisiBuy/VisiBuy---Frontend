@@ -67,5 +67,5 @@ export const currencyFormmater = (amount: number) => {
 
 export const capitalize = (text: string | undefined) => {
   if(!text) return '';
-  return text.slice(0, 1).toUpperCase() + text.slice(1);
+  return text.slice(0, 1).toUpperCase() + text.slice(1).toLowerCase();
 };

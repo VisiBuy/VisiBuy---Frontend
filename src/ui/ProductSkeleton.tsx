@@ -13,8 +13,8 @@ interface Product {
   image?: string;
   storeName: string;
   storeAvatar?: string;
-  model: string;
-  brand: string;
+  productName: string;
+  name: any;
   // sizes: number[];
   // color: string[];
   price: number;
@@ -39,10 +39,10 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
         price: product.price,
         quantity: 1,
         image: product.image,
-        // color: product,
-        // size: product,
-        model: product.model,
-        storeName: product,
+        color: undefined,
+        sizes: undefined,
+        productName: undefined,
+        storeName: undefined,
       })
     );
   };
@@ -85,7 +85,7 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
             )}
 
             {/* Product Details */}
-            <h3 className='text-lg font-semibold'>{product?.model}</h3>
+            <h3 className='text-lg font-semibold'>{product?.productName}</h3>
             {/* <p className='text-gray-400 text-sm'>
               Sizes: {product?.sizes.join(", ")}
             </p> */}

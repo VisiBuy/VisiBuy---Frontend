@@ -9,7 +9,7 @@ import PurchasingHistory from "@/modules/Buyer/features/track-order/components/P
 import { TOrderStatus } from "@/types/status";
 
 // Import or define the 'Order' interface
-import Order  from "@/modules/Buyer/features/track-order/components/OrderCard";
+import {Order} from "@/modules/Buyer/features/track-order/components/OrderCard";
  
 type FilterStatus = TOrderStatus | "all";
 

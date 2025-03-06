@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { TOrderStatus } from "../../../../../types/status";
 import { statusToClassName } from "@/modules/Buyer/lib/track-order/utils";
 
-interface Order {
+export interface Order {
   id: string;
   title: string;
   description: string;
