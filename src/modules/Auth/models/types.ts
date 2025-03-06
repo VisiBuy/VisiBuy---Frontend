@@ -19,6 +19,7 @@ export interface User {
   email: string;
   fullName: string;
   role: Role;
+  phone?: string;
 }
 
 export interface AuthState {
@@ -27,12 +28,12 @@ export interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
-  role:Role| null
+  role: Role | null;
 }
 export interface LoginResponse {
   msg: string;
   token: string;
-  role : Role
+  role: Role;
 }
 export interface LoginErrorResponse extends ErrorResponse {}
 export type Role = "buyer" | "seller" | "admin";
@@ -160,7 +161,7 @@ export const SignupUserSchema: ZodType<SignupUser> = z
     }),
   })
   .refine((val) => val.pass === val.confirmPassword, {
-    path: ['confirmPassword'],
+    path: ["confirmPassword"],
     message: VALIDATION_NOT_MATCH.replace("{{FIELD}}", "Password"),
   });
 

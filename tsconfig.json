@@ -14,15 +14,17 @@
     "incremental": true,
     //"baseUrl": ".",
     "paths": {
-     "@/*": ["./src/*"]
-
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["src","**/*.ts",
+  "include": [
+    "src",
+    "**/*.ts",
     "**/*.tsx",
     "**/**/*.ts",
-    "**/**/*.tsx", "postcss.config.js","react-app-env.d.ts"],
-  "exclude": [
-    "node_modules"
-  ]
+    "**/**/*.tsx",
+    "postcss.config.js",
+    "react-app-env.d.ts"
+  ],
+  "exclude": ["node_modules"]
 }

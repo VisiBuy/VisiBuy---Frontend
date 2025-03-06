@@ -1,6 +1,6 @@
-import { TPaginationProps } from "@/models/paginationProps";
-import { Button } from "@/ui/Button";
-import Icon from "@/ui/Icon";
+import { TPaginationProps } from "../../models/paginationProps";
+import { Button } from "../../ui/Button";
+import Icon from "../../ui/Icon";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 export function Pagination<T>({
@@ -20,7 +20,7 @@ export function Pagination<T>({
   const endIndex = Math.min(startIndex + itemsPerPage, totalPages);
   useEffect(() => {
     setCurrentPage(pagesArray[startIndex]); // select first page on new group load
-  }, [currentGroup,totalPages]);
+  }, [currentGroup, totalPages]);
   useEffect(() => {
     setQueryParam({
       ...queryBuilder.buildQuery(queryParams),
@@ -58,7 +58,7 @@ export function Pagination<T>({
     [totalPages]
   );
   return (
-    <div className="flex space-x-4 mt-4 pt-8 justify-end">
+    <div className='flex space-x-4 mt-4 pt-8 justify-end'>
       <Button
         disabled={
           isFetching ||
@@ -66,27 +66,27 @@ export function Pagination<T>({
           totalGroups <= 1 ||
           currentGroup === 1
         }
-        size="icon"
+        size='icon'
         onClick={setFirstPage}
-        className="rounded-full h-14 w-14 bg-light-gray border-light-gray "
+        className='rounded-full h-14 w-14 bg-light-gray border-light-gray '
       >
-        <Icon name="chevrons-left" size={25} className="text-light-gray-600" />
+        <Icon name='chevrons-left' size={25} className='text-light-gray-600' />
       </Button>
       <Button
         disabled={isFetching || currentGroup <= 1}
-        size="icon"
+        size='icon'
         onClick={handlePrevGroup}
-        className="rounded-full h-14 w-14 bg-light-gray border-light-gray "
+        className='rounded-full h-14 w-14 bg-light-gray border-light-gray '
       >
-        <Icon name="chevron-left" size={25} className="text-light-gray-600" />
+        <Icon name='chevron-left' size={25} className='text-light-gray-600' />
       </Button>
       {totalPages > 0 &&
         pagesArray.slice(startIndex, endIndex).map((pageNum, index) => (
           <Button
-            size="icon"
+            size='icon'
             paginationLinks={pageNum === currentPage ? "active" : "default"}
             key={pageNum}
-            className="text-2xl rounded-full h-14 w-14"
+            className='text-2xl rounded-full h-14 w-14'
             onClick={handleSelectedPage}
             value={pageNum}
           >
@@ -94,12 +94,12 @@ export function Pagination<T>({
           </Button>
         ))}
       <Button
-        disabled={isFetching ||totalPages === 0 || currentGroup === totalGroups}
-        size="icon"
+        disabled={isFetching || currentGroup === totalGroups}
+        size='icon'
         onClick={handleNextGroup}
-        className="rounded-full h-14 w-14 bg-light-gray border-light-gray "
+        className='rounded-full h-14 w-14 bg-light-gray border-light-gray '
       >
-        <Icon name="chevron-right" size={25} className="text-light-gray-600" />
+        <Icon name='chevron-right' size={25} className='text-light-gray-600' />
       </Button>
       <Button
         disabled={
@@ -108,11 +108,11 @@ export function Pagination<T>({
           totalGroups <= 1 ||
           totalGroups === currentGroup
         }
-        size="icon"
+        size='icon'
         onClick={setLastPage}
-        className="rounded-full h-14 w-14 bg-light-gray border-light-gray "
+        className='rounded-full h-14 w-14 bg-light-gray border-light-gray '
       >
-        <Icon name="chevrons-right" size={25} className="text-light-gray-600" />
+        <Icon name='chevrons-right' size={25} className='text-light-gray-600' />
       </Button>
     </div>
   );

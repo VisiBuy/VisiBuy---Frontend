@@ -3,18 +3,19 @@ import {
   addToCart,
   removeFromCart,
 } from "@/modules/Buyer/features/cart/cartSlice";
-import { FaShoppingCart, FaTrash } from "react-icons/fa";
+import { FaEllipsisV, FaShoppingCart, FaTrash } from "react-icons/fa";
 import { AppDispatch } from "@/store/store";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 interface Product {
   size?: any;
   _id: string;
-  image?: string;
+  images: string;
   storeName: string;
   storeAvatar?: string;
-  productName: string;
-  name: any;
+  model: string;
+  brand: string;
   // sizes: number[];
   // color: string[];
   price: number;
@@ -27,6 +28,7 @@ interface ProductSkeletonProps {
 
 const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
   const dispatch = useDispatch<AppDispatch>();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     // prevent default navigation
@@ -38,31 +40,32 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
         brand: product.brand,
         price: product.price,
         quantity: 1,
-        image: product.image,
-        color: undefined,
-        sizes: undefined,
-        productName: undefined,
-        storeName: undefined,
+        images: product.images,
+        // color: product,
+        // size: product,
+        model: product.model,
+        storeName: product.storeName,
+        // productName: undefined,
       })
     );
   };
   const handleRemoveFromCart = (e: React.MouseEvent) => {
     e.preventDefault();
 
-    dispatch(removeFromCart(product?._id));
+    dispatch(removeFromCart(product._id));
   };
 
   return (
     <div className='relative w-fit'>
       {/* Link to Product Details */}
       <Link
-        to={`/dashboard/buyer/product/${product?._id}`}
+        to={type === "cart" ? "" : `/dashboard/buyer/product/${product?._id}`}
         className='block w-fit'
       >
         <div className='relative bg-black text-white rounded-lg overflow-hidden w-fit'>
           {/* Product Image */}
           <img
-            src={product?.image}
+            src={product?.images[0]}
             alt={product?.model}
             className='w-[251px] h-[242px] object-cover'
           />
@@ -85,7 +88,7 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
             )}
 
             {/* Product Details */}
-            <h3 className='text-lg font-semibold'>{product?.productName}</h3>
+            <h3 className='text-lg font-semibold'>{product?.model}</h3>
             {/* <p className='text-gray-400 text-sm'>
               Sizes: {product?.sizes.join(", ")}
             </p> */}
@@ -97,19 +100,43 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
       </Link>
 
       {/* Floating Add to Cart Button (Prevents Navigation) */}
-      {type == "cart" ? (
-        <button
-          onClick={handleRemoveFromCart}
-          className='absolute top-2 right-2 bg-red-500 p-2 rounded-full shadow-md z-10'
-        >
-          <FaTrash className='text-white' />
-        </button>
+      {type === "cart" ? (
+        <>
+          {/* Dropdown Toggle */}
+          <button
+            className='absolute top-2 right-2 p-2 bg-green-600 rounded-full'
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            aria-label='More options'
+          >
+            <FaEllipsisV className='text-white' size={20} />
+          </button>
+
+          {/* Dropdown Menu */}
+          {isDropdownOpen && (
+            <div className='absolute top-10 right-2 bg-white text-black shadow-lg rounded-md py-1 w-32'>
+              <Link
+                className='w-full text-left px-4 py-2 text-green-500 hover:bg-gray-200 flex items-center gap-2'
+                to={`/dashboard/buyer/carts/summary/${product._id}`}
+              >
+                Checkout
+              </Link>
+
+              <button
+                className='w-full text-left px-4 py-2 text-red-600 hover:bg-gray-200 flex items-center gap-2'
+                onClick={handleRemoveFromCart}
+              >
+                <FaTrash /> Delete
+              </button>
+            </div>
+          )}
+        </>
       ) : (
         <button
           onClick={handleAddToCart}
           className='absolute top-2 right-2 bg-green-500 p-2 rounded-full shadow-md z-10'
+          aria-label='Add to cart'
         >
-          <FaShoppingCart className='text-white' />
+          <FaShoppingCart className='text-white' size={20} />
         </button>
       )}
     </div>

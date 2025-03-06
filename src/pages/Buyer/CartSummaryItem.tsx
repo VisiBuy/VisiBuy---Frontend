@@ -8,7 +8,7 @@ import {
 interface CartSummaryItemProps {
   item: {
     _id: string;
-    image?: string;
+    images: string;
     model: string;
     color?: string[];
     sizes?: number[];
@@ -19,11 +19,12 @@ interface CartSummaryItemProps {
 
 const CartSummaryItem: React.FC<CartSummaryItemProps> = ({ item }) => {
   const dispatch = useDispatch();
+  console.log(item);
 
   return (
     <div key={item._id} className='flex items-center gap-4 border-b pb-4'>
       <img
-        src={item.image}
+        src={item.images[0]}
         alt={item.model}
         className='w-16 h-16 md:w-20 md:h-20 rounded-lg object-cover'
       />

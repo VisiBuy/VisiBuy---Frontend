@@ -6,12 +6,10 @@ interface CartItem {
   model: string;
   price: number;
   quantity: number;
-  image?: string;
-  productName: any;
-  storeName: any;
+  images: string;
   color?: string[];
   sizes?: number[];
- 
+  storeName: string;
 }
 
 interface CartState {
@@ -46,11 +44,28 @@ const cartSlice = createSlice({
       state,
       action: PayloadAction<{ id: string; quantity: number }>
     ) => {
-      const item = state.items.find((item) => item._id === action.payload.id);
+      console.log("Updating quantity for ID:", action.payload.id);
+      console.log("New quantity:", action.payload.quantity);
+      const { id, quantity } = action.payload;
+
+      // Find the item in the cart
+      const item = state.items.find((item) => item._id === id);
+
+      // If item exists, update its quantity (ensure it's at least 1)
       if (item) {
-        item.quantity = action.payload.quantity;
+        item.quantity = Math.max(1, quantity); // Prevent setting 0 or negative quantity
       }
     },
+
+    // updateQuantity: (
+    //   state,
+    //   action: PayloadAction<{ id: string; quantity: number }>
+    // ) => {
+    //   const item = state.items.find((item) => item._id === action.payload.id);
+    //   if (item) {
+    //     item.quantity = action.payload.quantity;
+    //   }
+    // },
   },
 });
 
