@@ -11,7 +11,7 @@ import {
 } from "@/modules/Buyer/lib/track-order/api";
 import { Order } from "@/types/orders";
 
-const BuyerOrderDetailsPage: React.FC = () => {
+const BuyerOrderDetailsPage = () => {
   const { orderId } = useParams<{ orderId: string }>();
   const navigate = useNavigate();
   const token = localStorage.getItem("auth-token") || "";
