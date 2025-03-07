@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { HiArrowLeft } from "react-icons/hi";
 import ViewAll from "../../modules/Buyer/features/track-order/components/ViewAll";
@@ -9,6 +9,7 @@ import {
   fetchOrderStatus,
   verifyOrder,
 } from "@/modules/Buyer/lib/track-order/api";
+
 import { Order } from "@/types/orders";
 
 const BuyerOrderDetailsPage = () => {
@@ -16,7 +17,7 @@ const BuyerOrderDetailsPage = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("auth-token") || "";
 
-  // State for dynamic order details fetched from the API
+  
   const [orderDetails, setOrderDetails] = useState<Order | null>(null);
 
   // Verification states
@@ -31,6 +32,7 @@ const BuyerOrderDetailsPage = () => {
   // Fetch order status details dynamically from the API
   useEffect(() => {
     if (orderId) {
+      fetchOrderStatus(orderId)
       fetchOrderStatus(orderId)
         .then((data) => {
           setOrderDetails(data);
@@ -51,6 +53,7 @@ const BuyerOrderDetailsPage = () => {
     try {
       setIsVerifying(true);
       // Call the verifyOrder API; using "verified" status
+      await verifyOrder(orderId, "verified");
       await verifyOrder(orderId, "verified");
       setVerificationStatus("verified");
       setIsButtonVerified(true);
@@ -131,6 +134,7 @@ const BuyerOrderDetailsPage = () => {
             {orderDetails ? (
               <div className="flex justify-between text-sm font-semibold text-gray-700 p-2 border-t border-gray-300">
                 <p>
+                  {orderDetails.product.quantity}x {orderDetails.product.title}
                   {orderDetails.product.quantity}x {orderDetails.product.title}
                 </p>
                 <p>#{orderDetails.product.price}</p>
