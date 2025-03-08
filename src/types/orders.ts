@@ -11,12 +11,10 @@ export interface Order {
   seller: {
     name: string;
   };
-  product: {
+  // Convert from product object to sneaker object
+sneaker: {
     brand: string;
     model: string;
-    title: string;
-    description: string;
-    quantity: number;
     price: string;
   };
   Size: string;
