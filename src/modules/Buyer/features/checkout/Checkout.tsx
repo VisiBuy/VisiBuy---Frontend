@@ -19,6 +19,7 @@ interface CartItem {
 
 const Checkout = () => {
   const navigate = useNavigate();
+
   const { id } = useParams();
   // Get user & cart details from Redux
   const user = useSelector((state: RootState) => state.auth.user);
@@ -122,6 +123,7 @@ const Checkout = () => {
       >
         Cancel
       </button>
+
     </div>
   );
 };

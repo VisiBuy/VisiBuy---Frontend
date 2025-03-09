@@ -1,0 +1,28 @@
+@import "./abstract/animations";
+@import "./abstract/mixins";
+@import "./abstract/variables";
+
+@import "./components/card";
+@import "./components/form";
+@import "./layouts/footer";
+@import "./layouts/header";
+@import "./layouts/navigation";
+
+@import "./pages/about";
+@import "./pages/home";
+@import "./pages/CTA";
+@import "./pages/testimonial";
+@import "./pages/service_m";
+@import "./pages/ctaform";
+@import "./pages/features";
+@import "./pages/newsroom";
+@import "./pages/contactus";
+@import "./pages/T&C";
+@import "./pages/customers";
+@import "./pages/vendor";
+@import "./pages/riders";
+@import "./pages/404";
+@import "./pages/pp";
+
+@import "./base/base";
+@import "./base/typography";

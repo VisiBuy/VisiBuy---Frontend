@@ -1,0 +1,120 @@
+.vendor_section_container {
+	margin: 0 auto;
+	align-items: center;
+	margin-bottom: 2rem;
+
+	.vendor_section_heading {
+		text-align: center;
+		font-weight: 700;
+		margin-bottom: 4.8rem;
+		color: var(--color-primary-80);
+		font-family: $font-primary;
+
+		
+		.vendor_heading {
+			font-size: 6.4rem;
+			line-height: 1.2;
+			margin-bottom: 2.4rem;
+			
+			animation: fadeIn linear;
+		animation-timeline: view();
+		animation-range: entry 0% cover 40%;
+	
+		animation-name: moveInRight;
+				animation-duration: .8s;
+				animation-timing-function: ease-out;
+
+			@include respond(phone) {
+				font-size: 3.2rem!important;
+			}
+
+			@include respond(tab-port) {
+				font-size: 5.4rem;
+				// margin-bottom: 2rem;
+				// padding: 4.8rem 6.4rem;
+			}
+
+			@include respond(tab-land) {
+				font-size: 5.4rem;
+				// margin-bottom: 2rem;
+				// padding: 6.4rem;
+			}
+
+			span {
+				padding: 0.4rem 1.4rem;
+				border-radius: 2rem;
+				color: var(--color-white-10);
+				background-color: var(--color-tertiary);
+
+				animation: fadeIn linear;
+	animation-timeline: view();
+	animation-range: entry 0% cover 40%;
+
+	animation-name: moveInBottom;
+			animation-duration: .9s;
+			animation-timing-function: ease-out;
+
+				@include respond(tab-port) {
+					// font-size: 2rem;
+					padding: 0.2rem 1.2rem;
+				border-radius: 1.6rem;
+					margin-bottom: 2.4rem;
+					// padding: 4.8rem 6.4rem;
+				}
+	
+				@include respond(tab-land) {
+					// font-size: 1.8rem;
+					padding: 0.2rem 1.2rem;
+				border-radius: 1.6rem;
+					// margin-bottom: 2.4rem;
+					// padding: 6.4rem;
+				}
+			}
+		}
+
+		.vendor_subheading {
+			font-size: 2.4rem;
+			font-family: $font-secondary;
+
+			animation: fadeIn linear;
+	animation-timeline: view();
+	animation-range: entry 0% cover 40%;
+
+	animation-name: moveInTop;
+			animation-duration: 1s;
+			animation-timing-function: ease-out;
+
+			@include respond(tab-port) {
+				font-size: 2rem;
+				margin-bottom: 2.4rem;
+				// padding: 4.8rem 6.4rem;
+			}
+
+			@include respond(tab-land) {
+				font-size: 1.8rem;
+				margin-bottom: 2.4rem;
+				// padding: 6.4rem;
+			}
+		}
+	}
+	div {
+		// display: block;
+		text-align: center;
+		margin: 0 auto;
+
+		animation: fadeIn linear;
+	animation-timeline: view();
+	animation-range: entry 0% cover 40%;
+
+	animation-name: moveInTop;
+			animation-duration: .8s;
+			animation-timing-function: ease-out;
+
+		a {
+			font-size: 1.6rem;
+            font-family: $font-secondary;
+			text-decoration: none;
+			padding: 2rem 2.4rem;
+		}
+	}
+}
