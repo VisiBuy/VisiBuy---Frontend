@@ -16,7 +16,8 @@ interface Product {
   storeName: string;
   storeAvatar?: string;
   productName: string;
-  name: any;
+  model: string;
+  brand: string;
   // sizes: number[];
   // color: string[];
   price: number;
@@ -46,11 +47,9 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
         // size: product,
         model: product.model,
         storeName: product.storeName,
-        image: product.image,
         color: undefined,
         sizes: undefined,
         productName: undefined,
-        storeName: undefined,
       })
     );
   };

@@ -3,7 +3,7 @@ import { FlutterWaveButton, closePaymentModal } from "flutterwave-react-v3";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import OrderConfirmation from "../pop-up/OrderConfirmation";
-import { redirect, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface CartItem {
   _id: string;
@@ -18,6 +18,7 @@ interface CartItem {
 }
 
 const Checkout = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   // Get user & cart details from Redux
   const user = useSelector((state: RootState) => state.auth.user);
@@ -113,6 +114,14 @@ const Checkout = () => {
         }}
         orderDetails={orderDetails}
       />
+
+      <button
+        className='text-center text-xl text-white bg-red-400 py-2 px-6 rounded mt-6'
+        // onClick={() => navigate("/dashboard/buyer/carts")}
+        onClick={() => navigate(-1)}
+      >
+        Cancel
+      </button>
     </div>
   );
 };

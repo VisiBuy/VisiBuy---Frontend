@@ -6,7 +6,7 @@
   :root {
     --background: 0, 0%, 100%, 1;
     --foreground: 0, 0%, 0%, 1;
-    
+
     /* hsla(0, 0%, 63%, 1) */
     --muted: 134, 61%, 41%, 1;
     --muted-foreground: 0 0% 45.1%;
@@ -17,24 +17,22 @@
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
 
-    --border:0, 0%, 89%, 1;
+    --border: 0, 0%, 89%, 1;
     --input: 0 0% 89.8%;
 
     --primary: 134, 61%, 41%, 1;
-    --primary-150:134, 61%, 41%, 0.15;
+    --primary-150: 134, 61%, 41%, 0.15;
     --primary-foreground: 0, 0%, 100%, 1;
 
-    --secondary: 0 0% 96.1%; 
+    --secondary: 0 0% 96.1%;
 
     --secondary-foreground: 0, 0%, 0%, 1;
     --background-blue: 211, 100%, 50%, 1;
-    --background-blue-200:211, 100%, 50%, 0.15;
+    --background-blue-200: 211, 100%, 50%, 0.15;
 
-    --light-background:211, 100%, 98%, 1;
-    --light-gray:0, 0%, 89%, 1;
-    --light-gray-600:211, 1%, 50%, 1;
-
-
+    --light-background: 211, 100%, 98%, 1;
+    --light-gray: 0, 0%, 89%, 1;
+    --light-gray-600: 211, 1%, 50%, 1;
 
     --accent: 0 0% 96.1%;
     --accent-foreground: 0 0% 9%;
@@ -45,15 +43,22 @@
     --ring: 0, 0%, 63%, 1;
 
     --radius: 0.5rem;
-   --font-Montserrat: "Montserrat", sans-serif;
-   --font-OpenSans: "Open Sans", sans-serif;
+    --font-Montserrat: "Montserrat", sans-serif;
+    --font-OpenSans: "Open Sans", sans-serif;
   }
-
-  
 }
 
 @layer base {
-    *{
-        box-sizing: border-box;
-      }
+  * {
+    box-sizing: border-box;
+  }
+  :root {
+    --font-Montserrat: "Montserrat", sans-serif;
+  }
+}
+
+@layer components {
+  .font-montserrat {
+    font-family: var(--font-Montserrat);
+  }
 }
