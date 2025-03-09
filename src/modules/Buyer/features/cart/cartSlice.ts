@@ -7,9 +7,9 @@ interface CartItem {
   price: number;
   quantity: number;
   images: string;
-  storeName: any;
   color?: string[];
   sizes?: number[];
+  storeName: string;
 }
 
 interface CartState {

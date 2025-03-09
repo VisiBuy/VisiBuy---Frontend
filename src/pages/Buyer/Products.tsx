@@ -7,14 +7,13 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 interface Product {
-  _id: string;
-  model: string;
+  id: string;
   images?: string;
   storeName: string;
   storeAvatar: string;
   productName: string;
   size: number[];
-  color: string[];
+  color?: string[];
   price: number;
 }
 
@@ -28,14 +27,21 @@ const BuyerProductsPage = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
+  // console.log("Products from Redux:", products);
   const filteredProducts = useSelector(selectFilteredProducts) || [];
   const filters = useSelector((state: any) => state.buyer.filters) || {};
   const [filtersApplied, setFiltersApplied] = useState(false);
 
+  // const filtersApplied =
+  //   (filters?.size?.length ?? 0) > 0 ||
+  //   (filters?.color?.length ?? 0) > 0 ||
+  //   (filters?.priceRange?.[0] ?? 0) !== 0 ||
+  //   (filters?.priceRange?.[1] ?? 1000) !== 1000;
+
   return (
     <div>
       <div className='flex justify-between items-center'>
-        <h2 className='text-3xl font-bold font-montserrat'>Products</h2>
+        <h2>Products</h2>
         <FilterComponent
           onApplyFilters={() => setFiltersApplied((prev) => !prev)}
         />
@@ -45,7 +51,7 @@ const BuyerProductsPage = () => {
       {filtersApplied ? (
         filteredProducts.length > 0 ? (
           <div>
-            {filteredProducts.map((product: Product) => (
+            {filteredProducts.map((product) => (
               <div key={product?._id} className='product-card'>
                 <h3>{product?.model}</h3>
                 <p>Size: {product.size.join(", ")}</p>

@@ -14,7 +14,7 @@ interface Product {
   description: string;
   storeName: string;
   storeAvatar: string;
-  images: string;
+  images?: string;
   quantity: number;
 }
 
@@ -100,7 +100,6 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
         <button
           onClick={() => {
             // onClose;
-
             navigate("/dashboard/buyer/track-order");
             axiosWithAuth.post("order", orderData);
           }}

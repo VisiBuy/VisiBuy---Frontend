@@ -8,8 +8,6 @@ import ProfilePicture from "../../ui/buyer/header/ProfilePicture";
 import profilepic from "../../assets/Buyer/profilepic.jpg";
 import logo from "../../assets/Buyer/logo.png";
 import { dashboardConfig } from "../../lib/config";
-import { RootState } from "@/store/store";
-import { useSelector } from "react-redux";
 
 // Helper function to build a proper URL from the basePath and the relative path.
 function buildUrl(basePath: string, path: string) {
@@ -34,7 +32,6 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
   isSidebarOpen,
   setIsSidebarOpen,
 }) => {
-  const cartItems = useSelector((state: RootState) => state.buyer.cart.items);
   const navigate = useNavigate();
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 640);
 
@@ -58,38 +55,38 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
 
   return (
     <>
-      <header className='bg-background border border-gray-100 p-8'>
-        <div className='flex justify-between items-center'>
+      <header className="bg-background border border-gray-100 p-8">
+        <div className="flex justify-between items-center">
           {/* Left Side: Menu Icon + Logo (wrapped in a Link to buyer home) */}
-          <div className='flex items-center gap-4'>
+          <div className="flex items-center gap-4">
             <FaBars
-              className='text-4xl text-blue font-extrabold cursor-pointer sm:hidden'
+              className="text-4xl text-blue font-extrabold cursor-pointer sm:hidden"
               onClick={onMenuClick} // Use the passed callback to open the sidebar
             />
-            <Link to={homeUrl} className='block sm:hidden'>
-              <img src={logo} alt='VisiBuy' className='h-6' />
+            <Link to={homeUrl} className="block sm:hidden">
+              <img src={logo} alt="VisiBuy" className="h-6" />
             </Link>
           </div>
 
           {/* Right Side: Cart, Dashboard, Profile */}
-          <div className='flex items-center gap-4'>
+          <div className="flex items-center gap-4">
             {isLargeScreen && (
               <SearchBox
-                placeholder='Search outlets/products'
+                placeholder="Search outlets/products"
                 onSearch={handleSearch}
               />
             )}
-            <CartIcon itemCount={cartItems.length} />
+            <CartIcon itemCount={3} />
             <DashboardButton />
-            <ProfilePicture imageSrc={profilepic} altText='User' />
+            <ProfilePicture imageSrc={profilepic} altText="User" />
           </div>
         </div>
 
         {/* Search Box: Full width only on small screens */}
         {!isLargeScreen && (
-          <div className='mt-4'>
+          <div className="mt-4">
             <SearchBox
-              placeholder='Search outlets/products'
+              placeholder="Search outlets/products"
               onSearch={handleSearch}
             />
           </div>
