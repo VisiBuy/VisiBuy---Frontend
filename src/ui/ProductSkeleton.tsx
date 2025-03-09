@@ -7,7 +7,6 @@ import { FaEllipsisV, FaShoppingCart, FaTrash } from "react-icons/fa";
 import { AppDispatch } from "@/store/store";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import Checkout from "@/modules/Buyer/features/checkout/Checkout";
 
 interface Product {
   size?: any;
@@ -15,7 +14,6 @@ interface Product {
   images: string;
   storeName: string;
   storeAvatar?: string;
-  productName: string;
   model: string;
   brand: string;
   // sizes: number[];
@@ -43,13 +41,10 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
         price: product.price,
         quantity: 1,
         images: product.images,
-        // color: product,
-        // size: product,
         model: product.model,
         storeName: product.storeName,
         color: undefined,
         sizes: undefined,
-        productName: undefined,
       })
     );
   };
@@ -92,7 +87,7 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
             )}
 
             {/* Product Details */}
-            <h3 className='text-lg font-semibold'>{product?.productName}</h3>
+            <h3 className='text-lg font-semibold'>{product?.model}</h3>
             {/* <p className='text-gray-400 text-sm'>
               Sizes: {product?.sizes.join(", ")}
             </p> */}

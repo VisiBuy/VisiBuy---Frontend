@@ -7,7 +7,6 @@ interface CartItem {
   price: number;
   quantity: number;
   images: string;
-  productName: any;
   storeName: any;
   color?: string[];
   sizes?: number[];
