@@ -141,7 +141,7 @@ const CartSummary = () => {
             </Button>
           </Link>
         </div>
-
+      </div>
     </div>
   );
 };

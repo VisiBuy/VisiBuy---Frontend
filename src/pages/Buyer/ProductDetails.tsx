@@ -5,6 +5,7 @@ import {
 import { RootState } from "@/store/store";
 import OrderSuccess from "@/ui/buyer/OrderSuccess";
 import { useEffect, useState } from "react";
+import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -117,7 +118,8 @@ function ProductDetails() {
 
         {/* Quantity and Order Actions */}
         <div className='md:w-md'>
-          <label htmlFor=''>Amount</label>
+          <label htmlFor=''>Amount:</label>
+          <span className='px-4 text-2xl font-semibold'>{data?.price}</span>
           <div className='flex items-center text-center gap-4 rounded h-12 mt-6 font-bold text-2xl'>
             <button
               onClick={handleAddToQuantity}
@@ -143,11 +145,11 @@ function ProductDetails() {
           <p className='mt-4'>{data?.description}</p>
           <div className='flex gap-2 md:gap-4'>
             <button
-              className='w-[264px] h-12 mt-6 px-2 md:px-6 font-semibold rounded-md bg-green-600 text-white cursor-pointer hover:bg-green-400'
+              className='w-[264px] h-12 mt-6 px-2 md:px-6 font-semibold rounded-md bg-green-600 text-white cursor-pointer hover:bg-green-400 flex items-center justify-center gap-6'
               onClick={handleOrderSuccess}
               type='submit'
             >
-              Place Order
+              <FaShoppingCart className='text-white' size={14} /> Add To Cart
             </button>
           </div>
         </div>
@@ -157,74 +159,3 @@ function ProductDetails() {
 }
 
 export default ProductDetails;
-
-// 1
-// :
-// brand
-// :
-// "Nike"
-// color
-// :
-// Array(1)
-// 0
-// :
-// "yellow"
-// length
-// :
-// 1
-// [[Prototype]]
-// :
-// Array(0)
-// description
-// :
-// "The Nike Dunk Low is a popular model known for its versatile design and comfortable fit. This colorway features a striking combination of yellow, black, and gray, making it stand out as a stylish option"
-// images
-// :
-// Array(0)
-// length
-// :
-// 0
-// [[Prototype]]
-// :
-// Array(0)
-// model
-// :
-// "Nike Dunk Low"
-// price
-// :
-// 115
-// seller
-// :
-// time
-// :
-// "2024-11-07T11:11:15.978Z"
-// user_id
-// :
-// "672c9e3034132d7052ee1e35"
-// [[Prototype]]
-// :
-// Object
-// size
-// :
-// Array(1)
-// 0
-// :
-// "32"
-// length
-// :
-// 1
-// [[Prototype]]
-// :
-// Array(0)
-// stock_status
-// :
-// "in_stock"
-// __v
-// :
-// 0
-// _id
-// :
-// "672ca05c4e08718f982d1ede"
-// [[Prototype]]
-// :
-// Object
