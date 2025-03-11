@@ -33,7 +33,7 @@ const OrderStatusButtons: React.FC<OrderStatusButtonsProps> = ({
           <button
             key={status}
             onClick={() => onStatusChange(status)}
-            className={`px-4 py-2 rounded-md text-sm font-bold font-Montserrat ${
+            className={`px-4 py-2 rounded-md text-lg font-bold font-Montserrat ${
               currentStatus === status
                 ? "bg-blue-200 text-blue"
                 : "bg-light-gray text-light-gray-600"
