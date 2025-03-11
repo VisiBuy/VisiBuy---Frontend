@@ -21,7 +21,7 @@ const VisualVerificationFeedback: React.FC<VisualVerificationFeedbackProps> = ({
     if (rating === null) return;
     try {
       setLoading(true);
-      const result = await submitFeedback(orderId, rating, comments, token);
+      const result = await submitFeedback(orderId, rating, comments);
       onFeedbackSubmitted(result);
     } catch (err: any) {
       setError(err.message || "Feedback submission failed.");

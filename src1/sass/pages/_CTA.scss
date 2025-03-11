@@ -1,0 +1,146 @@
+.cta {
+	padding: 6.4rem 12.8rem;
+
+	@include respond(phone) {
+		padding: 5.4rem 4.2rem!important;
+		display: block!important;
+		margin-bottom: 3.2rem!important;
+	}
+
+	@include respond(tab-port) {
+		padding: 4.8rem 6.4rem;
+	}
+
+	@include respond(tab-land) {
+		padding: 6.4rem;
+	}
+
+	.cta_box {
+		// display: flex;
+		// align-content: space-between;
+		// gap: 6.4rem;
+		// grid-template-columns: 2.8fr 1fr;
+		padding: 6.4rem;
+		border-radius: 3.2rem;
+		font-family: $font-secondary;
+		color: var(--color-white-10);
+		background-color: var(--color-primary);
+
+		@include respond(tab-port) {
+			padding: 4.8rem 6.4rem;
+		}
+	
+		@include respond(tab-land) {
+			padding: 4.2rem;
+		}
+
+		.cta_container {
+			// background: url("/line-bg 1.svg");
+			// background-size: cover;
+			// background-position: center;
+			// background-blend-mode: lighten;
+			display: flex;
+            flex: 1 1 0;
+			// flex: 60% 1fr;
+			gap: 6.4rem;
+			align-content: baseline;
+
+			@include respond(phone) {
+				display: block;
+				// margin-bottom: 3.2rem!important;
+			}
+		}
+
+		.subheading {
+			@include subheading;
+
+			animation: fadeIn linear;
+		animation-timeline: view();
+		animation-range: entry 0% cover 40%;
+	
+		animation-name: moveInBottom;
+				animation-duration: .9s;
+				animation-timing-function: ease-out;
+
+			@include respond(tab-port) {
+				// padding: 4.8rem 6.4rem;
+				font-size: 1.4rem;;
+			}
+		
+			@include respond(tab-land) {
+				// padding: 6.4rem;
+				font-size: 1.2rem;
+			}
+		}
+
+		.heading_tertiary {
+			font-size: 4.8rem;
+			font-weight: 700;
+			margin-top: 1rem;
+			line-height: 1.2;
+			font-family: $font-primary;
+			text-wrap: wrap;
+
+			animation: fadeIn linear;
+		animation-timeline: view();
+		animation-range: entry 0% cover 40%;
+	
+		animation-name: moveInBottom;
+				animation-duration: .8s;
+				animation-timing-function: ease-out;
+
+			@include respond(tab-port) {
+				// padding: 4.8rem 6.4rem;
+				font-size: 3.4rem;
+			}
+		
+			@include respond(tab-land) {
+				// padding: 6.4rem;
+				font-size: 3.6rem;
+			}
+		}
+
+		a {
+			// width: 30%;
+			display: inline-block;
+            // padding: 2rem 2.8rem;
+            padding: 2rem;
+            width: 24%;
+            font-size: 1.6rem;
+			text-decoration: none;
+            // display: inline-block;
+            // flex-basis: 1;
+			cursor: pointer;
+			border: none;
+			align-self: end;
+			text-align: center;
+
+			animation: fadeIn linear;
+		animation-timeline: view();
+		animation-range: entry 0% cover 40%;
+	
+		animation-name: moveInTop;
+				animation-duration: 1.4s;
+				animation-timing-function: ease-out;
+
+			@include respond(phone) {
+				display: block;
+				width: 100%!important;
+				margin-top: 3.2rem!important;
+			}
+
+			@include respond(tab-port) {
+				// padding: 4.8rem 6.4rem;
+				font-size: 3.4rem;
+				width: 60%;
+			}
+		
+			@include respond(tab-land) {
+				// padding: 6.4rem;
+				width: 30%;
+				text-wrap: nowrap;
+				font-size: 1.4rem;
+			}
+		}
+	}
+}

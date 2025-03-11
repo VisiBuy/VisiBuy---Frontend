@@ -1,0 +1,28 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    // box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%; // 1 rem = 10px; 10px/16px = 62.5%;
+	text-rendering: optimizeLegibility;
+    font-optical-sizing: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	scroll-behavior: smooth;
+}
+
+body {
+
+    // box-sizing: border-box;
+    // transition: all 0.5s ease-in;
+
+    ::selection {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+    }
+}

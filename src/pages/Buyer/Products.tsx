@@ -62,7 +62,7 @@ const BuyerProductsPage = () => {
         // <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6'>
         <div className='flex gap-6 p-6' style={{ flexWrap: "wrap" }}>
           {products?.map((product: any) => (
-            <ProductSkeleton type='prod' key={product?.id} product={product} />
+            <ProductSkeleton type='prod' key={product?._id} product={product} />
           ))}
         </div>
       )}

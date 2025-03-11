@@ -48,6 +48,14 @@ const CartSummary = () => {
       dispatch(calculateTotals(data));
     }
   }, [data, dispatch]);
+  
+  if (!data)
+    return (
+      <div className='max-w-3xl mx-auto p-4 md:p-6 bg-white rounded-lg shadow-lg'>
+        <h2 className='text-lg md:text-xl font-semibold mb-4'>Cart Summary</h2>
+        <p className='text-gray-500 text-center'>Your cart is empty.</p>
+      </div>
+    );
 
   if (!data)
     return (
@@ -61,6 +69,7 @@ const CartSummary = () => {
       </div>
     );
 
+
   return (
     <div>
       <h2 className='mb-4 text-3xl font-bold font-montserrat'>Cart Summary</h2>
@@ -72,8 +81,10 @@ const CartSummary = () => {
         ) : (
           <p className='text-gray-500 text-center'>Your cart is empty.</p>
         )} */}
+
           <CartSummaryItem key={data._id} item={data} />
         </div>
+
 
         {/* Delivery Details */}
         <div className='mt-4'>
@@ -130,7 +141,7 @@ const CartSummary = () => {
             </Button>
           </Link>
         </div>
-      </div>
+
     </div>
   );
 };

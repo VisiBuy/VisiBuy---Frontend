@@ -45,6 +45,7 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
         storeName: product.storeName,
         color: undefined,
         sizes: undefined,
+
       })
     );
   };

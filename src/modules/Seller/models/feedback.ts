@@ -12,10 +12,7 @@ export interface SupportCardProps {
   link:string;
   key:string
 }
-export interface FaqProps{
-  question:string;
-  answer:string;
-}
+
 export interface FeedbackDto {
   name: string;
   email: string;

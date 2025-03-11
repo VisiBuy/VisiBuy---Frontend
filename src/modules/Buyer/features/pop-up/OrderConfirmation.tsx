@@ -101,7 +101,8 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
 
         <button
           onClick={() => {
-            onClose;
+            // onClose;
+
             navigate("/dashboard/buyer/track-order");
             axiosWithAuth.post("order", orderData);
             dispatch(removeFromCart(orderDetails.items._id));

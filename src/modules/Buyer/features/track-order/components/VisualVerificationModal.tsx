@@ -38,7 +38,7 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
   useEffect(() => {
     if (isOpen && orderId) {
       setLoading(true);
-      fetchVerificationImages(orderId, token)
+      fetchVerificationImages(orderId)
         .then((data: VerificationResponse) => {
           setVerificationData(data);
           setLoading(false);
