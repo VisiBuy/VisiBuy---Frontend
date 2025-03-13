@@ -51,13 +51,16 @@ const BuyerTrackOrderPage = () => {
 
 
   return (
-    <div className="flex flex-col gap-12 p-12">
-      <div className="flex items-center justify-between">
-        <OrderStatusButtons
-          currentStatus={statusFilter}
-          onStatusChange={handleStatusChange}
-        />
-        <SearchOrder onSearch={handleSearch} />
+    <div className="flex flex-col gap-12 p-10">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-4 w-full">
+          <OrderStatusButtons
+            currentStatus={statusFilter}
+            onStatusChange={handleStatusChange}
+            className="flex-1 whitespace-nowrap overflow-x-auto" // Prevent wrapping
+          />
+        </div>
+        <SearchOrder onSearch={handleSearch} className="w-full sm:w-auto" />
       </div>
 
       {/* Unified loading, error, and content handling */}

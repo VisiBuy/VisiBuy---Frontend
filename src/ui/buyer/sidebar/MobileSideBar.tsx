@@ -5,6 +5,7 @@ import { RxCross2 } from "react-icons/rx";
 import { FaSignOutAlt } from "react-icons/fa";
 import { dashboardConfig } from "../../../lib/config";
 import { buyerNavItems } from "../../../modules/Buyer/components/BuyerNavItems";
+import { useNotifications } from "@/context/notifications/NotificationsContext";
 
 // Helper function to build a proper URL from the basePath and the relative path.
 function buildUrl(basePath: string, path: string) {
@@ -26,6 +27,9 @@ const MobileSideBar: React.FC<MobileSideBarProps> = ({ isOpen, onClose }) => {
   const location = useLocation();
   const buyerConfig = dashboardConfig.getConfig("buyer");
   const { basePath } = buyerConfig;
+
+  // ✅ Get the unread notifications count
+  const { unreadCount } = useNotifications();
 
   return (
     <div
@@ -56,11 +60,35 @@ const MobileSideBar: React.FC<MobileSideBarProps> = ({ isOpen, onClose }) => {
                   "hover:bg-blue-200 hover:text-blue hover:font-bold"
                 )}
               >
-                {React.isValidElement(item.icon)
-                  ? React.cloneElement(item.icon as React.ReactElement<any>, {
-                      className: "text-current",
-                    })
-                  : item.icon}
+                {/* If this is the Notification item, wrap in a transparent button */}
+                {item.label === "Notification" ? (
+                  <button className="relative bg-transparent flex items-center p-0">
+                    {React.isValidElement(item.icon)
+                      ? React.cloneElement(
+                          item.icon as React.ReactElement<any>,
+                          { className: "text-current" }
+                        )
+                      : item.icon}
+
+                    {/* Unread Count Badge */}
+                    {unreadCount > 0 && (
+                      <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full px-2 transform translate-x-1/2 -translate-y-1/2">
+                        {unreadCount}
+                      </span>
+                    )}
+                  </button>
+                ) : (
+                  // Normal icon for other items
+                  <>
+                    {React.isValidElement(item.icon)
+                      ? React.cloneElement(
+                          item.icon as React.ReactElement<any>,
+                          { className: "text-current" }
+                        )
+                      : item.icon}
+                  </>
+                )}
+
                 <span>{item.label}</span>
               </Link>
             );
