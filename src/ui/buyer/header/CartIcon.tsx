@@ -7,8 +7,8 @@ const CartIcon = ({ itemCount }: { itemCount: number }) => {
 
   return (
     <Link to={cartPath} className="relative">
-      <div className="p-2 bg-blue-200 rounded-full flex items-center justify-center">
-        <FaShoppingCart className="text-2xl text-blue" />
+      <div className="p-3 bg-blue-200 rounded-full flex items-center justify-center">
+        <FaShoppingCart className="text-2xl md:text-4xl text-blue" />
       </div>
       {itemCount > 0 && (
         <span className="absolute -top-1 -right-1 bg-blue text-white text-xs rounded-full px-2">

@@ -24,14 +24,14 @@ const DesktopSideBar = () => {
     const location = useLocation();
 
     return (
-      <aside className="bg-white h-screen w-72 hidden sm:flex flex-col justify-between px-12 pt-10 pb-24 border border-gray-100">
+      <aside className="bg-white h-screen w-80 hidden sm:flex flex-col justify-between px-8 pt-10 pb-24 border border-gray-100">
         {/* Logo + Beta Badge */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           {/* Logo wrapped in a Link to always navigate to buyer's home */}
           <Link to={buildUrl(basePath, routes.home)}>
-            <img src={logo} alt="VisiBuy" className="h-6" />
+            <img src={logo} alt="VisiBuy" className="h-12" />
           </Link>
-          <span className="bg-blue-200 text-blue text-xs font-bold px-3 py-1 rounded-md">
+          <span className="bg-blue-200 text-blue text-md font-bold font-OpenSans px-6 py-2 rounded-lg">
             Beta
           </span>
         </div>
@@ -47,14 +47,14 @@ const DesktopSideBar = () => {
                 key={item.label}
                 to={url}
                 className={clsx(
-                  "flex items-center gap-2 px-3 py-2 rounded-sm transition-colors",
-                  isActive ? "text-blue font-bold" : "text-black font-semibold",
-                  "hover:bg-blue-200 hover:text-blue"
+                  "flex items-center gap-8 px-3 py-6 text-2xl rounded-md font-OpenSans transition-colors",
+                  isActive ? "text-blue font-extrabold" : "text-black font-semibold",
+                  "hover:bg-blue-200 hover:text-blue hover:font-bold"
                 )}
               >
                 {React.isValidElement(item.icon)
                   ? React.cloneElement(item.icon as React.ReactElement<any>, {
-                      className: "text-current",
+                      className: "text-current text-2xl",
                     })
                   : item.icon}
                 <span>{item.label}</span>
@@ -65,8 +65,8 @@ const DesktopSideBar = () => {
 
         {/* Logout */}
         <div>
-          <button className="flex items-center gap-2 text-red-500 font-bold">
-            <FaSignOutAlt size={18} /> <span>LogOut</span>
+          <button className="flex items-center gap-6 font-OpenSans text-red-500 text-2xl font-bold">
+            <FaSignOutAlt size={20} /> <span>LogOut</span>
           </button>
         </div>
       </aside>

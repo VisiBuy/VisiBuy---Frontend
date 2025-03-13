@@ -33,7 +33,7 @@ const MobileSideBar: React.FC<MobileSideBarProps> = ({ isOpen, onClose }) => {
         isOpen ? "translate-x-0" : "-translate-x-full"
       } sm:hidden`}
     >
-      <div className="bg-white w-64 h-full flex flex-col p-6">
+      <div className="bg-white w-72 h-full flex flex-col p-6">
         {/* Close Button */}
         <button className="self-end" onClick={onClose}>
           <RxCross2 size={24} className="text-blue" />
@@ -51,9 +51,9 @@ const MobileSideBar: React.FC<MobileSideBarProps> = ({ isOpen, onClose }) => {
                 to={url}
                 onClick={onClose} // Close sidebar when link is clicked
                 className={clsx(
-                  "flex items-center gap-2 px-3 py-2 rounded-sm transition-colors",
+                  "flex items-center text-2xl gap-8 px-3 py-6 rounded-sm font-OpenSans transition-colors",
                   isActive ? "text-blue font-bold" : "text-black font-semibold",
-                  "hover:bg-blue-200 hover:text-blue"
+                  "hover:bg-blue-200 hover:text-blue hover:font-bold"
                 )}
               >
                 {React.isValidElement(item.icon)
@@ -71,9 +71,9 @@ const MobileSideBar: React.FC<MobileSideBarProps> = ({ isOpen, onClose }) => {
         <div className="mt-auto">
           <button
             onClick={onClose}
-            className="flex items-center gap-2 text-red-500 font-bold"
+            className="flex items-center gap-4 font-OpenSans text-2xl text-red-500 font-bold"
           >
-            <FaSignOutAlt size={18} /> <span>LogOut</span>
+            <FaSignOutAlt size={20} /> <span>LogOut</span>
           </button>
         </div>
       </div>
