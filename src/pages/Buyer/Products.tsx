@@ -45,7 +45,7 @@ const BuyerProductsPage = () => {
       {filtersApplied ? (
         filteredProducts.length > 0 ? (
           <div>
-            {filteredProducts.map((product: Product) => (
+            {filteredProducts.map((product) => (
               <div key={product?._id} className='product-card'>
                 <h3>{product?.model}</h3>
                 <p>Size: {product.size.join(", ")}</p>

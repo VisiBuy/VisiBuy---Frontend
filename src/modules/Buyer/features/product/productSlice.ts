@@ -14,7 +14,7 @@ interface Product {
   description: string;
   storeName: string;
   storeAvatar: string;
-  images: string;
+  images: string[];
   quantity: number;
 }
 

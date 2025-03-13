@@ -15,9 +15,9 @@ interface CartItem {
   model: string;
   price: number;
   quantity: number;
-  images: string;
+  images: string[];
   color?: string[];
-  sizes?: number[];
+  sizes?: string[];
   storeName: string;
 }
 
@@ -48,7 +48,7 @@ const CartSummary = () => {
       dispatch(calculateTotals(data));
     }
   }, [data, dispatch]);
-  
+
   if (!data)
     return (
       <div className='max-w-3xl mx-auto p-4 md:p-6 bg-white rounded-lg shadow-lg'>
@@ -69,7 +69,6 @@ const CartSummary = () => {
       </div>
     );
 
-
   return (
     <div>
       <h2 className='mb-4 text-3xl font-bold font-montserrat'>Cart Summary</h2>
@@ -84,7 +83,6 @@ const CartSummary = () => {
 
           <CartSummaryItem key={data._id} item={data} />
         </div>
-
 
         {/* Delivery Details */}
         <div className='mt-4'>

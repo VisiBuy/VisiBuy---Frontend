@@ -5,16 +5,27 @@ import {
 import { RootState } from "@/store/store";
 import OrderSuccess from "@/ui/buyer/OrderSuccess";
 import { useEffect, useState } from "react";
-import { FaShoppingCart } from "react-icons/fa";
+import {
+  FaShoppingCart,
+  FaArrowLeft,
+  FaArrowRight,
+  FaChevronLeft,
+  FaChevronRight,
+} from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 interface Product {
   _id: string;
   brand: string;
   model: string;
   description: string;
-  images: string;
+  images: string[];
   storeName: string;
   storeAvatar: string;
   size?: number[];
@@ -35,6 +46,10 @@ function ProductDetails() {
   const [data, setData] = useState<Product | null>(null);
   const [showOrderSuccess, setShowOrderSuccess] = useState(false);
 
+  // selected color and size for cart
+  const [selectedColor, setSelectedColor] = useState<string>("");
+  const [selectedSize, setSelectedSize] = useState<string>("");
+
   // Get product quantity in cart
   const cartItem = cartItems.find((item) => item._id === id);
   const quantity = cartItem ? cartItem.quantity : 1;
@@ -47,7 +62,7 @@ function ProductDetails() {
 
   const handleOrderSuccess = () => {
     if (!data) return;
-    dispatch(addToCart(data));
+    dispatch(addToCart({ ...data, sizes: selectedSize, color: selectedColor }));
     setShowOrderSuccess(true);
   };
   const handleAddToQuantity = () => {
@@ -70,7 +85,7 @@ function ProductDetails() {
         <h2 className='font-semibold uppercase text-2xl'>{data?.model}</h2>
 
         {/* image */}
-        <div className='h-[263px] flex justify-center'>
+        {/* <div className='h-[263px] flex justify-center'>
           {data?.images && (
             <img
               src={data.images[0]}
@@ -78,6 +93,61 @@ function ProductDetails() {
               className='w-[75%] h-[80%]'
             />
           )}
+        </div> */}
+        {/* Desktop View: Display images side by side */}
+        <div className='hidden md:flex space-x-4'>
+          {data?.images.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt={data?.model}
+              className='w-1/3 rounded-lg shadow-md'
+            />
+          ))}
+        </div>
+
+        {/* Mobile View: Image Slider with Custom Navigation */}
+        <div className='relative md:hidden'>
+          <Swiper
+            modules={[Navigation, Pagination]}
+            spaceBetween={10}
+            slidesPerView={1}
+            navigation={{
+              prevEl: ".swiper-button-prev",
+              nextEl: ".swiper-button-next",
+            }}
+            pagination={{ clickable: true }}
+          >
+            {data?.images.map((img, index) => (
+              <SwiperSlide key={index}>
+                <img
+                  src={img}
+                  alt={data?.model}
+                  className='w-full rounded-lg shadow-md'
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* Custom Navigation Arrows */}
+          {/* <button className='swiper-button-prev absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full'>
+            <FaArrowLeft size={10} />
+          </button>
+          <button className='swiper-button-next absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full'>
+            <FaArrowRight size={10} />
+          </button> */}
+          <button
+            // ref={prevRef}
+            className='swiper-button-prev absolute left-2 top-1/2 -translate-y-1/2 bg-gray-800/50 text-white p-2 rounded-full hover:bg-gray-700 transition text-sm'
+          >
+            <FaChevronLeft className='w-5 h-5' />
+          </button>
+          <button
+            // ref={nextRef}
+            className='swiper-button-next absolute right-2 top-1/2 -translate-y-1/2 bg-gray-800/50 text-white p-2 rounded-full hover:bg-gray-700 transition text-sm'
+          >
+            <FaChevronRight className='w-5 h-5' />
+          </button>
         </div>
 
         {/* color and sizes */}
@@ -89,7 +159,12 @@ function ProductDetails() {
               <select
                 id='color'
                 className='min-w-[130px] h-12 border-2 border-gray-400 rounded'
+                value={selectedColor}
+                onChange={(e) => setSelectedColor(e.target.value)}
               >
+                <option value='' disabled>
+                  Select a color
+                </option>
                 {data.color.map((col, index) => (
                   <option key={index} value={col}>
                     {col}
@@ -98,6 +173,7 @@ function ProductDetails() {
               </select>
             </div>
           )}
+
           {data?.size && data.size.length > 0 && (
             <div>
               <label htmlFor='size'>Size</label>
@@ -105,7 +181,12 @@ function ProductDetails() {
               <select
                 id='size'
                 className='min-w-[130px] h-12 border-2 border-gray-400 rounded'
+                value={selectedSize}
+                onChange={(e) => setSelectedSize(e.target.value)}
               >
+                <option value='' disabled>
+                  Select a size
+                </option>
                 {data.size.map((sz, index) => (
                   <option key={index} value={sz}>
                     {sz}
