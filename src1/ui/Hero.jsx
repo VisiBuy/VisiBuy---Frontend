@@ -22,7 +22,7 @@ function Hero() {
 						certainty.
 					</p>
 
-					<form action='https://forms.zohopublic.com/visibuy1/form/Earlyadopters/formperma/QxdTWBh4lPuQJThpBAZ5WesybXha8ur4m47OH3-lPzE/htmlRecords/submit' name='form' method="POST" className="waitlist_section" id="cta"  acceptCharset='UTF-8' enctype='multipart/form-data' onSubmit={(e) => {e.preventDefault()}}>
+					<form action='https://forms.zohopublic.com/visibuy1/form/Earlyadopters/formperma/QxdTWBh4lPuQJThpBAZ5WesybXha8ur4m47OH3-lPzE/htmlRecords/submit' name='form' method="POST" className="waitlist_section" id="cta"  acceptCharset='UTF-8' encType='multipart/form-data' onSubmit={(e) => {e.preventDefault()}}>
 						<div >
 						<input type="email" name="Email" placeholder="Enter Email Address" value={email} onChange={emailHandler} autoComplete= "on" required />
 						<input type="hidden" name="zf_referrer_name" value="" />

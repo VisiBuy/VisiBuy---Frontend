@@ -29,9 +29,9 @@ const DesktopSideBar = () => {
         <div className="flex items-center gap-4">
           {/* Logo wrapped in a Link to always navigate to buyer's home */}
           <Link to={buildUrl(basePath, routes.home)}>
-            <img src={logo} alt="VisiBuy" className="h-12" />
+            <img src={logo} alt="VisiBuy" className="h-6" />
           </Link>
-          <span className="bg-blue-200 text-blue text-md font-bold font-OpenSans px-6 py-2 rounded-lg">
+          <span className="bg-blue-200 text-blue text-md font-bold font-OpenSans px-5 py-1 rounded-lg">
             Beta
           </span>
         </div>
