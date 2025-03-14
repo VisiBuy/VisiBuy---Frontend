@@ -45,7 +45,6 @@
     "recharts": "^2.15.1",
     "redux-persist": "^6.0.0",
     "sass": "^1.79.3",
-    "swiper": "^11.2.5",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.6",
     "vite": "^5.4.7",

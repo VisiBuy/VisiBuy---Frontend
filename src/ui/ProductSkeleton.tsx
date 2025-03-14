@@ -11,7 +11,7 @@ import { useState } from "react";
 interface Product {
   size?: any;
   _id: string;
-  images: string[];
+  images: string;
   storeName: string;
   storeAvatar?: string;
   model: string;
@@ -41,10 +41,11 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
         price: product.price,
         quantity: 1,
         images: product.images,
+        // color: product,
+        // size: product,
         model: product.model,
         storeName: product.storeName,
-        color: undefined,
-        sizes: undefined,
+        // productName: undefined,
       })
     );
   };

@@ -1,9 +1,8 @@
 import { axiosWithAuth } from "@/lib/client";
-import { AppDispatch, RootState } from "@/store/store";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { removeFromCart } from "../cart/cartSlice";
 
 interface Product {
   size: number[];
@@ -15,7 +14,7 @@ interface Product {
   description: string;
   storeName: string;
   storeAvatar: string;
-  images: string;
+  images?: string;
   quantity: number;
 }
 
@@ -41,7 +40,6 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
   orderDetails,
 }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
   const cartProduct = useSelector(
     (state: RootState) => state.buyer.product.products
   );
@@ -102,10 +100,8 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
         <button
           onClick={() => {
             // onClose;
-
             navigate("/dashboard/buyer/track-order");
             axiosWithAuth.post("order", orderData);
-            dispatch(removeFromCart(orderDetails.items._id));
           }}
           className='mt-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700'
         >

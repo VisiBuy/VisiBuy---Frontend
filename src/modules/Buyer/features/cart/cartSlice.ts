@@ -6,10 +6,10 @@ interface CartItem {
   model: string;
   price: number;
   quantity: number;
-  images: string[];
-  storeName: any;
-  color?: string;
-  sizes?: string;
+  images: string;
+  color?: string[];
+  sizes?: number[];
+  storeName: string;
 }
 
 interface CartState {

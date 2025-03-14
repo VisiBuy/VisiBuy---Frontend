@@ -5,27 +5,15 @@ import {
 import { RootState } from "@/store/store";
 import OrderSuccess from "@/ui/buyer/OrderSuccess";
 import { useEffect, useState } from "react";
-import {
-  FaShoppingCart,
-  FaArrowLeft,
-  FaArrowRight,
-  FaChevronLeft,
-  FaChevronRight,
-} from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 
 interface Product {
   _id: string;
   brand: string;
   model: string;
   description: string;
-  images: string[];
+  images: string;
   storeName: string;
   storeAvatar: string;
   size?: number[];
@@ -46,10 +34,6 @@ function ProductDetails() {
   const [data, setData] = useState<Product | null>(null);
   const [showOrderSuccess, setShowOrderSuccess] = useState(false);
 
-  // selected color and size for cart
-  const [selectedColor, setSelectedColor] = useState<string>("");
-  const [selectedSize, setSelectedSize] = useState<string>("");
-
   // Get product quantity in cart
   const cartItem = cartItems.find((item) => item._id === id);
   const quantity = cartItem ? cartItem.quantity : 1;
@@ -62,7 +46,7 @@ function ProductDetails() {
 
   const handleOrderSuccess = () => {
     if (!data) return;
-    dispatch(addToCart({ ...data, sizes: selectedSize, color: selectedColor }));
+    dispatch(addToCart(data));
     setShowOrderSuccess(true);
   };
   const handleAddToQuantity = () => {
@@ -85,7 +69,7 @@ function ProductDetails() {
         <h2 className='font-semibold uppercase text-2xl'>{data?.model}</h2>
 
         {/* image */}
-        {/* <div className='h-[263px] flex justify-center'>
+        <div className='h-[263px] flex justify-center'>
           {data?.images && (
             <img
               src={data.images[0]}
@@ -93,61 +77,6 @@ function ProductDetails() {
               className='w-[75%] h-[80%]'
             />
           )}
-        </div> */}
-        {/* Desktop View: Display images side by side */}
-        <div className='hidden md:flex space-x-4'>
-          {data?.images.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt={data?.model}
-              className='w-1/3 rounded-lg shadow-md'
-            />
-          ))}
-        </div>
-
-        {/* Mobile View: Image Slider with Custom Navigation */}
-        <div className='relative md:hidden'>
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={10}
-            slidesPerView={1}
-            navigation={{
-              prevEl: ".swiper-button-prev",
-              nextEl: ".swiper-button-next",
-            }}
-            pagination={{ clickable: true }}
-          >
-            {data?.images.map((img, index) => (
-              <SwiperSlide key={index}>
-                <img
-                  src={img}
-                  alt={data?.model}
-                  className='w-full rounded-lg shadow-md'
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-
-          {/* Custom Navigation Arrows */}
-          {/* <button className='swiper-button-prev absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full'>
-            <FaArrowLeft size={10} />
-          </button>
-          <button className='swiper-button-next absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full'>
-            <FaArrowRight size={10} />
-          </button> */}
-          <button
-            // ref={prevRef}
-            className='swiper-button-prev absolute left-2 top-1/2 -translate-y-1/2 bg-gray-800/50 text-white p-2 rounded-full hover:bg-gray-700 transition text-sm'
-          >
-            <FaChevronLeft className='w-5 h-5' />
-          </button>
-          <button
-            // ref={nextRef}
-            className='swiper-button-next absolute right-2 top-1/2 -translate-y-1/2 bg-gray-800/50 text-white p-2 rounded-full hover:bg-gray-700 transition text-sm'
-          >
-            <FaChevronRight className='w-5 h-5' />
-          </button>
         </div>
 
         {/* color and sizes */}
@@ -159,12 +88,7 @@ function ProductDetails() {
               <select
                 id='color'
                 className='min-w-[130px] h-12 border-2 border-gray-400 rounded'
-                value={selectedColor}
-                onChange={(e) => setSelectedColor(e.target.value)}
               >
-                <option value='' disabled>
-                  Select a color
-                </option>
                 {data.color.map((col, index) => (
                   <option key={index} value={col}>
                     {col}
@@ -173,7 +97,6 @@ function ProductDetails() {
               </select>
             </div>
           )}
-
           {data?.size && data.size.length > 0 && (
             <div>
               <label htmlFor='size'>Size</label>
@@ -181,12 +104,7 @@ function ProductDetails() {
               <select
                 id='size'
                 className='min-w-[130px] h-12 border-2 border-gray-400 rounded'
-                value={selectedSize}
-                onChange={(e) => setSelectedSize(e.target.value)}
               >
-                <option value='' disabled>
-                  Select a size
-                </option>
                 {data.size.map((sz, index) => (
                   <option key={index} value={sz}>
                     {sz}
@@ -199,8 +117,7 @@ function ProductDetails() {
 
         {/* Quantity and Order Actions */}
         <div className='md:w-md'>
-          <label htmlFor=''>Amount:</label>
-          <span className='px-4 text-2xl font-semibold'>{data?.price}</span>
+          <label htmlFor=''>Amount</label>
           <div className='flex items-center text-center gap-4 rounded h-12 mt-6 font-bold text-2xl'>
             <button
               onClick={handleAddToQuantity}
@@ -226,11 +143,11 @@ function ProductDetails() {
           <p className='mt-4'>{data?.description}</p>
           <div className='flex gap-2 md:gap-4'>
             <button
-              className='w-[264px] h-12 mt-6 px-2 md:px-6 font-semibold rounded-md bg-green-600 text-white cursor-pointer hover:bg-green-400 flex items-center justify-center gap-6'
+              className='w-[264px] h-12 mt-6 px-2 md:px-6 font-semibold rounded-md bg-green-600 text-white cursor-pointer hover:bg-green-400'
               onClick={handleOrderSuccess}
               type='submit'
             >
-              <FaShoppingCart className='text-white' size={14} /> Add To Cart
+              Place Order
             </button>
           </div>
         </div>
@@ -240,3 +157,74 @@ function ProductDetails() {
 }
 
 export default ProductDetails;
+
+// 1
+// :
+// brand
+// :
+// "Nike"
+// color
+// :
+// Array(1)
+// 0
+// :
+// "yellow"
+// length
+// :
+// 1
+// [[Prototype]]
+// :
+// Array(0)
+// description
+// :
+// "The Nike Dunk Low is a popular model known for its versatile design and comfortable fit. This colorway features a striking combination of yellow, black, and gray, making it stand out as a stylish option"
+// images
+// :
+// Array(0)
+// length
+// :
+// 0
+// [[Prototype]]
+// :
+// Array(0)
+// model
+// :
+// "Nike Dunk Low"
+// price
+// :
+// 115
+// seller
+// :
+// time
+// :
+// "2024-11-07T11:11:15.978Z"
+// user_id
+// :
+// "672c9e3034132d7052ee1e35"
+// [[Prototype]]
+// :
+// Object
+// size
+// :
+// Array(1)
+// 0
+// :
+// "32"
+// length
+// :
+// 1
+// [[Prototype]]
+// :
+// Array(0)
+// stock_status
+// :
+// "in_stock"
+// __v
+// :
+// 0
+// _id
+// :
+// "672ca05c4e08718f982d1ede"
+// [[Prototype]]
+// :
+// Object

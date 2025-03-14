@@ -7,14 +7,13 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 interface Product {
-  _id: string;
-  model: string;
+  id: string;
   images?: string;
   storeName: string;
   storeAvatar: string;
-  brand: string;
+  productName: string;
   size: number[];
-  color: string[];
+  color?: string[];
   price: number;
 }
 
@@ -28,14 +27,21 @@ const BuyerProductsPage = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
+  // console.log("Products from Redux:", products);
   const filteredProducts = useSelector(selectFilteredProducts) || [];
   const filters = useSelector((state: any) => state.buyer.filters) || {};
   const [filtersApplied, setFiltersApplied] = useState(false);
 
+  // const filtersApplied =
+  //   (filters?.size?.length ?? 0) > 0 ||
+  //   (filters?.color?.length ?? 0) > 0 ||
+  //   (filters?.priceRange?.[0] ?? 0) !== 0 ||
+  //   (filters?.priceRange?.[1] ?? 1000) !== 1000;
+
   return (
     <div>
       <div className='flex justify-between items-center'>
-        <h2 className='text-3xl font-bold font-montserrat'>Products</h2>
+        <h2>Products</h2>
         <FilterComponent
           onApplyFilters={() => setFiltersApplied((prev) => !prev)}
         />
@@ -59,7 +65,6 @@ const BuyerProductsPage = () => {
         )
       ) : (
         // Show all products only if no filters are applied
-        // <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6'>
         <div className='flex gap-6 p-6' style={{ flexWrap: "wrap" }}>
           {products?.map((product: any) => (
             <ProductSkeleton type='prod' key={product?._id} product={product} />

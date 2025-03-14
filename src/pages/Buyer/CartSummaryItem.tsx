@@ -8,10 +8,10 @@ import {
 interface CartSummaryItemProps {
   item: {
     _id: string;
-    images: string[];
+    images: string;
     model: string;
     color?: string[];
-    sizes?: string[];
+    sizes?: number[];
     quantity: number;
     price: number;
   };
