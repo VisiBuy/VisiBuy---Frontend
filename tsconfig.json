@@ -25,6 +25,6 @@
     "**/**/*.tsx",
     "postcss.config.js",
     "react-app-env.d.ts"
-  ],
+, "eslint.config.ts"  ],
   "exclude": ["node_modules"]
 }

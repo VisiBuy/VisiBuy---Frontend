@@ -33,6 +33,7 @@ import BuyerNotificationsPage from "./pages/Buyer/Notifications";
 import BuyerProfilePage from "./pages/Buyer/Profile";
 import BuyerProductDetails from "./pages/Buyer/ProductDetails";
 import Checkout from "./modules/Buyer/features/checkout/Checkout";
+import BuyerNotificationsDetailsPage from "./pages/Buyer/NotificationsDetails";
 
 const router = createHashRouter([
   {
@@ -130,13 +131,14 @@ const router = createHashRouter([
       },
 
       { path: "product/:id", element: <BuyerProductDetails /> },
-      { path: "track-order", element: <BuyerTrackOrderPage /> },
+      
 
       { path: "carts", element: <BuyerCartPage /> },
       { path: "carts/summary/:id", element: <BuyerCartSummaryPage /> },
       { path: "carts/checkout/:id", element: <Checkout /> },
 
       { path: "notification", element: <BuyerNotificationsPage /> },
+      { path: "notification/:id", element: <BuyerNotificationsDetailsPage /> },
       { path: "profile", element: <BuyerProfilePage /> },
     ],
   },

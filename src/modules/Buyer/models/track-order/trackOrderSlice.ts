@@ -1,61 +1,38 @@
-// src/modules/Buyer/features/track-order/trackOrderSlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchOrderHistory } from "../../lib/track-order/api";
 import { Order } from "@/types/orders";
 
-interface TrackOrderState {
-  orders: Order[];
-  total_order: number;
-  loading: boolean;
-  error: string | null;
-}
-
-const initialState: TrackOrderState = {
-  orders: [],
-  total_order: 0,
-  loading: false,
-  error: null,
-};
-
 export const getOrderHistory = createAsyncThunk(
-  "trackOrder/getOrderHistory",
-  async (token: string, { rejectWithValue }) => {
-    try {
-      const data = await fetchOrderHistory();
-      return data;
-    } catch (error: any) {
-      // Return a custom error message
-      return rejectWithValue(
-        "Failed to fetch order history. Please try again later."
-      );
-    }
+  "trackOrder/fetchOrders",
+  async () => {
+    return await fetchOrderHistory();
   }
 );
 
 const trackOrderSlice = createSlice({
   name: "trackOrder",
-  initialState,
+  initialState: {
+    orders: [] as Order[], // ✅ Ensure it's strongly typed
+    loading: false,
+    error: null as string | null, // ✅ Allow both `string` and `null`
+  },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getOrderHistory.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = null; // ✅ Reset error state when loading starts
       })
       .addCase(getOrderHistory.fulfilled, (state, action) => {
         state.loading = false;
-        state.orders = action.payload.orders;
-        state.total_order = Number(action.payload.total_order);
+        state.orders = action.payload.orders || [];
       })
       .addCase(getOrderHistory.rejected, (state, action) => {
         state.loading = false;
-        // Ensure action.payload is a string before assigning
-        state.error =
-          typeof action.payload === "string"
-            ? action.payload
-            : "An unexpected error occurred.";
+        state.error = action.error.message || "Something went wrong"; // ✅ Ensure error is always a string
       });
   },
 });
+
 
 export default trackOrderSlice.reducer;

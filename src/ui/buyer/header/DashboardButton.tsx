@@ -7,7 +7,7 @@ const DashboardButton = () => {
   return (
     <Link
       to={dashboardPath}
-      className="bg-blue text-white py-2 px-6 rounded-md"
+      className="bg-blue text-white text-lg font-semibold font-OpenSans py-2 px-7 md:py-3 md:px-8 rounded-md"
     >
       Dashboard
     </Link>

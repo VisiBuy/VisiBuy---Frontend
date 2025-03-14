@@ -11,7 +11,7 @@ import { Order } from "@/types/orders";
 
 type FilterStatus = TOrderStatus | "all";
 
-const BuyerTrackOrderPage: React.FC = () => {
+const BuyerTrackOrderPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { orders, loading, error } = useSelector(
     (state: RootState) => state.trackOrder
@@ -20,11 +20,9 @@ const BuyerTrackOrderPage: React.FC = () => {
   const [statusFilter, setStatusFilter] = useState<FilterStatus>("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const token = localStorage.getItem("auth-token") || "";
-
   useEffect(() => {
-    dispatch(getOrderHistory(token));
-  }, [dispatch, token]);
+    dispatch(getOrderHistory());
+  }, [dispatch]);
 
   const handleStatusChange = (status: FilterStatus) => {
     setStatusFilter(status);
@@ -34,37 +32,51 @@ const BuyerTrackOrderPage: React.FC = () => {
     setSearchQuery(query);
   };
 
-  const filteredOrders = orders.filter((order: Order) => {
-    const matchesStatus =
-      statusFilter === "all" || order.order_status === statusFilter;
-    const matchesSearch =
-      order.product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.orderId.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesStatus && matchesSearch;
-  });
+  // Ensure orders exist before filtering
+  if (!Array.isArray(orders)) {
+    console.error("⚠️ Orders is not an array:", orders);
+  }
+
+  const filteredOrders = Array.isArray(orders)
+    ? orders.filter((order: Order) => {
+        const matchesStatus =
+          statusFilter === "all" || order.order_status?.toLowerCase() === statusFilter.toLowerCase();
+        const matchesSearch =
+          order.product?.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          order.orderId?.toLowerCase().includes(searchQuery.toLowerCase());
+
+        return matchesStatus && matchesSearch;
+      })
+    : [];
+
 
   return (
-    <div className="flex flex-col gap-12 p-12">
-      <div className="flex items-center justify-between">
-        <OrderStatusButtons
-          currentStatus={statusFilter}
-          onStatusChange={handleStatusChange}
-        />
-        <SearchOrder onSearch={handleSearch} />
+    <div className="flex flex-col gap-12 p-10">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-4 w-full">
+          <OrderStatusButtons
+            currentStatus={statusFilter}
+            onStatusChange={handleStatusChange}
+            className="flex-1 whitespace-nowrap overflow-x-auto" // Prevent wrapping
+          />
+        </div>
+        <SearchOrder onSearch={handleSearch} className="w-full sm:w-auto" />
       </div>
 
-      {loading && <p>Loading orders...</p>}
-      {error && (
-        <p className="text-red-500">
-          {typeof error === "string" ? error : "Failed to load orders."}
-        </p>
-      )}
-
+      {/* Unified loading, error, and content handling */}
       <div className="flex gap-24">
         <div className="flex-1 flex flex-col gap-4">
-          {filteredOrders.map((order: Order) => (
-            <OrderCard key={order.orderId} order={order} />
-          ))}
+          {loading ? (
+            <p>Loading orders...</p>
+          ) : error ? (
+            <p className="text-red-500">{error}</p>
+          ) : filteredOrders.length > 0 ? (
+            filteredOrders.map((order: Order) => (
+              <OrderCard key={order.orderId} order={order} />
+            ))
+          ) : (
+            <p>No orders found.</p>
+          )}
         </div>
         <div className="w-96 hidden lg:block">
           <PurchasingHistory />

@@ -15,7 +15,7 @@ const ProfilePicture = ({
       <img
         src={imageSrc}
         alt={altText}
-        className="w-10 h-10 rounded-full border-none"
+        className="w-12 h-12 md:w-14 md:h-14 rounded-full border-none"
       />
     </Link>
   );

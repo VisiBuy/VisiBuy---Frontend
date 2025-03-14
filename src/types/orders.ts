@@ -4,7 +4,7 @@ export interface Order {
   orderId: string;
   invoiceID: string;
   created_at: string;
-  order_status: TOrderStatus; // Renamed from 'status' to 'order_status'
+  order_status: TOrderStatus;
   buyer: {
     fullName: string;
   };
