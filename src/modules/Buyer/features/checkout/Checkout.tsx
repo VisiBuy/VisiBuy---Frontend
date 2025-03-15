@@ -11,9 +11,9 @@ interface CartItem {
   model: string;
   price: number;
   quantity: number;
-  images: string;
-  color?: string[];
-  sizes?: number[];
+  images: string[];
+  color?: string;
+  sizes?: string;
   storeName: string;
 }
 
@@ -63,7 +63,6 @@ const Checkout = () => {
     }
   }, [data]);
 
-  // const totalAmount = data?.price * data?.quantity;
   // Flutterwave payment config
   const flutterwaveConfig = {
     public_key: "FLWPUBK_TEST-d9c9a5938f9d56e031129288f4f30553-X",
@@ -123,7 +122,6 @@ const Checkout = () => {
       >
         Cancel
       </button>
-
     </div>
   );
 };

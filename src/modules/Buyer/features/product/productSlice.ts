@@ -35,7 +35,7 @@ export const fetchProducts = createAsyncThunk(
     try {
       const response = await axiosWithAuth.get("list");
       // const response = await axios.get("https://fakestoreapi.com/products");
-      console.log("res:", response);
+      // console.log("res:", response);
       const data = response.data.sneakers;
 
       // Extract min & max prices
@@ -46,7 +46,7 @@ export const fetchProducts = createAsyncThunk(
       // Set price range dynamically in Redux store
       dispatch(setPriceRange([minPrice, maxPrice]));
 
-      console.log(data);
+      // console.log(data);
       return data.map((product: any) => ({
         ...product,
       }));
