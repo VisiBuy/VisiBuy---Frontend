@@ -1,10 +1,9 @@
 import { axiosWithAuth } from "@/lib/client";
-import { AppDispatch, RootState } from "@/store/store";
+import { AppDispatch, RootState, store } from "@/store/store";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { removeFromCart } from "../cart/cartSlice";
-import { store } from "@/store/store";
 
 interface CartItem {
   _id: string;
