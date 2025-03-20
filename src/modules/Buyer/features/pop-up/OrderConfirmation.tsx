@@ -4,26 +4,25 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { removeFromCart } from "../cart/cartSlice";
+import { store } from "@/store/store";
 
-interface Product {
-  size: number[];
-  color: string[];
+interface CartItem {
   _id: string;
   brand: string;
-  price: number;
   model: string;
-  description: string;
-  storeName: string;
-  storeAvatar: string;
-  images: string[];
+  price: number;
   quantity: number;
+  images: string[];
+  storeName: any;
+  color?: string;
+  size?: string;
 }
 
 interface OrderConfirmationProps {
   isOpen: boolean;
   onClose: () => void;
   orderDetails: {
-    orderId: string;
+    // orderId: string;
     items: {
       _id: string;
       model: string;
@@ -42,11 +41,9 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const cartProduct = useSelector(
-    (state: RootState) => state.buyer.product.products
-  );
+  const cartProduct = useSelector((state: RootState) => state.buyer.cart.items);
 
-  const [data, setData] = useState<Product | null>(null);
+  const [data, setData] = useState<CartItem | null>(null);
   useEffect(() => {
     // Find the product by matching the id with the `id` in the products array
     const foundProduct = cartProduct.find(
@@ -59,10 +56,34 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
 
   const orderData = {
     sneaker_id: orderDetails.items._id,
-    address: "",
+    address: "23 online street, react state, javascript",
     size: data?.size,
     color: data?.color,
   };
+
+  const sendOrderData = async () => {
+    const data = await axiosWithAuth.post("order", orderData);
+    console.log(data);
+  };
+  const sendData = async () => {
+    const state = store.getState();
+    const token = state.auth.token;
+
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}order`, {
+      method: "POST", // Specify method
+      headers: {
+        "Content-Type": "application/json", // Set content type
+        "auth-token": `${token}`,
+      },
+      body: JSON.stringify(orderData), // Convert to JSON string
+    });
+
+    const data = await response.json(); // Parse response
+    console.log("Response:", data);
+    console.log(orderData);
+  };
+
+  sendData();
 
   return (
     <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center'>
@@ -73,7 +94,7 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
         </p>
 
         <div className='mt-4'>
-          <p className='font-semibold'>Order ID: {orderDetails.orderId}</p>
+          {/* <p className='font-semibold'>Order ID: {orderDetails.orderId}</p> */}
           <p className='text-green-600 font-semibold'>
             Payment: {orderDetails.paymentStatus}
           </p>
@@ -104,7 +125,9 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
             // onClose;
 
             navigate("/dashboard/buyer/track-order");
-            axiosWithAuth.post("order", orderData);
+            // axiosWithAuth.post("order", orderData);
+            sendOrderData();
+            sendData();
             dispatch(removeFromCart(orderDetails.items._id));
           }}
           className='mt-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700'

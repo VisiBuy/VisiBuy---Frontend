@@ -130,13 +130,14 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
           )}
         </>
       ) : (
-        <button
-          onClick={handleAddToCart}
-          className='absolute top-2 right-2 bg-green-500 p-2 rounded-full shadow-md z-10'
-          aria-label='Add to cart'
-        >
-          <FaShoppingCart className='text-white' size={20} />
-        </button>
+        // <button
+        //   onClick={handleAddToCart}
+        //   className='absolute top-2 right-2 bg-green-500 p-2 rounded-full shadow-md z-10'
+        //   aria-label='Add to cart'
+        // >
+        //   <FaShoppingCart className='text-white' size={20} />
+        // </button>
+        ""
       )}
     </div>
   );
