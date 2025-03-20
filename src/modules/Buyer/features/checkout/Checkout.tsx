@@ -11,9 +11,9 @@ interface CartItem {
   model: string;
   price: number;
   quantity: number;
-  images: string;
-  color?: string[];
-  sizes?: number[];
+  images: string[];
+  color?: string;
+  size?: number;
   storeName: string;
 }
 
@@ -123,7 +123,6 @@ const Checkout = () => {
       >
         Cancel
       </button>
-
     </div>
   );
 };

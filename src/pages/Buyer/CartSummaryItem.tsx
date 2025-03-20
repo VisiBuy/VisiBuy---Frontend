@@ -10,8 +10,8 @@ interface CartSummaryItemProps {
     _id: string;
     images: string[];
     model: string;
-    color?: string[];
-    sizes?: string[];
+    color?: string;
+    size?: string;
     quantity: number;
     price: number;
   };
