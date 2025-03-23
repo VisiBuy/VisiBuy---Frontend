@@ -13,7 +13,7 @@ interface CartItem {
   quantity: number;
   images: string[];
   color?: string;
-  size?: number;
+  size?: string;
   storeName: string;
 }
 
@@ -44,7 +44,7 @@ const Checkout = () => {
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const [orderDetails, setOrderDetails] = useState({
     // Generate unique order ID
-    orderId: "VISI-" + Math.floor(100000 + Math.random() * 900000),
+    // orderId: "VISI-" + Math.floor(100000 + Math.random() * 900000),
     items: { _id: "", model: "", quantity: 1, price: 0 },
     totalAmount: 0, // Default value
     paymentStatus: "Pending",
@@ -55,7 +55,7 @@ const Checkout = () => {
   useEffect(() => {
     if (data) {
       setOrderDetails({
-        orderId: "VISI-" + Math.floor(100000 + Math.random() * 900000),
+        // orderId: "VISI-" + Math.floor(100000 + Math.random() * 900000),
         items: data,
         totalAmount: data.price * (data.quantity ?? 1), // Handle potential undefined quantity
         paymentStatus: "Pending",
@@ -63,7 +63,6 @@ const Checkout = () => {
     }
   }, [data]);
 
-  // const totalAmount = data?.price * data?.quantity;
   // Flutterwave payment config
   const flutterwaveConfig = {
     public_key: "FLWPUBK_TEST-d9c9a5938f9d56e031129288f4f30553-X",
@@ -81,7 +80,7 @@ const Checkout = () => {
     customizations: {
       title: "VisiBuy Order Payment",
       description: `Complete your order payment for ${data?.model}`,
-      logo: "/VisiBuy - White.png", // Ensure logo is correctly referenced
+      logo: "/VisiBuy - White.png",
     },
     text: "Pay with Flutterwave!",
     callback: (response: any) => {
@@ -95,7 +94,7 @@ const Checkout = () => {
       closePaymentModal(); // Close modal after payment
     },
     onClose: () => {
-      console.log("Payment modal closed"); // ✅ Add this to handle modal close event
+      console.log("Payment modal closed"); // Add this to handle modal close event
     },
   };
 

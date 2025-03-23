@@ -5,13 +5,7 @@ import {
 import { RootState } from "@/store/store";
 import OrderSuccess from "@/ui/buyer/OrderSuccess";
 import { useEffect, useState } from "react";
-import {
-  FaShoppingCart,
-  FaArrowLeft,
-  FaArrowRight,
-  FaChevronLeft,
-  FaChevronRight,
-} from "react-icons/fa";
+import { FaShoppingCart, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,6 +13,8 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import ErrorHolder from "@/ui/buyer/ErrorHolder";
+import { selectCartSummary } from "@/modules/Buyer/features/cart/cartSummarySlice";
 
 interface Product {
   _id: string;
@@ -45,6 +41,7 @@ function ProductDetails() {
 
   const [data, setData] = useState<Product | null>(null);
   const [showOrderSuccess, setShowOrderSuccess] = useState(false);
+  const [showErrorHolder, setShowErrorHolder] = useState(false);
 
   // selected color and size for cart
   const [selectedColor, setSelectedColor] = useState<string>("");
@@ -56,13 +53,14 @@ function ProductDetails() {
 
   useEffect(() => {
     // Find the product by matching the id with the `id` in the products array
-    const foundProduct = products.find((p) => p._id === id); // Assuming id is a string from the URL
+    const foundProduct = products.find((p) => p._id === id);
     setData(foundProduct ?? null); // Set the product or null if not found
   }, [id, products]); // Re-run effect when id or products change
 
   const handleOrderSuccess = () => {
     if (!data) return;
-    dispatch(addToCart({ ...data, sizes: selectedSize, color: selectedColor }));
+    if (!selectedColor || !selectedSize) return setShowErrorHolder(true);
+    dispatch(addToCart({ ...data, size: selectedSize, color: selectedColor }));
     setShowOrderSuccess(true);
   };
   const handleAddToQuantity = () => {
@@ -76,9 +74,17 @@ function ProductDetails() {
 
   return (
     <div className='h-[100%] w-[90%] p-8'>
-      {showOrderSuccess && (
+      {/* {showErrorHolder ? <ErrorHolder message='Size/Color can not be empty!' onClose={()=> setShowErrorHolder(false)}/> :  {showOrderSuccess ?
+        <OrderSuccess onClose={() => setShowOrderSuccess(false)} /> : ''
+      }} */}
+      {showErrorHolder ? (
+        <ErrorHolder
+          message='Size/Color can not be empty!'
+          onClose={() => setShowErrorHolder(false)}
+        />
+      ) : showOrderSuccess ? (
         <OrderSuccess onClose={() => setShowOrderSuccess(false)} />
-      )}
+      ) : null}
 
       <div className='flex flex-col  py-8 text-xl gap-8'>
         {/* title */}
@@ -152,6 +158,62 @@ function ProductDetails() {
 
         {/* color and sizes */}
         <div className='flex gap-8'>
+          {/* Color Selection */}
+          {data?.color && data?.color?.length > 0 && (
+            <div className='flex flex-col'>
+              <label
+                htmlFor='color'
+                className='text-gray-700 font-semibold mb-1'
+              >
+                Color
+              </label>
+              <select
+                id='color'
+                className='min-w-[150px] h-12 border-2 border-gray-300 rounded-lg px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200'
+                value={selectedColor}
+                onChange={(e) => setSelectedColor(e.target.value)}
+              >
+                <option value='' disabled className='text-gray-400'>
+                  Select a color
+                </option>
+                {data.color.map((col, index) => (
+                  <option key={index} value={col} className='text-gray-900'>
+                    {col}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {/* Size Selection */}
+          {data?.size && data?.size?.length > 0 && (
+            <div className='flex flex-col'>
+              <label
+                htmlFor='size'
+                className='text-gray-700 font-semibold mb-1'
+              >
+                Size
+              </label>
+              <select
+                id='size'
+                className='min-w-[150px] h-12 border-2 border-gray-300 rounded-lg px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200'
+                value={selectedSize}
+                onChange={(e) => setSelectedSize(e.target.value)}
+              >
+                <option value='' disabled className='text-gray-400'>
+                  Select a size
+                </option>
+                {data.size.map((sz, index) => (
+                  <option key={index} value={sz} className='text-gray-900'>
+                    {sz}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+        </div>
+
+        {/* <div className='flex gap-8'>
           {data?.color && data.color.length > 0 && (
             <div>
               <label htmlFor='color'>Color</label>
@@ -195,12 +257,23 @@ function ProductDetails() {
               </select>
             </div>
           )}
-        </div>
+        </div> */}
 
         {/* Quantity and Order Actions */}
         <div className='md:w-md'>
-          <label htmlFor=''>Amount:</label>
-          <span className='px-4 text-2xl font-semibold'>{data?.price}</span>
+          {/* <label htmlFor=''>Amount:</label>
+          {/* <div>{subtotal}</div> */}
+          {/*<span className='px-4 text-2xl font-semibold'>
+            ₦{data?.price * quantity}
+          </span> */}
+          <label htmlFor='amount'>Amount:</label>
+          <span className='px-4 text-2xl font-semibold'>
+            ₦
+            {data?.price && quantity
+              ? (data.price * quantity).toLocaleString()
+              : data?.price}
+          </span>
+
           <div className='flex items-center text-center gap-4 rounded h-12 mt-6 font-bold text-2xl'>
             <button
               onClick={handleAddToQuantity}

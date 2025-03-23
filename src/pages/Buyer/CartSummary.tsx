@@ -49,13 +49,13 @@ const CartSummary = () => {
     }
   }, [data, dispatch]);
 
-  if (!data)
-    return (
-      <div className='max-w-3xl mx-auto p-4 md:p-6 bg-white rounded-lg shadow-lg'>
-        <h2 className='text-lg md:text-xl font-semibold mb-4'>Cart Summary</h2>
-        <p className='text-gray-500 text-center'>Your cart is empty.</p>
-      </div>
-    );
+  // if (!data)
+  //   return (
+  //     <div className='max-w-3xl mx-auto p-4 md:p-6 bg-white rounded-lg shadow-lg'>
+  //       <h2 className='text-lg md:text-xl font-semibold mb-4'>Cart Summary</h2>
+  //       <p className='text-gray-500 text-center'>Your cart is empty.</p>
+  //     </div>
+  //   );
 
   if (!data)
     return (

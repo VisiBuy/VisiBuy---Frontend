@@ -9,7 +9,7 @@ interface CartItem {
   images: string[];
   storeName: any;
   color?: string;
-  sizes?: string;
+  size?: string;
 }
 
 interface CartState {
