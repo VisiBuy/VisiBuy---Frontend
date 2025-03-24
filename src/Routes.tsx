@@ -22,7 +22,6 @@ import path from "path";
 import { PlacingOrderPage } from "./pages/Seller/help-support/placing-order";
 import { OrderPaymentPage } from "./pages/Seller/help-support/order-payment";
 import BuyerDashboardLayout from "./layouts/buyer/BuyerDashboardLayout";
-import BuyerHomePage from "./pages/Buyer/Home";
 import BuyerDashboardPage from "./pages/Buyer/Dashboard";
 import BuyerProductsPage from "./pages/Buyer/Products";
 import BuyerTrackOrderPage from "./pages/Buyer/TrackOrder";
@@ -34,6 +33,7 @@ import BuyerProfilePage from "./pages/Buyer/Profile";
 import BuyerProductDetails from "./pages/Buyer/ProductDetails";
 import Checkout from "./modules/Buyer/features/checkout/Checkout";
 import BuyerNotificationsDetailsPage from "./pages/Buyer/NotificationsDetails";
+import FileDispute from "./pages/Buyer/FileDispute";
 
 const router = createHashRouter([
   {
@@ -118,9 +118,10 @@ const router = createHashRouter([
       // <BuyerDashboardLayout />
     ),
     children: [
-      { index: true, element: <BuyerHomePage /> },
+      
+      { index:true, element: <BuyerProductsPage /> },
       { path: "analytics", element: <BuyerDashboardPage /> },
-      { path: "purchases", element: <BuyerProductsPage /> },
+
 
       {
         path: "track-order",
@@ -139,6 +140,7 @@ const router = createHashRouter([
 
       { path: "notification", element: <BuyerNotificationsPage /> },
       { path: "notification/:id", element: <BuyerNotificationsDetailsPage /> },
+      { path: "report", element: <FileDispute /> },
       { path: "profile", element: <BuyerProfilePage /> },
     ],
   },

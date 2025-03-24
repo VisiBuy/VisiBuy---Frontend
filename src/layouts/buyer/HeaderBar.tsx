@@ -54,7 +54,7 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
 
   // Get the buyer config and compute the home URL.
   const buyerConfig = dashboardConfig.getConfig("buyer");
-  const homeUrl = buildUrl(buyerConfig.basePath, buyerConfig.routes.home);
+  const homeUrl = buildUrl(buyerConfig.basePath, buyerConfig.routes.products);
 
   return (
     <>
