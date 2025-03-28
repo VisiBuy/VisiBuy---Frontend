@@ -21,14 +21,15 @@ interface VisualVerificationModalProps {
   token: string;
   onClose: () => void;
   onYes: () => void;
+  onNo: () => void;
 }
 
 const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
   isOpen,
   orderId,
-  token,
   onClose,
   onYes,
+  onNo,
 }) => {
   const [verificationData, setVerificationData] =
     useState<VerificationResponse | null>(null);
@@ -37,6 +38,7 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
 
   useEffect(() => {
     if (isOpen && orderId) {
+      console.log("Fetching images for order ID:", orderId); // Debugging line
       setLoading(true);
       fetchVerificationImages(orderId)
         .then((data: VerificationResponse) => {
@@ -49,14 +51,14 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
           setLoading(false);
         });
     }
-  }, [isOpen, orderId, token]);
+  }, [isOpen, orderId]);
 
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50">
       <div className="bg-white px-24 py-28 rounded-md shadow-lg w-full max-w-7xl space-y-4">
-        {/* Header with chevron left */}
+        {/* Header */}
         <div className="flex items-center gap-3 mb-2">
           <ChevronLeft
             className="text-black cursor-pointer w-8 h-8"
@@ -69,7 +71,10 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
 
         {/* Dynamic Product Name Selector */}
         <select className="border border-gray-300 font-bold font-Montserrat text-base rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500">
-          <option value={verificationData?.productName || ""}>
+          <option
+            key={verificationData?.productName}
+            value={verificationData?.productName || ""}
+          >
             {verificationData?.productName || "Select Product"}
           </option>
         </select>
@@ -79,7 +84,7 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
 
         {/* Dynamic Product Images Row */}
         <div className="flex gap-2 overflow-x-auto">
-          {verificationData?.images.slice(0, 5).map((img, index) => (
+          {verificationData?.images?.slice(0, 5).map((img, index) => (
             <div key={index} className="flex flex-col items-center">
               <img
                 src={img.imageUrl}
@@ -103,13 +108,13 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
         {/* Action Buttons */}
         <div className="flex items-center justify-end gap-4">
           <button
-            onClick={onClose}
+            onClick={onNo} // Calls onNo when "No" is clicked
             className="border border-black text-gray-600 px-20 py-3 rounded-md hover:bg-gray-100"
           >
             No
           </button>
           <button
-            onClick={onYes}
+            onClick={onYes} // Calls onYes when "Yes" is clicked
             className="bg-green-600 text-white px-20 py-3 rounded-md font-semibold hover:bg-green-700"
           >
             Yes

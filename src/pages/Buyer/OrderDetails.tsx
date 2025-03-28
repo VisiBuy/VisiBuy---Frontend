@@ -1,26 +1,40 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@/store/store";
 import { HiArrowLeft } from "react-icons/hi";
 import ViewAll from "../../modules/Buyer/features/track-order/components/ViewAll";
 import VerifyButton from "../../modules/Buyer/features/track-order/components/VerifyButton";
 import VisualVerificationModal from "../../modules/Buyer/features/track-order/components/VisualVerificationModal";
 import FeedbackModal from "../../modules/Buyer/features/track-order/components/FeedbackModal";
-import {
-  fetchOrderStatus,
-  verifyOrder,
-} from "@/modules/Buyer/lib/track-order/api";
-
+import { getOrderHistory } from "@/modules/Buyer/models/track-order/trackOrderSlice";
+import { verifyOrder } from "@/modules/Buyer/lib/track-order/api";
 import { Order } from "@/types/orders";
+import { normalizeOrder } from "@/modules/Buyer/lib/track-order/normalizeOrder";
 
 const BuyerOrderDetailsPage = () => {
   const { orderId } = useParams<{ orderId: string }>();
+  const safeOrderId = orderId ?? "";
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const token = localStorage.getItem("auth-token") || "";
 
-  
-  const [orderDetails, setOrderDetails] = useState<Order | null>(null);
+  const { orders, loading, error, pagination } = useSelector(
+    (state: any) => state.trackOrder
+  );
 
-  // Verification states
+  useEffect(() => {
+    if (!orders.length || !orders.find((order: any) => order._id === orderId)) {
+      dispatch(getOrderHistory({ page: pagination.currentPage }));
+    }
+  }, [dispatch, orders.length, orderId]);
+
+  const orderDetails: Order | null = useMemo(() => {
+    if (loading || !orders.length) return null;
+    const foundOrder = orders.find((order: any) => order._id === orderId);
+    return foundOrder ? normalizeOrder(foundOrder) : null;
+  }, [orders, orderId, loading]);
+
   const [verificationStatus, setVerificationStatus] = useState<
     "awaiting" | "verified"
   >("awaiting");
@@ -29,56 +43,23 @@ const BuyerOrderDetailsPage = () => {
   const [showVerificationModal, setShowVerificationModal] = useState(false);
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
 
-  // Fetch order status details dynamically from the API
-  useEffect(() => {
-    if (orderId) {
-      fetchOrderStatus(orderId)
-      fetchOrderStatus(orderId)
-        .then((data) => {
-          setOrderDetails(data);
-        })
-        .catch((err) => console.error(err));
-    }
-  }, [orderId, token]);
-
-  // Compute a delivery date 3 days after verification (if verified)
   const getDeliveryDate = () => {
     const deliveryDate = new Date();
     deliveryDate.setDate(deliveryDate.getDate() + 3);
     return deliveryDate.toLocaleDateString();
   };
 
-  const handleVerifyClick = async () => {
-    if (!orderId) return;
-    try {
-      setIsVerifying(true);
-      // Call the verifyOrder API; using "verified" status
-      await verifyOrder(orderId, "verified");
-      await verifyOrder(orderId, "verified");
-      setVerificationStatus("verified");
-      setIsButtonVerified(true);
-      setShowFeedbackModal(true);
-    } catch (error) {
-      console.error("Verification failed:", error);
-    } finally {
-      setIsVerifying(false);
+  // 🛠 Fix: Show verification modal first before verifying
+  const handleVerifyClick = () => {
+    if (!orderId) {
+      console.error("🚨 Order ID is missing!");
+      return;
     }
-  };
-
-  const handleVerificationNo = () => {
-    setShowVerificationModal(false);
-  };
-
-  const handleVerificationYes = () => {
-    setShowVerificationModal(false);
-    setVerificationStatus("verified");
-    setIsButtonVerified(true);
-    setShowFeedbackModal(true);
+    setShowVerificationModal(true); // Open modal first
   };
 
   return (
     <div className="relative p-4 md:p-4">
-      {/* Header: Back Button + Order ID + Verification Status */}
       <div className="flex items-center justify-between mb-6 rounded-md max-w-6xl">
         <div className="flex items-center gap-3">
           <HiArrowLeft
@@ -86,16 +67,12 @@ const BuyerOrderDetailsPage = () => {
             onClick={() => navigate(-1)}
           />
           <h1 className="text-xl md:text-2xl font-bold">
-            Order #{orderId || "1452589"}
+            Order #{orderDetails?.orderNo || " "}
           </h1>
         </div>
         <span
-          className="px-2 py-1 rounded-xl text-sm font-semibold"
-          style={{
-            backgroundColor:
-              verificationStatus === "verified" ? "#E0F2FE" : "#0284ff",
-            color: verificationStatus === "verified" ? "#0284C7" : "white",
-          }}
+          className={`px-2 py-1 rounded-xl text-sm font-semibold 
+          ${verificationStatus === "verified" ? "bg-blue-100 text-blue-700" : "bg-blue-600 text-white"}`}
         >
           {verificationStatus === "verified"
             ? "Verified"
@@ -103,101 +80,135 @@ const BuyerOrderDetailsPage = () => {
         </span>
       </div>
 
-      {/* Order Details & View All */}
-      <div className="lg:flex lg:justify-between gap-8">
-        {/* Left Column: Order Details */}
-        <div className="flex-1 bg-white p-4 space-y-4">
-          {/* Order Information */}
-          <div className="p-4">
-            {orderDetails ? (
-              <div className="grid grid-cols-2 text-sm text-gray-600">
-                <div className="space-y-2 font-semibold">
+      {loading && <p>Loading order details...</p>}
+      {error && <p className="text-red-500">{error}</p>}
+
+      {!loading && orderDetails ? (
+        <div className="lg:flex lg:justify-between gap-8">
+          <div className="flex-1 bg-white p-4 space-y-4">
+            <div className="p-4">
+              <div className="grid grid-cols-2 text-2xl text-gray-600">
+                <div className="space-y-2 font-OpenSans font-semibold">
                   <p>Buyer:</p>
                   <p>Seller:</p>
                   <p>Date & Time of Purchase:</p>
                   <p>Invoice ID:</p>
                 </div>
-                <div className="space-y-2 text-right">
-                  <p>{orderDetails.buyer.fullName}</p>
-                  <p>{orderDetails.seller.name}</p>
-                  <p>{orderDetails.created_at}</p>
-                  <p>{orderDetails.invoiceID}</p>
+                <div className="space-y-2 font-OpenSans text-right">
+                  <p>{orderDetails?.buyer?.fullName}</p>
+                  <p>{orderDetails?.seller?.fullName}</p>
+                  <p>{orderDetails?.created_at}</p>
+                  <p>{orderDetails?.invoiceID}</p>
                 </div>
               </div>
-            ) : (
-              <p>Loading order details...</p>
-            )}
-          </div>
+            </div>
 
-          {/* Items Section: Dynamic Product Details */}
-          <div className="p-4">
-            {orderDetails ? (
+            <div className="p-4">
               <div className="flex justify-between text-sm font-semibold text-gray-700 p-2 border-t border-gray-300">
                 <p>
-                  {orderDetails.product.quantity}x {orderDetails.product.title}
-                  {orderDetails.product.quantity}x {orderDetails.product.title}
+                  {orderDetails?.product?.quantity || 0}{" "}
+                  {orderDetails?.product?.brand || "N/A"}
                 </p>
-                <p>#{orderDetails.product.price}</p>
-              </div>
-            ) : null}
-          </div>
-
-          {/* Verify Order */}
-          <div className="p-4 flex items-center justify-between">
-            <span className="text-gray-700 font-semibold">
-              Verify your Order
-            </span>
-            <VerifyButton
-              isVerifying={isVerifying}
-              isVerified={isButtonVerified}
-              onClick={handleVerifyClick}
-            />
-          </div>
-
-          {/* Delivery Info: Display only if verification is accepted */}
-          {verificationStatus === "verified" && (
-            <div className="p-4 space-y-2 border-t border-gray-300">
-              <div className="flex items-center justify-between text-sm text-gray-600">
-                <span className="font-semibold text-black">Delivery Date:</span>
-                <span className="text-gray-500">{getDeliveryDate()}</span>
+                <p>#{orderDetails?.product?.price || 0}</p>
               </div>
             </div>
-          )}
 
-          {/* Additional Actions: Assign Rider & Customer Care */}
-          <div className="p-4 space-y-2">
-            {/* Assign Rider */}
-            <div className="flex justify-end">
-              <button className="text-sm hover:underline">
-                + Assign to new rider
-              </button>
+            <div className="p-4 flex items-center justify-between">
+              <span className="text-gray-700 font-semibold">
+                Verify your Order
+              </span>
+              <VerifyButton
+                isVerifying={isVerifying}
+                isVerified={isButtonVerified}
+                onClick={handleVerifyClick}
+              />
             </div>
-            {/* Customer Care */}
-            <div className="flex items-center justify-between text-sm">
-              <span>Experiencing issues with this order? Reach out to our</span>
-              <button className="text-blue-600 font-semibold hover:underline">
-                Customer Care
-              </button>
+
+            {verificationStatus === "verified" && (
+              <div className="p-4 space-y-2 border-t border-gray-300">
+                <div className="flex items-center justify-between text-sm text-gray-600">
+                  <span className="font-semibold text-black">
+                    Delivery Date:
+                  </span>
+                  <span className="text-gray-500">{getDeliveryDate()}</span>
+                </div>
+              </div>
+            )}
+
+            <div className="p-4 space-y-2">
+              <div className="flex justify-end">
+                <button className="text-sm hover:underline">
+                  + Assign to new rider
+                </button>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span>
+                  Experiencing issues with this order? Reach out to our
+                </span>
+                <button className="text-blue-600 font-semibold hover:underline">
+                  Customer Care
+                </button>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Right Column: View All Component */}
-        <div className="w-[250px]">
-          <ViewAll onClick={() => alert("Clicked View all!")} />
+          <div className="w-[250px]">
+            <ViewAll onClick={() => alert("Clicked View all!")} />
+          </div>
         </div>
-      </div>
+      ) : (
+        !loading && (
+          <div className="text-center text-gray-500">
+            <p>Order details not found.</p>
+            <button
+              onClick={() =>
+                dispatch(getOrderHistory({ page: pagination.currentPage }))
+              }
+              className="mt-2 text-blue-600 font-semibold hover:underline"
+            >
+              Retry
+            </button>
+          </div>
+        )
+      )}
 
-      {/* Modals */}
+      {/* Verification Modal */}
       <VisualVerificationModal
         isOpen={showVerificationModal}
-        orderId={orderId || ""}
+        orderId={safeOrderId}
         token={token}
-        onClose={handleVerificationNo}
-        onYes={handleVerificationYes}
+        onClose={() => setShowVerificationModal(false)}
+        onYes={async () => {
+          setShowVerificationModal(false);
+          setIsVerifying(true);
+
+          try {
+            console.log("🔍 Verifying order:", orderId);
+            const response = await verifyOrder(safeOrderId, "accepted");
+            console.log("✅ Order verified successfully:", response);
+
+            setVerificationStatus("verified");
+            setIsButtonVerified(true);
+            setShowFeedbackModal(true);
+          } catch (error: any) {
+            console.error(
+              "❌ Verification failed:",
+              error.response?.data?.message || error.message
+            );
+            alert(
+              `Verification failed: ${error.response?.data?.message || "Unknown error"}`
+            );
+          } finally {
+            setIsVerifying(false);
+          }
+        }}
+        onNo={() => setShowVerificationModal(false)}
       />
+
+      {/* Feedback Modal */}
       {showFeedbackModal && (
         <FeedbackModal
+          orderId={safeOrderId}
           isOpen={showFeedbackModal}
           onClose={() => setShowFeedbackModal(false)}
         />

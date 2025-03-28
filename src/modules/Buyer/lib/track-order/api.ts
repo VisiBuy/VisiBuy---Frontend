@@ -4,9 +4,10 @@ import { axiosWithAuth } from "@/lib/client";
  * Track Order
  * GET /order/history
  */
-export async function fetchOrderHistory() {
+export async function fetchOrderHistory(page = 1) {
   try {
-    const response = await axiosWithAuth.get("/order/history");
+    const response = await axiosWithAuth.get(`/order/history?page=${page}`); // ✅ Pass page parameter
+    console.log("API Response:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching order history:", error);
@@ -34,55 +35,85 @@ export async function fetchOrderStatus(orderId: string) {
  */
 export async function verifyOrder(
   orderId: string,
-  status: "verified" | "canceled"
+  status: "accepted" | "canceled"
 ) {
   try {
+    console.log("🔍 Sending verification request with:", {
+      order_id: orderId,
+      status,
+    });
+
     const response = await axiosWithAuth.post("/verify", {
       order_id: orderId,
       status,
     });
+
+    console.log("✅ Verification response:", response.data);
     return response.data;
-  } catch (error) {
-    console.error("Error verifying order:", error);
-    throw new Error("Failed to verify order");
+  } catch (error: any) {
+    console.error("❌ Error verifying order:", error.response?.data || error);
+    throw new Error(error.response?.data?.message || "Failed to verify order");
   }
 }
+
 
 /**
  * Get Verification Images
  * GET /image?order_id=...
  */
 export async function fetchVerificationImages(orderId: string) {
+  if (!orderId || typeof orderId !== "string") {
+    console.error("Invalid Order ID:", orderId);
+    throw new Error("Invalid Order ID");
+  }
+
   try {
     const response = await axiosWithAuth.get(`/image`, {
-      params: { order_id: orderId },
+      headers: { order_id: orderId }, // ✅ Move order_id to headers
     });
+
     return response.data;
-  } catch (error) {
-    console.error("Error fetching verification images:", error);
-    throw new Error("Failed to fetch verification images");
+  } catch (error: any) {
+    console.error(
+      "❌ Error fetching verification images:",
+      error.response?.data || error
+    );
+
+    // If the response is 404 with "No verification images found"
+    if (error.response?.status === 404) {
+      return { msg: "No verification images found for this order." };
+    }
+
+    throw new Error(
+      error.response?.data?.message || "Failed to fetch verification images"
+    );
   }
 }
+
+
 
 /**
  * Submit Feedback
  * POST /feedback
  */
-export async function submitFeedback(
+export const submitFeedback = async (
   orderId: string,
   rating: number,
   comments?: string
-) {
+) => {
   try {
+    console.log("📤 Sending Request:", { order_id: orderId, rating, comments });
     const response = await axiosWithAuth.post("/feedback", {
       order_id: orderId,
       rating,
-      comments,
+      comments: comments || "",
     });
     return response.data;
-  } catch (error) {
-    console.error("Error submitting feedback:", error);
-    throw new Error("Failed to submit feedback");
+  } catch (error: any) {
+    console.error("❌ API Error:", error.response?.data || error.message);
+    throw error;
   }
-}
+};
+
+
 
