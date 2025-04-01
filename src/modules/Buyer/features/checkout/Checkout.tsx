@@ -13,7 +13,7 @@ interface CartItem {
   quantity: number;
   images: string[];
   color?: string;
-  sizes?: string;
+  size?: string;
   storeName: string;
 }
 

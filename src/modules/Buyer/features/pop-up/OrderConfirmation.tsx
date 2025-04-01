@@ -58,6 +58,7 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
     address: "23 online street, react state, javascript",
     size: data?.size,
     color: data?.color,
+    quantity: orderDetails.items.quantity
   };
 
   const sendOrderData = async () => {
