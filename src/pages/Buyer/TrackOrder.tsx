@@ -15,9 +15,13 @@ type FilterStatus = TOrderStatus | "all";
 const BuyerTrackOrderPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const location = useLocation();
-  const { orders, loading, error, pagination } = useSelector(
-    (state: RootState) => state.trackOrder
-  );
+  const {
+    orders,
+    loading,
+    error,
+    pagination = { currentPage: 1, totalPages: 1 },
+  } = useSelector((state: RootState) => state.trackOrder);
+
 
   const [statusFilter, setStatusFilter] = useState<FilterStatus>("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -45,8 +49,10 @@ const BuyerTrackOrderPage = () => {
 
   // Fetch orders when page changes
   useEffect(() => {
-    dispatch(getOrderHistory({ page: pagination.currentPage }));
-  }, [dispatch, pagination.currentPage]);
+    if (pagination?.currentPage !== undefined) {
+      dispatch(getOrderHistory({ page: pagination.currentPage }));
+    }
+  }, [dispatch, pagination?.currentPage]);
 
   const handleStatusChange = (status: FilterStatus) => {
     setStatusFilter(status);
@@ -97,13 +103,13 @@ const BuyerTrackOrderPage = () => {
           {/* Pagination Controls */}
           {!loading &&
             filteredOrders.length > 0 &&
-            pagination.totalPages > 1 && (
+            pagination?.totalPages > 1 && (
               <div className="flex justify-center mt-4 gap-4">
                 <button
-                  disabled={pagination.currentPage === 1}
+                  disabled={pagination?.currentPage === 1}
                   onClick={() =>
                     dispatch(
-                      getOrderHistory({ page: pagination.currentPage - 1 })
+                      getOrderHistory({ page: pagination?.currentPage - 1 })
                     )
                   }
                   className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
@@ -112,14 +118,14 @@ const BuyerTrackOrderPage = () => {
                 </button>
 
                 <span>
-                  Page {pagination.currentPage} of {pagination.totalPages}
+                  Page {pagination?.currentPage} of {pagination?.totalPages}
                 </span>
 
                 <button
-                  disabled={pagination.currentPage >= pagination.totalPages}
+                  disabled={pagination?.currentPage >= pagination?.totalPages}
                   onClick={() =>
                     dispatch(
-                      getOrderHistory({ page: pagination.currentPage + 1 })
+                      getOrderHistory({ page: pagination?.currentPage + 1 })
                     )
                   }
                   className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"

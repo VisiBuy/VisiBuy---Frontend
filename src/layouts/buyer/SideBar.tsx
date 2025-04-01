@@ -7,10 +7,12 @@ const SideBar = () => {
 
   return (
     <>
-      {/* Desktop Sidebar (Hidden on small screens) */}
-      <DesktopSideBar />
+      {/* Desktop Sidebar (Fixed for large screens) */}
+      <div className="hidden sm:block fixed left-0 top-0 h-screen w-64 bg-white shadow-lg z-50">
+        <DesktopSideBar />
+      </div>
 
-      {/* Mobile Sidebar (Hidden on large screens) */}
+      {/* Mobile Sidebar */}
       <MobileSideBar
         isOpen={isMobileOpen}
         onClose={() => setIsMobileOpen(false)}

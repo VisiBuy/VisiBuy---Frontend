@@ -7,11 +7,10 @@ import LoadingSpinner from "@/ui/LoadingSpinner";
 
 const BuyerDashboardLayout = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [loading, setLoading] = useState(true); // For main content
-  const location = useLocation(); // Detect route changes
+  const [loading, setLoading] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
-    // Simulate loading on each route change
     setLoading(true);
     const timer = setTimeout(() => {
       setLoading(false);
@@ -20,34 +19,34 @@ const BuyerDashboardLayout = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex h-screen relative">
-      {/* Sidebar (Visible Immediately) */}
-      <SideBar />
+    <div className="flex h-screen overflow-hidden">
+      {/* Sidebar (Hidden on mobile) */}
+      <div className="hidden sm:block">
+        <SideBar />
+      </div>
 
       {/* Main Layout */}
-      <div className="flex flex-col flex-1">
-        {/* Header (Visible Immediately) */}
+      <div className="flex flex-col flex-1 sm:ml-64">
+        {/* Header */}
         <HeaderBar
           onMenuClick={() => setIsMobileOpen(true)}
           isSidebarOpen={isMobileOpen}
           setIsSidebarOpen={setIsMobileOpen}
         />
 
-        {/* Main Content Area */}
-        <main className="p-4 h-full">
+        {/* Main Content (Scrollable) */}
+        <main className="p-4 md:p-16 h-[calc(100vh-4rem)] overflow-y-auto mt-40 md:mt-16">
           {loading ? (
-            // Spinner only in main content area
             <div className="flex items-center justify-center h-full">
               <LoadingSpinner isLoading={true} size="large" />
             </div>
           ) : (
-            // Render child routes when loading finishes
             <Outlet />
           )}
         </main>
       </div>
 
-      {/* Mobile Sidebar */}
+      {/* Mobile Sidebar (Overlay) */}
       <MobileSideBar
         isOpen={isMobileOpen}
         onClose={() => setIsMobileOpen(false)}
