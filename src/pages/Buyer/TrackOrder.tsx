@@ -112,7 +112,7 @@ const BuyerTrackOrderPage = () => {
                       getOrderHistory({ page: pagination?.currentPage - 1 })
                     )
                   }
-                  className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                  className="px-4 py-2 bg-gray-400 rounded disabled:opacity-50"
                 >
                   Previous
                 </button>
@@ -128,7 +128,7 @@ const BuyerTrackOrderPage = () => {
                       getOrderHistory({ page: pagination?.currentPage + 1 })
                     )
                   }
-                  className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                  className="px-4 py-2 bg-gray-400 rounded disabled:opacity-50"
                 >
                   Next
                 </button>
