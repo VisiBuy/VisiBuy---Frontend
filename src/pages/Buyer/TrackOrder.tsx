@@ -1,8 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
-import { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
-import { Outlet, useLocation } from "react-router-dom";
 import { Outlet, useLocation } from "react-router-dom";
 import { getOrderHistory } from "@/modules/Buyer/models/track-order/trackOrderSlice";
 import OrderStatusButtons from "@/modules/Buyer/features/track-order/components/OrderStatusButtons";
@@ -10,7 +8,6 @@ import SearchOrder from "@/modules/Buyer/features/track-order/components/SearchO
 import OrderCard from "@/modules/Buyer/features/track-order/components/OrderCard";
 import PurchasingHistory from "@/modules/Buyer/features/track-order/components/PurchasingHistory";
 import { TOrderStatus } from "@/types/status";
-import { normalizeOrder } from "@/modules/Buyer/lib/track-order/normalizeOrder";
 import { normalizeOrder } from "@/modules/Buyer/lib/track-order/normalizeOrder";
 
 type FilterStatus = TOrderStatus | "all";
@@ -25,32 +22,9 @@ const BuyerTrackOrderPage = () => {
     pagination = { currentPage: 1, totalPages: 1 },
   } = useSelector((state: RootState) => state.trackOrder);
 
-
   const [statusFilter, setStatusFilter] = useState<FilterStatus>("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Memoize normalized orders
-  const normalizedOrders = useMemo(
-    () => (Array.isArray(orders) ? orders.map(normalizeOrder) : []),
-    [orders]
-  );
-
-  // Memoize filtered orders
-  const filteredOrders = useMemo(() => {
-    return normalizedOrders.filter((order) => {
-      const matchesStatus =
-        statusFilter === "all" ||
-        order.order_status.toLowerCase() === statusFilter.toLowerCase();
-
-      const matchesSearch =
-        order.product.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        order.orderNo.toLowerCase().includes(searchQuery.toLowerCase());
-
-      return matchesStatus && matchesSearch;
-    });
-  }, [normalizedOrders, statusFilter, searchQuery]);
-
-  // Fetch orders when page changes
   // Memoize normalized orders
   const normalizedOrders = useMemo(
     () => (Array.isArray(orders) ? orders.map(normalizeOrder) : []),
@@ -88,24 +62,9 @@ const BuyerTrackOrderPage = () => {
   };
 
   const isViewingOrder = location.pathname.includes("/track-order/view/");
-  const isViewingOrder = location.pathname.includes("/track-order/view/");
 
   return (
     <div className="flex flex-col gap-12 p-10">
-      {isViewingOrder ? (
-        <Outlet />
-      ) : (
-        <>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-4 w-full">
-              <OrderStatusButtons
-                currentStatus={statusFilter}
-                onStatusChange={handleStatusChange}
-                className="flex-1 whitespace-nowrap overflow-x-auto"
-              />
-            </div>
-            <SearchOrder onSearch={handleSearch} className="w-full sm:w-auto" />
-          </div>
       {isViewingOrder ? (
         <Outlet />
       ) : (
@@ -152,7 +111,7 @@ const BuyerTrackOrderPage = () => {
                       getOrderHistory({ page: pagination?.currentPage - 1 })
                     )
                   }
-                  className="px-4 py-2 bg-gray-400 rounded disabled:opacity-50"
+                  className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
                 >
                   Previous
                 </button>
@@ -168,7 +127,7 @@ const BuyerTrackOrderPage = () => {
                       getOrderHistory({ page: pagination?.currentPage + 1 })
                     )
                   }
-                  className="px-4 py-2 bg-gray-400 rounded disabled:opacity-50"
+                  className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
                 >
                   Next
                 </button>
