@@ -6,8 +6,7 @@ import { axiosWithAuth } from "@/lib/client";
  */
 export async function fetchOrderHistory(page = 1) {
   try {
-    const response = await axiosWithAuth.get(`/order/history?page=${page}`); // ✅ Pass page parameter
-    console.log("API Response:", response.data);
+    const response = await axiosWithAuth.get(`/order/history?page=${page}`); 
     return response.data;
   } catch (error) {
     console.error("Error fetching order history:", error);
@@ -68,8 +67,8 @@ export async function fetchVerificationImages(orderId: string) {
   }
 
   try {
-    const response = await axiosWithAuth.get(`/image`, {
-      headers: { order_id: orderId }, // ✅ Move order_id to headers
+    const response = await axiosWithAuth.get("/image", {
+      headers: { order_id: orderId }, 
     });
 
     return response.data;
@@ -114,6 +113,21 @@ export const submitFeedback = async (
     throw error;
   }
 };
+
+
+/**
+ * Get Notifications
+ * GET /notification
+ */
+export async function fetchNotifications() {
+  try {
+    const response = await axiosWithAuth.get("/notification"); // Fetch notifications
+    return response.data.notifications; // Return only the notifications data
+  } catch (error) {
+    console.error("Error fetching notifications:", error);
+    throw new Error("Failed to fetch notifications");
+  }
+}
 
 
 

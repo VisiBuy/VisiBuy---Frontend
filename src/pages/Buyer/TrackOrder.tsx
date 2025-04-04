@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { Outlet, useLocation } from "react-router-dom";
@@ -6,45 +6,20 @@ import { getOrderHistory } from "@/modules/Buyer/models/track-order/trackOrderSl
 import OrderStatusButtons from "@/modules/Buyer/features/track-order/components/OrderStatusButtons";
 import SearchOrder from "@/modules/Buyer/features/track-order/components/SearchOrder";
 import OrderCard from "@/modules/Buyer/features/track-order/components/OrderCard";
-import PurchasingHistory from "@/modules/Buyer/features/track-order/components/PurchasingHistory";
-import { TOrderStatus } from "@/types/status";
-import { normalizeOrder } from "@/modules/Buyer/lib/track-order/normalizeOrder";
+import useOrderActions from "@/modules/Buyer/hooks/useOrderActions";
+import useOrderFilter from "@/modules/Buyer/hooks/useOrderFilter";
 
-type FilterStatus = TOrderStatus | "all";
 
 const BuyerTrackOrderPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const location = useLocation();
-  const {
-    orders,
-    loading,
-    error,
-    pagination = { currentPage: 1, totalPages: 1 },
-  } = useSelector((state: RootState) => state.trackOrder);
-
-  const [statusFilter, setStatusFilter] = useState<FilterStatus>("all");
-  const [searchQuery, setSearchQuery] = useState("");
-
-  // Memoize normalized orders
-  const normalizedOrders = useMemo(
-    () => (Array.isArray(orders) ? orders.map(normalizeOrder) : []),
-    [orders]
+  const { orders, loading, error, pagination } = useSelector(
+    (state: RootState) => state.trackOrder
   );
 
-  // Memoize filtered orders
-  const filteredOrders = useMemo(() => {
-    return normalizedOrders.filter((order) => {
-      const matchesStatus =
-        statusFilter === "all" ||
-        order.order_status.toLowerCase() === statusFilter.toLowerCase();
-
-      const matchesSearch =
-        order.product.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        order.orderNo.toLowerCase().includes(searchQuery.toLowerCase());
-
-      return matchesStatus && matchesSearch;
-    });
-  }, [normalizedOrders, statusFilter, searchQuery]);
+  const { statusFilter, searchQuery, handleStatusChange, handleSearch } =
+    useOrderActions();
+  const filteredOrders = useOrderFilter(orders, statusFilter, searchQuery);
 
   // Fetch orders when page changes
   useEffect(() => {
@@ -52,14 +27,6 @@ const BuyerTrackOrderPage = () => {
       dispatch(getOrderHistory({ page: pagination.currentPage }));
     }
   }, [dispatch, pagination?.currentPage]);
-
-  const handleStatusChange = (status: FilterStatus) => {
-    setStatusFilter(status);
-  };
-
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-  };
 
   const isViewingOrder = location.pathname.includes("/track-order/view/");
 
@@ -95,7 +62,7 @@ const BuyerTrackOrderPage = () => {
               )}
             </div>
             <div className="w-96 hidden lg:block">
-              <PurchasingHistory />
+              {/* <PurchasingHistory /> */}
             </div>
           </div>
 

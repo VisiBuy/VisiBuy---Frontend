@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import { HiArrowLeft } from "react-icons/hi";
-import ViewAll from "../../modules/Buyer/features/track-order/components/ViewAll";
+// import ViewAll from "../../modules/Buyer/features/track-order/components/ViewAll";
 import VerifyButton from "../../modules/Buyer/features/track-order/components/VerifyButton";
 import VisualVerificationModal from "../../modules/Buyer/features/track-order/components/VisualVerificationModal";
 import FeedbackModal from "../../modules/Buyer/features/track-order/components/FeedbackModal";
@@ -153,7 +153,7 @@ const BuyerOrderDetailsPage = () => {
           </div>
 
           <div className="w-[250px]">
-            <ViewAll onClick={() => alert("Clicked View all!")} />
+            {/* <ViewAll onClick={() => alert("Clicked View all!")} /> */}
           </div>
         </div>
       ) : (

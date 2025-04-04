@@ -58,7 +58,7 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
 
   return (
     <>
-      <header className="bg-background fixed top-0 left-50 md:left-80 right-0 z-50 border border-gray-100 p-8">
+      <header className="bg-background fixed top-0 left-0 md:left-80 right-0 z-50 border border-gray-100 p-8">
         <div className="flex justify-between items-center">
           {/* Left Side: Menu Icon + Logo (wrapped in a Link to buyer home) */}
           <div className="flex items-center gap-4">
