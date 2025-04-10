@@ -2,7 +2,6 @@ import { useState } from "react";
 
 interface DisputeForm {
   orderId: string;
-  seller: string;
   description: string;
   evidence: File | null;
 }
@@ -10,7 +9,6 @@ interface DisputeForm {
 const FileDispute = () => {
   const [formData, setFormData] = useState<DisputeForm>({
     orderId: "",
-    seller: "",
     description: "",
     evidence: null,
   });
@@ -48,17 +46,7 @@ const FileDispute = () => {
             required
           />
         </div>
-        <div>
-          <label className="block text-sm font-medium">Seller</label>
-          <input
-            type="text"
-            name="seller"
-            value={formData.seller}
-            onChange={handleChange}
-            className="w-full border px-3 py-2 rounded-md"
-            required
-          />
-        </div>
+        
         <div>
           <label className="block text-sm font-medium">Issue Description</label>
           <textarea

@@ -38,7 +38,7 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
 
   useEffect(() => {
     if (isOpen && orderId) {
-      console.log("Fetching images for order ID:", orderId); // Debugging line
+      console.log("Fetching images for order ID:", orderId); 
       setLoading(true);
       fetchVerificationImages(orderId)
         .then((data: VerificationResponse) => {
