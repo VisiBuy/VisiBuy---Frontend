@@ -7,7 +7,7 @@ export function statusToClassName(status: TOrderStatus): string {
     case "pending":
       return "text-blue";
     case "accepted":
-      return "text-yellow-700";
+      return "text-yellow-300";
     case "dispatched":
       return "text-gray-700";
     case "delivered":

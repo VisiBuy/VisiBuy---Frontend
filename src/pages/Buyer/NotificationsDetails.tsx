@@ -34,7 +34,7 @@ const BuyerNotificationsDetailsPage = () => {
       <p className="text-sm text-gray-500">
         {new Date(notification.created_at).toLocaleString()}
       </p>
-      <p className="mt-4">{notification.details || notification.message}</p>
+      <p className="mt-4 font-OpenSans text-lg">{notification.details || notification.message}</p>
     </div>
   );
 };

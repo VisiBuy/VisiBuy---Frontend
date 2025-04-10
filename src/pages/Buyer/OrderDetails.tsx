@@ -34,6 +34,10 @@ const BuyerOrderDetailsPage = () => {
     const foundOrder = orders.find((order: any) => order._id === orderId);
     return foundOrder ? normalizeOrder(foundOrder) : null;
   }, [orders, orderId, loading]);
+  
+
+  // const colors = orderDetails?.color || [];
+  // const sizes = orderDetails?.size || [];
 
   const [verificationStatus, setVerificationStatus] = useState<
     "awaiting" | "verified"
@@ -63,7 +67,7 @@ const BuyerOrderDetailsPage = () => {
       <div className="flex items-center justify-between mb-6 rounded-md max-w-6xl">
         <div className="flex items-center gap-3">
           <HiArrowLeft
-            className="w-5 h-5 cursor-pointer"
+            className="w-7 h-7  cursor-pointer"
             onClick={() => navigate(-1)}
           />
           <h1 className="text-xl md:text-2xl font-bold">
@@ -71,8 +75,8 @@ const BuyerOrderDetailsPage = () => {
           </h1>
         </div>
         <span
-          className={`px-2 py-1 rounded-xl text-sm font-semibold 
-          ${verificationStatus === "verified" ? "bg-blue-100 text-blue-700" : "bg-blue-600 text-white"}`}
+          className={`px-2 py-1 rounded-md text-sm font-semibold font-Montserrat
+          ${verificationStatus === "verified" ? "bg-blue-100 text-blue-700" : "bg-blue text-white"}`}
         >
           {verificationStatus === "verified"
             ? "Verified"
@@ -87,16 +91,16 @@ const BuyerOrderDetailsPage = () => {
         <div className="lg:flex lg:justify-between gap-8">
           <div className="flex-1 bg-white p-4 space-y-4">
             <div className="p-4">
-              <div className="grid grid-cols-2 text-2xl text-gray-600">
-                <div className="space-y-2 font-OpenSans font-semibold">
-                  <p>Buyer:</p>
-                  <p>Seller:</p>
-                  <p>Date & Time of Purchase:</p>
-                  <p>Invoice ID:</p>
+              <div className="grid grid-cols-2 text-xs md:text-xl font-medium font-OpenSans">
+                <div className="space-y-2  text-light-gray-600">
+                  <p>Buyer</p>
+                  <p>Seller</p>
+                  <p>Date & Time of Purchase</p>
+                  <p>Invoice ID</p>
                 </div>
-                <div className="space-y-2 font-OpenSans text-right">
-                  <p>{orderDetails?.buyer?.fullName}</p>
-                  <p>{orderDetails?.seller?.fullName}</p>
+                <div className="space-y-2 text-right">
+                  <p>{orderDetails?.buyer?.fullName.toLocaleUpperCase()}</p>
+                  <p>{orderDetails?.seller?.fullName.toLocaleUpperCase()}</p>
                   <p>{orderDetails?.created_at}</p>
                   <p>{orderDetails?.invoiceID}</p>
                 </div>
@@ -104,17 +108,20 @@ const BuyerOrderDetailsPage = () => {
             </div>
 
             <div className="p-4">
-              <div className="flex justify-between text-sm font-semibold text-gray-700 p-2 border-t border-gray-300">
-                <p>
+              <div className="flex justify-between text-lg font-OpenSans text-black p-2 mt-10 border-t border-gray-300">
+                <p className="font-medium">
                   {orderDetails?.product?.quantity || 0}{" "}
-                  {orderDetails?.product?.brand || "N/A"}
+                  {orderDetails?.product?.model || "N/A"}
                 </p>
-                <p>#{orderDetails?.product?.price || 0}</p>
+                <p className="font-bold">
+                  {" "}
+                  &#8358; {orderDetails?.product?.price || 0}
+                </p>
               </div>
             </div>
 
             <div className="p-4 flex items-center justify-between">
-              <span className="text-gray-700 font-semibold">
+              <span className="text-light-gray-600 font-medium">
                 Verify your Order
               </span>
               <VerifyButton
@@ -136,16 +143,11 @@ const BuyerOrderDetailsPage = () => {
             )}
 
             <div className="p-4 space-y-2">
-              <div className="flex justify-end">
-                <button className="text-sm hover:underline">
-                  + Assign to new rider
-                </button>
-              </div>
-              <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center font-OpenSans font-medium justify-between text-sm">
                 <span>
                   Experiencing issues with this order? Reach out to our
                 </span>
-                <button className="text-blue-600 font-semibold hover:underline">
+                <button className="text-blue hover:underline">
                   Customer Care
                 </button>
               </div>
@@ -177,6 +179,9 @@ const BuyerOrderDetailsPage = () => {
         isOpen={showVerificationModal}
         orderId={safeOrderId}
         token={token}
+        productName={orderDetails?.product?.model}
+        // colors={colors}
+        // sizes={sizes}
         onClose={() => setShowVerificationModal(false)}
         onYes={async () => {
           setShowVerificationModal(false);

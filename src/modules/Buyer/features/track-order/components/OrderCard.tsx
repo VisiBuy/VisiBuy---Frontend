@@ -11,18 +11,14 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
 
   return (
     <Link to={detailsUrl} className="block">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white shadow-md p-6 rounded-md hover:bg-gray-50 transition-colors">
-        <div>
-          <h2 className="font-bold text-gray-800">
+      <div className="flex flex-col bg-white shadow-md p-6 rounded-md hover:bg-gray-50 transition-colors gap-1">
+        {/* Row 1: Order number + status */}
+        <div className="flex flex-row justify-between items-center">
+          <h2 className="font-bold font-Montserrat text-xl">
             Order #{order.orderNo ?? "N/A"}
           </h2>
-          <p className="text-sm text-gray-600 mt-1">
-            {order.product.description ?? "No description available"}
-          </p>
-        </div>
-        <div className="flex flex-col sm:items-end mt-2 sm:mt-0">
           <span
-            className={`text-sm font-semibold px-2 py-1 rounded-md inline-block ${statusToClassName(
+            className={`text-sm md:text-lg font-normal font-OpenSans px-2 py-1 rounded-md ${statusToClassName(
               order.order_status ?? "pending"
             )}`}
           >
@@ -32,7 +28,16 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
                 ? "Cancelled"
                 : "Pending"}
           </span>
-          <span className="text-xs text-gray-400 mt-1">
+        </div>
+
+        {/* Row 2: Description */}
+        <p className="text-lg font-OpenSans text-gray-600 line-clamp-1">
+          {order.product.description ?? "No description available"}
+        </p>
+
+        {/* Row 3: Timestamp */}
+        <div className="flex justify-end">
+          <span className="text-xs font-OpenSans text-gray-400">
             {order.created_at ?? "Unknown Date"}
           </span>
         </div>

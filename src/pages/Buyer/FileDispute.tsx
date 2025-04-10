@@ -33,9 +33,9 @@ const FileDispute = () => {
 
   return (
     <div className="max-w-4xl w-full pt-4 mx-auto bg-white shadow-md rounded-md px-6 py-6 lg:px-12 lg:py-12">
-      <h2 className="text-2xl font-bold mb-4">File a Dispute</h2>
+      <h2 className="text-2xl font-Montserrat font-bold mb-4">File a Dispute</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
+        <div className="font-OpenSans">
           <label className="block text-sm font-medium">Order ID</label>
           <input
             type="text"
@@ -47,7 +47,7 @@ const FileDispute = () => {
           />
         </div>
         
-        <div>
+        <div className="font-OpenSans">
           <label className="block text-sm font-medium">Issue Description</label>
           <textarea
             name="description"
@@ -58,7 +58,7 @@ const FileDispute = () => {
             required
           ></textarea>
         </div>
-        <div>
+        <div className="font-OpenSans">
           <label className="block text-sm font-medium">
             Upload Evidence (optional)
           </label>
@@ -66,7 +66,7 @@ const FileDispute = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+          className="w-full bg-blue font-Montserrat font-semibold text-white py-2 rounded-md hover:bg-blue-700"
         >
           Submit Dispute
         </button>

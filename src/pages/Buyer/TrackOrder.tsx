@@ -20,6 +20,7 @@ const BuyerTrackOrderPage = () => {
   const { statusFilter, searchQuery, handleStatusChange, handleSearch } =
     useOrderActions();
   const filteredOrders = useOrderFilter(orders, statusFilter, searchQuery);
+  console.log(filteredOrders)
 
   // Fetch orders when page changes
   useEffect(() => {
@@ -78,12 +79,12 @@ const BuyerTrackOrderPage = () => {
                       getOrderHistory({ page: pagination?.currentPage - 1 })
                     )
                   }
-                  className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                  className="px-4 py-2 button-text rounded disabled:opacity-50"
                 >
                   Previous
                 </button>
 
-                <span>
+                <span className="font-OpenSans font-bold text-blue text-xl">
                   Page {pagination?.currentPage} of {pagination?.totalPages}
                 </span>
 
@@ -94,7 +95,7 @@ const BuyerTrackOrderPage = () => {
                       getOrderHistory({ page: pagination?.currentPage + 1 })
                     )
                   }
-                  className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                  className="px-4 py-2 button-text rounded disabled:opacity-50"
                 >
                   Next
                 </button>

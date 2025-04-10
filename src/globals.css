@@ -62,3 +62,9 @@
     font-family: var(--font-Montserrat);
   }
 }
+
+@layer utilities{
+  .button-text {
+    @apply bg-blue-200 text-blue font-semibold font-Montserrat;
+  }
+}
