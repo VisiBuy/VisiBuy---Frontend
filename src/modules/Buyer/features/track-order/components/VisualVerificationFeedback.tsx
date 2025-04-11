@@ -33,7 +33,6 @@ const VisualVerificationFeedback: React.FC<VisualVerificationFeedbackProps> = ({
     }
   };
 
-
   return (
     <div className="space-y-6 text-center">
       <h3 className="text-xl md:text-3xl font-bold text-black">

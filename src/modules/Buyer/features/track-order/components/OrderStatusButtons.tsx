@@ -7,9 +7,7 @@ interface OrderStatusButtonsProps {
   onStatusChange: (status: FilterStatus) => void;
   className?: string;
 }
-
 const statuses: FilterStatus[] = [
-  "all",
   "accepted",
   "dispatched",
   "pending",

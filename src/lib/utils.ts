@@ -1,3 +1,4 @@
+
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -66,6 +67,35 @@ export const currencyFormmater = (amount: number) => {
 };
 
 export const capitalize = (text: string | undefined) => {
-  if(!text) return '';
-  return text.slice(0, 1).toUpperCase() + text.slice(1);
+  if (!text) return "";
+  return text.slice(0, 1).toUpperCase() + text.slice(1).toLowerCase();
 };
+export class ImageLinkMap {
+  links: Map<string, string>;
+  constructor() {
+    this.links = new Map();
+    // bind the this keyword 
+    this.setImageLink = this.setImageLink.bind(this);
+    this.removeImageLink = this.removeImageLink.bind(this);
+    this.getImageLinks = this.getImageLinks.bind(this)
+  }
+  setImageLink(key: string, url: string) {
+    return this.links.set(key, url);
+  }
+  getImageLink(key: string): string | undefined {
+    return this.links.get(key);
+  }
+  hasImageLink(key: string) {
+    return this.links.has(key);
+  }
+  removeImageLink(key: string) {
+    return this.links.delete(key);
+  }
+
+  clearAllLinks() {
+    this.links.clear();
+  }
+  getImageLinks(){
+    return this.links.values()
+  }
+}

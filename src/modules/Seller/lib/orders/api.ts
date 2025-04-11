@@ -39,6 +39,22 @@ class SellerOrderApiAdapter implements ISellerOrderRepository {
       ...response.data,
     };
   }
+  async uploadSellerVerifcationImages(orderId: string, imagesData: FormData) {
+    const response = await axiosWithAuth.post("/upload", imagesData, {
+      headers: {
+        order_id: orderId,
+      },
+    });
+    return response.data;
+  }
+  async getSellerVerificationImages(orderId: string) {
+    const response = await axiosWithAuth.get("/image", {
+      headers: {
+        order_id: orderId,
+      },
+    });
+    return response.data;
+  }
 }
 
 export default new SellerOrderApiAdapter();

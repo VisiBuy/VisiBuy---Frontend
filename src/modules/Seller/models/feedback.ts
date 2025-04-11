@@ -18,7 +18,10 @@ export interface FeedbackDto {
   email: string;
   issue: string;
 }
-
+export interface FaqProps{
+  question:string;
+  answer:string;
+}
 export const FeedbackSchema: ZodType<FeedbackDto> = z.object({
   email: z
     .string({

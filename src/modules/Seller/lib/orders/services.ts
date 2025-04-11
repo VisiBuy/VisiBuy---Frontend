@@ -23,5 +23,24 @@ async function getOrderList(queryParams: ISellerOrderQueryParams) {
     totalPages: response.totalPages,
   };
 }
-
-export default { getOrderList, getOrderById, updateSellerOrderStatus };
+async function uploadSellerVerifcationImages(
+  orderId: string,
+  imagesData: FormData
+) {
+  const response = await SellerOrderApi.uploadSellerVerifcationImages(
+    orderId,
+    imagesData
+  );
+  return response;
+}
+async function getSellerVerifcationImages(orderId: string) {
+  const response = await SellerOrderApi.getSellerVerificationImages(orderId);
+  return response;
+}
+export default {
+  getOrderList,
+  getOrderById,
+  updateSellerOrderStatus,
+  uploadSellerVerifcationImages,
+  getSellerVerifcationImages
+};

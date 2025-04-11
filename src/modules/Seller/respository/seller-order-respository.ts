@@ -13,4 +13,9 @@ export interface ISellerOrderRepository {
   updateOrderStatus: (
     payload: TUpdateSellerOrderStaus
   ) => Promise<ISellerOrder>;
+  uploadSellerVerifcationImages: (
+    orderId: string,
+    imagesData: FormData
+  ) => Promise<any>;
+  getSellerVerificationImages: (orderId: string) => Promise<any>;
 }

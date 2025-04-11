@@ -63,7 +63,7 @@ export function ProductScreen() {
             <Spinner />
           </div>
         )}
-        <AddProductModal />
+        {/* <AddProductModal /> */}
         <OverlaySpinner open={isFetching} />
       </MainLayout>
       <Pagination<ISellerProductQueryParams>

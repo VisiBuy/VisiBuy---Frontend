@@ -34,7 +34,8 @@ import BuyerProductDetails from "./pages/Buyer/ProductDetails";
 import Checkout from "./modules/Buyer/features/checkout/Checkout";
 import BuyerNotificationsDetailsPage from "./pages/Buyer/NotificationsDetails";
 import FileDispute from "./pages/Buyer/FileDispute";
-
+import { PaymentFaqPage } from "./pages/Seller/help-support/payment-faq";
+ 
 const router = createHashRouter([
   {
     element: <AppLayout />,
@@ -104,6 +105,11 @@ const router = createHashRouter([
         children: [
           { path: "placing-order", element: <PlacingOrderPage /> },
           { path: "order-payment", element: <OrderPaymentPage /> },
+          {
+            path: "faq",
+            children: [{ path: "payment", element: <PaymentFaqPage /> }],
+          },
+
         ],
       },
     ],
@@ -121,7 +127,6 @@ const router = createHashRouter([
       
       { index:true, element: <BuyerProductsPage /> },
       { path: "analytics", element: <BuyerDashboardPage /> },
-
 
       {
         path: "track-order",
