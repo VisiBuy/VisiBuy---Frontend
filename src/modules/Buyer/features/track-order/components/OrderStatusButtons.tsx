@@ -8,6 +8,7 @@ interface OrderStatusButtonsProps {
   className?: string;
 }
 const statuses: FilterStatus[] = [
+  "all",
   "accepted",
   "dispatched",
   "pending",
