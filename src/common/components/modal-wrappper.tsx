@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 
 interface ModalWrapperDialogProps {
   trigger?: React.ReactNode;
-  title: string;
+  title?: string;
   description?: string;
   children: React.ReactNode;
   footer?: React.ReactNode;
@@ -59,27 +59,29 @@ export const ModalWrapperDialog = ({
           className
         )}
       >
-        <DialogHeader className="px-12 py-12 pb-3">
-          <div className="flex items-center justify-between">
-            <DialogTitle className="text-xl md:text-3xl font-semibold font-Montserrat">
-              {title}
-            </DialogTitle>
-            <DialogTrigger asChild className="bg-transparent">
-              <Button
-                variant="link"
-                className="h-10 w-10 p-1  bg-light-gray rounded-full  opacity-70 border-transparent"
-                aria-label="Close"
-              >
-                <X className="h-10 w-10" style={{ color: "#000" }} />
-              </Button>
-            </DialogTrigger>
-          </div>
-          {description && (
-            <DialogDescription className="mt-2 text-gray-500">
-              {description}
-            </DialogDescription>
-          )}
-        </DialogHeader>
+        {title && (
+          <DialogHeader className="px-12 py-12 pb-3">
+            <div className="flex items-center justify-between">
+              <DialogTitle className="text-xl md:text-3xl font-semibold font-Montserrat">
+                {title}
+              </DialogTitle>
+              <DialogTrigger asChild className="bg-transparent">
+                <Button
+                  variant="link"
+                  className="h-10 w-10 p-1  bg-light-gray rounded-full  opacity-70 border-transparent"
+                  aria-label="Close"
+                >
+                  <X className="h-10 w-10" style={{ color: "#000" }} />
+                </Button>
+              </DialogTrigger>
+            </div>
+            {description && (
+              <DialogDescription className="mt-2 text-gray-500">
+                {description}
+              </DialogDescription>
+            )}
+          </DialogHeader>
+        )}
 
         <div
           className="flex-1 overflow-y-auto px-12 py-3"

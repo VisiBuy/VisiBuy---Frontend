@@ -11,7 +11,7 @@ export function SellerProductCard({
   store_name,
   images,
 }: ISellerProduct) {
-  const bgImg =  images[0] ?? "/sneaker.png";
+  const bgImg = images ? images[0] : "/sneaker.png";
   return (
     <div
       className=" rounded-md px-6  pb-4 bg-no-repeat min-h-[300px] bg-cover flex flex-col justify-end   text-white font-OpenSans"

@@ -57,6 +57,43 @@ export function formatDate(inputDate: string | number | Date) {
     return `${day} ${month} | ${timeString}`;
   }
 }
+/**
+ * Format a number as currency with commas as thousands separators
+ * @param {number} value - The number to format
+ * @param {boolean} includeSymbol - Whether to include the currency symbol
+ * @param {string} symbol - The currency symbol to use
+ * @param {number} decimalPlaces - Number of decimal places to show
+ * @returns {string} Formatted currency string
+ */
+export function formatCurrency(
+  value: number,
+  includeSymbol = true,
+  symbol = "$",
+  decimalPlaces = 2
+) {
+  // Handle non-numeric input
+  if (value === null || value === undefined || isNaN(value)) {
+    return includeSymbol ? `${symbol}0.00` : "0.00";
+  }
+
+  // Convert to number if it's a string
+  const numericValue = typeof value === "string" ? parseFloat(value) : value;
+
+  // Fixed decimal places
+  const fixedValue = numericValue.toFixed(decimalPlaces);
+
+  // Split into whole and decimal parts
+  const [wholePart, decimalPart] = fixedValue.split(".");
+
+  // Add commas to the whole part
+  const wholeWithCommas = wholePart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+  // Combine parts
+  const formatted = `${wholeWithCommas}.${decimalPart}`;
+
+  // Add symbol if needed
+  return includeSymbol ? `${symbol}${formatted}` : formatted;
+}
 
 export const currencyFormmater = (amount: number) => {
   return new Intl.NumberFormat("en-NG", {
@@ -74,10 +111,10 @@ export class ImageLinkMap {
   links: Map<string, string>;
   constructor() {
     this.links = new Map();
-    // bind the this keyword 
+    // bind the this keyword
     this.setImageLink = this.setImageLink.bind(this);
     this.removeImageLink = this.removeImageLink.bind(this);
-    this.getImageLinks = this.getImageLinks.bind(this)
+    this.getImageLinks = this.getImageLinks.bind(this);
   }
   setImageLink(key: string, url: string) {
     return this.links.set(key, url);
@@ -95,7 +132,7 @@ export class ImageLinkMap {
   clearAllLinks() {
     this.links.clear();
   }
-  getImageLinks(){
-    return this.links.values()
+  getImageLinks() {
+    return this.links.values();
   }
 }

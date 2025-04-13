@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import SellerProductService from "@/modules/Seller/lib/products/services";
 import { ISellerProductQueryParams } from "../../models/product";
-export function getProductsQueryKey(queryParams: ISellerProductQueryParams) {
+export function getProductsQueryKey(queryParams?: ISellerProductQueryParams) {
   return ["products", queryParams];
 }
 export function useGetProducts(queryParams: ISellerProductQueryParams) {

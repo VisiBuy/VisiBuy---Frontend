@@ -7,6 +7,8 @@ interface ImagePickerProps {
   onChange: (id: string, imageLink?: string, imageFile?: File) => void;
   onRemoveImage?: (id: string | undefined) => void;
   className?: string;
+  imageLink?: string;
+  imageLinkId?: string;
 }
 // Define props interfaces
 interface ImagePickerFactoryProps extends ImagePickerProps {
@@ -18,6 +20,8 @@ const ImagePickerFactory: React.FC<ImagePickerFactoryProps> = ({
   onChange,
   onRemoveImage,
   className,
+  imageLinkId,
+  imageLink,
 }) => {
   // Return the appropriate component based on type
   return type === "camera" ? (
@@ -27,6 +31,7 @@ const ImagePickerFactory: React.FC<ImagePickerFactoryProps> = ({
       onChange={onChange}
       onRemoveImage={onRemoveImage}
       className={className}
+      {...(imageLink && { imageLink, imageLinkId })}
     />
   );
 };
@@ -143,9 +148,11 @@ const FileImagePicker: React.FC<ImagePickerProps> = ({
   onChange,
   onRemoveImage,
   className,
+  imageLink,
+  imageLinkId,
 }) => {
   const { toast } = useToast();
-  const [image, setImage] = useState<string | null>(null);
+  const [image, setImage] = useState<string | null>(imageLink ?? null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const dropAreaRef = useRef<HTMLDivElement | null>(null);
   const imageId = useId();
@@ -285,7 +292,7 @@ const FileImagePicker: React.FC<ImagePickerProps> = ({
             className="absolute top-2 right-2 bg-gray-800 text-white p-1 rounded-full opacity-80 hover:opacity-100"
             aria-label="Remove image"
           >
-            <X size={20} id={imageId} />
+            <X size={20} id={imageLinkId ?? imageId} />
           </button>
         </div>
       ) : (

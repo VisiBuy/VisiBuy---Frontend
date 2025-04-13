@@ -13,8 +13,6 @@ export function PreviewImagesCard({
   const [mainImage, setMainImage] = useState<ImageUploadSchema>(
     images[0] || {
       id: "1",
-      type: "",
-      size: 0,
       name: "",
       url: "",
     }
@@ -27,8 +25,6 @@ export function PreviewImagesCard({
       } else {
         setMainImage({
           id: "1",
-          type: "",
-          size: 0,
           name: "",
           url: "",
         });

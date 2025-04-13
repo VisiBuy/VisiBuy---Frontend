@@ -16,74 +16,93 @@ export interface SellerProductState {
 
 export interface ProductDto {
   id: string;
-  color: string;
+  color: Array<string>;
   brand: string;
   model: string;
-  size: string;
+  size: Array<number>;
   price: number;
   description: string;
-  stock_status: "Out of stock" | "In stock";
-  images: z.infer<typeof ImageMetadataSchema>[];
+  stock_status: "in_stock" | "out_stock";
+  images?: File[];
 }
 export type ImageUploadSchema = z.infer<typeof ImageMetadataSchema>;
 export interface ISellerProduct extends ProductDto {
   store_name: string;
   seller_img: string;
 }
+// FileList with file type validation
+const ImageFileListSchema = z.custom<File>(
+  (val) => {
+    if (!(val instanceof File)) {
+      return false;
+    }
+
+    return true;
+  },
+  {
+    message: "Expected a FileList containing only image files",
+  }
+);
+
 export const ImageMetadataSchema = z.object({
   // Unique identifier for the image
   id: z.string().uuid(),
 
   // Original filename
-  name: z.string().min(1, "Filename is required"),
-
-  // File size validation (in bytes)
-  size: z
-    .number()
-    .min(1, "Image must be at least 1 byte")
-    .max(5 * 1024 * 1024, "Image cannot exceed 5MB"),
-
-  // MIME type validation
-  type: z
-    .string()
-    .refine(
-      (val) =>
-        ["image/jpeg", "image/png", "image/gif", "image/webp"].includes(val),
-      { message: "Unsupported image type" }
-    ),
+  name: z.string().min(1, "Filename is required").optional(),
 
   // Optional URL for preview or existing image
   url: z.string().url().optional(),
-
-  // Dimensions validation
-  dimensions: z
-    .object({
-      width: z.number().min(10, "Image width too small"),
-      height: z.number().min(10, "Image height too small"),
-    })
-    .optional(),
 });
+
 export const AddProductSchema: ZodType<Omit<ProductDto, "id">> = z.object({
-  color: z.string({
-    required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Color"),
-  }),
+  color: z
+    .array(
+      z
+        .string()
+        .min(1, "sneaker color cannot be empty")
+        .max(100, " sneaker color is too long")
+    )
+    .min(1, "Color must contain at least one sneaker color"),
   brand: z
     .string({
       required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Brand"),
     })
     .min(2, {
-      message: VALIDATION_MIN_LENGTH.replace("{{FIELD}}", "Name"),
+      message: VALIDATION_MIN_LENGTH.replace("{{FIELD}}", "Brand"),
     })
     .max(100, {
-      message: VALIDATION_MAX_LENGTH.replace("{{FIELD}}", "Name"),
+      message: VALIDATION_MAX_LENGTH.replace("{{FIELD}}", "Brand"),
     }),
-  model: z.string({
-    required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Model"),
-  }),
-  size: z.string({
-    required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Model"),
-  }),
-  price: z
+
+  model: z
+    .string({
+      required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Model"),
+    })
+    .min(2, {
+      message: VALIDATION_MIN_LENGTH.replace("{{FIELD}}", "Model"),
+    })
+    .max(100, {
+      message: VALIDATION_MAX_LENGTH.replace("{{FIELD}}", "Model"),
+    }),
+
+  size: z
+    .array(
+      z.coerce
+        .number({
+          required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Size"),
+          invalid_type_error: VALIDATION_INVALID_FIELD.replace(
+            "{{FIELD}}",
+            "Size"
+          ),
+        })
+        .positive("Size must be positive")
+
+        .max(100, "Size is too high")
+    )
+    .min(1, "Array must contain at least one sneaker size"),
+
+  price: z.coerce
     .number({
       required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Price"),
       invalid_type_error: VALIDATION_INVALID_FIELD.replace(
@@ -98,23 +117,18 @@ export const AddProductSchema: ZodType<Omit<ProductDto, "id">> = z.object({
     .string({
       required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Description"),
     })
-    .min(2, {
-      message: VALIDATION_MIN_LENGTH.replace("{{FIELD}}", "Name"),
+    .min(10, {
+      message: VALIDATION_MIN_LENGTH.replace("{{FIELD}}", "Description"),
     })
     .max(500, {
-      message: VALIDATION_MAX_LENGTH.replace("{{FIELD}}", "Name"),
+      message: VALIDATION_MAX_LENGTH.replace("{{FIELD}}", "Description"),
     }),
-  stock_status: z.enum(["In stock", "Out of stock"]),
+  stock_status: z.enum(["in_stock", "out_stock"]),
   images: z
-    .array(ImageMetadataSchema)
+    .array(ImageFileListSchema)
     .min(1, "At least one image is required")
     .max(8, "Maximum of 8 images allowed")
-
-    // Optional custom validation to ensure unique images
-    .refine(
-      (images) => new Set(images.map((img) => img.id)).size === images.length,
-      { message: "Duplicate images are not allowed" }
-    ),
+    .optional(),
 });
 
 export type TStockStatus = "Out of stock" | "In stock";
