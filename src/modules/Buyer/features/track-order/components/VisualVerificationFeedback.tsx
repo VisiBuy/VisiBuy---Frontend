@@ -3,13 +3,11 @@ import { submitFeedback } from "@/modules/Buyer/lib/track-order/api";
 
 interface VisualVerificationFeedbackProps {
   orderId: string;
-  token: string;
   onFeedbackSubmitted: (feedback: any) => void;
 }
 
 const VisualVerificationFeedback: React.FC<VisualVerificationFeedbackProps> = ({
   orderId,
-  token,
   onFeedbackSubmitted,
 }) => {
   const [rating, setRating] = useState<number | null>(null);
@@ -19,12 +17,17 @@ const VisualVerificationFeedback: React.FC<VisualVerificationFeedbackProps> = ({
 
   const handleSubmit = async () => {
     if (rating === null) return;
+    console.log("📤 Submitting feedback:", { orderId, rating, comments });
+
+
     try {
       setLoading(true);
       const result = await submitFeedback(orderId, rating, comments);
+      console.log("✅ API Success:", result); // ✅ Log API response
       onFeedbackSubmitted(result);
     } catch (err: any) {
-      setError(err.message || "Feedback submission failed.");
+      console.error("❌ API Error:", err.response?.data || err.message); // ✅ Log full error response
+      setError(err.response?.data?.msg || "Feedback submission failed.");
     } finally {
       setLoading(false);
     }

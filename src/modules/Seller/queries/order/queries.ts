@@ -27,3 +27,10 @@ export function useGetSellerOrdersQuery(
     enabled: isMatchRoute,
   });
 }
+
+export function useGetSellerVerificationImages(orderId: string) {
+  return useQuery({
+    queryKey: ["seller_verification_images",orderId],
+    queryFn: () => SellerOrderService.getSellerVerifcationImages(orderId),
+  });
+}

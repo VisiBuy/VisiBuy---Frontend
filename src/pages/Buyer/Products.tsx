@@ -44,23 +44,11 @@ const BuyerProductsPage = () => {
       {/* Product Grid using Tailwind CSS Masonry */}
       {displayedProducts.length > 0 ? (
         <div
-          className='grid grid-rows-[repeat(auto-fit,minmax(200px,1fr))] auto-rows-[240px] md:flex gap-6 p-6'
+          className='grid grid-rows-[repeat(auto-fit,minmax(200px,1fr))] auto-cols-[251px] justify-center md:flex md:justify-normal gap-6 p-6'
           style={{ flexWrap: "wrap" }}
         >
           {displayedProducts.map((product) => (
-            <div
-              key={product._id}
-              className={`
-                ${product.size.length > 2 ? "row-span-2" : ""}
-                ${product.price > 500 ? "col-span-2" : ""}
-              `}
-            >
-              <ProductSkeleton
-                type='prod'
-                product={product}
-                key={product._id}
-              />
-            </div>
+            <ProductSkeleton type='prod' product={product} key={product._id} />
           ))}
         </div>
       ) : (

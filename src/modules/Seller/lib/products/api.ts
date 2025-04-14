@@ -3,6 +3,7 @@ import { QueryResult } from "@/models/query-result";
 import {
   ISellerProduct,
   ISellerProductQueryParams,
+  ProductDto,
 } from "@/modules/Seller/models/product";
 import SellerProductRespository from "@/modules/Seller/respository/seller-product-repository";
 
@@ -26,6 +27,11 @@ class SellerProductApiAdapter implements SellerProductRespository {
       totalPages: response.data.pagination.totalPages,
       ...response.data,
     };
+  }
+  async createProduct(productData: FormData) {
+    console.log(productData,'ds')
+    const response = await axiosWithAuth.post("/create-product", productData);
+    return response.data;
   }
 }
 export default new SellerProductApiAdapter();

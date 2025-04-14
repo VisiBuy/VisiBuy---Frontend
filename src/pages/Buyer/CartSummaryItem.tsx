@@ -20,6 +20,7 @@ interface CartSummaryItemProps {
 const CartSummaryItem: React.FC<CartSummaryItemProps> = ({ item }) => {
   const dispatch = useDispatch();
   // console.log(item);
+  // console.log(item);
 
   return (
     <div key={item._id} className='flex items-center gap-4 border-b pb-4'>

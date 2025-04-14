@@ -2,21 +2,21 @@ import { useNavigate } from "react-router-dom";
 import { useNotifications } from "@/context/notifications/NotificationsContext";
 import { CheckCircle } from "lucide-react";
 
+interface Notification {
+  id: string; 
+  message: string;
+  timestamp: string;
+  read: boolean;
+  details?: string;
+}
+
 const BuyerNotificationsPage = () => {
   const navigate = useNavigate();
-  const { notifications, setNotifications } = useNotifications();
+  const { notifications, markAsRead } = useNotifications();
 
-  // Mark notification as read
-  const markAsRead = (id: number) => {
-    setNotifications((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, read: true } : n))
-    );
-  };
-
-  // Handle navigation to the details page and mark as read
-  const handleOpenNotification = (id: number) => {
-    markAsRead(id);
-    navigate(`/dashboard/buyer/notification/${id}`);
+  const handleOpenNotification = (id: string) => {
+    markAsRead(id); // Mark notification as read
+    navigate(`/dashboard/buyer/notification/${id}`); 
   };
 
   return (
@@ -28,14 +28,14 @@ const BuyerNotificationsPage = () => {
           <ul className="divide-y">
             {notifications.map((notification) => (
               <li
-                key={notification.id}
+                key={notification._id} // Use _id here
                 className="flex justify-between items-center p-4 transition-all hover:bg-gray-50 cursor-pointer"
-                onClick={() => handleOpenNotification(notification.id)}
+                onClick={() => handleOpenNotification(notification._id)} 
               >
                 <div className="flex-1">
                   <p
                     className={`text-lg ${
-                      notification.read
+                      notification.is_read
                         ? "text-gray-500"
                         : "font-semibold text-gray-800"
                     }`}
@@ -43,16 +43,14 @@ const BuyerNotificationsPage = () => {
                     {notification.message}
                   </p>
                   <p className="text-sm text-gray-400">
-                    {notification.timestamp}
+                    {new Date(notification.created_at).toLocaleString()}
                   </p>
                 </div>
-
-                {/* Optionally, you can keep the Mark as Read button, but it's redundant now */}
-                {!notification.read && (
+                {!notification.is_read && (
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      markAsRead(notification.id);
+                      markAsRead(notification._id); // Use _id here
                     }}
                     className="ml-4 text-sm px-3 py-1 rounded-lg transition-all duration-300 flex items-center gap-2"
                     style={{ backgroundColor: "#1a73e8", color: "white" }}

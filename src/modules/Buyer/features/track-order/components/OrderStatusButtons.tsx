@@ -7,7 +7,6 @@ interface OrderStatusButtonsProps {
   onStatusChange: (status: FilterStatus) => void;
   className?: string;
 }
-
 const statuses: FilterStatus[] = [
   "all",
   "accepted",
@@ -35,7 +34,7 @@ const OrderStatusButtons: React.FC<OrderStatusButtonsProps> = ({
             key={status}
             onClick={() => onStatusChange(status)}
             className={` 
-              px-1 py-1 text-xs md:px-4 md:py-2 md:text-lg /* Smaller on small screens */
+              px-2 py-2 text-lg md:px-4 md:py-2 md:text-xl /* Smaller on small screens */
               rounded-md font-bold font-Montserrat
               ${
                 currentStatus === status

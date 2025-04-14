@@ -21,6 +21,8 @@ import {
 } from "@/modules/Auth/features/slices";
 import { Toaster } from "@/ui/Toaster";
 import { dashboardConfig } from "@/lib/config";
+import { AddProductModal } from "@/modules/Seller/features/product/components/modals/add-product-modal";
+
 const navlinks: NavItemProps[] = [
   { name: "Products", href: "products", iconName: "briefcase" },
   {
@@ -125,6 +127,7 @@ export function SellerDashboardLayout() {
         <main className="m-8 main content">
           <Outlet />
           <Toaster />
+          <AddProductModal />
         </main>
       </div>
     </section>
