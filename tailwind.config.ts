@@ -19,7 +19,7 @@ const config: Config = {
     extend: {
       dropShadow: {
         "3xl": "0 10px 30px rgba(0, 0, 0, 0.05)",
-        "top":"0 -2px 8px rgba(0, 0, 0, 0.5)"
+        top: "0 -2px 8px rgba(0, 0, 0, 0.5)",
       },
       colors: {
         border: "hsl(var(--border))",
@@ -87,10 +87,21 @@ const config: Config = {
             transform: "rotate(360deg);",
           },
         },
+        typing: {
+          "0%": { width: "0" },
+          "100%": { width: "100%" },
+        },
+        blink: {
+          "50%": { "border-color": "transparent" },
+          "100%": { "border-color": "black" },
+        },
       },
-      animation:{
-        rotation:"rotation 1s linear infinite;"
-      }
+      animation: {
+        rotation: "rotation 1s linear infinite",
+        typing: "typing 2s steps(30, end) forwards",
+        blink: "blink 0.7s step-end infinite",
+        "bounce-slow": "bounce 5s infinite",
+      },
     },
   },
   plugins: [],
