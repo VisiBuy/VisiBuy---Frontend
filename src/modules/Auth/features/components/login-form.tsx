@@ -60,11 +60,11 @@ export function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto flex flex-col items-center justify-center min-h-screen px-4">
+    <div className="w-full max-w-xl mx-auto flex flex-col items-center min-h-screen px-4">
       {/* Welcome Section */}
       <div className="text-center mb-8">
         <h2
-          className={`text-secondary-foreground font-bold text-5xl font-Montserrat 
+          className={`auth-heading mt-12  
     whitespace-nowrap overflow-hidden 
     ${isTypingDone ? "" : "border-r-4 border-black animate-typing"}`}
         >

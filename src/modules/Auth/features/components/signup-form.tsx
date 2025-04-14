@@ -79,9 +79,7 @@ export function SignUpForm() {
   return (
     <div className="w-full flex justify-center items-center px-4 py-16">
       <div className="w-full max-w-2xl">
-        <h2 className="text-secondary-foreground font-bold text-3xl md:text-5xl font-Montserrat text-center">
-          Create your account.
-        </h2>
+        <h2 className="auth-heading">Create your account.</h2>
         <p className="text-secondary-foreground text-lg md:text-xl font-OpenSans mt-2 text-center">
           Shop with certainty using VisiBuy.
         </p>
@@ -89,25 +87,21 @@ export function SignUpForm() {
         <div className="flex justify-center mt-6">
           <Button
             className={cn(
-              "rounded-none rounded-l-lg border border-gray-300",
-              role === "buyer"
-                ? "bg-blue text-white"
-                : "bg-light-background text-secondary-foreground hover:bg-gray-200 hover:text-black"
+              "rounded-none border border-blue rounded-l-lg",
+              role === "buyer" ? "btn-role-active" : "btn-role-inactive"
             )}
             onClick={() => setRole("buyer")}
           >
-            Signup as User
+            Signup as Buyer
           </Button>
           <Button
             className={cn(
-              "rounded-none rounded-r-lg border border-gray-300",
-              role === "seller"
-                ? "bg-blue text-white"
-                : "bg-light-background text-secondary-foreground hover:bg-gray-200 hover:text-black"
+              "rounded-none border border-blue rounded-r-lg",
+              role === "seller" ? "btn-role-active" : "btn-role-inactive"
             )}
             onClick={() => setRole("seller")}
           >
-            Signup as Vendor
+            Signup as Seller
           </Button>
         </div>
 

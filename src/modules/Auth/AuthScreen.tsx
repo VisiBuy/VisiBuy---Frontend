@@ -3,7 +3,7 @@ import lockIcon from "/lock.png";
 import { Toaster } from "../../ui/Toaster";
 
 type AuthScreenProps = {
-  title: "Sign Up" | "Login";
+  title: "Sign Up" | "Login" | "Password Recovery";
   formComponent: React.ReactNode;
 };
 
@@ -36,7 +36,7 @@ export function AuthScreen({ title, formComponent }: AuthScreenProps) {
           <img src={logo} alt="Visibuy logo" className="w-48" />
         </div>
         <div className="relative z-10 mt-20 px-4">
-          <div className="bg-white shadow-lg rounded-xl px-6">
+          <div className="bg-white shadow-lg rounded-xl px-6 py-5">
             {formComponent}
           </div>
           <Toaster />
