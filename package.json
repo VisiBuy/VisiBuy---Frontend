@@ -55,6 +55,7 @@
     "vite-plugin-toml": "^0.7.0",
     "vite-tsconfig-paths": "^5.1.0",
     "yarn": "^1.22.22",
+    "yet-another-react-lightbox": "^3.22.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
 import { axiosWithAuth } from "@/lib/client";
+import { VerificationResponse, VerificationImage } from "@/types/VerificationImage";
 
 /**
  * Track Order
@@ -60,7 +61,9 @@ export async function verifyOrder(
  * Get Verification Images
  * GET /image?order_id=...
  */
-export async function fetchVerificationImages(orderId: string) {
+export async function fetchVerificationImages(
+  orderId: string
+): Promise<VerificationResponse> {
   if (!orderId || typeof orderId !== "string") {
     console.error("Invalid Order ID:", orderId);
     throw new Error("Invalid Order ID");
@@ -68,19 +71,39 @@ export async function fetchVerificationImages(orderId: string) {
 
   try {
     const response = await axiosWithAuth.get("/image", {
-      headers: { order_id: orderId }, 
+      headers: { order_id: orderId },
     });
 
-    return response.data;
+    const data = response.data;
+
+    // Transform raw response to match your component's expected structure
+    const images: VerificationImage[] = (data.urls.urls || []).map(
+      (img: any) => ({
+        imageUrl: img.viewUrl,
+        sneakerName: "", // if not available in backend
+        size: "", // if not available in backend
+        color: "", // if not available in backend
+        verifiedDate: "", // if not available in backend
+      })
+    );
+
+    return {
+      productName: data?.urls?.productName || "Product",
+      images,
+      verificationId: data?.urls?._id || "N/A",
+    };
   } catch (error: any) {
     console.error(
       "❌ Error fetching verification images:",
       error.response?.data || error
     );
 
-    // If the response is 404 with "No verification images found"
     if (error.response?.status === 404) {
-      return { msg: "No verification images found for this order." };
+      return {
+        productName: "Not Found",
+        images: [],
+        verificationId: "N/A",
+      };
     }
 
     throw new Error(
