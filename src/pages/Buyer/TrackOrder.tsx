@@ -19,7 +19,7 @@ const BuyerTrackOrderPage = () => {
   const { statusFilter, searchQuery, handleStatusChange, handleSearch } =
     useOrderActions();
   const filteredOrders = useOrderFilter(orders, statusFilter, searchQuery);
-  console.log(filteredOrders)
+  
 
   // Fetch orders when page changes
   useEffect(() => {
@@ -50,7 +50,7 @@ const BuyerTrackOrderPage = () => {
           <div className="flex gap-24">
             <div className="flex-1 flex flex-col gap-4">
               {loading ? (
-                <p>Loading orders...</p>
+                <p> </p>
               ) : error ? (
                 <p className="text-red-500">{error}</p>
               ) : filteredOrders.length > 0 ? (

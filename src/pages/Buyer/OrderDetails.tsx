@@ -84,7 +84,7 @@ const BuyerOrderDetailsPage = () => {
         </span>
       </div>
 
-      {loading && <p>Loading order details...</p>}
+      {loading && <p></p>}
       {error && <p className="text-red-500">{error}</p>}
 
       {!loading && orderDetails ? (
@@ -178,31 +178,33 @@ const BuyerOrderDetailsPage = () => {
       <VisualVerificationModal
         isOpen={showVerificationModal}
         orderId={safeOrderId}
-        token={token}
         productName={orderDetails?.product?.model}
-        // colors={colors}
-        // sizes={sizes}
+        colors={
+          Array.isArray(orderDetails?.color)
+            ? orderDetails.color
+            : orderDetails?.color
+              ? [orderDetails.color]
+              : []
+        }
+        sizes={
+          Array.isArray(orderDetails?.size)
+            ? orderDetails.size
+            : orderDetails?.size
+              ? [orderDetails.size]
+              : []
+        }
         onClose={() => setShowVerificationModal(false)}
         onYes={async () => {
           setShowVerificationModal(false);
           setIsVerifying(true);
-
           try {
-            console.log("🔍 Verifying order:", orderId);
-            const response = await verifyOrder(safeOrderId, "accepted");
-            console.log("✅ Order verified successfully:", response);
-
+            await verifyOrder(safeOrderId, "accepted");
             setVerificationStatus("verified");
             setIsButtonVerified(true);
             setShowFeedbackModal(true);
-          } catch (error: any) {
-            console.error(
-              "❌ Verification failed:",
-              error.response?.data?.message || error.message
-            );
-            alert(
-              `Verification failed: ${error.response?.data?.message || "Unknown error"}`
-            );
+          } catch (err) {
+            console.error(err);
+            alert("Verification failed. Please try again.");
           } finally {
             setIsVerifying(false);
           }
@@ -210,7 +212,6 @@ const BuyerOrderDetailsPage = () => {
         onNo={() => setShowVerificationModal(false)}
       />
 
-      {/* Feedback Modal */}
       {showFeedbackModal && (
         <FeedbackModal
           orderId={safeOrderId}
