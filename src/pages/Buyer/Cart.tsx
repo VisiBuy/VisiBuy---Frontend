@@ -18,7 +18,8 @@ const Cart: React.FC = () => {
             </div>
           ) : null}
           {cartItems.map((item) => (
-            <div key={item._id}>
+            <div key={item._id} className='grid grid-rows-[repeat(auto-fit,minmax(200px,1fr))] auto-cols-[251px] justify-center md:flex md:justify-normal gap-6 p-6'
+            style={{ flexWrap: "wrap" }}>
               <ProductSkeleton type='cart' product={item} />
             </div>
           ))}

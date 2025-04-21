@@ -26,7 +26,7 @@ const ErrorHolder: React.FC<ErrorHolderProps> = ({
   if (!visible) return null;
 
   return (
-    <div className='fixed top-5 right-5 bg-white shadow-lg rounded-lg flex items-center p-4 space-x-3 border border-gray-200'>
+    <div className='fixed top-5 right-5 bg-white shadow-lg rounded-lg flex items-center p-4 space-x-3 border border-gray-200 z-[9999]'>
       <CircleX className='text-red-500' size={24} />
       <span className='text-black font-medium'>{message}</span>
     </div>

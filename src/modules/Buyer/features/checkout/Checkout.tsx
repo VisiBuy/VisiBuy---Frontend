@@ -90,6 +90,7 @@ const Checkout = () => {
           paymentStatus: "Paid",
         }));
         setIsOrderPlaced(true);
+        dispatch(removeFromCart(orderDetails.items._id));
       }
       closePaymentModal(); // Close modal after payment
     },

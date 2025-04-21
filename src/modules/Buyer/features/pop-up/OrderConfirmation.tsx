@@ -47,7 +47,7 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
     // Find the product by matching the id with the `id` in the products array
     const foundProduct = cartProduct.find(
       (p) => p._id === orderDetails.items._id
-    ); // Assuming id is a string from the URL
+    );
     setData(foundProduct ?? null); // Set the product or null if not found
   }, [orderDetails.items._id, cartProduct]);
 
@@ -58,13 +58,13 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
     address: "23 online street, react state, javascript",
     size: data?.size,
     color: data?.color,
-    quantity: orderDetails.items.quantity
+    quantity: orderDetails.items.quantity,
   };
 
-  const sendOrderData = async () => {
-    const data = await axiosWithAuth.post("order", orderData);
-    console.log(data);
-  };
+  // const sendOrderData = async () => {
+  //   const data = await axiosWithAuth.post("order", orderData);
+  //   console.log(data);
+  // };
   const sendData = async () => {
     const state = store.getState();
     const token = state.auth.token;
@@ -120,20 +120,31 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
           Total: ₦{orderDetails.totalAmount}
         </div>
 
-        <button
-          onClick={() => {
-            // onClose;
+        <div className='flex gap-2'>
+          <button
+            onClick={() => {
+              navigate(-1);
+              dispatch(removeFromCart(orderDetails.items._id));
+            }}
+            className='mt-4 w-[48%] bg-white-600 text-green-600 py-2 rounded-lg hover:bg-green-300 hover:text-white border-2 border-green-300'
+          >
+            Back
+          </button>
+          <button
+            onClick={() => {
+              // onClose;
 
-            navigate("/dashboard/buyer/track-order");
-            // axiosWithAuth.post("order", orderData);
-            sendOrderData();
-            sendData();
-            dispatch(removeFromCart(orderDetails.items._id));
-          }}
-          className='mt-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700'
-        >
-          Close
-        </button>
+              navigate("/dashboard/buyer/track-order");
+              // axiosWithAuth.post("order", orderData);
+              // sendOrderData();
+              sendData();
+              dispatch(removeFromCart(orderDetails.items._id));
+            }}
+            className='mt-4 w-[48%] bg-green-600 text-white py-2 rounded-lg hover:bg-green-700'
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   );
