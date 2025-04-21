@@ -45,30 +45,30 @@ export function PasswordResetForm() {
     }
   };
   return (
-    <div className='w-[50%]'>
-      <h2 className='text-secondary-foreground font-bold text-5xl font-Montserrat'>
+    <div className="w-full max-w-xl mx-auto">
+      <h2 className="auth-heading mt-10">
         Forgot password?
       </h2>
-      <p className='text-secondary-foreground text-xl font-OpenSans mt-4'>
+      <p className="text-secondary-foreground text-lg sm:text-xl font-OpenSans mt-4">
         Enter registered email address of your account and we’ll send you a
         password reset link.
       </p>
-      <div className='border-border border p-8 mt-8 rounded-2xl'>
+      <div className="border-border border p-6 sm:p-8 mt-8 rounded-2xl">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
-              name='email'
+              name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className='flex justify-start text-xl'>
-                    Email<span className='text-destructive ml-1'>*</span>
+                  <FormLabel className="flex justify-start text-xl">
+                    Email<span className="text-destructive ml-1">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
-                      placeholder='Email'
+                      placeholder="Email"
                       {...field}
-                      icon={<Icon name='mail' className='h-8 w-8' />}
+                      icon={<Icon name="mail" className="h-8 w-8" />}
                     />
                   </FormControl>
                   <FormMessage />
@@ -76,23 +76,23 @@ export function PasswordResetForm() {
               )}
             />
 
-            <div className='pt-4'>
+            <div className="pt-4">
               <Button
                 disabled={loginMutation.isPending || !form.formState.isValid}
-                type='submit'
-                className='w-full px-12 h-16 text-xl'
-                size='sm'
+                type="submit"
+                className="w-full px-12 h-16 text-xl"
+                size="sm"
               >
                 Reset Password
                 {loginMutation.isPending && (
-                  <Loader2 className='ml-2 animate-spin' />
+                  <Loader2 className="ml-2 animate-spin" />
                 )}
               </Button>
             </div>
-            <div className='flex justify-center items-center text-xl text-secondary-foreground  font-OpenSans mt-4'>
+            <div className="flex justify-center items-center text-xl text-secondary-foreground font-OpenSans mt-4">
               <h3>Back to</h3>
-              <Button asChild variant='link' className='px-2 text-blue'>
-                <Link to='/login' className='text-xl '>
+              <Button asChild variant="link" className="px-2 text-blue">
+                <Link to="/login" className="text-xl">
                   Sign In
                 </Link>
               </Button>
