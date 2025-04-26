@@ -14,7 +14,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import ErrorHolder from "@/ui/buyer/ErrorHolder";
-import { selectCartSummary } from "@/modules/Buyer/features/cart/cartSummarySlice";
 
 interface Product {
   _id: string;
@@ -43,13 +42,15 @@ function ProductDetails() {
   const [showOrderSuccess, setShowOrderSuccess] = useState(false);
   const [showErrorHolder, setShowErrorHolder] = useState(false);
 
+  const [localQuantity, setLocalQuantity] = useState(1);
+
   // selected color and size for cart
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string>("");
 
   // Get product quantity in cart
   const cartItem = cartItems.find((item) => item._id === id);
-  const quantity = cartItem ? cartItem.quantity : 1;
+  const quantity = cartItem ? cartItem.quantity : localQuantity;
 
   useEffect(() => {
     // Find the product by matching the id with the `id` in the products array
@@ -58,35 +59,57 @@ function ProductDetails() {
   }, [id, products]); // Re-run effect when id or products change
 
   const handleOrderSuccess = () => {
+    console.log(quantity);
     if (!data) return;
     if (!selectedColor || !selectedSize) return setShowErrorHolder(true);
-    dispatch(addToCart({ ...data, size: selectedSize, color: selectedColor }));
+    dispatch(
+      addToCart({
+        ...data,
+        _id: data._id!,
+        size: selectedSize,
+        color: selectedColor,
+        quantity,
+      })
+    );
     setShowOrderSuccess(true);
   };
   const handleAddToQuantity = () => {
-    if (!data) return;
-    dispatch(updateQuantity({ id: data?._id, quantity: quantity - 1 }));
+    // check if data exist
+    if (!data || !data._id) return;
+    // do nothing if quantity is <= 1
+    if (quantity <= 1) return;
+
+    if (cartItem) {
+      dispatch(updateQuantity({ id: data._id, quantity: quantity - 1 }));
+    } else {
+      setLocalQuantity((prev) => prev - 1);
+    }
   };
+
   const handleMinusToQuantity = () => {
-    if (!data) return;
-    dispatch(updateQuantity({ id: data?._id, quantity: quantity + 1 }));
+    // check if data exist
+    if (!data || !data._id) return;
+    if (cartItem) {
+      dispatch(updateQuantity({ id: data._id, quantity: quantity + 1 }));
+    } else {
+      setLocalQuantity((prev) => prev + 1);
+    }
   };
 
   return (
-    <div className='h-[100%] w-[90%] p-8'>
-      {/* {showErrorHolder ? <ErrorHolder message='Size/Color can not be empty!' onClose={()=> setShowErrorHolder(false)}/> :  {showOrderSuccess ?
-        <OrderSuccess onClose={() => setShowOrderSuccess(false)} /> : ''
-      }} */}
-      {showErrorHolder ? (
+    <div className='h-[100%] w-[93%] p-8'>
+      {showErrorHolder && (
         <ErrorHolder
           message='Size/Color can not be empty!'
           onClose={() => setShowErrorHolder(false)}
         />
-      ) : showOrderSuccess ? (
-        <OrderSuccess onClose={() => setShowOrderSuccess(false)} />
-      ) : null}
+      )}
 
-      <div className='flex flex-col  py-8 text-xl gap-8'>
+      {showOrderSuccess && (
+        <OrderSuccess onClose={() => setShowOrderSuccess(false)} />
+      )}
+
+      <div className='w-[100%] flex flex-col py-8 text-xl gap-8'>
         {/* title */}
         <h2 className='font-semibold uppercase text-2xl'>{data?.model}</h2>
 
@@ -101,23 +124,46 @@ function ProductDetails() {
           )}
         </div> */}
         {/* Desktop View: Display images side by side */}
-        <div className='hidden md:flex space-x-4'>
+        <div
+          className='hidden lg:flex space-x-4 w-full'
+          // style={{ overflowY: "auto" }}
+        >
           {data?.images.map((img, index) => (
             <img
               key={index}
               src={img}
               alt={data?.model}
-              className='w-1/3 rounded-lg shadow-md'
+              className='w-full rounded-lg shadow-md'
             />
           ))}
         </div>
 
-        {/* Mobile View: Image Slider with Custom Navigation */}
-        <div className='relative md:hidden'>
+        {/* ipad View: Display images side by side */}
+        <div className='hidden md:flex lg:hidden space-x-4 w-full max-w-[30rem] mx-auto'>
           <Swiper
             modules={[Navigation, Pagination]}
             spaceBetween={10}
-            slidesPerView={1}
+            slidesPerView={1.06}
+            pagination={{ clickable: true }}
+          >
+            {data?.images.map((img, index) => (
+              <SwiperSlide key={index}>
+                <img
+                  src={img}
+                  alt={data?.model}
+                  className='w-full h-[190px] rounded-lg shadow-md'
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
+        {/* Mobile View: Image Slider with Custom Navigation */}
+        <div className='relative md:hidden w-full max-w-[29rem] mx-auto'>
+          <Swiper
+            modules={[Navigation, Pagination]}
+            spaceBetween={10}
+            slidesPerView={1.05}
             navigation={{
               prevEl: ".swiper-button-prev",
               nextEl: ".swiper-button-next",
@@ -129,31 +175,25 @@ function ProductDetails() {
                 <img
                   src={img}
                   alt={data?.model}
-                  className='w-full rounded-lg shadow-md'
+                  className='rounded-lg shadow-md'
                 />
               </SwiperSlide>
             ))}
           </Swiper>
 
           {/* Custom Navigation Arrows */}
-          {/* <button className='swiper-button-prev absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full'>
-            <FaArrowLeft size={10} />
-          </button>
-          <button className='swiper-button-next absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full'>
-            <FaArrowRight size={10} />
-          </button> */}
-          <button
+          {/* <button
             // ref={prevRef}
             className='swiper-button-prev absolute left-2 top-1/2 -translate-y-1/2 bg-gray-800/50 text-white p-2 rounded-full hover:bg-gray-700 transition text-sm'
           >
-            <FaChevronLeft className='w-5 h-5' />
+            <FaChevronLeft className='' size={10} />
           </button>
           <button
             // ref={nextRef}
             className='swiper-button-next absolute right-2 top-1/2 -translate-y-1/2 bg-gray-800/50 text-white p-2 rounded-full hover:bg-gray-700 transition text-sm'
           >
-            <FaChevronRight className='w-5 h-5' />
-          </button>
+            <FaChevronRight className='' size={10} />
+          </button> */}
         </div>
 
         {/* color and sizes */}
@@ -169,7 +209,7 @@ function ProductDetails() {
               </label>
               <select
                 id='color'
-                className='min-w-[150px] h-12 border-2 border-gray-300 rounded-lg px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200'
+                className='sm:min-w-[50px] min-w-[150px] h-12 border-2 border-gray-300 rounded-lg px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200'
                 value={selectedColor}
                 onChange={(e) => setSelectedColor(e.target.value)}
               >
@@ -196,7 +236,7 @@ function ProductDetails() {
               </label>
               <select
                 id='size'
-                className='min-w-[150px] h-12 border-2 border-gray-300 rounded-lg px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200'
+                className='sm:min-w-[50px] min-w-[150px] h-12 border-2 border-gray-300 rounded-lg px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200'
                 value={selectedSize}
                 onChange={(e) => setSelectedSize(e.target.value)}
               >
@@ -212,52 +252,6 @@ function ProductDetails() {
             </div>
           )}
         </div>
-
-        {/* <div className='flex gap-8'>
-          {data?.color && data.color.length > 0 && (
-            <div>
-              <label htmlFor='color'>Color</label>
-              <br />
-              <select
-                id='color'
-                className='min-w-[130px] h-12 border-2 border-gray-400 rounded'
-                value={selectedColor}
-                onChange={(e) => setSelectedColor(e.target.value)}
-              >
-                <option value='' disabled>
-                  Select a color
-                </option>
-                {data.color.map((col, index) => (
-                  <option key={index} value={col}>
-                    {col}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
-
-          {data?.size && data.size.length > 0 && (
-            <div>
-              <label htmlFor='size'>Size</label>
-              <br />
-              <select
-                id='size'
-                className='min-w-[130px] h-12 border-2 border-gray-400 rounded'
-                value={selectedSize}
-                onChange={(e) => setSelectedSize(e.target.value)}
-              >
-                <option value='' disabled>
-                  Select a size
-                </option>
-                {data.size.map((sz, index) => (
-                  <option key={index} value={sz}>
-                    {sz}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
-        </div> */}
 
         {/* Quantity and Order Actions */}
         <div className='md:w-md'>

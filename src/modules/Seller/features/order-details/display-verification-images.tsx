@@ -21,9 +21,9 @@ export interface IVerificationImagesProps
 export const DisplayVerificationImage = ({images}:IVerificationImagesProps)=>{
   
   return ( <>
-  <div className="flex flex-col md:flex-row gap-x-4 p-6 ">
+  <div className="flex flex-col md:flex-row gap-y-3 w-full gap-x-4 p-6 ">
     {images && images.map(({view,viewUrl})=><div key={view}>
-      <img src={viewUrl} alt={view}/>
+      <img src={viewUrl} alt={view} className="w-full"/>
       <p className="text-base md:text-lg">{capitalize((veiwMap[view as IVeiwMap]))}</p>
    </div>)}
   </div>

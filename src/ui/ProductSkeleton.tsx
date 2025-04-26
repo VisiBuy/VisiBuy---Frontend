@@ -54,6 +54,24 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
     dispatch(removeFromCart(product._id));
   };
 
+  if (type === "skeleton") {
+    return (
+      <div className='relative w-fit animate-pulse'>
+        <div className='bg-gray-800 rounded-lg overflow-hidden w-[251px] h-[242px]' />
+
+        <div className='absolute inset-0 bg-black bg-opacity-50 p-4 flex flex-col justify-end'>
+          <div className='flex items-center mb-2'>
+            <div className='w-8 h-8 rounded-full bg-gray-600 mr-2' />
+            <div className='w-24 h-4 bg-gray-600 rounded' />
+          </div>
+
+          <div className='w-3/4 h-5 bg-gray-600 rounded mb-1' />
+          <div className='w-1/2 h-4 bg-gray-500 rounded' />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className='relative w-fit'>
       {/* Link to Product Details */}

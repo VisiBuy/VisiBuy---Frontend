@@ -76,7 +76,7 @@ export function SellerOrderScreen() {
       {match ? (
         <div>
           <MainLayout title='Order Management'>
-            <div className='grid grid-cols-5 gap-x-4'>
+            <div className='grid grid-cols-2 gap-5 lg:grid-cols-5 lg:gap-x-4'>
               <OrderSummaryCard figure={data?.data.total_orders} />
               <OrderSummaryCard
                 title='Pending'
@@ -116,15 +116,16 @@ export function SellerOrderScreen() {
       ) : (
         <MainLayout
           title={
-            <div className='flex gap-x-4 items-center'>
+            <div className='flex gap-x-4 items-center text-xl lg:text-2xl'>
               <Link to='' className='bg-light-gray px-4 py-2 '>
                 {" "}
-                <Icon name='move-left' width={20} />
+                <Icon name='move-left'  className="w-5 lg:w-10" />
               </Link>
 
               {`Order details (#${orderId})`}
             </div>
           }
+          className="px-5 py-10"
         >
           <Outlet />
         </MainLayout>

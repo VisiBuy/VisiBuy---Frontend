@@ -1,3 +1,4 @@
+import logo from "/visibuy-beta.svg";
 import { SideBar } from "@/common/components/side-bar";
 import { Header } from "./header";
 import { Link, Outlet, useNavigate, useSearchParams } from "react-router-dom";
@@ -8,7 +9,7 @@ import { NavItemProps } from "@/types/navItem";
 import { UserProfileCard } from "@/common/components/user-profile-card";
 import { Notification } from "@/common/components/notification";
 import { SearchBar } from "@/common/components/search-bar";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { createQueryString } from "@/lib/utils";
 import { useGetMeQuery } from "@/modules/Auth/queries/queries";
 import { useAppDispatch, useAppSelector } from "@/hooks/app-hooks";
@@ -22,6 +23,10 @@ import {
 import { Toaster } from "@/ui/Toaster";
 import { dashboardConfig } from "@/lib/config";
 import { AddProductModal } from "@/modules/Seller/features/product/components/modals/add-product-modal";
+import { FaHamburger } from "react-icons/fa";
+import { FaBars } from "react-icons/fa6";
+import { SellerMobileSideBar } from "./seller-mobile-sidebar";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const navlinks: NavItemProps[] = [
   { name: "Products", href: "products", iconName: "briefcase" },
@@ -30,7 +35,7 @@ const navlinks: NavItemProps[] = [
     href: "orders",
     iconName: "file-spreadsheet",
   },
-  { name: "Customers", href: "customers", iconName: "user-round" },
+  // { name: "Customers", href: "customers", iconName: "user-round" },
 ];
 export function SellerDashboardLayout() {
   const auth = useAppSelector((state: RootState) => state.auth);
@@ -38,7 +43,8 @@ export function SellerDashboardLayout() {
   const navigate = useNavigate();
   const { isLoading, isError, data } = useGetMeQuery(auth.role as Role);
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const isLargeScreen = useMediaQuery(1024);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   useEffect(() => {
     console.log(data);
     dispatch(
@@ -70,7 +76,8 @@ export function SellerDashboardLayout() {
   };
   return (
     <section className="flex min-h-screen relative">
-      <div className=" w-[20%] ">
+      {/* Hidden on Mobile */}
+      <div className="hidden lg:block  lg:w-[30%]  xl:w-[20%]">
         <SideBar>
           <div className="w-full px-12 mt-40">
             <Button
@@ -83,7 +90,12 @@ export function SellerDashboardLayout() {
           </div>
           <div className="flex flex-col items-end text-left pt-12 w-full ">
             {navlinks.map(({ name, href, iconName }) => (
-              <NavItem key={name} name={name} href={href} iconName={iconName} />
+              <NavItem
+                key={name}
+                name={name}
+                href={`/dashboard/seller/${href}`}
+                iconName={iconName}
+              />
             ))}
           </div>
           <div className="w-full px-12 my-48">
@@ -114,15 +126,35 @@ export function SellerDashboardLayout() {
           </div>
         </SideBar>
       </div>
-      <div className="w-[80%]">
+      <div className="w-full lg:w-[70%] xl:w-[80%]">
         <Header>
-          <div className="flex justify-between">
-            <SearchBar />
-            <div className="flex gap-4">
-              <Notification />
-              <UserProfileCard fullName={data?.fullName} />
+          {isLargeScreen && (
+            <div className="flex justify-between">
+              <SearchBar />
+              <div className="flex gap-4">
+                <Notification />
+                <UserProfileCard fullName={data?.fullName} />
+              </div>
             </div>
-          </div>
+          )}
+          {!isLargeScreen && (
+            <>
+              <div className="flex justify-between items-center">
+                <div className="flex gap-x-8 my-6">
+                  <FaBars
+                    className="text-4xl text-black font-normal cursor-pointer "
+                    onClick={() => setIsMobileOpen(true)}
+                  />
+                  <img src={logo} alt="visibuy logo" width={120} />
+                </div>
+                <div className="flex  gap-4">
+                  <Notification />
+                  <UserProfileCard fullName={data?.fullName} />
+                </div>
+              </div>
+              <SearchBar />
+            </>
+          )}
         </Header>
         <main className="m-8 main content">
           <Outlet />
@@ -130,6 +162,10 @@ export function SellerDashboardLayout() {
           <AddProductModal />
         </main>
       </div>
+      <SellerMobileSideBar
+        isOpen={isMobileOpen}
+        onClose={() => setIsMobileOpen(false)}
+      />
     </section>
   );
 }

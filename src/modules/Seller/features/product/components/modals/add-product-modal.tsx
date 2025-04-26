@@ -28,10 +28,11 @@ export function AddProductModal() {
   const [formData, setFormData] = useState<any>();
   const [isPreviewModal, setIsPreviewModal] = useState(false);
   const [isLoadingModal, setIsLoadingModal] = useState(false);
-  const isOpen = searchParams.get("modal") === "add-product" && !isPreviewModal;
   const submitButtonRef = useRef<HTMLButtonElement>(null);
   const { toast } = useToast();
   const createProductMutation = useCreateSellerProduct();
+ 
+  const isOpen = searchParams.get("modal") === "add-product" && !isPreviewModal;
   function handleModalOpen() {
     setFormData(undefined);
     setIsPreviewModal(false)
@@ -95,12 +96,14 @@ export function AddProductModal() {
       <PreviewProductLoader open={isLoadingModal} setOpen={() => {}}>
         <Spinner></Spinner>
       </PreviewProductLoader>
+      {/* Product Preview  */}
       <ModalWrapperDialog
         title="Preview"
         open={isPreviewModal}
+        onOpenChange={setIsPreviewModal}
         className="md:max-w-[800px]"
         footer={
-          <div className=" flex gap-x-5 pr-4 py-2">
+          <div className=" flex justify-between gap-x-5 pr-4 py-2">
             <Button
               className="tex-sm lg:tex-xl px-12 bg-transparent border-black text-black font-Montserrat hover:text-black"
               onClick={() => setIsPreviewModal(false)}
@@ -122,13 +125,14 @@ export function AddProductModal() {
       >
         {formData && <ProductPreview productFormData={formData} />}
       </ModalWrapperDialog>
+      {/* Add new product form */}
       <ModalWrapperDialog
         open={isOpen}
         onOpenChange={handleModalOpen}
         title=" Product Listing Form"
         className="md:max-w-[800px]"
         footer={
-          <div className=" flex gap-x-5 pr-4 py-2">
+          <div className=" flex justify-between gap-x-5 pr-4 py-2">
             <Button
               className="tex-sm lg:tex-xl px-12 bg-transparent border-black text-black font-Montserrat hover:text-black"
               onClick={handleModalOpen}

@@ -1,14 +1,18 @@
 import Icon from "../../ui/Icon";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useGetSellerGetNotification } from "../../modules/Seller/queries/notification/queries";
 import { NotificationModal } from "./notification-modal";
 import { TSellerNotification } from "../../modules/Seller/models/notification";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { set } from "date-fns";
 
 export function Notification() {
   const [isOpen, setIsOpen] = useState(false);
+  const path = useLocation();
+  const navigate = useNavigate();
   const [notifications, setNotifications] = useState<TSellerNotification[]>([]);
   const { data, isPending } = useGetSellerGetNotification();
-
+  const [searchParams] = useSearchParams();
   // Only update notifications when data changes
   useEffect(() => {
     if (data?.notifications) {
@@ -19,14 +23,17 @@ export function Notification() {
   const unreadCount = notifications.filter(
     (notification) => !notification.is_read
   ).length;
-
-  const toggleModal = () => setIsOpen((prev) => !prev);
+  const isOpenNotification = searchParams.get("modal") === "notification";
+  const toggleModal = () => {
+    setIsOpen(false);
+    navigate(path.pathname);
+  };
 
   return (
     <div className="relative">
       <button
-        className="h-16 w-16 bg-blue-200 rounded-full flex items-center justify-center cursor-pointer"
-        onClick={toggleModal}
+        className="h-16 w-16 bg-blue-200 rounded-full  items-center justify-center cursor-pointer hidden lg:flex"
+        onClick={() => setIsOpen(true)}
         aria-label={`Notifications ${unreadCount > 0 ? `(${unreadCount} unread)` : ""}`}
       >
         <Icon name="bell" className="text-blue" size={25} />
@@ -38,8 +45,8 @@ export function Notification() {
       </button>
 
       <NotificationModal
-        open={isOpen}
-        setOpen={setIsOpen}
+        open={isOpen || isOpenNotification}
+        setOpen={toggleModal}
         notifications={notifications}
       />
     </div>

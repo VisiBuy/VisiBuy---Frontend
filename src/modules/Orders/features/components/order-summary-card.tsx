@@ -19,7 +19,7 @@ export function OrderSummaryCard({
         <span className={`h-10 w-10 rounded-full ${legendColor}`}></span>
       </div>
       <div className='flex justify-between mt-8 items-end'>
-        <h3 className='font-OpenSans font-semibold text-4xl'>{figure}</h3>
+        <h3 className='font-OpenSans font-semibold text-xl lg:text-4xl'>{figure}</h3>
         <span className={`flex items-end text-primary gap-x-2`}>
           <Icon name='trending-up' size={15} />
           {trendPercentage}%
