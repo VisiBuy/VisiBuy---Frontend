@@ -16,7 +16,9 @@ axiosWithAuth.interceptors.request.use(
   (config:InternalAxiosRequestConfig) => {
     const state = store.getState();
     const token = state.auth.token;
-
+    console.log(window.location)
+    // save last accessed path
+    localStorage.setItem('redirectPath', window.location.href + window.location.search);
     if (token) {
       config.headers['auth-token'] = `${token}`;
     }
@@ -35,7 +37,7 @@ axiosWithAuth.interceptors.response.use(
       
 
       try {
-        localStorage.setItem('redirectPath', window.location.pathname + window.location.search);
+        
         
         // If no refresh token or refresh fails, handle logout
         handleLogout();

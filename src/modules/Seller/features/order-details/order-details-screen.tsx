@@ -194,10 +194,13 @@ export function SellerOrderDetailsScreen() {
       {/* Product verification section */}
       <div className="border border-light-gray rounded-lg mt-12">
         <div className="flex justify-between border-b border-light-gray p-6 items-center">
-          <div className="flex gap-x-4 items-center">
-            <h3 className="text-2xl font-medium">
+          <div className="flex gap-x-8 lg:gap-x-4 justify-between items-center lg:justify-evenly flex-wrap">
+            <h3 className="text-lg lg:text-2xl font-medium">
               Product visual verification
             </h3>
+            <span className="lg:hidden text-[#007AFF] bg-[#007AFF] bg-opacity-15 px-6 py-2 text-xl font-OpenSans">
+            Unverified
+          </span>
             <ModalWrapperDialog
               trigger={
                 <div
@@ -339,7 +342,7 @@ export function SellerOrderDetailsScreen() {
             </ModalWrapperDialog>
           </div>
 
-          <span className="text-[#007AFF] bg-[#007AFF] bg-opacity-15 px-6 py-2 text-xl font-OpenSans">
+          <span className="hidden lg:block text-[#007AFF] bg-[#007AFF] bg-opacity-15 px-6 py-2 text-xl font-OpenSans">
             Unverified
           </span>
         </div>
@@ -374,7 +377,7 @@ export function SellerOrderDetailsScreen() {
                 Verify
               </Button>
             </div>
-
+               {/*  verificatin upload*/}
             {sellerUploadMutation.isPending && <OverlaySpinner open={true} />}
           </div>
         )}

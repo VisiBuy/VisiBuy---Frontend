@@ -21,7 +21,7 @@ export function SupportCard({
         <img src={icon} alt={title} />
       </span>
       <div className='flex-1 ml-4'>
-        <h3 className='text-foreground text-2xl text-left font-Montserrat font-medium '>
+        <h3 className='text-foreground md:text-xl lg:text-2xl text-left font-Montserrat font-medium '>
           {title}
         </h3>
       </div>

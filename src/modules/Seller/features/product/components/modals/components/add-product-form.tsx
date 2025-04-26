@@ -25,6 +25,7 @@ import ImagePickerFactory from "@/common/components/image-picker-factory";
 import { useCreateSellerProduct } from "@/modules/Seller/mutations/product/useCreateSellerProduct";
 import { useToast } from "@/ui/use-toast";
 import { SUCCESS_RESPONSE_CREATE_RECORD } from "@/lib/systemConfig";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const colors: ISearchableData[] = [
   { value: "red", label: "Red" },
@@ -52,6 +53,7 @@ export function AddProductForm({
 }: Readonly<AddProductFormProps>) {
   const Id = useId();
   const { toast } = useToast();
+  const isLargeScreen = useMediaQuery(1024);
   const triggerRef = useRef<HTMLDivElement>(null);
   const [imagesMap, setImagesMap] = useState(new Map());
   const [imageFiles, setImageFiles] = useState<any>();
@@ -157,7 +159,7 @@ export function AddProductForm({
             form.handleSubmit(onSubmit)(e);
           }}
         >
-          <div className="flex gap-x-10 mb-8">
+          <div className="lg:flex gap-x-10 mb-8">
             <div className="flex-1">
               <h3
                 className="text-2xl mb-4 font-medium "
@@ -167,30 +169,32 @@ export function AddProductForm({
               </h3>
 
               <PreviewImagesCard images={[...buildPreviewImages(imagesMap)]} />
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="flex justify-start text-xl mt-4 font-Montserrat">
-                      Description
-                      <span className="text-destructive ml-1 ">*</span>
-                    </FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Describe the item you're selling and provide complete and accurate details."
-                        {...field}
-                        className=" text-2xl rounded-xl h-48 resize-none"
-                        maxLength={500}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              {isLargeScreen && (
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="flex justify-start text-xl mt-4 font-Montserrat">
+                        Description
+                        <span className="text-destructive ml-1 ">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Describe the item you're selling and provide complete and accurate details."
+                          {...field}
+                          className=" text-2xl rounded-xl h-48 resize-none"
+                          maxLength={500}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
             </div>
             <div className="flex-1">
-              <div className="flex justify-between font-Montserrat">
+              <div className="flex justify-between font-Montserrat mt-4 lg:mt-0">
                 <h3 className="font-medium text-xl">Images</h3>
                 <ModalWrapperDialog
                   trigger={
@@ -335,14 +339,14 @@ export function AddProductForm({
                   </div>
                 </ModalWrapperDialog>
               </div>
-              <div className="grid grid-cols-4 gap-x-8  gap-y-2 mt-4">
+              <div className="grid grid-cols-3  md:grid-cols-4  gap-x-8  gap-y-4 mt-4">
                 {[...Array(8)].map((_, index) => (
                   <ImagePickerFactory
                     key={`${index}-${Id}`}
                     type="file"
                     onChange={handleFileUpload}
                     onRemoveImage={handleImageRemove}
-                    className="w-36 h-36"
+                    className="w-36 h-36 md:w-56 lg:w-36"
                     imageLink={formData?.images[index]?.imageLink ?? ""}
                     imageLinkId={formData?.images[index]?.id ?? ""}
                   />
@@ -489,6 +493,29 @@ export function AddProductForm({
                     </FormItem>
                   )}
                 />
+                {!isLargeScreen && (
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="flex justify-start text-xl mt-4 font-Montserrat">
+                          Description
+                          <span className="text-destructive ml-1 ">*</span>
+                        </FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Describe the item you're selling and provide complete and accurate details."
+                            {...field}
+                            className=" text-2xl rounded-xl h-48 resize-none"
+                            maxLength={500}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
               </div>
             </div>
           </div>

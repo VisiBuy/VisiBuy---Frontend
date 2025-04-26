@@ -11,7 +11,7 @@ interface CartSummaryItemProps {
     images: string[];
     model: string;
     color?: string;
-    sizes?: string;
+    size?: string;
     quantity: number;
     price: number;
   };
@@ -63,7 +63,7 @@ const CartSummaryItem: React.FC<CartSummaryItemProps> = ({ item }) => {
       </div>
       <div className='flex-1 pr-12'>
         <h2 style={{ overflow: "hidden" }}>{item.color}</h2>
-        <div>size: {item.sizes}</div>
+        <div>size: {item.size}</div>
       </div>
       <div className='flex flex-col items-end'>
         <p className='font-semibold'>#{item.price * item.quantity}</p>

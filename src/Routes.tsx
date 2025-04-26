@@ -18,9 +18,7 @@ import { SellerOrderPage } from "./pages/Seller/Order";
 import { SellerOrderDetailsPage } from "./pages/Seller/OrderDetails";
 import { PrivateRoute } from "./common/components/private-route";
 import { HelpSupportPage } from "./pages/Seller/help-support/help-support";
-import path from "path";
-import { PlacingOrderPage } from "./pages/Seller/help-support/placing-order";
-import { OrderPaymentPage } from "./pages/Seller/help-support/order-payment";
+
 import BuyerDashboardLayout from "./layouts/buyer/BuyerDashboardLayout";
 import BuyerDashboardPage from "./pages/Buyer/Dashboard";
 import BuyerProductsPage from "./pages/Buyer/Products";
@@ -35,7 +33,16 @@ import Checkout from "./modules/Buyer/features/checkout/Checkout";
 import BuyerNotificationsDetailsPage from "./pages/Buyer/NotificationsDetails";
 import FileDispute from "./pages/Buyer/FileDispute";
 import { PaymentFaqPage } from "./pages/Seller/help-support/payment-faq";
- 
+import { VoucherFaqPage } from "./pages/Seller/help-support/vouchers-faq";
+import { DeliveryFaqPage } from "./pages/Seller/help-support/delivery-faq";
+import { SellOnVisibuyFaqPage } from "./pages/Seller/help-support/sell-visibuy-faq";
+import { ProductFaqPage } from "./pages/Seller/help-support/products-faq";
+import { SellerGetStartedPage } from "./pages/Seller/help-support/get-started";
+import { GetpayedPage } from "./pages/Seller/help-support/getpayed";
+import { GetVerifiedPage } from "./pages/Seller/help-support/verification";
+import { CancelOrderPage } from "./pages/Seller/help-support/cancel-order";
+import { OrderManagementPage } from "./pages/Seller/help-support/order-management";
+
 const router = createHashRouter([
   {
     element: <AppLayout />,
@@ -103,13 +110,21 @@ const router = createHashRouter([
         path: "call-support",
         element: <HelpSupportPage />,
         children: [
-          { path: "placing-order", element: <PlacingOrderPage /> },
-          { path: "order-payment", element: <OrderPaymentPage /> },
+          { path: "get-started", element: <SellerGetStartedPage /> },
+          { path: "how-to-get-payed", element: <GetpayedPage /> },
+          { path: "get-verified", element: <GetVerifiedPage /> },
+          { path: "cancel-order", element: <CancelOrderPage /> },
+          { path: "order-management", element: <OrderManagementPage /> },
           {
             path: "faq",
-            children: [{ path: "payment", element: <PaymentFaqPage /> }],
+            children: [
+              { path: "payment", element: <PaymentFaqPage /> },
+              { path: "vouchers", element: <VoucherFaqPage /> },
+              { path: "delivery", element: <DeliveryFaqPage /> },
+              { path: "sell-on-visibuy", element: <SellOnVisibuyFaqPage /> },
+              { path: "product", element: <ProductFaqPage /> },
+            ],
           },
-
         ],
       },
     ],
@@ -124,8 +139,7 @@ const router = createHashRouter([
       // <BuyerDashboardLayout />
     ),
     children: [
-      
-      { index:true, element: <BuyerProductsPage /> },
+      { index: true, element: <BuyerProductsPage /> },
       { path: "analytics", element: <BuyerDashboardPage /> },
 
       {
@@ -137,7 +151,6 @@ const router = createHashRouter([
       },
 
       { path: "product/:id", element: <BuyerProductDetails /> },
-      
 
       { path: "carts", element: <BuyerCartPage /> },
       { path: "carts/summary/:id", element: <BuyerCartSummaryPage /> },

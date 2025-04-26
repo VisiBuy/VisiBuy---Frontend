@@ -28,8 +28,8 @@ export const columns: ColumnDef<ISellerOrder>[] = [
         <div className="flex justify-center">
           {" "}
           <img
-            className="aspect-square border border-light-gray rounded-md mr-3"
-            width={20}
+            className="aspect-square border border-light-gray rounded-md mr-3 w-30"
+            alt={row.getValue("productName")}
             src={row.getValue("img_url")}
           />
           {row.getValue("productName")}

@@ -25,9 +25,7 @@ function App() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <QueryClientProvider client={queryClient}>
-          <NotificationsProvider>
-            <RouterProvider router={router} />
-          </NotificationsProvider>
+          <RouterProvider router={router} />
         </QueryClientProvider>
       </PersistGate>
     </Provider>

@@ -13,16 +13,18 @@ export const FaqItem = ({ question, answer }: FaqProps) => {
         className="flex justify-between items-start  w-full text-left"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="text-foreground text-2xl text-left font-Montserrat font-medium ">{question}</span>
+        <span className="text-foreground text-2xl text-left font-Montserrat font-medium ">
+          {question}
+        </span>
         <motion.span
           animate={{ rotate: isOpen ? -90 : 0 }}
           transition={{ duration: 0.3 }}
           className="ml-6 flex-shrink-0"
         >
-         <Icon name="chevron-right" className="text-blue" />
+          <Icon name="chevron-right" className="text-blue" />
         </motion.span>
       </button>
-      <AnimatePresence> 
+      <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
@@ -31,7 +33,10 @@ export const FaqItem = ({ question, answer }: FaqProps) => {
             transition={{ duration: 0.3 }}
             className="mt-2 pr-12 overflow-hidden"
           >
-            <p className="text-gray-500 text-xl font-Montserrat">{answer}</p>
+            <p
+              dangerouslySetInnerHTML={{ __html: answer }}
+              className="text-gray-500 text-xl font-Montserrat"
+            ></p>
           </motion.div>
         )}
       </AnimatePresence>
