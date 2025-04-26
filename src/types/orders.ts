@@ -1,17 +1,17 @@
 import { TOrderStatus } from "@/types/status";
 
 export interface Order {
-  orderId: string; 
+  orderId: string;
   orderNo: string;
   invoiceID: string;
   created_at: string;
   order_status: TOrderStatus;
   buyer: {
-    buyerId: string; 
+    buyerId: string;
     fullName: string;
   };
   seller: {
-    sellerId: string; 
+    sellerId: string;
     fullName: string;
     time?: string;
   };
@@ -26,4 +26,5 @@ export interface Order {
   };
   size: string;
   color: string;
+  verificationStatus: "awaiting" | "accepted" | "cancelled";
 }

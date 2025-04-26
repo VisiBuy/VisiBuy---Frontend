@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import { HiArrowLeft } from "react-icons/hi";
-// import ViewAll from "../../modules/Buyer/features/track-order/components/ViewAll";
 import VerifyButton from "../../modules/Buyer/features/track-order/components/VerifyButton";
 import VisualVerificationModal from "../../modules/Buyer/features/track-order/components/VisualVerificationModal";
 import FeedbackModal from "../../modules/Buyer/features/track-order/components/FeedbackModal";
@@ -34,16 +33,15 @@ const BuyerOrderDetailsPage = () => {
     const foundOrder = orders.find((order: any) => order._id === orderId);
     return foundOrder ? normalizeOrder(foundOrder) : null;
   }, [orders, orderId, loading]);
-  
 
-  // const colors = orderDetails?.color || [];
-  // const sizes = orderDetails?.size || [];
-
-  const [verificationStatus, setVerificationStatus] = useState<
-    "awaiting" | "verified" | "cancelled"
-  >("awaiting");
+  // Set the initial verification status based on the order's verification state
+ const [verificationStatus, setVerificationStatus] = useState<
+   "awaiting" | "verified" | "cancelled"
+ >("awaiting");
   const [isVerifying, setIsVerifying] = useState(false);
-  const [isButtonVerified, setIsButtonVerified] = useState(false);
+  const [isButtonVerified, setIsButtonVerified] = useState(
+    verificationStatus === "verified"
+  );
   const [showVerificationModal, setShowVerificationModal] = useState(false);
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
 
@@ -53,7 +51,6 @@ const BuyerOrderDetailsPage = () => {
     return deliveryDate.toLocaleDateString();
   };
 
-  // 🛠 Fix: Show verification modal first before verifying
   const handleVerifyClick = () => {
     if (!orderId) {
       console.error("🚨 Order ID is missing!");
@@ -67,7 +64,7 @@ const BuyerOrderDetailsPage = () => {
       <div className="flex items-center justify-between mb-6 rounded-md max-w-6xl">
         <div className="flex items-center gap-3">
           <HiArrowLeft
-            className="w-7 h-7  cursor-pointer"
+            className="w-7 h-7 cursor-pointer"
             onClick={() => navigate(-1)}
           />
           <h1 className="text-xl md:text-2xl font-bold">
@@ -85,14 +82,14 @@ const BuyerOrderDetailsPage = () => {
     }`}
         >
           {verificationStatus === "verified"
-            ? "Verified"
+            ? "Accepted"
             : verificationStatus === "cancelled"
               ? "Cancelled"
               : "Awaiting Verification"}
         </span>
       </div>
 
-      {loading && <p></p>}
+      {loading && <p>Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
 
       {!loading && orderDetails ? (
@@ -137,6 +134,7 @@ const BuyerOrderDetailsPage = () => {
                 isVerified={isButtonVerified}
                 isCancelled={verificationStatus === "cancelled"}
                 onClick={handleVerifyClick}
+                isButtonVerified={isButtonVerified}
               />
             </div>
 

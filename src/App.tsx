@@ -1,10 +1,10 @@
-import { createHashRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "react-redux";
 import { persistor, store } from "@/store/store";
 import router from "./Routes";
 import { PersistGate } from "redux-persist/integration/react";
-import { NotificationsProvider } from "@/context/notifications/NotificationsContext";
+
 
 
 // Using createHashRouter with Hash-based routing is better for GitHub Pages because:

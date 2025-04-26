@@ -8,6 +8,7 @@ import SearchOrder from "@/modules/Buyer/features/track-order/components/SearchO
 import OrderCard from "@/modules/Buyer/features/track-order/components/OrderCard";
 import useOrderActions from "@/modules/Buyer/hooks/useOrderActions";
 import useOrderFilter from "@/modules/Buyer/hooks/useOrderFilter";
+import LoadingSpinner from "@/ui/LoadingSpinner";
 
 const BuyerTrackOrderPage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,7 +20,6 @@ const BuyerTrackOrderPage = () => {
   const { statusFilter, searchQuery, handleStatusChange, handleSearch } =
     useOrderActions();
   const filteredOrders = useOrderFilter(orders, statusFilter, searchQuery);
-  
 
   // Fetch orders when page changes
   useEffect(() => {
@@ -50,7 +50,9 @@ const BuyerTrackOrderPage = () => {
           <div className="flex gap-24">
             <div className="flex-1 flex flex-col gap-4">
               {loading ? (
-                <p> </p>
+                <div className="flex justify-center items-center min-h-[300px]">
+                  <LoadingSpinner isLoading={true} size="large" />{" "}
+                </div>
               ) : error ? (
                 <p className="text-red-500">{error}</p>
               ) : filteredOrders.length > 0 ? (

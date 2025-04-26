@@ -16,6 +16,24 @@ export async function fetchOrderHistory(page = 1) {
 }
 
 /**
+ * Update Order Status
+ * POST /update/status
+ */
+export async function updateOrderStatus(orderId: string, status: "accepted" | "dispatched" | "delivered" | "cancelled") {
+  try {
+    const response = await axiosWithAuth.post("/update/status", {
+      order_id: orderId,
+      status,
+    });
+    console.log("✅ Update Order Status Response:", response.data);
+    return response.data;
+  } catch (error: any) {
+    console.error("❌ Error updating order status:", error.response?.data || error);
+    throw new Error(error.response?.data?.message || "Failed to update order status");
+  }
+}
+
+/**
  * Get Order Status
  * GET /order/:order_id/status
  */

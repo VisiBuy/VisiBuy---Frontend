@@ -16,7 +16,6 @@ axiosWithAuth.interceptors.request.use(
   (config:InternalAxiosRequestConfig) => {
     const state = store.getState();
     const token = state.auth.token;
-    console.log(window.location)
     // save last accessed path
     localStorage.setItem('redirectPath', window.location.href + window.location.search);
     if (token) {
