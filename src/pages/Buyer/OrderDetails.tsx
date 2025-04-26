@@ -40,7 +40,7 @@ const BuyerOrderDetailsPage = () => {
   // const sizes = orderDetails?.size || [];
 
   const [verificationStatus, setVerificationStatus] = useState<
-    "awaiting" | "verified"
+    "awaiting" | "verified" | "cancelled"
   >("awaiting");
   const [isVerifying, setIsVerifying] = useState(false);
   const [isButtonVerified, setIsButtonVerified] = useState(false);
@@ -76,11 +76,19 @@ const BuyerOrderDetailsPage = () => {
         </div>
         <span
           className={`px-2 py-1 rounded-md text-sm font-semibold font-Montserrat
-          ${verificationStatus === "verified" ? "bg-blue-100 text-blue-700" : "bg-blue text-white"}`}
+    ${
+      verificationStatus === "verified"
+        ? "bg-blue-100 text-blue-700"
+        : verificationStatus === "cancelled"
+          ? "bg-red-100 text-red-700"
+          : "bg-blue text-white"
+    }`}
         >
           {verificationStatus === "verified"
             ? "Verified"
-            : "Awaiting Verification"}
+            : verificationStatus === "cancelled"
+              ? "Cancelled"
+              : "Awaiting Verification"}
         </span>
       </div>
 
@@ -127,6 +135,7 @@ const BuyerOrderDetailsPage = () => {
               <VerifyButton
                 isVerifying={isVerifying}
                 isVerified={isButtonVerified}
+                isCancelled={verificationStatus === "cancelled"}
                 onClick={handleVerifyClick}
               />
             </div>
@@ -209,7 +218,10 @@ const BuyerOrderDetailsPage = () => {
             setIsVerifying(false);
           }
         }}
-        onNo={() => setShowVerificationModal(false)}
+        onNo={() => {
+          setVerificationStatus("cancelled");
+          setShowVerificationModal(false);
+        }}
       />
 
       {showFeedbackModal && (
