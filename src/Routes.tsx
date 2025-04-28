@@ -107,7 +107,7 @@ const router = createHashRouter([
         ],
       },
       {
-        path: "call-support",
+        path: "call-support", 
         element: <HelpSupportPage />,
         children: [
           { path: "get-started", element: <SellerGetStartedPage /> },

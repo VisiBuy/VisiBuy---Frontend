@@ -19,7 +19,7 @@ export interface ProductDto {
   color: Array<string>;
   brand: string;
   model: string;
-  size: Array<number>;
+  size: Array<string>;
   price: number;
   description: string;
   stock_status: "in_stock" | "out_stock";
@@ -55,7 +55,7 @@ export const ImageMetadataSchema = z.object({
   url: z.string().url().optional(),
 });
 
-export const AddProductSchema: ZodType<Omit<ProductDto, "id">> = z.object({
+export const AddProductSchema = z.object({
   color: z
     .array(
       z
@@ -88,19 +88,25 @@ export const AddProductSchema: ZodType<Omit<ProductDto, "id">> = z.object({
 
   size: z
     .array(
-      z.coerce
-        .number({
+      z
+        .string({
           required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Size"),
           invalid_type_error: VALIDATION_INVALID_FIELD.replace(
             "{{FIELD}}",
             "Size"
           ),
         })
-        .positive("Size must be positive")
-
-        .max(100, "Size is too high")
+        .refine((val) => !isNaN(Number(val)), {
+          message: VALIDATION_INVALID_FIELD.replace("{{FIELD}}", "Size"),
+        })
+        .refine((val) => Number(val) > 0, {
+          message: "Size must be positive",
+        })
+        .refine((val) => Number(val) <= 100, {
+          message: "Size is too high",
+        })
     )
-    .min(1, "Array must contain at least one sneaker size"),
+    .min(1, "Size must contain at least one sneaker size"),
 
   price: z.coerce
     .number({

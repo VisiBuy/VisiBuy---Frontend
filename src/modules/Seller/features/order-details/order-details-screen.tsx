@@ -30,7 +30,9 @@ export function SellerOrderDetailsScreen() {
   const [errorMessage, setErrorMessage] = useState("");
   const { toast } = useToast();
   const { orderId } = useParams();
-  const { data, isFetching } = useGetASellerOrderQuery(orderId ?? "");
+  const { data, isLoading: orderDetailsLoading } = useGetASellerOrderQuery(
+    orderId ?? ""
+  );
   const {
     data: sellerImageVerification,
     isLoading: isLoadingVerificationImage,
@@ -110,7 +112,7 @@ export function SellerOrderDetailsScreen() {
     }
   };
 
-  if (isFetching || isLoadingVerificationImage) {
+  if (orderDetailsLoading || isLoadingVerificationImage) {
     return (
       <div className="relative flex items-center justify-center h-full">
         <OverlaySpinner open={true} />
@@ -199,8 +201,8 @@ export function SellerOrderDetailsScreen() {
               Product visual verification
             </h3>
             <span className="lg:hidden text-[#007AFF] bg-[#007AFF] bg-opacity-15 px-6 py-2 text-xl font-OpenSans">
-            Unverified
-          </span>
+              Unverified
+            </span>
             <ModalWrapperDialog
               trigger={
                 <div
@@ -357,13 +359,22 @@ export function SellerOrderDetailsScreen() {
           />
         ) : (
           <div className="flex flex-col p-6 gap-y-12 relative">
-            <div className="flex flex-col md:flex-row gap-4 items-start">
-              {[...Array(REQUIRED_IMAGE_COUNT)].map((_, index) => (
-                <ImagePickerFactory
-                  key={index}
-                  type="camera"
-                  onChange={handleImageCapture}
-                />
+            <div className="grid grid-cols-2 lg:flex  gap-x-2 gap-y-4">
+              {[
+                "Side View",
+                "Sole View",
+                "Top View",
+                "Logo & Size Tag",
+                "Material / Stitching Close-up",
+              ].map((slot, index) => (
+                <div>
+                  <ImagePickerFactory
+                    type="camera"
+                    key={slot}
+                    onChange={handleImageCapture}
+                  />
+                  <p className="mt-4 text-lg lg:text-xl text-left lg:text-center text-gray-500 ">{slot}</p>
+                </div>
               ))}
             </div>
 
@@ -377,7 +388,7 @@ export function SellerOrderDetailsScreen() {
                 Verify
               </Button>
             </div>
-               {/*  verificatin upload*/}
+            {/*  verificatin upload*/}
             {sellerUploadMutation.isPending && <OverlaySpinner open={true} />}
           </div>
         )}

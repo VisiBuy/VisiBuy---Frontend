@@ -71,6 +71,7 @@ export function AddProductForm({
       color: formData?.color || [],
     },
   });
+
   const handleImageRemove = (id: string | undefined) => {
     if (id) {
       setImagesMap((prevMap) => {
@@ -110,6 +111,7 @@ export function AddProductForm({
     );
     setImagesMap(imagesMap);
   }, []);
+
   const onSubmit = async (data: z.infer<typeof AddProductSchema>) => {
     console.log("Form submitted:", data);
     setIsLoadingModal(true);
@@ -150,6 +152,26 @@ export function AddProductForm({
     },
     [imagesMap]
   );
+
+  const handleCustomSizeAdded = async (option:any) => {
+    // Validate that the custom option is a valid number
+    const sizeValue = Number(option.label);
+    if (isNaN(sizeValue) || sizeValue <= 0 || sizeValue > 100) {
+      // Handle invalid custom size
+      form.setError("size", {
+        type: "manual",
+        message: "Please enter a valid size between 1 and 100",
+      });
+
+      // Remove the invalid size from the form values
+      const currentSizes = form.getValues("size");
+      form.setValue(
+        "size",
+        currentSizes.filter((size) => size !== option.value),
+        { shouldValidate: true }
+      );
+    }
+  };
   return (
     <div>
       <Form {...form}>
@@ -441,6 +463,9 @@ export function AddProductForm({
                           name="color"
                           placeholder="Select one or more color"
                           multiselect={true}
+                          allowCustomOptions
+                          customOptionLabel="Add your custom color"
+                          searchPlaceholder="Type to search or enter your custom shoe color..."
                         />
                       </FormControl>
                       <FormMessage />
@@ -463,6 +488,10 @@ export function AddProductForm({
                           name="size"
                           placeholder="Select one or more sizes"
                           multiselect={true}
+                          allowCustomOptions
+                          customOptionLabel="Add your custom size"
+                          onCustomOptionAdded={handleCustomSizeAdded}
+                          searchPlaceholder="Type to search or enter your custom shoe size..."
                         />
                       </FormControl>
                       <FormMessage />

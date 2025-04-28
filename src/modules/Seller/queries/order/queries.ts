@@ -14,6 +14,8 @@ export function useGetASellerOrderQuery(id: string) {
   return useQuery({
     queryKey: getOrderQueryKey(id),
     queryFn: () => SellerOrderService.getOrderById(id),
+    refetchOnWindowFocus :false,
+    refetchOnMount:false
   });
 }
 export function useGetSellerOrdersQuery(
