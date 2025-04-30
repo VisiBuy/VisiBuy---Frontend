@@ -10,6 +10,8 @@ import { getOrderHistory } from "@/modules/Buyer/models/track-order/trackOrderSl
 import { verifyOrder } from "@/modules/Buyer/lib/track-order/api";
 import { Order } from "@/types/orders";
 import { normalizeOrder } from "@/modules/Buyer/lib/track-order/normalizeOrder";
+import { statusToClassName } from "@/modules/Buyer/lib/track-order/utils";
+import { TOrderStatus } from "@/types/status";
 
 const BuyerOrderDetailsPage = () => {
   const { orderId } = useParams<{ orderId: string }>();
@@ -24,9 +26,9 @@ const BuyerOrderDetailsPage = () => {
 
   useEffect(() => {
     if (!orders.length || !orders.find((order: any) => order._id === orderId)) {
-      dispatch(getOrderHistory({ page: pagination.currentPage }));
+      dispatch(getOrderHistory(pagination.currentPage));
     }
-  }, [dispatch, orders.length, orderId]);
+  }, [dispatch, orders.length, orderId, pagination.currentPage]);
 
   const orderDetails: Order | null = useMemo(() => {
     if (loading || !orders.length) return null;
@@ -34,16 +36,17 @@ const BuyerOrderDetailsPage = () => {
     return foundOrder ? normalizeOrder(foundOrder) : null;
   }, [orders, orderId, loading]);
 
-  // Set the initial verification status based on the order's verification state
- const [verificationStatus, setVerificationStatus] = useState<
-   "awaiting" | "verified" | "cancelled"
- >("awaiting");
   const [isVerifying, setIsVerifying] = useState(false);
-  const [isButtonVerified, setIsButtonVerified] = useState(
-    verificationStatus === "verified"
-  );
   const [showVerificationModal, setShowVerificationModal] = useState(false);
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+
+  const handleVerifyClick = () => {
+    if (!orderId) {
+      console.error("🚨 Order ID is missing!");
+      return;
+    }
+    setShowVerificationModal(true);
+  };
 
   const getDeliveryDate = () => {
     const deliveryDate = new Date();
@@ -51,13 +54,23 @@ const BuyerOrderDetailsPage = () => {
     return deliveryDate.toLocaleDateString();
   };
 
-  const handleVerifyClick = () => {
-    if (!orderId) {
-      console.error("🚨 Order ID is missing!");
-      return;
+  // ✅ Function to get dynamic verification status
+  const getVerificationStatus = () => {
+    if (!orderDetails) return "Loading...";
+    if (orderDetails.order_status === "pending") {
+      return "Awaiting Verification";
     }
-    setShowVerificationModal(true); // Open modal first
+    // You can add more mappings if necessary
+    switch (orderDetails.order_status) {
+      case "accepted":
+        return "Accepted";
+      case "cancelled":
+        return "Cancelled";
+      default:
+        return orderDetails.order_status; // fallback to showing the raw status if no mapping
+    }
   };
+
 
   return (
     <div className="relative p-4 md:p-4">
@@ -72,20 +85,20 @@ const BuyerOrderDetailsPage = () => {
           </h1>
         </div>
         <span
-          className={`px-2 py-1 rounded-md text-sm font-semibold font-Montserrat
+          className={`px-2 py-1 rounded-md text-sm font-semibold font-Montserrat 
     ${
-      verificationStatus === "verified"
-        ? "bg-blue-100 text-blue-700"
-        : verificationStatus === "cancelled"
-          ? "bg-red-100 text-red-700"
-          : "bg-blue text-white"
-    }`}
+      orderDetails?.order_status === "pending"
+        ? "bg-blue text-white"
+        : statusToClassName(orderDetails?.order_status as TOrderStatus)
+    }
+  `}
         >
-          {verificationStatus === "verified"
-            ? "Accepted"
-            : verificationStatus === "cancelled"
-              ? "Cancelled"
-              : "Awaiting Verification"}
+          {orderDetails?.order_status === "pending"
+            ? "Awaiting Verification"
+            : orderDetails?.order_status
+                ?.split("_")
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ")}
         </span>
       </div>
 
@@ -95,23 +108,25 @@ const BuyerOrderDetailsPage = () => {
       {!loading && orderDetails ? (
         <div className="lg:flex lg:justify-between gap-8">
           <div className="flex-1 bg-white p-4 space-y-4">
+            {/* Order Details */}
             <div className="p-4">
               <div className="grid grid-cols-2 text-xs md:text-xl font-medium font-OpenSans">
-                <div className="space-y-2  text-light-gray-600">
+                <div className="space-y-2 text-light-gray-600">
                   <p>Buyer</p>
                   <p>Seller</p>
                   <p>Date & Time of Purchase</p>
                   <p>Invoice ID</p>
                 </div>
                 <div className="space-y-2 text-right">
-                  <p>{orderDetails?.buyer?.fullName.toLocaleUpperCase()}</p>
-                  <p>{orderDetails?.seller?.fullName.toLocaleUpperCase()}</p>
-                  <p>{orderDetails?.created_at}</p>
+                  <p>{orderDetails?.buyer?.fullName.toUpperCase()}</p>
+                  <p>{orderDetails?.seller?.fullName.toUpperCase()}</p>
+                  <p>{orderDetails?.formattedDate}</p>
                   <p>{orderDetails?.invoiceID}</p>
                 </div>
               </div>
             </div>
 
+            {/* Product */}
             <div className="p-4">
               <div className="flex justify-between text-lg font-OpenSans text-black p-2 mt-10 border-t border-gray-300">
                 <p className="font-medium">
@@ -125,20 +140,22 @@ const BuyerOrderDetailsPage = () => {
               </div>
             </div>
 
+            {/* Verify Button */}
             <div className="p-4 flex items-center justify-between">
               <span className="text-light-gray-600 font-medium">
                 Verify your Order
               </span>
               <VerifyButton
                 isVerifying={isVerifying}
-                isVerified={isButtonVerified}
-                isCancelled={verificationStatus === "cancelled"}
+                isVerified={orderDetails?.order_status === "accepted"}
+                isCancelled={orderDetails?.order_status === "cancelled"}
                 onClick={handleVerifyClick}
-                isButtonVerified={isButtonVerified}
+                isButtonVerified={orderDetails?.order_status === "accepted"}
               />
             </div>
 
-            {verificationStatus === "verified" && (
+            {/* Delivery Date */}
+            {orderDetails.order_status === "accepted" && (
               <div className="p-4 space-y-2 border-t border-gray-300">
                 <div className="flex items-center justify-between text-sm text-gray-600">
                   <span className="font-semibold text-black">
@@ -149,6 +166,7 @@ const BuyerOrderDetailsPage = () => {
               </div>
             )}
 
+            {/* Customer Care */}
             <div className="p-4 space-y-2">
               <div className="flex items-center font-OpenSans font-medium justify-between text-sm">
                 <span>
@@ -161,9 +179,8 @@ const BuyerOrderDetailsPage = () => {
             </div>
           </div>
 
-          <div className="w-[250px]">
-            {/* <ViewAll onClick={() => alert("Clicked View all!")} /> */}
-          </div>
+          {/* Optional Side Content */}
+          <div className="w-[250px]"></div>
         </div>
       ) : (
         !loading && (
@@ -171,7 +188,7 @@ const BuyerOrderDetailsPage = () => {
             <p>Order details not found.</p>
             <button
               onClick={() =>
-                dispatch(getOrderHistory({ page: pagination.currentPage }))
+                dispatch(getOrderHistory(pagination.currentPage))
               }
               className="mt-2 text-blue-600 font-semibold hover:underline"
             >
@@ -206,8 +223,7 @@ const BuyerOrderDetailsPage = () => {
           setIsVerifying(true);
           try {
             await verifyOrder(safeOrderId, "accepted");
-            setVerificationStatus("verified");
-            setIsButtonVerified(true);
+            dispatch(getOrderHistory(pagination.currentPage));
             setShowFeedbackModal(true);
           } catch (err) {
             console.error(err);
@@ -217,7 +233,7 @@ const BuyerOrderDetailsPage = () => {
           }
         }}
         onNo={() => {
-          setVerificationStatus("cancelled");
+          dispatch(getOrderHistory(pagination.currentPage));
           setShowVerificationModal(false);
         }}
       />

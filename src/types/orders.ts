@@ -4,7 +4,8 @@ export interface Order {
   orderId: string;
   orderNo: string;
   invoiceID: string;
-  created_at: string;
+  created_at: Date;
+  formattedDate: string;
   order_status: TOrderStatus;
   buyer: {
     buyerId: string;
@@ -26,5 +27,5 @@ export interface Order {
   };
   size: string;
   color: string;
-  verificationStatus: "awaiting" | "accepted" | "cancelled";
+  verificationStatus: "pending" | "accepted" | "cancelled";
 }

@@ -38,7 +38,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
         {/* Row 3: Timestamp */}
         <div className="flex justify-end">
           <span className="text-xs font-OpenSans text-gray-400">
-            {order.created_at ?? "Unknown Date"}
+            {order.formattedDate ?? "Unknown Date"}
           </span>
         </div>
       </div>

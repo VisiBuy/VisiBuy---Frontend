@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { Outlet, useLocation } from "react-router-dom";
@@ -9,26 +9,65 @@ import OrderCard from "@/modules/Buyer/features/track-order/components/OrderCard
 import useOrderActions from "@/modules/Buyer/hooks/useOrderActions";
 import useOrderFilter from "@/modules/Buyer/hooks/useOrderFilter";
 import LoadingSpinner from "@/ui/LoadingSpinner";
+import { FilterStatus } from "@/modules/Buyer/features/track-order/components/OrderStatusButtons";
+
+const ORDERS_PER_PAGE = 10;
 
 const BuyerTrackOrderPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const location = useLocation();
-  const { orders, loading, error, pagination } = useSelector(
+  const { allOrders, loading, error } = useSelector(
     (state: RootState) => state.trackOrder
   );
 
   const { statusFilter, searchQuery, handleStatusChange, handleSearch } =
     useOrderActions();
-  const filteredOrders = useOrderFilter(orders, statusFilter, searchQuery);
 
-  // Fetch orders when page changes
+  const filteredOrders = useOrderFilter(allOrders, statusFilter, searchQuery);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Reset page to 1 when status or search changes
   useEffect(() => {
-    if (pagination?.currentPage !== undefined) {
-      dispatch(getOrderHistory({ page: pagination.currentPage }));
-    }
-  }, [dispatch, pagination?.currentPage]);
+    setCurrentPage(1);
+  }, [statusFilter, searchQuery]);
+
+  const totalPages = Math.ceil(filteredOrders.length / ORDERS_PER_PAGE);
+  const paginatedOrders = filteredOrders.slice(
+    (currentPage - 1) * ORDERS_PER_PAGE,
+    currentPage * ORDERS_PER_PAGE
+  );
+
+  // Load all orders once
+  useEffect(() => {
+    dispatch(getOrderHistory());
+  }, [dispatch]);
 
   const isViewingOrder = location.pathname.includes("/track-order/view/");
+
+  const validStatuses: FilterStatus[] = [
+    "all",
+    "accepted",
+    "dispatched",
+    "pending",
+    "delivered",
+    "cancelled",
+  ];
+
+  const statusCounts: Record<FilterStatus, number> = {
+    all: allOrders.length,
+    accepted: 0,
+    dispatched: 0,
+    pending: 0,
+    delivered: 0,
+    cancelled: 0,
+  };
+
+  allOrders.forEach((order) => {
+    const status = order.order_status?.toLowerCase() as FilterStatus;
+    if (validStatuses.includes(status)) {
+      statusCounts[status] += 1;
+    }
+  });
 
   return (
     <div className="flex flex-col gap-12 p-10">
@@ -41,6 +80,7 @@ const BuyerTrackOrderPage = () => {
               <OrderStatusButtons
                 currentStatus={statusFilter}
                 onStatusChange={handleStatusChange}
+                statusCounts={statusCounts}
                 className="flex-1 whitespace-nowrap overflow-x-auto"
               />
             </div>
@@ -51,12 +91,12 @@ const BuyerTrackOrderPage = () => {
             <div className="flex-1 flex flex-col gap-4">
               {loading ? (
                 <div className="flex justify-center items-center min-h-[300px]">
-                  <LoadingSpinner isLoading={true} size="large" />{" "}
+                  <LoadingSpinner isLoading={true} size="large" />
                 </div>
               ) : error ? (
                 <p className="text-red-500">{error}</p>
-              ) : filteredOrders.length > 0 ? (
-                filteredOrders.map((order) => (
+              ) : paginatedOrders.length > 0 ? (
+                paginatedOrders.map((order) => (
                   <OrderCard key={order.orderId} order={order} />
                 ))
               ) : (
@@ -64,44 +104,34 @@ const BuyerTrackOrderPage = () => {
               )}
             </div>
             <div className="w-96 hidden lg:block">
-              {/* <PurchasingHistory /> */}
+              {/* Optional: PurchasingHistory */}
             </div>
           </div>
 
-          {/* Pagination Controls */}
-          {!loading &&
-            filteredOrders.length > 0 &&
-            pagination?.totalPages > 1 && (
-              <div className="flex justify-center mt-4 gap-4">
-                <button
-                  disabled={pagination?.currentPage === 1}
-                  onClick={() =>
-                    dispatch(
-                      getOrderHistory({ page: pagination?.currentPage - 1 })
-                    )
-                  }
-                  className="px-4 py-2 button-text rounded disabled:opacity-50"
-                >
-                  Previous
-                </button>
+          {/* Pagination */}
+          {!loading && filteredOrders.length > 10 && (
+            <div className="flex justify-center mt-4 gap-4">
+              <button
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage(currentPage - 1)}
+                className="px-4 py-2 button-text rounded disabled:opacity-50"
+              >
+                Previous
+              </button>
 
-                <span className="font-OpenSans font-bold text-blue text-xl">
-                  Page {pagination?.currentPage} of {pagination?.totalPages}
-                </span>
+              <span className="font-OpenSans font-bold text-blue text-xl">
+                Page {currentPage} of {totalPages}
+              </span>
 
-                <button
-                  disabled={pagination?.currentPage >= pagination?.totalPages}
-                  onClick={() =>
-                    dispatch(
-                      getOrderHistory({ page: pagination?.currentPage + 1 })
-                    )
-                  }
-                  className="px-4 py-2 button-text rounded disabled:opacity-50"
-                >
-                  Next
-                </button>
-              </div>
-            )}
+              <button
+                disabled={currentPage >= totalPages}
+                onClick={() => setCurrentPage(currentPage + 1)}
+                className="px-4 py-2 button-text rounded disabled:opacity-50"
+              >
+                Next
+              </button>
+            </div>
+          )}
         </>
       )}
     </div>
