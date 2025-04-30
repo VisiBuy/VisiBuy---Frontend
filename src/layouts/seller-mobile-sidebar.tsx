@@ -59,6 +59,7 @@ export const SellerMobileSideBar: React.FC<ISellerMobileSideBarProps> = ({
     [searchParams]
   );
   const handleLogout = () => {
+    localStorage.removeItem('redirectPath');
     dispatch(logout());
     navigate("/login");
   };

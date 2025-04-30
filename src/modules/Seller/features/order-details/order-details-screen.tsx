@@ -24,6 +24,24 @@ const ACCEPTED_IMAGE_TYPES = [
   "image/png",
   "image/webp",
 ];
+const statusConfig: any = {
+  unverified: {
+    color: "#007AFF",
+    label: "Unverified",
+  },
+  pending: {
+    color: "#FF6200",
+    label: "Pending",
+  },
+  accepted: {
+    color: "#FFA600",
+    label: "Accepted",
+  },
+  cancelled: {
+    color: "#F41414",
+    label: "Cancelled", // Fixed label for cancelled state
+  },
+};
 
 export function SellerOrderDetailsScreen() {
   const triggerRef = useRef<HTMLDivElement>(null);
@@ -125,21 +143,42 @@ export function SellerOrderDetailsScreen() {
   }
 
   const { order, order_status } = data.data;
-  console.log(sellerImageVerification);
+  let currentStatus: string = "unverified";
+  const hasVerificationImages = sellerImageVerification?.urls?.urls?.length > 0;
+
+  if (!hasVerificationImages) {
+    currentStatus = "unverified";
+  } else if (order_status === "accepted") {
+    currentStatus = "accepted";
+  } else if (order_status === "cancelled") {
+    currentStatus = "cancelled";
+  } else {
+    currentStatus = "pending";
+  }
+
+  // Get configuration for current status
+  const { color, label } = statusConfig[currentStatus];
+  const orderAmount = order.price || 0;
+  const commissionFee = 0.05; // 5%
+  const commisionAmout = order.price ? order.price * commissionFee : 0;
+  const sellerPayableAmount = orderAmount - commisionAmout;
+  console.log(sellerImageVerification, orderAmount, order);
   return (
     <div className="p-4 font-OpenSans">
       {/* Order status section */}
       <div className="relative border border-light-gray rounded-lg">
         <div className="flex justify-between border-b border-light-gray p-6">
-          <h3 className="text-2xl font-medium">Ordered Item : 1</h3>
+          <h3 className="text-2xl font-medium">
+            Ordered Item : {order?.quantity || 0}
+          </h3>
           <h3 className="text-2xl font-medium">Status</h3>
         </div>
 
         <div className="flex justify-between items-center p-6">
           <div className="flex gap-x-4">
             <img
-              src="/sneaker.png"
-              width={50}
+              src={order.img_url}
+              width={70}
               alt={order.productName}
               className="border border-light-gray"
             />
@@ -147,6 +186,12 @@ export function SellerOrderDetailsScreen() {
               <span className="text-2xl font-medium">{order.productName}</span>
               <span className="text-xl">
                 {formatDate(order.orderDate as string)}
+              </span>
+              <span className="text-xl">
+                Colors: {order.colors}
+              </span>
+              <span className="text-xl">
+                Sizes : {order.sizes}
               </span>
             </div>
           </div>
@@ -165,7 +210,9 @@ export function SellerOrderDetailsScreen() {
         <div className="flex justify-between items-center p-6">
           <div className="flex flex-col gap-y-4">
             <span className="text-2xl font-medium">Paid via Bank Transfer</span>
-            <span className="text-xl">{formatDate(new Date())}</span>
+            <span className="text-xl">
+              {formatDate(order.orderDate as string)}
+            </span>
           </div>
 
           <span className="text-[#28A78B] bg-opacity-15 bg-[#28A78B] px-6 py-2 text-xl font-OpenSans">
@@ -176,19 +223,21 @@ export function SellerOrderDetailsScreen() {
         <div className="border-t border-light-gray flex flex-col gap-y-4 p-6">
           <div className="flex justify-between text-xl">
             <span>Subtotal</span>
-            <span>{currencyFormmater(14000)}</span>
+            <span>{currencyFormmater(orderAmount)}</span>
           </div>
           <div className="flex justify-between text-xl">
-            <span>Transaction Fee</span>
-            <span>{currencyFormmater(100)}</span>
+            <span>Transaction Fee (5%)</span>
+            <span>{currencyFormmater(commisionAmout)}</span>
           </div>
           <div className="flex justify-between text-xl">
             <span>Shipping Fee</span>
             <span>{currencyFormmater(0)}</span>
           </div>
           <div className="flex justify-between text-xl">
-            <span className="font-bold">Total</span>
-            <span className="font-bold">{currencyFormmater(14100)}</span>
+            <span className="font-bold">You'll receive</span>
+            <span className="font-bold">
+              {currencyFormmater(sellerPayableAmount)}
+            </span>
           </div>
         </div>
       </div>
@@ -200,8 +249,14 @@ export function SellerOrderDetailsScreen() {
             <h3 className="text-lg lg:text-2xl font-medium">
               Product visual verification
             </h3>
-            <span className="lg:hidden text-[#007AFF] bg-[#007AFF] bg-opacity-15 px-6 py-2 text-xl font-OpenSans">
-              Unverified
+            <span
+              className=" lg:hidden px-6 py-2 text-xl font-OpenSans"
+              style={{
+                color: color,
+                backgroundColor: `${color}26`, // 15% opacity in hex is approximately 26
+              }}
+            >
+              {label}
             </span>
             <ModalWrapperDialog
               trigger={
@@ -343,9 +398,14 @@ export function SellerOrderDetailsScreen() {
               </div>
             </ModalWrapperDialog>
           </div>
-
-          <span className="hidden lg:block text-[#007AFF] bg-[#007AFF] bg-opacity-15 px-6 py-2 text-xl font-OpenSans">
-            Unverified
+          <span
+            className="hidden lg:block px-6 py-2 text-xl font-OpenSans"
+            style={{
+              color: color,
+              backgroundColor: `${color}26`, // 15% opacity in hex is approximately 26
+            }}
+          >
+            {label}
           </span>
         </div>
 
@@ -373,7 +433,9 @@ export function SellerOrderDetailsScreen() {
                     key={slot}
                     onChange={handleImageCapture}
                   />
-                  <p className="mt-4 text-lg lg:text-xl text-left lg:text-center text-gray-500 ">{slot}</p>
+                  <p className="mt-4 text-lg lg:text-xl text-left lg:text-center text-gray-500 ">
+                    {slot}
+                  </p>
                 </div>
               ))}
             </div>
