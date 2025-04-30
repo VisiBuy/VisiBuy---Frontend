@@ -9,11 +9,6 @@ export default defineConfig({
     react(),
     //tsconfigPaths()
   ],
-  define: {
-    "process.env": {
-      REACT_APP_BASE_URL: "https://visibuy-backend-dev.onrender.com/api/v1/",
-    },
-  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
