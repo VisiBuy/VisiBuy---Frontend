@@ -187,67 +187,76 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
 
           {!loading && !error && (
             <>
-              <div className="w-full flex justify-center mb-4">
-                <img
-                  src={images[activeIndex]?.imageUrl}
-                  alt="Sneaker"
-                  className="w-64 h-64 object-cover rounded-xl border"
-                />
-              </div>
-
-              <div className="flex flex-wrap justify-center gap-4 mb-4 relative">
-                {images.map((img, index) => (
-                  <div key={index} className="relative group">
+              {images.length === 0 ? (
+                <div className="text-center text-gray-600 text-lg py-20">
+                  No verification image present yet for this order.
+                </div>
+              ) : (
+                <>
+                  <div className="w-full flex justify-center mb-4">
                     <img
-                      src={img.imageUrl}
-                      alt="Thumbnail"
-                      className={clsx(
-                        "object-cover rounded-lg border cursor-pointer",
-                        isMobile ? "w-24 h-24" : "w-32 h-32",
-                        activeIndex === index && "ring-2 ring-blue-500"
-                      )}
-                      onClick={() => setActiveIndex(index)}
+                      src={images[activeIndex]?.imageUrl}
+                      alt="Sneaker"
+                      className="w-64 h-64 object-cover rounded-xl border"
                     />
-                    <div
-                      className="absolute top-1 right-1 bg-black/70 rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
-                      onClick={() => {
-                        setLightboxIndex(index);
-                        setIsLightboxOpen(true);
-                      }}
-                    >
-                      <MoveDiagonal className="w-5 h-5 text-white" />
-                    </div>
                   </div>
-                ))}
-              </div>
 
-              <div className="flex flex-col items-center gap-2 text-sm text-gray-500 mb-6">
-                <span className="inline-flex items-center gap-1">
-                  <Lock className="w-4 h-4" /> Encrypted Storage
-                </span>
-                <span className="text-xs">
-                  Verification ID: {verificationData?.verificationId || "N/A"}
-                </span>
-              </div>
+                  <div className="flex flex-wrap justify-center gap-4 mb-4 relative">
+                    {images.map((img, index) => (
+                      <div key={index} className="relative group">
+                        <img
+                          src={img.imageUrl}
+                          alt="Thumbnail"
+                          className={clsx(
+                            "object-cover rounded-lg border cursor-pointer",
+                            isMobile ? "w-24 h-24" : "w-32 h-32",
+                            activeIndex === index && "ring-2 ring-blue-500"
+                          )}
+                          onClick={() => setActiveIndex(index)}
+                        />
+                        <div
+                          className="absolute top-1 right-1 bg-black/70 rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                          onClick={() => {
+                            setLightboxIndex(index);
+                            setIsLightboxOpen(true);
+                          }}
+                        >
+                          <MoveDiagonal className="w-5 h-5 text-white" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
 
-              <p className="text-left text-xl md:text-2xl font-OpenSans font-medium mb-4">
-                Does this product match your order?
-              </p>
+                  <div className="flex flex-col items-center gap-2 text-sm text-gray-500 mb-6">
+                    <span className="inline-flex items-center gap-1">
+                      <Lock className="w-4 h-4" /> Encrypted Storage
+                    </span>
+                    <span className="text-xs">
+                      Verification ID:{" "}
+                      {verificationData?.verificationId || "N/A"}
+                    </span>
+                  </div>
 
-              <div className="flex justify-end gap-6">
-                <button
-                  onClick={onNo}
-                  className="border border-black text-black font-OpenSans text-lg md:text-xl px-12 py-3 rounded-lg hover:bg-gray-100"
-                >
-                  No
-                </button>
-                <button
-                  onClick={onYes}
-                  className="bg-green-600 text-white text-lg md:text-xl px-12 py-3 font-OpenSans rounded-lg hover:bg-green-700"
-                >
-                  Yes
-                </button>
-              </div>
+                  <p className="text-left text-xl md:text-2xl font-OpenSans font-medium mb-4">
+                    Does this product match your order?
+                  </p>
+
+                  <div className="flex justify-end gap-6">
+                    <button
+                      onClick={onNo}
+                      className="border border-black text-black font-OpenSans text-lg md:text-xl px-12 py-3 rounded-lg hover:bg-gray-100"
+                    >
+                      No
+                    </button>
+                    <button
+                      onClick={onYes}
+                      className="bg-green-600 text-white text-lg md:text-xl px-12 py-3 font-OpenSans rounded-lg hover:bg-green-700"
+                    >
+                      Yes
+                    </button>
+                  </div>
+                </>
+              )}
             </>
           )}
         </div>

@@ -34,7 +34,7 @@ export const ProductPreview = ({
   );
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-2">
       <div className="max-h-auto">
         <PreviewImagesCard images={previewImages ?? []} />
       </div>

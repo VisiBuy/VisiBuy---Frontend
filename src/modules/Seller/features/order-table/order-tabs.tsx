@@ -27,7 +27,7 @@ export function OrderTabs({
   return (
     <div className='py-12 w-full'>
       <Tabs defaultValue='all_orders' className=''>
-        <TabsList className='flex justify-between'>
+        <TabsList className="flex  justify-between overflow-x-scroll">
           {tabs.map(({ title, value }) =>
             value === "all_orders" ? (
               <TabsTrigger

@@ -2,7 +2,7 @@ import Icon from "../../ui/Icon";
 
 export function SearchBar() {
   return (
-    <div className='w-4/12 '>
+    <div className='lg:w-4/12 '>
       <label
         htmlFor='default-search'
         className='mb-2 text-sm font-medium text-blue sr-only dark:text-white'

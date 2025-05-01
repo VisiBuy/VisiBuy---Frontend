@@ -59,7 +59,7 @@ export function FeedBackForm() {
       <h3 className='font-Montserrat font-semibold text-secondary-foreground text-3xl'>
         Update visibuy.
       </h3>
-      <p className='font-OpenSans font-normal text-3xl mt-6'>
+      <p className='font-OpenSans font-normal text-xl lg:text-3xl mt-6'>
         You can get in touch with us anytime via our mail{" "}
         <a
           href='mailto:support@visibuy.com'

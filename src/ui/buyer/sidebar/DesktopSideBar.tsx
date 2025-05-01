@@ -10,9 +10,15 @@ import {
 } from "../../../modules/Buyer/components/BuyerNavItems";
 import { useNotifications } from "@/context/notifications/NotificationsContext";
 
-function buildUrl(basePath: string, path: string) {
-  if (!basePath.endsWith("/")) basePath += "/";
-  if (path.startsWith("/")) path = path.slice(1);
+
+// Helper function to build a proper URL from the basePath and the relative path.
+export function buildUrl(basePath: string, path: string) {
+  if (!basePath.endsWith("/")) {
+    basePath += "/";
+  }
+  if (path.startsWith("/")) {
+    path = path.slice(1);
+  }
   return `${basePath}${path}`;
 }
 
@@ -41,7 +47,11 @@ const DesktopSideBar = () => {
           {/* Main Navigation */}
           {MainNav.map((item) => {
             const url = buildUrl(basePath, item.path);
-            const isActive = location.pathname === url;
+            const isProducts = item.label === "Products";
+            const isDashboardHome = location.pathname === basePath;
+            const isActive = isProducts
+              ? isDashboardHome || location.pathname === url // treat dashboard base as Products
+              : location.pathname === url;
 
             return (
               <Link
@@ -59,7 +69,7 @@ const DesktopSideBar = () => {
                 {item.label === "Notification" ? (
                   <button className="relative bg-transparent flex items-center p-0">
                     {React.isValidElement(item.icon)
-                      ? React.cloneElement(item.icon, )
+                      ? React.cloneElement(item.icon)
                       : item.icon}
                     {unreadCount > 0 && (
                       <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full px-2 transform translate-x-1/2 -translate-y-1/2">
@@ -68,7 +78,7 @@ const DesktopSideBar = () => {
                     )}
                   </button>
                 ) : React.isValidElement(item.icon) ? (
-                  React.cloneElement(item.icon, )
+                  React.cloneElement(item.icon)
                 ) : (
                   item.icon
                 )}
