@@ -81,11 +81,13 @@ function OrderSelectStatus({
       >
         <SelectValue placeholder={capitalize(orderStatus)} />
       </SelectTrigger>
-      <SelectContent className='bg-[#d5d1d1] font-OpenSans '>
-        <SelectItem value='cancelled' className='focus:bg-[#C8E2FF]'>
-          Cancelled
-        </SelectItem>
-        <SelectItem value='accepted' className='focus:bg-[#C8E2FF]'>
+      <SelectContent className="bg-[#d5d1d1] font-OpenSans ">
+        {orderStatus !== "accepted" && (
+          <SelectItem value="cancelled" className="focus:bg-[#C8E2FF]">
+            Cancelled
+          </SelectItem>
+        )}
+        <SelectItem value="accepted" className="focus:bg-[#C8E2FF]">
           Accepted
         </SelectItem>
         <SelectItem value='delivered' className='focus:bg-[#C8E2FF]'>

@@ -8,6 +8,8 @@ import ProfilePicture from "../../ui/buyer/header/ProfilePicture";
 import profilepic from "../../assets/Buyer/profilepic.jpg";
 import logo from "../../assets/Buyer/logo.png";
 import { dashboardConfig } from "../../lib/config";
+import { RootState } from "@/store/store";
+import { useSelector } from "react-redux";
 
 // Helper function to build a proper URL from the basePath and the relative path.
 function buildUrl(basePath: string, path: string) {
@@ -32,6 +34,7 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
   isSidebarOpen,
   setIsSidebarOpen,
 }) => {
+  const cartItems = useSelector((state: RootState) => state.buyer.cart.items);
   const navigate = useNavigate();
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 640);
 
@@ -51,11 +54,11 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
 
   // Get the buyer config and compute the home URL.
   const buyerConfig = dashboardConfig.getConfig("buyer");
-  const homeUrl = buildUrl(buyerConfig.basePath, buyerConfig.routes.home);
+  const homeUrl = buildUrl(buyerConfig.basePath, buyerConfig.routes.products);
 
   return (
     <>
-      <header className="bg-background border border-gray-100 p-8">
+      <header className="bg-background fixed top-0 left-0 md:left-80 right-0 z-50 border border-gray-100 p-8">
         <div className="flex justify-between items-center">
           {/* Left Side: Menu Icon + Logo (wrapped in a Link to buyer home) */}
           <div className="flex items-center gap-4">
@@ -76,7 +79,7 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
                 onSearch={handleSearch}
               />
             )}
-            <CartIcon itemCount={3} />
+            <CartIcon itemCount={cartItems.length} />
             <DashboardButton />
             <ProfilePicture imageSrc={profilepic} altText="User" />
           </div>

@@ -8,10 +8,10 @@ import {
 interface CartSummaryItemProps {
   item: {
     _id: string;
-    images: string;
+    images: string[];
     model: string;
-    color?: string[];
-    sizes?: number[];
+    color?: string;
+    size?: string;
     quantity: number;
     price: number;
   };
@@ -19,7 +19,8 @@ interface CartSummaryItemProps {
 
 const CartSummaryItem: React.FC<CartSummaryItemProps> = ({ item }) => {
   const dispatch = useDispatch();
-  console.log(item);
+  // console.log(item);
+  // console.log(item);
 
   return (
     <div key={item._id} className='flex items-center gap-4 border-b pb-4'>
@@ -59,6 +60,10 @@ const CartSummaryItem: React.FC<CartSummaryItemProps> = ({ item }) => {
             <Plus size={14} />
           </button>
         </div>
+      </div>
+      <div className='flex-1 pr-12'>
+        <h2 style={{ overflow: "hidden" }}>{item.color}</h2>
+        <div>size: {item.size}</div>
       </div>
       <div className='flex flex-col items-end'>
         <p className='font-semibold'>#{item.price * item.quantity}</p>

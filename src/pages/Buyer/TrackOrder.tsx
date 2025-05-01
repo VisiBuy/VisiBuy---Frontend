@@ -1,75 +1,139 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
+import { Outlet, useLocation } from "react-router-dom";
 import { getOrderHistory } from "@/modules/Buyer/models/track-order/trackOrderSlice";
 import OrderStatusButtons from "@/modules/Buyer/features/track-order/components/OrderStatusButtons";
 import SearchOrder from "@/modules/Buyer/features/track-order/components/SearchOrder";
 import OrderCard from "@/modules/Buyer/features/track-order/components/OrderCard";
-import PurchasingHistory from "@/modules/Buyer/features/track-order/components/PurchasingHistory";
-import { TOrderStatus } from "@/types/status";
-import { Order } from "@/types/orders";
+import useOrderActions from "@/modules/Buyer/hooks/useOrderActions";
+import useOrderFilter from "@/modules/Buyer/hooks/useOrderFilter";
+import LoadingSpinner from "@/ui/LoadingSpinner";
+import { FilterStatus } from "@/modules/Buyer/features/track-order/components/OrderStatusButtons";
 
-type FilterStatus = TOrderStatus | "all";
+const ORDERS_PER_PAGE = 10;
 
-const BuyerTrackOrderPage: React.FC = () => {
+const BuyerTrackOrderPage = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { orders, loading, error } = useSelector(
+  const location = useLocation();
+  const { allOrders, loading, error } = useSelector(
     (state: RootState) => state.trackOrder
   );
 
-  const [statusFilter, setStatusFilter] = useState<FilterStatus>("all");
-  const [searchQuery, setSearchQuery] = useState("");
+  const { statusFilter, searchQuery, handleStatusChange, handleSearch } =
+    useOrderActions();
 
-  const token = localStorage.getItem("auth-token") || "";
+  const filteredOrders = useOrderFilter(allOrders, statusFilter, searchQuery);
+  const [currentPage, setCurrentPage] = useState(1);
 
+  // Reset page to 1 when status or search changes
   useEffect(() => {
-    dispatch(getOrderHistory(token));
-  }, [dispatch, token]);
+    setCurrentPage(1);
+  }, [statusFilter, searchQuery]);
 
-  const handleStatusChange = (status: FilterStatus) => {
-    setStatusFilter(status);
+  const totalPages = Math.ceil(filteredOrders.length / ORDERS_PER_PAGE);
+  const paginatedOrders = filteredOrders.slice(
+    (currentPage - 1) * ORDERS_PER_PAGE,
+    currentPage * ORDERS_PER_PAGE
+  );
+
+  // Load all orders once
+  useEffect(() => {
+    dispatch(getOrderHistory());
+  }, [dispatch]);
+
+  const isViewingOrder = location.pathname.includes("/track-order/view/");
+
+  const validStatuses: FilterStatus[] = [
+    "all",
+    "accepted",
+    "dispatched",
+    "pending",
+    "delivered",
+    "cancelled",
+  ];
+
+  const statusCounts: Record<FilterStatus, number> = {
+    all: allOrders.length,
+    accepted: 0,
+    dispatched: 0,
+    pending: 0,
+    delivered: 0,
+    cancelled: 0,
   };
 
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-  };
-
-  const filteredOrders = orders.filter((order: Order) => {
-    const matchesStatus =
-      statusFilter === "all" || order.order_status === statusFilter;
-    const matchesSearch =
-      order.product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.orderId.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesStatus && matchesSearch;
+  allOrders.forEach((order) => {
+    const status = order.order_status?.toLowerCase() as FilterStatus;
+    if (validStatuses.includes(status)) {
+      statusCounts[status] += 1;
+    }
   });
 
   return (
-    <div className="flex flex-col gap-12 p-12">
-      <div className="flex items-center justify-between">
-        <OrderStatusButtons
-          currentStatus={statusFilter}
-          onStatusChange={handleStatusChange}
-        />
-        <SearchOrder onSearch={handleSearch} />
-      </div>
+    <div className="flex flex-col gap-12 p-10">
+      {isViewingOrder ? (
+        <Outlet />
+      ) : (
+        <>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-4 w-full">
+              <OrderStatusButtons
+                currentStatus={statusFilter}
+                onStatusChange={handleStatusChange}
+                statusCounts={statusCounts}
+                className="flex-1 whitespace-nowrap overflow-x-auto"
+              />
+            </div>
+            <SearchOrder onSearch={handleSearch} className="w-full sm:w-auto" />
+          </div>
 
-      {loading && <p>Loading orders...</p>}
-      {error && (
-        <p className="text-red-500">
-          {typeof error === "string" ? error : "Failed to load orders."}
-        </p>
+          <div className="flex gap-24">
+            <div className="flex-1 flex flex-col gap-4">
+              {loading ? (
+                <div className="flex justify-center items-center min-h-[300px]">
+                  <LoadingSpinner isLoading={true} size="large" />
+                </div>
+              ) : error ? (
+                <p className="text-red-500">{error}</p>
+              ) : paginatedOrders.length > 0 ? (
+                paginatedOrders.map((order) => (
+                  <OrderCard key={order.orderId} order={order} />
+                ))
+              ) : (
+                <p>No orders found.</p>
+              )}
+            </div>
+            <div className="w-96 hidden lg:block">
+              {/* Optional: PurchasingHistory */}
+            </div>
+          </div>
+
+          {/* Pagination */}
+          {!loading && filteredOrders.length > 10 && (
+            <div className="flex justify-center mt-4 gap-4">
+              <button
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage(currentPage - 1)}
+                className="px-4 py-2 button-text rounded disabled:opacity-50"
+              >
+                Previous
+              </button>
+
+              <span className="font-OpenSans font-bold text-blue text-xl">
+                Page {currentPage} of {totalPages}
+              </span>
+
+              <button
+                disabled={currentPage >= totalPages}
+                onClick={() => setCurrentPage(currentPage + 1)}
+                className="px-4 py-2 button-text rounded disabled:opacity-50"
+              >
+                Next
+              </button>
+            </div>
+          )}
+        </>
       )}
-
-      <div className="flex gap-24">
-        <div className="flex-1 flex flex-col gap-4">
-          {filteredOrders.map((order: Order) => (
-            <OrderCard key={order.orderId} order={order} />
-          ))}
-        </div>
-        <div className="w-96 hidden lg:block">
-          <PurchasingHistory />
-        </div>
-      </div>
     </div>
   );
 };

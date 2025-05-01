@@ -12,19 +12,32 @@ import {
 import { SupportCard } from "./components/support-card";
 import { useCallback, useMemo } from "react";
 const storeSupportLinks = [
-  { title: "Placing Order", link: "placing-order", icon: "/bag-tick-2.svg" },
-  { title: "Order Payment", link: "order-payment", icon: "/money-send.svg" },
+  {
+    title: "How to Receive and Fulfill Orders",
+    link: "get-started",
+    icon: "/bag-tick-2.svg",
+  },
+  {
+    title: "How and When You Get Paid",
+    link: "how-to-get-payed",
+    icon: "/money-send.svg",
+  },
+  {
+    title: "How to Get Verified Easily (Visual Verification)",
+    link: "get-verified",
+    icon: "/shop.svg",
+  },
   { title: "Order Management", link: "order-management", icon: "/shop.svg" },
   { title: "Cancel Order", link: "cancel-order", icon: "/close-circle.svg" },
 ];
 const storeFaqLinks = [
-  { title: "Payment", link: "payment", icon: "/digital-payment 1.svg" },
-  { title: "Deliver", link: "order-deliver", icon: "/truck.svg" },
-  { title: "Products", link: "order-management", icon: "/bag-2.svg" },
-  { title: "Vouchers", link: "vouchers", icon: "/ticket.svg" },
+  { title: "Payment", link: "faq/payment", icon: "/digital-payment 1.svg" },
+  { title: "Deliver", link: "faq/delivery", icon: "/truck.svg" },
+  { title: "Products", link: "faq/product", icon: "/bag-2.svg" },
+  { title: "Vouchers", link: "faq/vouchers", icon: "/ticket.svg" },
   {
     title: "Sell Products on Visibuy",
-    link: "vouchers",
+    link: "faq/sell-on-visibuy",
     icon: "/shopping-bag.svg",
   },
 ];
@@ -51,15 +64,15 @@ export function HelpSupportScreen() {
   return (
     <div>
       {match && (
-        <MainLayout title='Help & Support'>
-          <div className='px-10 pt-10'>
-            <h2 className='text-4xl font-semibold font-Montserrat'>
+        <MainLayout title="Help & Support">
+          <div className="px-2 lg:px-10 pt-10">
+            <h2 className="text-4xl font-semibold font-Montserrat">
               How can we help you today?
             </h2>
             <h3 className='mt-16 mb-8 text-2xl font-Montserrat font-medium'>
               Store Guides
             </h3>
-            <div className='grid grid-cols-2 gap-y-6 gap-x-4'>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-4">
               {storeSupportLinks.map(({ title, link, icon }) => (
                 <SupportCard
                   key={title}
@@ -72,7 +85,7 @@ export function HelpSupportScreen() {
             <h3 className='mt-16 mb-8 text-2xl font-Montserrat font-medium'>
               Frequently Asked Questions (FAQ)
             </h3>
-            <div className='grid grid-cols-2 gap-y-6 gap-x-4'>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-4">
               {storeFaqLinks.map(({ title, link, icon }) => (
                 <SupportCard
                   key={title}
@@ -103,14 +116,14 @@ export function HelpSupportScreen() {
       )}
       <div
         className={cn(
-          `border border-light-gray py-10 px-20  h-full mt-8 rounded-xl `
+          `border border-light-gray py-10 px-10 lg:px-20  h-full mt-8 rounded-xl `
         )}
       >
         <h2 className='text-4xl font-semibold font-Montserrat'>
           Talk to an agent
         </h2>
-        <div className='grid grid-cols-2 mt-8'>
-          <div className='flex items-center px-6 py-8 bg-blue-200 rounded-md hover:cursor-pointer'>
+        <div className="grid  grid-cols-1 lg:grid-cols-2  gap-y-4  mt-8">
+          <div className="flex items-center px-6 py-8 bg-blue-200 rounded-md hover:cursor-pointer">
             <span>
               <img src='/messages-3.svg' alt='chat icon' />
             </span>
@@ -118,8 +131,8 @@ export function HelpSupportScreen() {
               <h3 className='text-foreground text-2xl mb-4 text-left font-Montserrat font-bold '>
                 Live Chat
               </h3>
-              <p className='text-2xl font-Montserrat'>
-                We are available from Monday to Sunday, between 8an and 7pm.
+              <p className="text-xl lg:text-2xl font-Montserrat">
+                We are available from Monday to Sunday, between 8am and 7pm.
               </p>
             </div>
           </div>
@@ -131,8 +144,8 @@ export function HelpSupportScreen() {
               <h3 className='text-foreground text-2xl mb-4 text-left font-Montserrat font-bold '>
                 Call an agent
               </h3>
-              <p className='text-2xl font-Montserrat '>
-                We are available from Monday to Friday, between 8an and 5pm.
+              <p className="text-xl lg:text-2xl font-Montserrat ">
+                We are available from Monday to Friday, between 8am and 5pm.
               </p>
             </div>
           </div>

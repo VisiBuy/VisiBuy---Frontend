@@ -1,5 +1,8 @@
 import OrderSelectStatus from "../../../../common/components/status-selector";
-import { currencyFormmater, formatDate } from "../../../../lib/utils";
+import {
+  formatCurrency,
+  formatDate,
+} from "../../../../lib/utils";
 import Icon from "../../../../ui/Icon";
 import { ColumnDef, Row } from "@tanstack/react-table";
 import { Link } from "react-router-dom";
@@ -25,8 +28,8 @@ export const columns: ColumnDef<ISellerOrder>[] = [
         <div className='flex justify-center'>
           {" "}
           <img
-            className='aspect-square border border-light-gray rounded-md mr-3'
-            width={20}
+            className="aspect-square border border-light-gray rounded-md mr-3 w-10"
+            alt={row.getValue("productName")}
             src={row.getValue("img_url")}
           />
           {row.getValue("productName")}
@@ -52,8 +55,12 @@ export const columns: ColumnDef<ISellerOrder>[] = [
     accessorKey: "price",
     header: "Amount",
     cell: ({ row }) => {
-      return currencyFormmater(row.getValue("price"));
+      return formatCurrency(row.getValue("price"), true, "₦");
     },
+  },
+  {
+    accessorKey: "quantity",
+    header: "Quantity",
   },
   {
     accessorKey: "invoiceId",
@@ -65,7 +72,7 @@ export const columns: ColumnDef<ISellerOrder>[] = [
     header: "Status",
     cell: ({ row }) => {
       return (
-        <div className='flex items-center justify-center'>
+        <div className="flex items-center justify-center">
           <OrderSelectStatus
             status={row.getValue("status")}
             id={row.getValue("id")}

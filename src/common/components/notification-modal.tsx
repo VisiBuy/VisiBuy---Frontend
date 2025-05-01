@@ -1,6 +1,6 @@
 import React from "react";
 import { format } from "date-fns";
-import { ModalWrapper } from "./modal-wrappper";
+import { ModalWrapperDialog } from "./modal-wrappper";
 import { TSellerNotification } from "../../modules/Seller/models/notification";
 import { cn } from "../../lib/utils";
 import { formatNotiticationDate } from "../../modules/Seller/lib/notification/utils";
@@ -17,8 +17,8 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
   notifications,
 }) => {
   return (
-    <ModalWrapper open={open} setOpen={setOpen} title='Notifications'>
-      <div className='max-h-[70vh] overflow-y-auto'>
+    <ModalWrapperDialog open={open} onOpenChange={setOpen}  title='Notifications' className="md:max-w-[700px]">
+      <div className='max-h-[70vh] '>
         {notifications.length === 0 ? (
           <div className='text-center py-8 text-gray-500'>
             No notifications yet
@@ -69,6 +69,6 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
           </div>
         )}
       </div>
-    </ModalWrapper>
+    </ModalWrapperDialog>
   );
 };

@@ -12,7 +12,7 @@ export function Pagination<T>({
 }: TPaginationProps<T>) {
   const [currentGroup, setCurrentGroup] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
+  const itemsPerPage = 2;
   const totalGroups = Math.ceil(totalPages / itemsPerPage);
   //console.log(totalPages,'pagination')
   // Calculate start and end index for current group
@@ -58,7 +58,7 @@ export function Pagination<T>({
     [totalPages]
   );
   return (
-    <div className='flex space-x-4 mt-4 pt-8 justify-end'>
+    <div className='flex space-x-4 mt-4 pt-8 justify-center lg:justify-end'>
       <Button
         disabled={
           isFetching ||

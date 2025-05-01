@@ -9,7 +9,7 @@ const Cart: React.FC = () => {
   return (
     <>
       <div className=''>
-        <h2 className='text-3xl font-bold'>Cart</h2>
+        <h2 className='text-3xl font-bold font-montserrat'>Cart</h2>
         {/* <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 p-6'> */}
         <div className='flex gap-6 p-6' style={{ flexWrap: "wrap" }}>
           {cartItems.length === 0 ? (
@@ -18,7 +18,8 @@ const Cart: React.FC = () => {
             </div>
           ) : null}
           {cartItems.map((item) => (
-            <div key={item._id}>
+            <div key={item._id} className='grid grid-rows-[repeat(auto-fit,minmax(200px,1fr))] auto-cols-[251px] justify-center md:flex md:justify-normal gap-6 p-6'
+            style={{ flexWrap: "wrap" }}>
               <ProductSkeleton type='cart' product={item} />
             </div>
           ))}

@@ -8,7 +8,7 @@ interface CartItem {
   brand: string;
   price: number;
   quantity: number;
-  image?: string;
+  image?: string[];
   model: any;
   storeName: any;
 }

@@ -2,24 +2,30 @@ import { TOrderStatus } from "@/types/status";
 
 export interface Order {
   orderId: string;
+  orderNo: string;
   invoiceID: string;
-  created_at: string;
-  order_status: TOrderStatus; // Renamed from 'status' to 'order_status'
+  created_at: Date;
+  formattedDate: string;
+  order_status: TOrderStatus;
   buyer: {
+    buyerId: string;
     fullName: string;
   };
   seller: {
-    name: string;
+    sellerId: string;
+    fullName: string;
+    time?: string;
   };
+  address: string;
   product: {
+    productId: string;
     brand: string;
     model: string;
-    title: string;
     description: string;
-    quantity: number;
-    price: string;
+    quantity?: number;
+    price: number;
   };
-  Size: string;
-  Color: string;
+  size: string;
+  color: string;
+  verificationStatus: "pending" | "accepted" | "cancelled";
 }
-

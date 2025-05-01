@@ -14,6 +14,8 @@ export function useGetASellerOrderQuery(id: string) {
   return useQuery({
     queryKey: getOrderQueryKey(id),
     queryFn: () => SellerOrderService.getOrderById(id),
+    refetchOnWindowFocus :false,
+    refetchOnMount:false
   });
 }
 export function useGetSellerOrdersQuery(
@@ -25,5 +27,12 @@ export function useGetSellerOrdersQuery(
     queryFn: () => SellerOrderService.getOrderList(queryParams),
     placeholderData: (previousData) => previousData,
     enabled: isMatchRoute,
+  });
+}
+
+export function useGetSellerVerificationImages(orderId: string) {
+  return useQuery({
+    queryKey: ["seller_verification_images",orderId],
+    queryFn: () => SellerOrderService.getSellerVerifcationImages(orderId),
   });
 }

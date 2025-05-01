@@ -12,7 +12,7 @@ export interface LoginCredentials {
   email: string;
   pass: string;
   role: Role;
-  isRemeberChecked?: boolean;
+  isRememberChecked?: boolean;
 }
 
 export interface User {

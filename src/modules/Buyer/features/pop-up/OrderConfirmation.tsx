@@ -1,28 +1,27 @@
 import { axiosWithAuth } from "@/lib/client";
-import { RootState } from "@/store/store";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { AppDispatch, RootState, store } from "@/store/store";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { removeFromCart } from "../cart/cartSlice";
 
-interface Product {
-  size: number[];
-  color: string[];
+interface CartItem {
   _id: string;
   brand: string;
-  price: number;
   model: string;
-  description: string;
-  storeName: string;
-  storeAvatar: string;
-  images?: string;
+  price: number;
   quantity: number;
+  images: string[];
+  storeName: any;
+  color?: string;
+  size?: string;
 }
 
 interface OrderConfirmationProps {
   isOpen: boolean;
   onClose: () => void;
   orderDetails: {
-    orderId: string;
+    // orderId: string;
     items: {
       _id: string;
       model: string;
@@ -40,16 +39,15 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
   orderDetails,
 }) => {
   const navigate = useNavigate();
-  const cartProduct = useSelector(
-    (state: RootState) => state.buyer.product.products
-  );
+  const dispatch = useDispatch<AppDispatch>();
+  const cartProduct = useSelector((state: RootState) => state.buyer.cart.items);
 
-  const [data, setData] = useState<Product | null>(null);
+  const [data, setData] = useState<CartItem | null>(null);
   useEffect(() => {
     // Find the product by matching the id with the `id` in the products array
     const foundProduct = cartProduct.find(
       (p) => p._id === orderDetails.items._id
-    ); // Assuming id is a string from the URL
+    );
     setData(foundProduct ?? null); // Set the product or null if not found
   }, [orderDetails.items._id, cartProduct]);
 
@@ -57,10 +55,35 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
 
   const orderData = {
     sneaker_id: orderDetails.items._id,
-    address: "",
+    address: "23 online street, react state, javascript",
     size: data?.size,
     color: data?.color,
+    quantity: orderDetails.items.quantity,
   };
+
+  // const sendOrderData = async () => {
+  //   const data = await axiosWithAuth.post("order", orderData);
+  //   console.log(data);
+  // };
+  const sendData = async () => {
+    const state = store.getState();
+    const token = state.auth.token;
+
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}order`, {
+      method: "POST", // Specify method
+      headers: {
+        "Content-Type": "application/json", // Set content type
+        "auth-token": `${token}`,
+      },
+      body: JSON.stringify(orderData), // Convert to JSON string
+    });
+
+    const data = await response.json(); // Parse response
+    console.log("Response:", data);
+    console.log(orderData);
+  };
+
+  sendData();
 
   return (
     <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center'>
@@ -71,7 +94,7 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
         </p>
 
         <div className='mt-4'>
-          <p className='font-semibold'>Order ID: {orderDetails.orderId}</p>
+          {/* <p className='font-semibold'>Order ID: {orderDetails.orderId}</p> */}
           <p className='text-green-600 font-semibold'>
             Payment: {orderDetails.paymentStatus}
           </p>
@@ -97,16 +120,31 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
           Total: ₦{orderDetails.totalAmount}
         </div>
 
-        <button
-          onClick={() => {
-            // onClose;
-            navigate("/dashboard/buyer/track-order");
-            axiosWithAuth.post("order", orderData);
-          }}
-          className='mt-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700'
-        >
-          Close
-        </button>
+        <div className='flex gap-2'>
+          <button
+            onClick={() => {
+              navigate(-1);
+              dispatch(removeFromCart(orderDetails.items._id));
+            }}
+            className='mt-4 w-[48%] bg-white-600 text-green-600 py-2 rounded-lg hover:bg-green-300 hover:text-white border-2 border-green-300'
+          >
+            Back
+          </button>
+          <button
+            onClick={() => {
+              // onClose;
+
+              navigate("/dashboard/buyer/track-order");
+              // axiosWithAuth.post("order", orderData);
+              // sendOrderData();
+              sendData();
+              dispatch(removeFromCart(orderDetails.items._id));
+            }}
+            className='mt-4 w-[48%] bg-green-600 text-white py-2 rounded-lg hover:bg-green-700'
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   );

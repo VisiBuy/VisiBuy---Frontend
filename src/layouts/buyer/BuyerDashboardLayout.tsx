@@ -1,58 +1,44 @@
-import { useState, useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import SideBar from "../../layouts/buyer/SideBar";
 import HeaderBar from "../../layouts/buyer/HeaderBar";
 import MobileSideBar from "../../ui/buyer/sidebar/MobileSideBar";
-import LoadingSpinner from "@/ui/LoadingSpinner";
+import { NotificationsProvider } from "@/context/notifications/NotificationsContext";
 
 const BuyerDashboardLayout = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [loading, setLoading] = useState(true); // For main content
-  const location = useLocation(); // Detect route changes
 
-  useEffect(() => {
-    // Simulate loading on each route change
-    setLoading(true);
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-    return () => clearTimeout(timer);
-  }, [location.pathname]);
 
   return (
-    <div className="flex h-screen relative">
-      {/* Sidebar (Visible Immediately) */}
-      <SideBar />
+    <NotificationsProvider>
+      <div className="flex h-screen overflow-hidden">
+        {/* Sidebar */}
+        <div className="hidden sm:block">
+          <SideBar />
+        </div>
 
-      {/* Main Layout */}
-      <div className="flex flex-col flex-1">
-        {/* Header (Visible Immediately) */}
-        <HeaderBar
-          onMenuClick={() => setIsMobileOpen(true)}
-          isSidebarOpen={isMobileOpen}
-          setIsSidebarOpen={setIsMobileOpen}
-        />
+        {/* Main Layout */}
+        <div className="flex flex-col flex-1 sm:ml-64">
+          {/* Header */}
+          <HeaderBar
+            onMenuClick={() => setIsMobileOpen(true)}
+            isSidebarOpen={isMobileOpen}
+            setIsSidebarOpen={setIsMobileOpen}
+          />
 
-        {/* Main Content Area */}
-        <main className="p-4 h-full">
-          {loading ? (
-            // Spinner only in main content area
-            <div className="flex items-center justify-center h-full">
-              <LoadingSpinner isLoading={true} size="large" />
-            </div>
-          ) : (
-            // Render child routes when loading finishes
+          {/* Main Content */}
+          <main className="p-4 md:p-16 h-[calc(100vh-4rem)] overflow-y-auto mt-40 md:mt-16">
             <Outlet />
-          )}
-        </main>
-      </div>
+          </main>
+        </div>
 
-      {/* Mobile Sidebar */}
-      <MobileSideBar
-        isOpen={isMobileOpen}
-        onClose={() => setIsMobileOpen(false)}
-      />
-    </div>
+        {/* Mobile Sidebar */}
+        <MobileSideBar
+          isOpen={isMobileOpen}
+          onClose={() => setIsMobileOpen(false)}
+        />
+      </div>
+    </NotificationsProvider>
   );
 };
 

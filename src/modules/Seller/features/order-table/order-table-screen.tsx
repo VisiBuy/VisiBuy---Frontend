@@ -12,7 +12,10 @@ import { ITabs, OrderTabs } from "./order-tabs";
 import { Link, Outlet, useMatch, useParams } from "react-router-dom";
 import { dashboardConfig } from "../../../../lib/config";
 import Icon from "../../../../ui/Icon";
-import { useGetSellerOrdersQuery } from "../../queries/order/queries";
+import {
+  useGetASellerOrderQuery,
+  useGetSellerOrdersQuery,
+} from "../../queries/order/queries";
 import { Pagination } from "../../../../common/components/pagination";
 import { useMemo, useState } from "react";
 import { SellerOrderQueryBuilder } from "../../lib/orders/order-query-builder";
@@ -53,6 +56,8 @@ export function SellerOrderScreen() {
     queryParams,
     isMathRoute
   );
+  const { data: sellerOrder, isLoading: orderDetailsLoading } =
+    useGetASellerOrderQuery(orderId ?? "");
   const table = useReactTable({
     initialState: {
       columnVisibility: {
@@ -71,12 +76,13 @@ export function SellerOrderScreen() {
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   });
+  console.log(sellerOrder?.data.order.orderNumber);
   return (
     <>
       {match ? (
         <div>
-          <MainLayout title='Order Management'>
-            <div className='grid grid-cols-5 gap-x-4'>
+          <MainLayout title="Order Management">
+            <div className="grid grid-cols-2 gap-5 lg:grid-cols-5 lg:gap-x-4">
               <OrderSummaryCard figure={data?.data.total_orders} />
               <OrderSummaryCard
                 title='Pending'
@@ -116,15 +122,17 @@ export function SellerOrderScreen() {
       ) : (
         <MainLayout
           title={
-            <div className='flex gap-x-4 items-center'>
-              <Link to='' className='bg-light-gray px-4 py-2 '>
+            <div className="flex gap-x-4 items-center text-xl lg:text-2xl">
+              <Link to="" className="bg-light-gray px-4 py-2 ">
                 {" "}
-                <Icon name='move-left' width={20} />
+                <Icon name="move-left" className="w-5 lg:w-10" />
               </Link>
-
-              {`Order details (#${orderId})`}
+              {orderDetailsLoading
+                ? "Loading..."
+                : `Order details (#${sellerOrder?.data.order.orderNumber})`}
             </div>
           }
+          className="px-5 py-10"
         >
           <Outlet />
         </MainLayout>
