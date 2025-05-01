@@ -71,6 +71,7 @@ export function SellerDashboardLayout() {
     [searchParams]
   );
   const handleLogout = () => {
+    localStorage.removeItem('redirectPath');
     dispatch(logout());
     navigate("/login");
   };

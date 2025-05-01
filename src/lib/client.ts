@@ -4,7 +4,7 @@ import { store } from "@/store/store"; // Your Redux store
 import dotenv from "dotenv";
 import { handleLogout } from "./handleLogout";
 //dotenv.config();
-const baseURL = process.env.REACT_APP_BASE_URL;
+const baseURL = import.meta.env.VITE_REACT_APP_BASE_URL;
 const apiClient = axios.create({
   baseURL,
 });
@@ -16,9 +16,8 @@ axiosWithAuth.interceptors.request.use(
   (config:InternalAxiosRequestConfig) => {
     const state = store.getState();
     const token = state.auth.token;
-    console.log(window.location)
     // save last accessed path
-    localStorage.setItem('redirectPath', window.location.href + window.location.search);
+    localStorage.setItem('redirectPath', window.location.hash + window.location.search);
     if (token) {
       config.headers['auth-token'] = `${token}`;
     }

@@ -5,6 +5,7 @@ import { persistStore,persistReducer } from 'redux-persist';
 const rootPersistConfig = {
     key:'root_persist',
     storage,
+    blacklist:['toast']
 }
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer)

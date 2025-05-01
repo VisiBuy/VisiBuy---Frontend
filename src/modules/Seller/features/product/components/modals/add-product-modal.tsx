@@ -130,7 +130,7 @@ export function AddProductModal() {
         open={isOpen}
         onOpenChange={handleModalOpen}
         title=" Product Listing Form"
-        className="md:max-w-[800px]"
+        className="max-w-[34rem] md:max-w-[800px]"
         footer={
           <div className=" flex justify-between gap-x-5 pr-4 py-2">
             <Button

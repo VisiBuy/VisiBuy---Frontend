@@ -6,7 +6,7 @@ import {
 } from "../models/orders";
 
 export interface ISellerOrderRepository {
-  getOrder: (id: string) => void;
+  getOrder: (id: string) => Promise<any>;
   getOrderList: (
     queryParams: ISellerOrderQueryParams
   ) => Promise<QueryResult<ISellerOrder>>;

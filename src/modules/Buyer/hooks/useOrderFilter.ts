@@ -1,8 +1,6 @@
 import { useMemo } from "react";
 import { normalizeOrder } from "@/modules/Buyer/lib/track-order/normalizeOrder";
-import { TOrderStatus } from "@/types/status";
-
-export type FilterStatus = TOrderStatus | "all";
+import { FilterStatus } from "../features/track-order/components/OrderStatusButtons";
 
 const useOrderFilter = (
   orders: any[],
@@ -26,18 +24,20 @@ const useOrderFilter = (
 
       return matchesStatus && matchesSearch;
     });
-      
 
-    // Sort orders by `createdAt` in descending order (newest to oldest)
+    
+
     return filtered.sort((a, b) => {
       const dateA = new Date(a.created_at);
       const dateB = new Date(b.created_at);
-
       return dateB.getTime() - dateA.getTime(); // Newest first
     });
   }, [normalizedOrders, statusFilter, searchQuery]);
 
   return filteredOrders;
+  
 };
+
+
 
 export default useOrderFilter;

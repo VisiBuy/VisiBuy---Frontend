@@ -1,13 +1,16 @@
 import { TOrderStatus } from "../../../../../types/status";
 
-type FilterStatus = TOrderStatus | "all";
+export type FilterStatus = TOrderStatus | "all";
 
 interface OrderStatusButtonsProps {
   currentStatus: FilterStatus;
   onStatusChange: (status: FilterStatus) => void;
   className?: string;
+  statusCounts: Record<FilterStatus, number>;
 }
+
 const statuses: FilterStatus[] = [
+  "all",
   "accepted",
   "dispatched",
   "pending",
@@ -19,14 +22,16 @@ const OrderStatusButtons: React.FC<OrderStatusButtonsProps> = ({
   currentStatus,
   onStatusChange,
   className,
+  statusCounts
 }) => {
   return (
     <div className={`flex gap-2 flex-wrap ${className || ""}`}>
       {statuses.map((status) => {
-        const displayLabel =
+        const displayLabel = `${
           status === "all"
             ? "All"
-            : status.charAt(0).toUpperCase() + status.slice(1);
+            : status.charAt(0).toUpperCase() + status.slice(1)
+        } (${statusCounts[status] || 0})`;
 
         return (
           <button

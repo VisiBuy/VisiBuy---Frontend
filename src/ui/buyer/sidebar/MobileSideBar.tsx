@@ -6,18 +6,7 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { dashboardConfig } from "../../../lib/config";
 import { useNotifications } from "@/context/notifications/NotificationsContext";
 import { MainNav, SubNav } from "@/modules/Buyer/components/BuyerNavItems";
-
-// Helper function to build a proper URL from the basePath and the relative path.
-function buildUrl(basePath: string, path: string) {
-  if (!basePath.endsWith("/")) {
-    basePath += "/";
-  }
-  if (path.startsWith("/")) {
-    path = path.slice(1);
-  }  
-  return `${basePath}${path}`;
-}
-
+import { buildUrl } from "./DesktopSideBar";
 
 interface MobileSideBarProps {
   isOpen: boolean;
@@ -47,8 +36,12 @@ const MobileSideBar: React.FC<MobileSideBarProps> = ({ isOpen, onClose }) => {
         {/* Main Navigation */}
         <nav className="flex flex-col gap-6 mt-6">
           {MainNav.map((item) => {
-            const url = buildUrl(basePath, item.path);
-            const isActive = location.pathname === url;
+             const url = buildUrl(basePath, item.path);
+             const isProducts = item.label === "Products";
+             const isDashboardHome = location.pathname === basePath;
+             const isActive = isProducts
+               ? isDashboardHome || location.pathname === url 
+               : location.pathname === url;
 
             return (
               <Link

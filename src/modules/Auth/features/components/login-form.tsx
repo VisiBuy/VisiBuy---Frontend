@@ -19,12 +19,14 @@ import { Checkbox } from "../../../../ui/Checkbox";
 import { useLogin } from "../../mutations/use-login";
 import { Link } from "react-router-dom";
 import Icon from "../../../../ui/Icon";
+import { useId } from "react";
 
 export function LoginForm() {
-  const { toast } = useToast();
   const loginMutation = useLogin();
   const [showPassword, setShowPassword] = useState(false);
   const [isTypingDone, setIsTypingDone] = useState(false);
+
+  const checkboxId = useId(); // Generate a unique ID for the checkbox
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -37,36 +39,37 @@ export function LoginForm() {
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     mode: "onTouched",
+    criteriaMode: "all",
+    shouldFocusError: true,
     defaultValues: {
       pass: "",
       email: "",
-      role: "seller",
-      isRemeberChecked: false,
+      role: "buyer", // Correct valid role for schema
+      isRememberChecked: false, // Correct spelling
     },
   });
 
   const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
-    try {
-      await loginMutation.mutateAsync(values);
-    } catch (error: any) {
-      console.log(error?.response.data.msg);
-      toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: error?.response.data.msg,
-        duration: 5000,
-      });
+    if (!values.email || !values.pass) {
+      return; // Stop here, don't even call login
     }
+
+    await loginMutation.mutateAsync(values);
   };
+
+  const isButtonDisabled = () =>
+    loginMutation.isPending ||
+    form.formState.isSubmitting ||
+    !form.formState.isValid;
 
   return (
     <div className="w-full max-w-xl mx-auto flex flex-col items-center min-h-screen px-4">
       {/* Welcome Section */}
       <div className="text-center mb-8">
         <h2
-          className={`auth-heading mt-12  
-    whitespace-nowrap overflow-hidden 
-    ${isTypingDone ? "" : "border-r-4 border-black animate-typing"}`}
+          className={`auth-heading mt-12 whitespace-nowrap overflow-hidden ${
+            isTypingDone ? "" : "border-r-4 border-black animate-typing"
+          }`}
         >
           Welcome back!
         </h2>
@@ -131,18 +134,18 @@ export function LoginForm() {
 
             <FormField
               control={form.control}
-              name="isRemeberChecked"
+              name="isRememberChecked"
               render={({ field }) => (
                 <FormItem className="py-4">
                   <FormControl>
                     <div className="flex items-center space-x-2">
                       <Checkbox
                         checked={field.value}
-                        onCheckedChange={field.onChange}
-                        id="loginRemember"
+                        onCheckedChange={(checked) => field.onChange(checked)}
+                        id={checkboxId} // Use dynamic id here
                       />
                       <FormLabel
-                        htmlFor="loginRemember"
+                        htmlFor={checkboxId} // Refer to the dynamic id
                         className="flex justify-start text-xl"
                       >
                         Remember me
@@ -156,7 +159,7 @@ export function LoginForm() {
 
             <div className="pt-4">
               <Button
-                disabled={loginMutation.isPending || !form.formState.isValid}
+                disabled={isButtonDisabled()}
                 type="submit"
                 className="w-full px-12 h-16 text-xl"
               >
