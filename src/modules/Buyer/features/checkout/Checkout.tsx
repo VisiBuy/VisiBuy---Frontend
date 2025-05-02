@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { FlutterWaveButton, closePaymentModal } from "flutterwave-react-v3";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store/store";
 import OrderConfirmation from "../pop-up/OrderConfirmation";
 import { useNavigate, useParams } from "react-router-dom";
+import { removeFromCart } from "../cart/cartSlice";
 
 interface CartItem {
   _id: string;
@@ -19,7 +20,7 @@ interface CartItem {
 
 const Checkout = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
   // Get user & cart details from Redux
   const user = useSelector((state: RootState) => state.auth.user);
