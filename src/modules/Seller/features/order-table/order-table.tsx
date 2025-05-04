@@ -28,12 +28,12 @@ interface DataTableProps<TData, TValue> {
 export function SellerOrderTable<TData, TValue>({ table }: { table: any }) {
   return (
     <Table>
-      <TableHeader className='bg-blue-200 font-OpenSans font-medium text-xl text-center'>
+      <TableHeader className='bg-blue-200 font-OpenSans font-medium lg:text-xl text-center'>
         {table
           .getHeaderGroups()
           .map(
             (headerGroup: { id: Key | null | undefined; headers: any[] }) => (
-              <TableRow className='text-center' key={headerGroup.id}>
+              <TableRow className='text-center w-full' key={headerGroup.id}>
                 {headerGroup.headers.map(
                   (header: {
                     id: Key | null | undefined;
@@ -58,7 +58,7 @@ export function SellerOrderTable<TData, TValue>({ table }: { table: any }) {
                     getContext: () => any;
                   }) => {
                     return (
-                      <TableHead className=' py-6' key={header.id}>
+                      <TableHead className=' py-6 px-2 ' key={header.id}>
                         {header.isPlaceholder
                           ? null
                           : flexRender(
@@ -84,7 +84,7 @@ export function SellerOrderTable<TData, TValue>({ table }: { table: any }) {
                 getVisibleCells: () => any[];
               }) => (
                 <TableRow
-                  className='text-lg font-medium font-OpenSans text-center'
+                  className='text-lg font-medium font-OpenSans text-center p'
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
@@ -110,7 +110,7 @@ export function SellerOrderTable<TData, TValue>({ table }: { table: any }) {
                       };
                       getContext: () => any;
                     }) => (
-                      <TableCell className='font-medium' key={cell.id}>
+                      <TableCell className='font-medium px-8' key={cell.id}>
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()

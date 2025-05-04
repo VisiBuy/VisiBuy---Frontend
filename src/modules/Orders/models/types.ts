@@ -9,5 +9,7 @@ export interface IOrder {
   orderNumber: number;
   orderDate: string | Date;
   status: TOrderStatus;
+  sizes?: string;
+  quantity?: number;
+  colors?: string;
 }
-

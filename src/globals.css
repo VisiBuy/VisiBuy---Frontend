@@ -63,8 +63,18 @@
   }
 }
 
-@layer utilities{
+@layer utilities {
   .button-text {
     @apply bg-blue-200 text-blue font-semibold font-Montserrat;
+  }
+  .auth-heading {
+    @apply text-secondary-foreground text-center font-bold text-4xl md:text-5xl font-Montserrat;
+  }
+  .btn-role-active {
+    @apply bg-blue text-white;
+  }
+
+  .btn-role-inactive {
+    @apply bg-light-background text-secondary-foreground hover:bg-gray-200 hover:text-black;
   }
 }

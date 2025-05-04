@@ -4,28 +4,25 @@ import sass from "sass";
 import tsconfigPaths from "vite-tsconfig-paths";
 import path from "path";
 
-export default defineConfig({
-  plugins: [
-    react(),
-    //tsconfigPaths()
-  ],
-  define: {
-    "process.env": {
-      REACT_APP_BASE_URL: "https://visibuy-backend-dev.onrender.com/api/v1/",
+export default defineConfig(({ mode }) => {
+  return {
+    plugins: [react(), tsconfigPaths()],
+    optimizeDeps: {
+      exclude: ["lucide-react"],
     },
-  },
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-  base: process.env.NODE_ENV === "production" ? "/" : "/",
-  css: {
-    preprocessorOptions: {
-      scss: {
-        implementation: sass, // Ensure Dart Sass is used
-        api: "modern", // Use modern API or 'modern-compiler'
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
       },
     },
-  },
+    base: mode === "production" ? "/" : "/",
+    css: {
+      preprocessorOptions: {
+        scss: {
+          implementation: sass,
+          api: "modern",
+        },
+      },
+    },
+  };
 });

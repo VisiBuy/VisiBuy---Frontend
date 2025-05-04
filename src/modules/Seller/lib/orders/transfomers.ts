@@ -26,6 +26,8 @@ export const transformSellerOrder = (
       orderNumber: order.orderNumber,
       status: order.order_status,
       orderDate: order.created_at,
+      quantity: order.quantity || 1,
+      img_url: order.sneaker.images[0] ||  ''
     };
   });
 
@@ -38,12 +40,21 @@ export const transformSellerOrder = (
 
 export const transformASellerOrder = (
   data: any
-): { order_status: TOrderStatus; order: Partial<ISellerOrder> } => {
+): {
+  order_status: TOrderStatus;
+  order: Partial<ISellerOrder>;
+} => {
   return {
     order_status: data.order_status,
     order: {
-      productName: data.order_details.sneaker.brand,
+      productName: data.order_details.sneaker.model,
       orderDate: data.order_details.created_at,
+      orderNumber: data.orderNumber,
+      img_url: data.order_details.sneaker.images[0] || "",
+      price: data.order_details.sneaker.price,
+      sizes:data?.size,
+      quantity:data?.quantity,
+      colors:data?.color
     },
   };
 };

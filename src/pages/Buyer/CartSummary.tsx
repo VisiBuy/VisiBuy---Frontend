@@ -139,6 +139,7 @@ const CartSummary = () => {
             </Button>
           </Link>
         </div>
+        <h2>Protected via Escrow</h2>
       </div>
     </div>
   );

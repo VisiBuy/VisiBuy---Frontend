@@ -22,55 +22,74 @@ const FileDispute = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (!files || files.length === 0) return; // Ensure files exist
+    if (!files || files.length === 0) return;
     setFormData((prev) => ({ ...prev, evidence: files[0] }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Dispute Submitted:", formData);
+    
   };
 
   return (
-    <div className="max-w-4xl w-full pt-4 mx-auto bg-white shadow-md rounded-md px-6 py-6 lg:px-12 lg:py-12">
-      <h2 className="text-2xl font-Montserrat font-bold mb-4">File a Dispute</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="font-OpenSans">
-          <label className="block text-sm font-medium">Order ID</label>
-          <input
-            type="text"
-            name="orderId"
-            value={formData.orderId}
-            onChange={handleChange}
-            className="w-full border px-3 py-2 rounded-md"
-            required
-          />
-        </div>
-        
-        <div className="font-OpenSans">
-          <label className="block text-sm font-medium">Issue Description</label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            className="w-full border px-3 py-2 rounded-md"
-            rows={4}
-            required
-          ></textarea>
-        </div>
-        <div className="font-OpenSans">
-          <label className="block text-sm font-medium">
-            Upload Evidence (optional)
-          </label>
-          <input type="file" onChange={handleFileChange} className="w-full" />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-blue font-Montserrat font-semibold text-white py-2 rounded-md hover:bg-blue-700"
-        >
-          Submit Dispute
-        </button>
-      </form>
+    <div className="min-h-screen flex w-full items-center justify-center bg-blue p-6">
+      <div
+        className="max-w-4xl w-full bg-white shadow-lg rounded-lg px-8 py-10
+        animate-fadeInUp transition-all duration-700"
+      >
+        <h2 className="text-3xl font-Montserrat font-bold mb-8 text-center text-gray-800">
+          File a Dispute Report
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-6 font-OpenSans">
+          <div>
+            <label className="block text-sm font-semibold mb-1 text-gray-700">
+              Order ID
+            </label>
+            <input
+              type="text"
+              name="orderId"
+              value={formData.orderId}
+              onChange={handleChange}
+              className="w-full border border-gray-300 px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="Enter your Order ID"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold mb-1 text-gray-700">
+              Issue Description
+            </label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              className="w-full border border-gray-300 px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              rows={5}
+              placeholder="Describe the issue clearly"
+              required
+            ></textarea>
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold mb-1 text-gray-700">
+              Upload Evidence (optional)
+            </label>
+            <input
+              type="file"
+              onChange={handleFileChange}
+              className="w-full text-gray-600"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 hover:bg-blue-700 transition-colors duration-300 text-white font-semibold py-3 rounded-md"
+          >
+            Submit Dispute
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

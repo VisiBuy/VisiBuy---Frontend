@@ -39,44 +39,230 @@ const ImagePickerFactory: React.FC<ImagePickerFactoryProps> = ({
 const CameraImagePicker: React.FC<ImagePickerProps> = ({ onChange }) => {
   const [image, setImage] = useState<string | null>(null);
   const [isCameraReady, setIsCameraReady] = useState<boolean>(false);
+  const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
   const webcamRef = useRef<Webcam>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const imageId = useId();
+  
+  // Check if getUserMedia is supported
+  const isGetUserMediaSupported = () => {
+    return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+  };
+  
   const videoConstraints = {
-    width: 720,
-    height: 720,
+    width: { ideal: window.innerWidth },
+    height: { ideal: window.innerHeight },
     facingMode: "environment", // Use back camera
   };
-
+  
   const handleUserMedia = useCallback(() => {
     setIsCameraReady(true);
   }, []);
-
+  
   const handleUserMediaError = useCallback((error: string | DOMException) => {
     console.error("Camera error:", error);
+    // More graceful error handling
     setIsCameraReady(false);
+    
+    // Open file input as fallback
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
   }, []);
-
-  const captureImage = useCallback(() => {
+  
+  const openCamera = () => {
+    // Check if getUserMedia is supported
+    if (!isGetUserMediaSupported()) {
+      console.log("getUserMedia is not supported, using file input fallback");
+      if (fileInputRef.current) {
+        fileInputRef.current.click();
+      }
+      return;
+    }
+    
+    setIsFullScreen(true);
+    setIsCameraReady(false); // Reset camera status
+    
+    // Small delay to ensure DOM is updated before accessing camera
+    setTimeout(() => {
+      setIsCameraReady(true);
+    }, 100);
+  };
+  
+  const closeCamera = () => {
+    setIsFullScreen(false);
+    setIsCameraReady(false);
+  };
+  
+  // File input handler as fallback
+  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const imageSrc = event.target?.result as string;
+        if (imageSrc) {
+          // Update local state and call onChange to notify parent
+          setImage(imageSrc);
+          onChange(imageId, imageSrc);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+    
+    // Reset the input value so the same file can be selected again
+    if (e.target) {
+      e.target.value = '';
+    }
+  };
+  
+  // Capture and preview states
+  const [showPreview, setShowPreview] = useState<boolean>(false);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  
+  const handleCapture = useCallback(() => {
     if (webcamRef.current) {
-      const imageSrc = webcamRef.current.getScreenshot();
-      if (imageSrc) {
-        console.log(imageId);
-        onChange(imageId, imageSrc);
-        setImage(imageSrc);
+      try {
+        const imageSrc = webcamRef.current.getScreenshot();
+        if (imageSrc) {
+          setPreviewImage(imageSrc);
+          setShowPreview(true);
+        } else {
+          console.error("Failed to capture image - no image data returned");
+          if (fileInputRef.current) {
+            fileInputRef.current.click();
+          }
+        }
+      } catch (error) {
+        console.error("Error capturing image:", error);
+        if (fileInputRef.current) {
+          fileInputRef.current.click();
+        }
       }
     }
   }, [webcamRef]);
+  
+  const confirmImage = () => {
+    if (previewImage) {
+      // Update local state
+      setImage(previewImage);
+      // Call onChange to notify parent without triggering react-query reload
+      onChange(imageId, previewImage);
+      
+      // Close the camera view
+      setShowPreview(false);
+      setIsFullScreen(false);
+    }
+  };
+  
+  const retakeImage = () => {
+    setPreviewImage(null);
+    setShowPreview(false);
+  };
 
   const resetImage = (): void => {
     onChange(imageId);
     setImage(null);
   };
-
-  // When not showing the camera or image, show the initial state
-  const showInitialState = !image && !isCameraReady;
-
+  
+  if (isFullScreen) {
+    return (
+      <div className="fixed inset-0 bg-black z-50 flex flex-col">
+        {showPreview ? (
+          // Preview captured image with confirm/retake options
+          <div className="relative w-full h-full flex flex-col">
+            <div className="flex-1 relative">
+              <img 
+                src={previewImage || ''} 
+                alt="Preview" 
+                className="w-full h-full object-contain"
+              />
+            </div>
+            
+            {/* Fixed position for confirm/retake buttons - ensures visibility on all devices */}
+            <div className="fixed bottom-0 left-0 right-0 flex justify-between p-4 bg-black bg-opacity-70 w-full">
+              <button
+                onClick={retakeImage}
+                className="bg-gray-800 text-white px-6 py-3 rounded-md text-lg font-medium"
+              >
+                Retake
+              </button>
+              <button
+                onClick={confirmImage}
+                className="bg-blue-600 text-white px-6 py-3 rounded-md text-lg font-medium"
+              >
+                Confirm
+              </button>
+            </div>
+            
+            {/* Add exit button */}
+            <button
+              onClick={closeCamera}
+              className="absolute top-4 right-4 bg-gray-800 text-white p-2 rounded-full opacity-80 hover:opacity-100 z-10"
+              aria-label="Exit"
+            >
+              <X size={24} />
+            </button>
+          </div>
+        ) : (
+          // Full-screen camera
+          <div className="relative w-full h-full">
+            {isCameraReady ? (
+              <Webcam
+                audio={false}
+                ref={webcamRef}
+                screenshotFormat="image/jpeg"
+                videoConstraints={videoConstraints}
+                onUserMedia={handleUserMedia}
+                onUserMediaError={handleUserMediaError}
+                mirrored={false}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-black">
+                <div className="text-white text-lg">Accessing camera...</div>
+              </div>
+            )}
+            
+            <div className="absolute bottom-0 left-0 right-0 p-4 flex justify-between items-center">
+              <button
+                onClick={closeCamera}
+                className="bg-gray-800 text-white p-3 rounded-full opacity-80 hover:opacity-100"
+              >
+                <X size={24} />
+              </button>
+              
+              {isCameraReady && (
+                <button
+                  onClick={handleCapture}
+                  className="bg-white p-4 rounded-full opacity-90 hover:opacity-100"
+                  aria-label="Take photo"
+                >
+                  <Camera size={32} color="black" />
+                </button>
+              )}
+              
+              <div className="w-12"></div> {/* Space balancer for flex layout */}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+  
   return (
-    <div className="relative w-64 h-64 border border-[#7F8081] p-3 rounded-lg flex items-center justify-center overflow-hidden ">
+    <div className="relative w-40 h-40 lg:w-64 lg:h-64 border border-[#7F8081] p-3 rounded-lg flex items-center justify-center overflow-hidden">
+      {/* Hidden file input as fallback */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        accept="image/*"
+        capture="environment"
+        onChange={handleFileInputChange}
+        className="hidden"
+        aria-hidden="true"
+      />
+      
       {image ? (
         // Display captured image with remove and retake buttons
         <div className="relative w-full h-full">
@@ -93,49 +279,19 @@ const CameraImagePicker: React.FC<ImagePickerProps> = ({ onChange }) => {
             <X size={20} />
           </button>
           <button
-            onClick={() => setImage(null)}
+            onClick={openCamera}
             className="absolute bottom-3 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-md text-sm font-medium opacity-80 hover:opacity-100"
           >
             Retake Photo
           </button>
         </div>
-      ) : !showInitialState ? (
-        // Display active camera with capture button
-        <div className="relative w-full h-full">
-          <Webcam
-            audio={false}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            videoConstraints={videoConstraints}
-            onUserMedia={handleUserMedia}
-            onUserMediaError={handleUserMediaError}
-            mirrored={false}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 flex items-center justify-center">
-            {!isCameraReady && (
-              <div className="bg-black bg-opacity-50 text-white px-4 py-2 rounded">
-                Accessing camera...
-              </div>
-            )}
-          </div>
-          {isCameraReady && (
-            <button
-              onClick={captureImage}
-              className="absolute bottom-3 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white p-3 rounded-full opacity-80 hover:opacity-100"
-              aria-label="Take photo"
-            >
-              <Camera size={24} />
-            </button>
-          )}
-        </div>
       ) : (
         // Initial state - click to start camera
         <div
-          onClick={() => setIsCameraReady(true)}
-          className="flex flex-col items-center justify-center cursor-pointer w-full h-full  bg-[#E3E3E3] rounded-md"
+          onClick={openCamera}
+          className="flex flex-col items-center justify-center cursor-pointer w-full h-full bg-[#E3E3E3] rounded-md"
         >
-          <p className="text-gray-500 text-center text-lg md:text-xl p-4 ">
+          <p className="text-gray-500 text-center text-sm md:text-xl p-4">
             Click here to take a picture of your product.
           </p>
         </div>
@@ -143,6 +299,7 @@ const CameraImagePicker: React.FC<ImagePickerProps> = ({ onChange }) => {
     </div>
   );
 };
+
 
 const FileImagePicker: React.FC<ImagePickerProps> = ({
   onChange,
