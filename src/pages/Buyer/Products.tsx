@@ -31,14 +31,14 @@ const BuyerProductsPage = () => {
   // Fetch products whenever the page number changes
   // useEffect(() => {
   //   // Start loading
-  //   setLoading(true);  
+  //   setLoading(true);
   //   dispatch(fetchProducts(page)).then((res) => {
   //     if (res.payload.length === 0) {
   //       setHasMore(false);
   //     }
   //   })
   //     // Stop loading when the fetch completes
-  //     .finally(() => setLoading(false));  
+  //     .finally(() => setLoading(false));
   // }, [dispatch, page]);
 
   // Initial fetch (only once on mount)
@@ -52,7 +52,7 @@ const BuyerProductsPage = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && !loading &&!loadingMore && hasMore) {
+        if (entries[0].isIntersecting && !loading && !loadingMore && hasMore) {
           // setPage((prev) => prev + 1); // Increment page to load more products
           dispatch(fetchProducts());
         }
@@ -94,8 +94,20 @@ const BuyerProductsPage = () => {
             [...Array(3)].map((_, idx) => (
               <ProductSkeleton key={`skeleton-${idx}`} type="skeleton" />
             ))} */}
-            {loading && [...Array(3)].map((_, i) => (
-              <ProductSkeleton key={`loading-${i}`} type="skeleton" product={{ _id: "", images: [], storeName: "", model: "", brand: "", price: 0 }} />
+          {loading &&
+            [...Array(3)].map((_, i) => (
+              <ProductSkeleton
+                key={`loading-${i}`}
+                type='skeleton'
+                product={{
+                  _id: "",
+                  images: [],
+                  storeName: "",
+                  model: "",
+                  brand: "",
+                  price: 0,
+                }}
+              />
             ))}
         </div>
       ) : (
@@ -103,9 +115,11 @@ const BuyerProductsPage = () => {
       )}
 
       {/* Loader Ref Target */}
-      <div ref={loader} className="flex justify-center items-center h-16">
+      <div ref={loader} className='flex justify-center items-center h-16'>
         {!hasMore && (
-          <span className="text-gray-400 text-sm">No more products to load.</span>
+          <span className='text-gray-400 text-sm'>
+            No more products to load.
+          </span>
         )}
       </div>
     </div>
