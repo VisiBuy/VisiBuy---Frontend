@@ -7,6 +7,7 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const BuyerProductsPage = () => {
+  console.log(import.meta.env)
   const dispatch = useDispatch<AppDispatch>();
   const { products, loading, loadingMore, hasMore } = useSelector(
     (state: RootState) => state.buyer.product
@@ -80,10 +81,10 @@ const BuyerProductsPage = () => {
         <h2 className="text-3xl font-bold font-montserrat">Products</h2>
       </div>
 
-<<<<<<< HEAD
+
       {/* Product Grid using Tailwind CSS Masonry */}
-      {displayedProducts?.length > 0 ? (
-=======
+      {/* {displayedProducts?.length > 0 ? ( */}
+
       {/* Products Grid */}
       {loading ? (
         <div className="flex justify-center items-center min-h-[300px]">
@@ -91,7 +92,7 @@ const BuyerProductsPage = () => {
           {/* Spinner for loading */}
         </div>
       ) : displayedProducts?.length > 0 ? (
->>>>>>> staging
+
         <div
           className="grid grid-rows-[repeat(auto-fit,minmax(200px,1fr))] auto-cols-[251px] justify-center md:flex md:justify-normal gap-6 p-6"
           style={{ flexWrap: "wrap" }}
@@ -125,12 +126,12 @@ const BuyerProductsPage = () => {
         <p className="text-center text-gray-500">No products available.</p>
       )}
 
-<<<<<<< HEAD
-      {/* Loader Ref Target */}
+
+      {/* Loader Ref Target
       <div ref={loader} className='flex justify-center items-center h-16'>
         {!hasMore && (
-          <span className='text-gray-400 text-sm'>
-=======
+          <span className='text-gray-400 text-sm'> */}
+
       {/* Loader Ref */}
       <div ref={loader} className="flex justify-center items-center h-16">
         {loadingMore && (
@@ -138,7 +139,7 @@ const BuyerProductsPage = () => {
         )}
         {!loadingMore && !hasMore && (
           <span className="text-gray-400 text-sm">
->>>>>>> staging
+
             No more products to load.
           </span>
         )}
