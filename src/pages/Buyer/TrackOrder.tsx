@@ -23,12 +23,7 @@ const BuyerTrackOrderPage = () => {
   const { statusFilter, searchQuery, handleStatusChange, handleSearch } =
     useOrderActions();
 
-  const filteredOrders = useOrderFilter(
-    allOrders ?? [],
-    statusFilter,
-    searchQuery
-  );
-
+  const filteredOrders = useOrderFilter(allOrders, statusFilter, searchQuery);
   const [currentPage, setCurrentPage] = useState(1);
 
   // Reset page to 1 when status or search changes
