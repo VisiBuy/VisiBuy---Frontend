@@ -25,7 +25,8 @@ export function useLogin() {
       let redirectPath = localStorage.getItem("redirectPath");
 
       if (redirectPath) {
-        if (!redirectPath.startsWith("/")) {
+        // if (!redirectPath.startsWith("/")) {
+        if (!redirectPath.startsWith("#")) {
           redirectPath = "/";
         }
         localStorage.removeItem("redirectPath");

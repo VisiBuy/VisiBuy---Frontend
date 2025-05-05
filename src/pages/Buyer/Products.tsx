@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const BuyerProductsPage = () => {
   console.log(import.meta.env)
+
   const dispatch = useDispatch<AppDispatch>();
   const { products, loading, loadingMore, hasMore } = useSelector(
     (state: RootState) => state.buyer.product
@@ -53,12 +54,9 @@ const BuyerProductsPage = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !loading && !loadingMore && hasMore) {
-          // setPage((prev) => prev + 1); // Increment page to load more products
-          // dispatch(fetchProducts());
           const nextPage = currentPage + 1;
           dispatch(fetchProducts(nextPage));
           setCurrentPage(nextPage);
-
         }
       },
       { threshold: 1.0 }
@@ -82,6 +80,7 @@ const BuyerProductsPage = () => {
       </div>
 
 
+
       {/* Product Grid using Tailwind CSS Masonry */}
       {/* {displayedProducts?.length > 0 ? ( */}
 
@@ -92,7 +91,6 @@ const BuyerProductsPage = () => {
           {/* Spinner for loading */}
         </div>
       ) : displayedProducts?.length > 0 ? (
-
         <div
           className="grid grid-rows-[repeat(auto-fit,minmax(200px,1fr))] auto-cols-[251px] justify-center md:flex md:justify-normal gap-6 p-6"
           style={{ flexWrap: "wrap" }}
@@ -126,12 +124,6 @@ const BuyerProductsPage = () => {
         <p className="text-center text-gray-500">No products available.</p>
       )}
 
-
-      {/* Loader Ref Target
-      <div ref={loader} className='flex justify-center items-center h-16'>
-        {!hasMore && (
-          <span className='text-gray-400 text-sm'> */}
-
       {/* Loader Ref */}
       <div ref={loader} className="flex justify-center items-center h-16">
         {loadingMore && (
@@ -139,7 +131,6 @@ const BuyerProductsPage = () => {
         )}
         {!loadingMore && !hasMore && (
           <span className="text-gray-400 text-sm">
-
             No more products to load.
           </span>
         )}
@@ -149,7 +140,3 @@ const BuyerProductsPage = () => {
 };
 
 export default BuyerProductsPage;
-// {/* Loading Indicator */}
-//           <div ref={loader} className="flex justify-center items-center h-16">
-//             {loading && <span className="text-gray-500 text-center">Loading...</span>}
-//           </div>

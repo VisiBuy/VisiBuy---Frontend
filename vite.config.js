@@ -7,9 +7,6 @@ import path from "path";
 export default defineConfig(({ mode }) => {
   return {
     plugins: [react(), tsconfigPaths()],
-    // optimizeDeps: {
-    //   exclude: ["lucide-react"],
-    // },
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),

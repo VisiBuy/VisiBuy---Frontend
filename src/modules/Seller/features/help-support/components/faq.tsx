@@ -15,10 +15,11 @@ export const faqs: FaqProps[] = [
   },
   {
     question: "How do I change my payout account?",
+
     answer:
       `Go to your Seller Dashboard > Settings > Payout Details. You can update your bank name, account number, and account holder name.
-      <br/>🔄 This feature is coming in Visibuy 2.0 — account updates will be available soon.
 
+      <br/>🔄 This feature is coming in Visibuy 2.0 — account updates will be available soon.
       `,
   },
 ];
@@ -26,9 +27,11 @@ export const faqs: FaqProps[] = [
 export const Faq = () => {
   return (
     <div className=" mx-auto py-4 px-4 sm:px-6 lg:px-8">
+
       <h2 className="text-3xl mb-8 font-Montserrat font-semibold">
         Payment
       </h2>
+
       <motion.dl
         className="space-y-8 "
         initial={{ opacity: 0, y: 20 }}

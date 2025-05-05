@@ -18,7 +18,6 @@ import { SellerOrderPage } from "./pages/Seller/Order";
 import { SellerOrderDetailsPage } from "./pages/Seller/OrderDetails";
 import { PrivateRoute } from "./common/components/private-route";
 import { HelpSupportPage } from "./pages/Seller/help-support/help-support";
-
 import BuyerDashboardLayout from "./layouts/buyer/BuyerDashboardLayout";
 import BuyerDashboardPage from "./pages/Buyer/Dashboard";
 import BuyerProductsPage from "./pages/Buyer/Products";
