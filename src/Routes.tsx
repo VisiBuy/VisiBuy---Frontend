@@ -41,6 +41,7 @@ import { GetpayedPage } from "./pages/Seller/help-support/getpayed";
 import { GetVerifiedPage } from "./pages/Seller/help-support/verification";
 import { CancelOrderPage } from "./pages/Seller/help-support/cancel-order";
 import { OrderManagementPage } from "./pages/Seller/help-support/order-management";
+import SearchResultsPage from "./pages/Buyer/SearchResultsPage";
 
 const router = createHashRouter([
   {
@@ -106,7 +107,7 @@ const router = createHashRouter([
         ],
       },
       {
-        path: "call-support", 
+        path: "call-support",
         element: <HelpSupportPage />,
         children: [
           { path: "get-started", element: <SellerGetStartedPage /> },
@@ -159,6 +160,7 @@ const router = createHashRouter([
       { path: "notification/:id", element: <BuyerNotificationsDetailsPage /> },
       { path: "report", element: <FileDispute /> },
       { path: "profile", element: <BuyerProfilePage /> },
+      { path: "search", element: <SearchResultsPage /> },
     ],
   },
 ]);

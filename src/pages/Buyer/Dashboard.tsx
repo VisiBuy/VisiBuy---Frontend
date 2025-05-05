@@ -13,28 +13,8 @@ import { useAppDispatch, useAppSelector } from "@/hooks/app-hooks";
 import { getOrderHistory } from "@/modules/Buyer/models/track-order/trackOrderSlice";
 import { RootState } from "@/store/store";
 import useOrderFilter from "@/modules/Buyer/hooks/useOrderFilter";
+import ErrorBoundary from "@/common/components/ErrorBoundary";
 
-// Error Boundary Component
-const ErrorBoundary = ({ children }: { children: React.ReactNode }) => {
-  const [hasError, setHasError] = useState(false);
-
-  const handleError = () => setHasError(true);
-
-  useEffect(() => {
-    window.addEventListener("error", handleError);
-    return () => {
-      window.removeEventListener("error", handleError);
-    };
-  }, []);
-
-  if (hasError) {
-    return (
-      <div className="p-6 text-center text-xl text-gray-600">No orders yet</div>
-    );
-  }
-
-  return <>{children}</>;
-};
 
 const COLORS = ["#FFBB28", "#FF8042", "#00C49F", "#0088FE", "#FF3B30"];
 interface AnalyticsData {

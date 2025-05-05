@@ -36,10 +36,14 @@ const initialState: ProductState = {
 // Fetch products from API
 export const fetchProducts = createAsyncThunk(
   "products/fetch",
-  async (page: number, { dispatch }) => {
+  async ({ page, query }: { page: number; query?: string }, { dispatch }) => {
     try {
       const response = await axiosWithAuth.get("list", {
-        params: { page, pageSize: 6 },
+        params: {
+          page,
+          pageSize: 6,
+          q: query || "",
+        },
       });
       const data = response.data.sneakers;
       console.log("Fetched products:", data);
@@ -73,20 +77,22 @@ const productSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state, action) => {
-        if (action.meta.arg > 1) {
+        if (action.meta.arg.page > 1) {
           state.loadingMore = true;
         } else {
           state.loading = true;
         }
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.products = [...state.products, ...action.payload.products];
-        state.loading = false;
-        state.loadingMore = false;
-        state.hasMore = action.payload.hasMore;
+        if (action.payload) {
+          state.products = [...state.products, ...action.payload.products];
+          state.loading = false;
+          state.loadingMore = false;
+          state.hasMore = action.payload.hasMore;
 
-        if (action.payload.hasMore) {
-          state.page += 1;
+          if (action.payload.hasMore) {
+            state.page = action.meta.arg.page + 1;
+          }
         }
       })
       .addCase(fetchProducts.rejected, (state) => {
