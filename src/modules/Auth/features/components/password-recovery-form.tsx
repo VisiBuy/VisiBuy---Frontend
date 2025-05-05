@@ -58,17 +58,17 @@ export function PasswordResetForm() {
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
-              name='email'
+              name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className='flex justify-start text-xl'>
-                    Email<span className='text-destructive ml-1'>*</span>
+                  <FormLabel className="flex justify-start text-xl">
+                    Email<span className="text-destructive ml-1">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
-                      placeholder='Email'
+                      placeholder="Email"
                       {...field}
-                      icon={<Icon name='mail' className='h-8 w-8' />}
+                      icon={<Icon name="mail" className="h-8 w-8" />}
                     />
                   </FormControl>
                   <FormMessage />
@@ -79,13 +79,13 @@ export function PasswordResetForm() {
             <div className="pt-4">
               <Button
                 disabled={loginMutation.isPending || !form.formState.isValid}
-                type='submit'
-                className='w-full px-12 h-16 text-xl'
-                size='sm'
+                type="submit"
+                className="w-full px-12 h-16 text-xl"
+                size="sm"
               >
                 Reset Password
                 {loginMutation.isPending && (
-                  <Loader2 className='ml-2 animate-spin' />
+                  <Loader2 className="ml-2 animate-spin" />
                 )}
               </Button>
             </div>

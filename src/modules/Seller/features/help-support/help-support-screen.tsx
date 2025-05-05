@@ -1,7 +1,7 @@
-import { MainLayout } from "../../../../layouts/main-layout";
-import { dashboardConfig } from "../../../../lib/config";
-import { capitalize, cn } from "../../../../lib/utils";
-import Icon from "../../../../ui/Icon";
+import { MainLayout } from "@/layouts/main-layout";
+import { dashboardConfig } from "@/lib/config";
+import { capitalize, cn } from "@/lib/utils";
+import Icon from "@/ui/Icon";
 import {
   Link,
   Outlet,
@@ -63,13 +63,14 @@ export function HelpSupportScreen() {
 
   return (
     <div>
+      {/* default layout  */}
       {match && (
         <MainLayout title="Help & Support">
           <div className="px-2 lg:px-10 pt-10">
             <h2 className="text-4xl font-semibold font-Montserrat">
               How can we help you today?
             </h2>
-            <h3 className='mt-16 mb-8 text-2xl font-Montserrat font-medium'>
+            <h3 className="mt-16 mb-8 text-2xl font-Montserrat font-medium">
               Store Guides
             </h3>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-4">
@@ -82,7 +83,7 @@ export function HelpSupportScreen() {
                 />
               ))}
             </div>
-            <h3 className='mt-16 mb-8 text-2xl font-Montserrat font-medium'>
+            <h3 className="mt-16 mb-8 text-2xl font-Montserrat font-medium">
               Frequently Asked Questions (FAQ)
             </h3>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-4">
@@ -100,11 +101,12 @@ export function HelpSupportScreen() {
       )}
       {match === null && (
         <MainLayout
+          className="min-h-full"
           title={
-            <div className='flex gap-x-4 items-center'>
-              <Link to='' className='bg-light-gray px-4 py-2 '>
+            <div className="flex gap-x-4 items-center ">
+              <Link to="" className="bg-light-gray px-4 py-2 ">
                 {" "}
-                <Icon name='move-left' width={20} />
+                <Icon name="move-left" width={20} />
               </Link>
 
               {capitalize(matchLink?.title)}
@@ -119,16 +121,16 @@ export function HelpSupportScreen() {
           `border border-light-gray py-10 px-10 lg:px-20  h-full mt-8 rounded-xl `
         )}
       >
-        <h2 className='text-4xl font-semibold font-Montserrat'>
+        <h2 className="text-4xl font-semibold font-Montserrat">
           Talk to an agent
         </h2>
         <div className="grid  grid-cols-1 lg:grid-cols-2  gap-y-4  mt-8">
           <div className="flex items-center px-6 py-8 bg-blue-200 rounded-md hover:cursor-pointer">
             <span>
-              <img src='/messages-3.svg' alt='chat icon' />
+              <img src="/messages-3.svg" alt="chat icon" />
             </span>
-            <div className='flex-1 ml-6'>
-              <h3 className='text-foreground text-2xl mb-4 text-left font-Montserrat font-bold '>
+            <div className="flex-1 ml-6">
+              <h3 className="text-foreground text-2xl mb-4 text-left font-Montserrat font-bold ">
                 Live Chat
               </h3>
               <p className="text-xl lg:text-2xl font-Montserrat">
@@ -136,12 +138,12 @@ export function HelpSupportScreen() {
               </p>
             </div>
           </div>
-          <div className='flex items-center px-6 py-8 bg-blue-200 rounded-md hover:cursor-pointer'>
+          <div className="flex items-center px-6 py-8 bg-blue-200 rounded-md hover:cursor-pointer">
             <span>
-              <img src='/messages-3.svg' alt='chat icon' />
+              <img src="/messages-3.svg" alt="chat icon" />
             </span>
-            <div className='flex-1 ml-6'>
-              <h3 className='text-foreground text-2xl mb-4 text-left font-Montserrat font-bold '>
+            <div className="flex-1 ml-6">
+              <h3 className="text-foreground text-2xl mb-4 text-left font-Montserrat font-bold ">
                 Call an agent
               </h3>
               <p className="text-xl lg:text-2xl font-Montserrat ">

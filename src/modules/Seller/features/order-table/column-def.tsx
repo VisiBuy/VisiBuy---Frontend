@@ -25,7 +25,7 @@ export const columns: ColumnDef<ISellerOrder>[] = [
     header: "Product Name",
     cell: ({ row }) => {
       return (
-        <div className='flex justify-center'>
+        <div className="flex justify-center">
           {" "}
           <img
             className="aspect-square border border-light-gray rounded-md mr-3 w-10"
@@ -79,8 +79,8 @@ export const columns: ColumnDef<ISellerOrder>[] = [
           />
           <Link to={`view/${row.getValue("id")}`}>
             <Icon
-              name='ellipsis-vertical'
-              className='text-secondary-foreground ml-4'
+              name="ellipsis-vertical"
+              className="text-secondary-foreground ml-4"
               size={15}
             />
           </Link>

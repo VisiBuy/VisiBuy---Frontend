@@ -90,13 +90,13 @@ function OrderSelectStatus({
         <SelectItem value="accepted" className="focus:bg-[#C8E2FF]">
           Accepted
         </SelectItem>
-        <SelectItem value='delivered' className='focus:bg-[#C8E2FF]'>
+        <SelectItem value="delivered" className="focus:bg-[#C8E2FF]">
           Delivered
         </SelectItem>
-        <SelectItem value='dispatched' className='focus:bg-[#C8E2FF]'>
+        <SelectItem value="dispatched" className="focus:bg-[#C8E2FF]">
           Dispatched
         </SelectItem>
-        <SelectItem value='pending' className='focus:bg-[#C8E2FF]'>
+        <SelectItem value="pending" className="focus:bg-[#C8E2FF]">
           Pending
         </SelectItem>
       </SelectContent>

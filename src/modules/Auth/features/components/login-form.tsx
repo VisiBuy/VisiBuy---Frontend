@@ -84,16 +84,16 @@ export function LoginForm() {
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
-              name='email'
+              name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className='flex justify-start text-xl'>
+                  <FormLabel className="flex justify-start text-xl">
                     Email/Phone Number
-                    <span className='text-destructive ml-1'>*</span>
+                    <span className="text-destructive ml-1">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
-                      placeholder='Email'
+                      placeholder="Email"
                       {...field}
                       className="text-xl"
                       icon={<Icon name="mail" className="h-6 w-6" />}
@@ -106,15 +106,15 @@ export function LoginForm() {
 
             <FormField
               control={form.control}
-              name='pass'
+              name="pass"
               render={({ field }) => (
-                <FormItem className='py-4'>
-                  <FormLabel className='flex justify-start text-xl items-center'>
-                    Password<span className='text-destructive ml-1'>*</span>
+                <FormItem className="py-4">
+                  <FormLabel className="flex justify-start text-xl items-center">
+                    Password<span className="text-destructive ml-1">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
-                      placeholder='Password'
+                      placeholder="Password"
                       {...field}
                       className="text-base"
                       type={showPassword ? "text" : "password"}
@@ -136,9 +136,9 @@ export function LoginForm() {
               control={form.control}
               name="isRememberChecked"
               render={({ field }) => (
-                <FormItem className='py-4'>
+                <FormItem className="py-4">
                   <FormControl>
-                    <div className='flex items-center space-x-2'>
+                    <div className="flex items-center space-x-2">
                       <Checkbox
                         checked={field.value}
                         onCheckedChange={(checked) => field.onChange(checked)}
@@ -165,7 +165,7 @@ export function LoginForm() {
               >
                 Sign In
                 {loginMutation.isPending && (
-                  <Loader2 className='ml-2 animate-spin' />
+                  <Loader2 className="ml-2 animate-spin" />
                 )}
               </Button>
             </div>

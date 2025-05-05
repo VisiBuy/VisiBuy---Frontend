@@ -85,28 +85,28 @@ export function SellerOrderScreen() {
             <div className="grid grid-cols-2 gap-5 lg:grid-cols-5 lg:gap-x-4">
               <OrderSummaryCard figure={data?.data.total_orders} />
               <OrderSummaryCard
-                title='Pending'
-                legendColor='bg-blue'
+                title="Pending"
+                legendColor="bg-blue"
                 figure={data?.data.sellerOrderSummary.pending}
               />
               <OrderSummaryCard
-                title='Accepted'
+                title="Accepted"
                 figure={data?.data.sellerOrderSummary.accepted}
-                legendColor='bg-[#FFA600]'
+                legendColor="bg-[#FFA600]"
               />
               <OrderSummaryCard
-                title='Dispatched'
+                title="Dispatched"
                 figure={data?.data.sellerOrderSummary.dispatched}
-                legendColor='bg-[#FF6200]'
+                legendColor="bg-[#FF6200]"
               />
               <OrderSummaryCard
-                title='Delivered'
-                legendColor='bg-primary'
+                title="Delivered"
+                legendColor="bg-primary"
                 figure={data?.data.sellerOrderSummary.delivered}
               />
             </div>
             <OrderTabs tabs={tabs} table={table} />
-            <div className='relative'>
+            <div className="relative">
               <SellerOrderTable table={table} />
               <OverlaySpinner open={isFetching || root.isLoading} />
             </div>
