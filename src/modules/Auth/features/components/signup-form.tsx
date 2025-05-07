@@ -55,13 +55,14 @@ export function SignUpForm() {
           ? buyerMutation.data?.token
           : sellerMutation.data?.token;
       dispatch(setCredentials({ token, role }));
-      if (role === "seller") {
-        navigate(dashboardConfig.getFullPath(role as Role, "products"));
-      } else {
-        navigate(dashboardConfig.getConfig(role as Role).basePath);
-      }
+
+        if (role === "seller") {
+          navigate(dashboardConfig.getFullPath(role, "products"));
+        } else {
+          navigate(dashboardConfig.getConfig(role).basePath);
+        }
     }
-  }, [sellerMutation.isSuccess, buyerMutation.isSuccess]);
+  }, [sellerMutation.isSuccess, buyerMutation.isSuccess, role]);
 
   const form = useForm<z.infer<typeof SignupUserSchema>>({
     mode: "onTouched",
@@ -81,6 +82,7 @@ export function SignUpForm() {
     const userActivityTracker = new UserActivityTracker([facebookTracker]); // array of trackers to send data
     try {
       if (role === "buyer") {
+        
         await buyerMutation.mutateAsync(values);
         userActivityTracker.trackActivity("track", "CompleteRegistration", {
           content_name: "Signup",
@@ -92,7 +94,7 @@ export function SignUpForm() {
         await sellerMutation.mutateAsync(values);
         userActivityTracker.trackActivity("track", "CompleteRegistration", {
           content_name: "Signup",
-          user_type: "seller ",
+          user_type: "seller",
           email: values.email,
           name: values.fullName,
         });

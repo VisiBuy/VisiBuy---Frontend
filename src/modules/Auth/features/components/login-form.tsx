@@ -20,11 +20,13 @@ import { useLogin } from "../../mutations/use-login";
 import { Link } from "react-router-dom";
 import Icon from "../../../../ui/Icon";
 import { useId } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function LoginForm() {
   const loginMutation = useLogin();
   const [showPassword, setShowPassword] = useState(false);
   const [isTypingDone, setIsTypingDone] = useState(false);
+  const navigate = useNavigate();
 
   const checkboxId = useId(); // Generate a unique ID for the checkbox
 
@@ -61,6 +63,13 @@ export function LoginForm() {
     loginMutation.isPending ||
     form.formState.isSubmitting ||
     !form.formState.isValid;
+
+  // Redirect based on role after successful login
+  useEffect(() => {
+    if (loginMutation.isSuccess && loginMutation.data?.role === "buyer") {
+      navigate("/dashboard/buyer");
+    }
+  }, [loginMutation.isSuccess, loginMutation.data, navigate]);
 
   return (
     <div className="w-full max-w-xl mx-auto flex flex-col items-center min-h-screen px-4">
@@ -120,9 +129,9 @@ export function LoginForm() {
                       type={showPassword ? "text" : "password"}
                       icon={
                         <Icon
-                          name="eye"
+                          name={showPassword ? "eye-off" : "eye"}
                           className="h-6 w-6 cursor-pointer"
-                          onClick={() => setShowPassword((prev) => !prev)}
+                          onClick={() => setShowPassword(!showPassword)}
                         />
                       }
                     />

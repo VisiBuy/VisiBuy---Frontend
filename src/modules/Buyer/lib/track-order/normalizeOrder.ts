@@ -36,3 +36,4 @@ export const normalizeOrder = (order: any): Order => {
     verificationStatus: order.order_status || "N/A", 
   };
 };
+

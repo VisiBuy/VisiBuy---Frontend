@@ -2,7 +2,7 @@ import authReducer from "@/modules/Auth/features/slices";
 import toastReducer from "@/ui/toastSlice";
 import sellerReducer from "@/store/sellerReducer";
 import buyerReducer from "@/store/buyerReducer";
-import trackOrderReducer from "@/modules/Buyer/models/track-order/trackOrderSlice"
+import trackOrderReducer from "@/modules/Buyer/models/trackOrderSlice";
 import { combineReducers, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialRootState: { error: null | string; isLoading: boolean } = {

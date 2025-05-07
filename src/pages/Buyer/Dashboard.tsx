@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import { motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "@/hooks/app-hooks";
-import { getOrderHistory } from "@/modules/Buyer/models/track-order/trackOrderSlice";
+import { getOrderHistory } from "@/modules/Buyer/models/trackOrderSlice";
 import { RootState } from "@/store/store";
 import useOrderFilter from "@/modules/Buyer/hooks/useOrderFilter";
 import ErrorBoundary from "@/common/components/ErrorBoundary";

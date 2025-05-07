@@ -9,6 +9,7 @@ interface OrderStatusButtonsProps {
   statusCounts: Record<FilterStatus, number>;
 }
 const statuses: FilterStatus[] = [
+  "all",
   "accepted",
   "dispatched",
   "pending",

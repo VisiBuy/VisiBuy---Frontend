@@ -20,7 +20,8 @@ const useOrderFilter = (
 
       const brand = order?.product?.brand?.toLowerCase?.() || "";
       const orderNo = order?.orderNo?.toLowerCase?.() || "";
-      const query = searchQuery.toLowerCase();
+      const query = searchQuery.trim().toLowerCase();
+
 
       const matchesSearch = brand.includes(query) || orderNo.includes(query);
 

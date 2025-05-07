@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { Outlet, useLocation } from "react-router-dom";
-import { getOrderHistory } from "@/modules/Buyer/models/track-order/trackOrderSlice";
+import { getOrderHistory } from "@/modules/Buyer/models/trackOrderSlice";
 import OrderStatusButtons from "@/modules/Buyer/features/track-order/components/OrderStatusButtons";
 import SearchOrder from "@/modules/Buyer/features/track-order/components/SearchOrder";
 import OrderCard from "@/modules/Buyer/features/track-order/components/OrderCard";
@@ -103,12 +103,14 @@ const BuyerTrackOrderPage = () => {
                   </div>
                 ) : error ? (
                   <p className="text-red-500">{error}</p>
+                ) : allOrders.length === 0 ? (
+                  <p>No orders yet.</p>
                 ) : paginatedOrders.length > 0 ? (
                   paginatedOrders.map((order) => (
                     <OrderCard key={order.orderId} order={order} />
                   ))
                 ) : (
-                  <p>No orders found.</p>
+                  <p>No orders found for the current filter or search.</p>
                 )}
               </div>
               <div className="w-96 hidden lg:block">
