@@ -5,7 +5,6 @@ import {
 import { RootState } from "@/store/store";
 import OrderSuccess from "@/ui/buyer/OrderSuccess";
 import { useEffect, useState } from "react";
-<<<<<<< HEAD
 import {
   FaShoppingCart,
   FaChevronLeft,
@@ -14,11 +13,6 @@ import {
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-=======
-import { FaShoppingCart, FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
->>>>>>> master
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -41,10 +35,7 @@ interface Product {
 }
 
 function ProductDetails() {
-<<<<<<< HEAD
   const navigate = useNavigate();
-=======
->>>>>>> master
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
 
@@ -113,16 +104,12 @@ function ProductDetails() {
 
   return (
     <div className='h-[100%] w-[93%] p-8'>
-<<<<<<< HEAD
       <button
         onClick={() => navigate(-1)}
         className='flex items-center gap-2 text-blue-500 hover:text-blue-700 font-semibold mb-4'
       >
         <FaArrowLeft /> Back
       </button>
-
-=======
->>>>>>> master
       {showErrorHolder && (
         <ErrorHolder
           message='Size/Color can not be empty!'

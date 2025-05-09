@@ -7,12 +7,13 @@ export const PrivateRoute = ({
   const { isAuthenticated, isLoading } = useAuth();
   const location = useLocation();
 
-  if (!isAuthenticated) {
-    // Ensure the path is a valid relative path before saving it
-    const redirectPath = location.pathname + location.search;
-    localStorage.setItem("redirectPath", redirectPath);
-    return <Navigate to="/login" />;
-  }
+  // if (!isAuthenticated) {
+  //   // Ensure the path is a valid relative path before saving it
+  //   const redirectPath = location.pathname + location.search;
+  //   localStorage.setItem("redirectPath", redirectPath);
+  //   return <Navigate to="/login" />;
+  // }
+  console.log('logger');
 
   return children;
 };
