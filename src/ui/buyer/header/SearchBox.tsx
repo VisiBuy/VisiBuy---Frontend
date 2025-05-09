@@ -13,9 +13,13 @@ const SearchBox = ({
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    if (query.trim()) {
-      navigate(`/search?q=${encodeURIComponent(query)}`);
-      if (onSearch) onSearch(query); // Call the callback if provided
+    const trimmedQuery = query.trim();
+    if (trimmedQuery) {
+      // Search string remains generic; backend or search page parses it
+      const searchParams = new URLSearchParams({ q: trimmedQuery });
+      navigate(`/search?${searchParams.toString()}`);
+
+      onSearch?.(trimmedQuery);
     }
   };
 

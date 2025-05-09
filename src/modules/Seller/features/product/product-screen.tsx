@@ -60,7 +60,7 @@ export function ProductScreen() {
             >
               <Plus></Plus> Add new product
             </Button>
-            <Spinner />
+           
           </div>
         )}
         {/* <AddProductModal /> */}

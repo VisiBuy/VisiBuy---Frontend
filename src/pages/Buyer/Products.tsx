@@ -45,7 +45,9 @@ const BuyerProductsPage = () => {
   // Initial fetch
   useEffect(() => {
     if (products?.length === 0) {
-      dispatch(fetchProducts(1)); // Fetch first page
+      dispatch(
+        fetchProducts({ page: currentPage, query: filters.search || "" })
+      ); // Fetch first page
     }
   }, [dispatch, products?.length]);
 
@@ -55,7 +57,9 @@ const BuyerProductsPage = () => {
       (entries) => {
         if (entries[0].isIntersecting && !loading && !loadingMore && hasMore) {
           const nextPage = currentPage + 1;
-          dispatch(fetchProducts(nextPage));
+          dispatch(
+            fetchProducts({ page: currentPage, query: filters.search || "" })
+          );
           setCurrentPage(nextPage);
         }
       },

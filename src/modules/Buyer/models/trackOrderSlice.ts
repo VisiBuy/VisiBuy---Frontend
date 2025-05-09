@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchOrderHistory } from "../../lib/track-order/api";
+import { fetchOrderHistory } from "../lib/track-order/api";
 import { Order } from "@/types/orders";
-import { normalizeOrder } from "../../lib/track-order/normalizeOrder";
+import { normalizeOrder } from "../lib/track-order/normalizeOrder";
 
 // Async thunk to fetch all order history
 export const getOrderHistory = createAsyncThunk(

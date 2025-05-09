@@ -1,5 +1,22 @@
 import { axiosWithAuth } from "@/lib/client";
 import { VerificationResponse, VerificationImage } from "@/types/VerificationImage";
+import { BuyerInfo } from "@/types/buyerInfo";
+
+
+/**
+ * Get Buyer Information
+ * GET /user/buyer
+ */
+export  const fetchBuyerInfo = async(): Promise<BuyerInfo> =>{
+  try {
+    const response = await axiosWithAuth.get("/user/buyer");
+    return response.data.msg.user; 
+  } catch (error: any) {
+    console.error("❌ Error fetching buyer info:", error.response?.data || error);
+    throw new Error(error.response?.data?.message || "Failed to fetch buyer info");
+  }
+}
+
 
 /**
  * Track Order
