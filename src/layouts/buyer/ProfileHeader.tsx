@@ -30,10 +30,8 @@ const getNameParts = (
   };
 };
 
-const HeaderBar: React.FC<HeaderBarProps> = ({
+const ProfileHeader: React.FC<HeaderBarProps> = ({
   onMenuClick,
-  isSidebarOpen,
-  setIsSidebarOpen,
 }) => {
   const cartItems = useSelector((state: RootState) => state.buyer.cart.items);
   const navigate = useNavigate();
@@ -68,16 +66,16 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
   const homeUrl = `${buyerConfig.basePath.replace(/\/$/, "")}/${buyerConfig.routes.products.replace(/^\//, "")}`;
 
   return (
-    <header className="bg-background fixed top-0 left-0 md:left-80 right-0 z-50 border border-gray-100 p-8">
+    <header className="bg-background fixed top-0 left-0 right-0 z-50 border border-gray-100 p-8">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">
           <FaBars
             className="text-4xl text-blue font-extrabold cursor-pointer sm:hidden"
             onClick={onMenuClick}
           />
-          <div className="flex items-center gap-2 sm:hidden">
+          <div className="flex items-center gap-2">
             <Link to={homeUrl}>
-              <img src={logo} alt="VisiBuy" className="h-6" />
+              <img src={logo} alt="VisiBuy" className="h-6 sm:h-8" />
             </Link>
             <span className="bg-blue-200 text-blue text-xs font-bold px-3 py-1 rounded-lg">
               Beta
@@ -97,9 +95,7 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
 
           {/* Profile Picture */}
           {isLoading ? (
-            <div className="text-sm text-gray-500 animate-pulse">
-              
-            </div>
+            <div className="text-sm text-gray-500 animate-pulse"></div>
           ) : error ? (
             <div className="text-red-500 text-sm">Failed to load user</div>
           ) : (
@@ -120,4 +116,4 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
   );
 };
 
-export default HeaderBar;
+export default ProfileHeader;

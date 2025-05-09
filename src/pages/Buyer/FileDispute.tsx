@@ -32,7 +32,7 @@ const FileDispute = () => {
   };
 
   return (
-    <div className="min-h-screen flex w-full items-center justify-center bg-blue p-6">
+    <div className="min-h-screen flex w-full items-center justify-center bg-blue p-4">
       <div
         className="max-w-4xl w-full bg-white shadow-lg rounded-lg px-8 py-10
         animate-fadeInUp transition-all duration-700"

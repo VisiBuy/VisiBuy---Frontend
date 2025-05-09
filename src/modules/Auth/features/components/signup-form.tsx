@@ -17,11 +17,16 @@ import { Loader2, MoveRight } from "lucide-react";
 import { Checkbox } from "../../../../ui/Checkbox";
 import { useCreateBuyer } from "../../mutations/use-register-buyer";
 import { useCreateSeller } from "../../mutations/use-register-seller";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { cn } from "../../../../lib/utils";
 import Icon from "../../../../ui/Icon";
 import { SUCCESS_RESPONSE_CREATE_RECORD } from "../../../../lib/systemConfig";
+import { UserActivityTracker } from "@/lib/activity-tracker/user-activity-tracker";
+import { facebookTracker } from "@/lib/activity-tracker/facebook-tracker";
+import { setCredentials } from "../slices";
+import { useAppDispatch } from "@/hooks/app-hooks";
+import { dashboardConfig } from "@/lib/config";
 
 export function SignUpForm() {
   const [role, setRole] = useState<Role>("buyer");
@@ -30,7 +35,8 @@ export function SignUpForm() {
   const { toast } = useToast();
   const buyerMutation = useCreateBuyer();
   const sellerMutation = useCreateSeller();
-
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     if (sellerMutation.isSuccess || buyerMutation.isSuccess) {
       toast({
@@ -43,7 +49,20 @@ export function SignUpForm() {
         duration: 5000,
       });
     }
-  }, [sellerMutation.isSuccess, buyerMutation.isSuccess]);
+    if (sellerMutation.data?.token || buyerMutation.data?.token) {
+      const token =
+        role === "buyer"
+          ? buyerMutation.data?.token
+          : sellerMutation.data?.token;
+      dispatch(setCredentials({ token, role }));
+
+        if (role === "seller") {
+          navigate(dashboardConfig.getFullPath(role, "products"));
+        } else {
+          navigate(dashboardConfig.getConfig(role).basePath);
+        }
+    }
+  }, [sellerMutation.isSuccess, buyerMutation.isSuccess, role]);
 
   const form = useForm<z.infer<typeof SignupUserSchema>>({
     mode: "onTouched",
@@ -60,11 +79,25 @@ export function SignUpForm() {
   });
 
   const onSubmit = async (values: z.infer<typeof SignupUserSchema>) => {
+    const userActivityTracker = new UserActivityTracker([facebookTracker]); // array of trackers to send data
     try {
       if (role === "buyer") {
+        
         await buyerMutation.mutateAsync(values);
+        userActivityTracker.trackActivity("track", "CompleteRegistration", {
+          content_name: "Signup",
+          user_type: "buyer",
+          email: values.email,
+          name: values.fullName,
+        });
       } else {
         await sellerMutation.mutateAsync(values);
+        userActivityTracker.trackActivity("track", "CompleteRegistration", {
+          content_name: "Signup",
+          user_type: "seller",
+          email: values.email,
+          name: values.fullName,
+        });
       }
     } catch (error: any) {
       toast({

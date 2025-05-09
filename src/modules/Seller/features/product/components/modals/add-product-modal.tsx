@@ -19,6 +19,8 @@ import { Loader2 } from "lucide-react";
 import { ProductPreview } from "./components/product-preview";
 import { Spinner } from "@/common/components/spinner";
 import { PreviewProductLoader } from "./components/preview-product-loader";
+import { UserActivityTracker } from "@/lib/activity-tracker/user-activity-tracker";
+import { facebookTracker } from "@/lib/activity-tracker/facebook-tracker";
 
 export function AddProductModal() {
   const sellerProductRoute = dashboardConfig.getFullPath("seller", "products");
@@ -31,11 +33,11 @@ export function AddProductModal() {
   const submitButtonRef = useRef<HTMLButtonElement>(null);
   const { toast } = useToast();
   const createProductMutation = useCreateSellerProduct();
- 
+
   const isOpen = searchParams.get("modal") === "add-product" && !isPreviewModal;
   function handleModalOpen() {
     setFormData(undefined);
-    setIsPreviewModal(false)
+    setIsPreviewModal(false);
     navigate(sellerProductRoute);
   }
   const handlesubmitButtonRef = () => {
@@ -69,6 +71,13 @@ export function AddProductModal() {
           });
         }
         await createProductMutation.mutateAsync(newFormData);
+        console.log(createProductMutation.data?.sneaker)
+        const userActivityTracker = new UserActivityTracker([facebookTracker]); // list of trackers to send data to
+        userActivityTracker.trackActivity("trackCustom", "ProductListed", {
+          seller_id: createProductMutation.data?.sneaker.seller.user_id,
+          product_id: createProductMutation.data?.sneaker._id,
+          category: "sneakers",
+        });
         toast({
           variant: "success",
           title: "",

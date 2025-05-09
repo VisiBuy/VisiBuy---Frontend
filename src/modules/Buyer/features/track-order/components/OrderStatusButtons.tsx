@@ -8,7 +8,6 @@ interface OrderStatusButtonsProps {
   className?: string;
   statusCounts: Record<FilterStatus, number>;
 }
-
 const statuses: FilterStatus[] = [
   "all",
   "accepted",

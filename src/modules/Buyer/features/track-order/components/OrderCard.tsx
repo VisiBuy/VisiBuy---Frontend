@@ -1,13 +1,29 @@
 import { Link } from "react-router-dom";
 import { Order } from "@/types/orders";
 import { statusToClassName } from "@/modules/Buyer/lib/track-order/utils";
+import { useMemo } from "react";
 
 interface OrderCardProps {
   order: Order;
 }
 
+const statusMap: Record<string, string> = {
+  accepted: "Accepted",
+  cancelled: "Cancelled",
+  pending: "Pending",
+  dispatched: "Dispatched",
+  delivered: "Delivered",
+};
+
 const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
   const detailsUrl = `view/${order.orderId ?? "unknown"}`;
+  
+  const statusClass = useMemo(
+    () => statusToClassName(order.order_status ?? "pending"),
+    [order.order_status]
+  );
+
+  
 
   return (
     <Link to={detailsUrl} className="block">
@@ -18,15 +34,9 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
             Order #{order.orderNo ?? "N/A"}
           </h2>
           <span
-            className={`text-sm md:text-lg font-normal font-OpenSans px-2 py-1 rounded-md ${statusToClassName(
-              order.order_status ?? "pending"
-            )}`}
+            className={`text-sm md:text-lg font-normal font-OpenSans px-2 py-1 rounded-md ${statusClass}`}
           >
-            {order.order_status === "accepted"
-              ? "Accepted"
-              : order.order_status === "cancelled"
-                ? "Cancelled"
-                : "Pending"}
+            {statusMap[order.order_status ?? "pending"]}
           </span>
         </div>
 
