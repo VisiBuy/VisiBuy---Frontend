@@ -55,14 +55,13 @@ export function SignUpForm() {
           ? buyerMutation.data?.token
           : sellerMutation.data?.token;
       dispatch(setCredentials({ token, role }));
-
-        if (role === "seller") {
-          navigate(dashboardConfig.getFullPath(role, "products"));
-        } else {
-          navigate(dashboardConfig.getConfig(role).basePath);
-        }
+      if (role === "seller") {
+        navigate(dashboardConfig.getFullPath(role as Role, "products"));
+      } else {
+        navigate(dashboardConfig.getConfig(role as Role).basePath);
+      }
     }
-  }, [sellerMutation.isSuccess, buyerMutation.isSuccess, role]);
+  }, [sellerMutation.isSuccess, buyerMutation.isSuccess]);
 
   const form = useForm<z.infer<typeof SignupUserSchema>>({
     mode: "onTouched",
