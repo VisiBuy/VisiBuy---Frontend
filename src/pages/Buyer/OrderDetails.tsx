@@ -63,6 +63,7 @@ const BuyerOrderDetailsPage = () => {
   
 
 
+
   return (
     <div className="relative p-4 md:p-4">
       <div className="flex items-center justify-between mb-6 rounded-md max-w-6xl">
