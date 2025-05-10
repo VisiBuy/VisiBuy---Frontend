@@ -37,9 +37,7 @@ export function SignUpForm() {
   const sellerMutation = useCreateSeller();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  
   useEffect(() => {
     if (sellerMutation.isSuccess || buyerMutation.isSuccess) {
       toast({
