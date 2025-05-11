@@ -34,6 +34,7 @@ export interface LoginResponse {
   msg: string;
   token: string;
   role: Role;
+  email: string;
 }
 export interface LoginErrorResponse extends ErrorResponse {}
 export type Role = "buyer" | "seller" | "admin";

@@ -21,6 +21,13 @@ import { Link } from "react-router-dom";
 import Icon from "../../../../ui/Icon";
 import { useId } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserActivityTracker } from "@/lib/activity-tracker/user-activity-tracker";
+import { facebookTracker } from "@/lib/activity-tracker/facebook-tracker";
+
+
+// Tracker Initialization
+const tracker = new UserActivityTracker([facebookTracker]);
+
 
 export function LoginForm() {
   const loginMutation = useLogin();
@@ -64,9 +71,13 @@ export function LoginForm() {
     form.formState.isSubmitting ||
     !form.formState.isValid;
 
-  // Redirect based on role after successful login
+  // Track Activity and Redirect on Success
   useEffect(() => {
     if (loginMutation.isSuccess && loginMutation.data?.role === "buyer") {
+      tracker.trackActivity("Login", "submit", {
+        email: loginMutation.data.email,
+        role: loginMutation.data.role,
+      });
       navigate("/dashboard/buyer");
     }
   }, [loginMutation.isSuccess, loginMutation.data, navigate]);
