@@ -13,7 +13,6 @@ dist/
 dist-ssr/
 
 # Environment files (for different environments)
-.env
 .env.local
 .env.development
 .env.production
