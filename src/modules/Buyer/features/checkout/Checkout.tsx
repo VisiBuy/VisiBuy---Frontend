@@ -83,7 +83,7 @@ const Checkout = () => {
 
   // Flutterwave payment config
   const flutterwaveConfig = {
-    public_key: "FLWPUBK_TEST-d9c9a5938f9d56e031129288f4f30553-X",
+    public_key: import.meta.env.REACT_APP_FLW_PUBLIC_KEY,
     // process.env.REACT_APP_FLW_PUBLIC_TEST_KEY || "FLWPUBK_TEST-XXXXXXXXX",
     // Unique transaction reference
     tx_ref: "VISIBUY-" + Date.now(),
