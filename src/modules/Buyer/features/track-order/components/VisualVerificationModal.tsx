@@ -72,6 +72,21 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
     }
   }, [isOpen, orderId]);
 
+<<<<<<< HEAD
+=======
+
+  useEffect(() => {
+  if (isOpen && verificationData?.productId) {
+    window.fbq?.("trackCustom", "VerificationOpened", {
+      product_id: verificationData.productId,
+      verified_seller: true,
+    });
+  }
+}, [isOpen, verificationData?.productId]);
+
+
+  
+>>>>>>> staging
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -116,6 +131,28 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
     colorsFromOrder.length > 0
       ? Array.from(new Set(colorsFromOrder))
       : colorsFromMetadata;
+<<<<<<< HEAD
+=======
+  
+  const handleApprove = () => {
+    // Trigger Facebook Pixel custom event
+    fbq("trackCustom", "BuyerApprovedOrder", {
+      order_id: orderId,
+      product_id: verificationData?.productId || "unknown", // Adjust as necessary
+    });
+
+    onYes(); // proceed with whatever the parent wants on approval
+  };
+  const handleReject = () => {
+    fbq("trackCustom", "BuyerRejectedOrder", {
+      order_id: orderId,
+      product_id: verificationData?.productId || "unknown",
+    });
+
+    onNo();
+  };
+
+>>>>>>> staging
 
   return (
     <>
@@ -243,13 +280,21 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
 
                   <div className="flex justify-end gap-6">
                     <button
+<<<<<<< HEAD
                       onClick={onNo}
+=======
+                      onClick={handleReject}
+>>>>>>> staging
                       className="border border-black text-black font-OpenSans text-lg md:text-xl px-12 py-3 rounded-lg hover:bg-gray-100"
                     >
                       No
                     </button>
                     <button
+<<<<<<< HEAD
                       onClick={onYes}
+=======
+                      onClick={handleApprove}
+>>>>>>> staging
                       className="bg-green-600 text-white text-lg md:text-xl px-12 py-3 font-OpenSans rounded-lg hover:bg-green-700"
                     >
                       Yes
@@ -282,3 +327,12 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
 };
 
 export default VisualVerificationModal;
+<<<<<<< HEAD
+=======
+
+
+function fbq(arg0: string, arg1: string, arg2: { order_id: string; product_id: string; }) {
+  throw new Error("Function not implemented.");
+}
+
+>>>>>>> staging

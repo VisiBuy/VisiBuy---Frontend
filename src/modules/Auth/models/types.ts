@@ -34,6 +34,10 @@ export interface LoginResponse {
   msg: string;
   token: string;
   role: Role;
+<<<<<<< HEAD
+=======
+  email: string;
+>>>>>>> staging
 }
 export interface LoginErrorResponse extends ErrorResponse {}
 export type Role = "buyer" | "seller" | "admin";

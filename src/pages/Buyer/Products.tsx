@@ -18,6 +18,31 @@ const BuyerProductsPage = () => {
 
   const loader = useRef<HTMLDivElement | null>(null);
 
+<<<<<<< HEAD
+=======
+  // Fetch products whenever the page number changes
+  // useEffect(() => {
+  //   // Start loading
+  //   setLoading(true);
+  //   dispatch(fetchProducts(page)).then((res) => {
+  //     if (res.payload.length === 0) {
+  //       setHasMore(false);
+  //     }
+  //   })
+  //     // Stop loading when the fetch completes
+  //     .finally(() => setLoading(false));
+  // }, [dispatch, page]);
+
+  // Initial fetch (only once on mount)
+  // useEffect(() => {
+  //   if (products?.length === 0) {
+  //     dispatch(fetchProducts());
+  //   }
+  // }, [dispatch, products?.length]);
+
+  // Intersection Observer to trigger fetching more products when scrolling to the bottom
+
+>>>>>>> staging
   // Initial fetch
   useEffect(() => {
     if (products?.length === 0) {
@@ -59,6 +84,14 @@ const BuyerProductsPage = () => {
         <h2 className="text-3xl font-bold font-montserrat">Products</h2>
       </div>
 
+<<<<<<< HEAD
+=======
+
+
+      {/* Product Grid using Tailwind CSS Masonry */}
+      {/* {displayedProducts?.length > 0 ? ( */}
+
+>>>>>>> staging
       {/* Products Grid */}
       {loading ? (
         <div className="flex justify-center items-center min-h-[300px]">
@@ -73,6 +106,30 @@ const BuyerProductsPage = () => {
           {displayedProducts.map((product) => (
             <ProductSkeleton type="prod" product={product} key={product._id} />
           ))}
+<<<<<<< HEAD
+=======
+
+          {/* Loading More Skeletons */}
+          {/* {loadingMore &&
+            [...Array(3)].map((_, idx) => (
+              <ProductSkeleton key={`skeleton-${idx}`} type="skeleton" />
+            ))} */}
+          {loading &&
+            [...Array(3)].map((_, i) => (
+              <ProductSkeleton
+                key={`loading-${i}`}
+                type='skeleton'
+                product={{
+                  _id: "",
+                  images: [],
+                  storeName: "",
+                  model: "",
+                  brand: "",
+                  price: 0,
+                }}
+              />
+            ))}
+>>>>>>> staging
         </div>
       ) : (
         <p className="text-center text-gray-500">No products available.</p>

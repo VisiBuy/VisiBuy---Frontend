@@ -71,7 +71,11 @@ export function AddProductModal() {
           });
         }
         await createProductMutation.mutateAsync(newFormData);
+<<<<<<< HEAD
         console.log(createProductMutation.data?.sneaker)
+=======
+        console.log(createProductMutation.data?.sneaker);
+>>>>>>> staging
         const userActivityTracker = new UserActivityTracker([facebookTracker]); // list of trackers to send data to
         userActivityTracker.trackActivity("trackCustom", "ProductListed", {
           seller_id: createProductMutation.data?.sneaker.seller.user_id,
@@ -107,6 +111,7 @@ export function AddProductModal() {
       </PreviewProductLoader>
       {/* Product Preview  */}
       <ModalWrapperDialog
+<<<<<<< HEAD
         title="Preview"
         open={isPreviewModal}
         onOpenChange={setIsPreviewModal}
@@ -115,18 +120,36 @@ export function AddProductModal() {
           <div className=" flex justify-between gap-x-5 pr-4 py-2">
             <Button
               className="tex-sm lg:tex-xl px-12 bg-transparent border-black text-black font-Montserrat hover:text-black"
+=======
+        title='Preview'
+        open={isPreviewModal}
+        onOpenChange={setIsPreviewModal}
+        className='md:max-w-[800px]'
+        footer={
+          <div className=' flex justify-between gap-x-5 pr-4 py-2'>
+            <Button
+              className='tex-sm lg:tex-xl px-12 bg-transparent border-black text-black font-Montserrat hover:text-black'
+>>>>>>> staging
               onClick={() => setIsPreviewModal(false)}
             >
               Cancel
             </Button>
             <Button
+<<<<<<< HEAD
               className="tex-sm md:text-xl text-white px-12 font-Montserrat"
+=======
+              className='tex-sm md:text-xl text-white px-12 font-Montserrat'
+>>>>>>> staging
               onClick={handleSubmitProduct}
               disabled={createProductMutation.isPending}
             >
               Upload
               {createProductMutation.isPending && (
+<<<<<<< HEAD
                 <Loader2 className="ml-2 animate-spin" />
+=======
+                <Loader2 className='ml-2 animate-spin' />
+>>>>>>> staging
               )}
             </Button>
           </div>
@@ -138,18 +161,31 @@ export function AddProductModal() {
       <ModalWrapperDialog
         open={isOpen}
         onOpenChange={handleModalOpen}
+<<<<<<< HEAD
         title=" Product Listing Form"
         className="max-w-[34rem] md:max-w-[800px]"
         footer={
           <div className=" flex justify-between gap-x-5 pr-4 py-2">
             <Button
               className="tex-sm lg:tex-xl px-12 bg-transparent border-black text-black font-Montserrat hover:text-black"
+=======
+        title=' Product Listing Form'
+        className='max-w-[34rem] md:max-w-[800px]'
+        footer={
+          <div className=' flex justify-between gap-x-5 pr-4 py-2'>
+            <Button
+              className='tex-sm lg:tex-xl px-12 bg-transparent border-black text-black font-Montserrat hover:text-black'
+>>>>>>> staging
               onClick={handleModalOpen}
             >
               Cancel
             </Button>
             <Button
+<<<<<<< HEAD
               className="tex-sm md:text-xl text-white px-12 font-Montserrat"
+=======
+              className='tex-sm md:text-xl text-white px-12 font-Montserrat'
+>>>>>>> staging
               onClick={handlesubmitButtonRef}
             >
               Preview

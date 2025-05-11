@@ -13,11 +13,15 @@ export const FaqItem = ({ question, answer }: FaqProps) => {
         className='flex justify-between items-start  w-full text-left'
         onClick={() => setIsOpen(!isOpen)}
       >
+<<<<<<< HEAD
 <<<<<<<< HEAD:src1/modules/Seller/features/help-support/components/faq-item.tsx
         <span className='text-foreground text-2xl text-left font-Montserrat font-medium '>
 ========
         <span className="text-foreground text-2xl text-left font-Montserrat font-medium ">
 >>>>>>>> staging:src/modules/Seller/features/help-support/components/faq-item.tsx
+=======
+        <span className='text-foreground text-2xl text-left font-Montserrat font-medium '>
+>>>>>>> staging
           {question}
         </span>
         <motion.span
@@ -25,11 +29,15 @@ export const FaqItem = ({ question, answer }: FaqProps) => {
           transition={{ duration: 0.3 }}
           className='ml-6 flex-shrink-0'
         >
+<<<<<<< HEAD
 <<<<<<<< HEAD:src1/modules/Seller/features/help-support/components/faq-item.tsx
           <Icon name='chevron-right' className='text-blue' />
 ========
           <Icon name="chevron-right" className="text-blue" />
 >>>>>>>> staging:src/modules/Seller/features/help-support/components/faq-item.tsx
+=======
+          <Icon name='chevron-right' className='text-blue' />
+>>>>>>> staging
         </motion.span>
       </button>
       <AnimatePresence>
@@ -41,6 +49,7 @@ export const FaqItem = ({ question, answer }: FaqProps) => {
             transition={{ duration: 0.3 }}
             className='mt-2 pr-12 overflow-hidden'
           >
+<<<<<<< HEAD
 <<<<<<<< HEAD:src1/modules/Seller/features/help-support/components/faq-item.tsx
             <p className='text-gray-500 text-xl font-Montserrat'>{answer}</p>
 ========
@@ -49,6 +58,14 @@ export const FaqItem = ({ question, answer }: FaqProps) => {
               className="text-gray-500 text-xl font-Montserrat"
             ></p>
 >>>>>>>> staging:src/modules/Seller/features/help-support/components/faq-item.tsx
+=======
+            {/* <p className='text-gray-500 text-xl font-Montserrat'>{answer}</p> */}
+
+            <p
+              dangerouslySetInnerHTML={{ __html: answer }}
+              className='text-gray-500 text-xl font-Montserrat'
+            ></p>
+>>>>>>> staging
           </motion.div>
         )}
       </AnimatePresence>

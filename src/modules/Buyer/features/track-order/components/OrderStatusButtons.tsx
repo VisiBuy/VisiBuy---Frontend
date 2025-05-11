@@ -9,11 +9,20 @@ interface OrderStatusButtonsProps {
   statusCounts: Record<FilterStatus, number>;
 }
 const statuses: FilterStatus[] = [
+<<<<<<< HEAD
   "accepted",
   "dispatched",
   "pending",
   "delivered",
   "cancelled",
+=======
+  "all",
+  // "accepted",
+  // "dispatched",
+  // "pending",
+  // "delivered",
+  // "cancelled",
+>>>>>>> staging
 ];
 
 const OrderStatusButtons: React.FC<OrderStatusButtonsProps> = ({

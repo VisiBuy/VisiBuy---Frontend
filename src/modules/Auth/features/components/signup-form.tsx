@@ -37,6 +37,10 @@ export function SignUpForm() {
   const sellerMutation = useCreateSeller();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+<<<<<<< HEAD
+=======
+  
+>>>>>>> staging
   useEffect(() => {
     if (sellerMutation.isSuccess || buyerMutation.isSuccess) {
       toast({
@@ -92,7 +96,11 @@ export function SignUpForm() {
         await sellerMutation.mutateAsync(values);
         userActivityTracker.trackActivity("track", "CompleteRegistration", {
           content_name: "Signup",
+<<<<<<< HEAD
           user_type: "seller ",
+=======
+          user_type: "seller",
+>>>>>>> staging
           email: values.email,
           name: values.fullName,
         });
@@ -108,6 +116,7 @@ export function SignUpForm() {
   };
 
   return (
+<<<<<<< HEAD
     <div className="w-full flex justify-center items-center px-4 py-16">
       <div className="w-full max-w-2xl">
         <h2 className="auth-heading">Create your account.</h2>
@@ -116,6 +125,16 @@ export function SignUpForm() {
         </p>
 
         <div className="flex justify-center mt-6">
+=======
+    <div className='w-full flex justify-center items-center px-4 py-16'>
+      <div className='w-full max-w-2xl'>
+        <h2 className='auth-heading'>Create your account.</h2>
+        <p className='text-secondary-foreground text-lg md:text-xl font-OpenSans mt-2 text-center'>
+          Shop with certainty using VisiBuy.
+        </p>
+
+        <div className='flex justify-center mt-6'>
+>>>>>>> staging
           <Button
             className={cn(
               "rounded-none border border-blue rounded-l-lg",
@@ -136,12 +155,17 @@ export function SignUpForm() {
           </Button>
         </div>
 
+<<<<<<< HEAD
         <div className="border border-border p-6 md:p-8 mt-8 rounded-2xl bg-white">
+=======
+        <div className='border border-border p-6 md:p-8 mt-8 rounded-2xl bg-white'>
+>>>>>>> staging
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               {/* Full Name */}
               <FormField
                 control={form.control}
+<<<<<<< HEAD
                 name="fullName"
                 render={({ field }) => (
                   <FormItem className="py-2">
@@ -150,6 +174,16 @@ export function SignUpForm() {
                     </FormLabel>
                     <FormControl>
                       <Input placeholder="Full Name" {...field} />
+=======
+                name='fullName'
+                render={({ field }) => (
+                  <FormItem className='py-2'>
+                    <FormLabel className='text-xl !text-left block'>
+                      Full Name<span className='text-destructive ml-1'>*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder='Full Name' {...field} />
+>>>>>>> staging
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -159,6 +193,7 @@ export function SignUpForm() {
               {/* Email */}
               <FormField
                 control={form.control}
+<<<<<<< HEAD
                 name="email"
                 render={({ field }) => (
                   <FormItem className="py-2">
@@ -170,6 +205,19 @@ export function SignUpForm() {
                         placeholder="Email"
                         {...field}
                         icon={<Icon name="mail" className="h-6 w-6" />}
+=======
+                name='email'
+                render={({ field }) => (
+                  <FormItem className='py-2'>
+                    <FormLabel className='text-xl !text-left block'>
+                      Email<span className='text-destructive ml-1'>*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder='Email'
+                        {...field}
+                        icon={<Icon name='mail' className='h-6 w-6' />}
+>>>>>>> staging
                       />
                     </FormControl>
                     <FormMessage />
@@ -180,6 +228,7 @@ export function SignUpForm() {
               {/* Phone */}
               <FormField
                 control={form.control}
+<<<<<<< HEAD
                 name="phone"
                 render={({ field }) => (
                   <FormItem className="py-2">
@@ -191,6 +240,19 @@ export function SignUpForm() {
                         placeholder="Phone number"
                         {...field}
                         icon={<Icon name="phone" className="h-6 w-6" />}
+=======
+                name='phone'
+                render={({ field }) => (
+                  <FormItem className='py-2'>
+                    <FormLabel className='text-xl !text-left block'>
+                      Phone<span className='text-destructive ml-1'>*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder='Phone number'
+                        {...field}
+                        icon={<Icon name='phone' className='h-6 w-6' />}
+>>>>>>> staging
                       />
                     </FormControl>
                     <FormMessage />
@@ -201,6 +263,7 @@ export function SignUpForm() {
               {/* Address */}
               <FormField
                 control={form.control}
+<<<<<<< HEAD
                 name="address"
                 render={({ field }) => (
                   <FormItem className="py-2">
@@ -209,6 +272,16 @@ export function SignUpForm() {
                     </FormLabel>
                     <FormControl>
                       <Input placeholder="Address" {...field} />
+=======
+                name='address'
+                render={({ field }) => (
+                  <FormItem className='py-2'>
+                    <FormLabel className='text-xl !text-left block'>
+                      Address<span className='text-destructive ml-1'>*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder='Address' {...field} />
+>>>>>>> staging
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -218,6 +291,7 @@ export function SignUpForm() {
               {/* Password */}
               <FormField
                 control={form.control}
+<<<<<<< HEAD
                 name="pass"
                 render={({ field }) => (
                   <FormItem className="py-2">
@@ -227,12 +301,27 @@ export function SignUpForm() {
                     <FormControl>
                       <Input
                         placeholder="Password"
+=======
+                name='pass'
+                render={({ field }) => (
+                  <FormItem className='py-2'>
+                    <FormLabel className='text-xl !text-left block'>
+                      Password<span className='text-destructive ml-1'>*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder='Password'
+>>>>>>> staging
                         type={showPassword ? "text" : "password"}
                         {...field}
                         icon={
                           <Icon
                             name={showPassword ? "eye-off" : "eye"}
+<<<<<<< HEAD
                             className="h-6 w-6 cursor-pointer"
+=======
+                            className='h-6 w-6 cursor-pointer'
+>>>>>>> staging
                             onClick={() => setShowPassword(!showPassword)}
                           />
                         }
@@ -246,6 +335,7 @@ export function SignUpForm() {
               {/* Confirm Password */}
               <FormField
                 control={form.control}
+<<<<<<< HEAD
                 name="confirmPassword"
                 render={({ field }) => (
                   <FormItem className="py-2">
@@ -256,12 +346,28 @@ export function SignUpForm() {
                     <FormControl>
                       <Input
                         placeholder="Confirm password"
+=======
+                name='confirmPassword'
+                render={({ field }) => (
+                  <FormItem className='py-2'>
+                    <FormLabel className='text-xl !text-left block'>
+                      Confirm Password
+                      <span className='text-destructive ml-1'>*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder='Confirm password'
+>>>>>>> staging
                         type={showConfirmPassword ? "text" : "password"}
                         {...field}
                         icon={
                           <Icon
                             name={showConfirmPassword ? "eye-off" : "eye"}
+<<<<<<< HEAD
                             className="h-6 w-6 cursor-pointer"
+=======
+                            className='h-6 w-6 cursor-pointer'
+>>>>>>> staging
                             onClick={() =>
                               setShowConfirmPassword(!showConfirmPassword)
                             }
@@ -277,6 +383,7 @@ export function SignUpForm() {
               {/* Terms and Conditions */}
               <FormField
                 control={form.control}
+<<<<<<< HEAD
                 name="tos"
                 render={({ field }) => (
                   <FormItem className="py-2">
@@ -296,6 +403,27 @@ export function SignUpForm() {
                             className="inline px-1 text-blue"
                           >
                             <Link to="/login">Terms & Conditions</Link>
+=======
+                name='tos'
+                render={({ field }) => (
+                  <FormItem className='py-2'>
+                    <FormControl>
+                      <div className='flex items-start gap-2'>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                          id='tos'
+                          className='mt-1'
+                        />
+                        <label htmlFor='tos' className='text-base text-left'>
+                          By selecting the box, you agree to the{" "}
+                          <Button
+                            asChild
+                            variant='link'
+                            className='inline px-1 text-blue'
+                          >
+                            <Link to='/login'>Terms & Conditions</Link>
+>>>>>>> staging
                           </Button>{" "}
                           of VisiBuy.
                         </label>
@@ -307,24 +435,38 @@ export function SignUpForm() {
               />
 
               {/* Submit Button */}
+<<<<<<< HEAD
               <div className="pt-6">
+=======
+              <div className='pt-6'>
+>>>>>>> staging
                 <Button
                   disabled={
                     buyerMutation.isPending ||
                     sellerMutation.isPending ||
                     !form.formState.isValid
                   }
+<<<<<<< HEAD
                   type="submit"
                   className="w-full h-14 text-lg"
                 >
                   Sign Up
                   {(buyerMutation.isPending || sellerMutation.isPending) && (
                     <Loader2 className="ml-2 animate-spin" />
+=======
+                  type='submit'
+                  className='w-full h-14 text-lg'
+                >
+                  Sign Up
+                  {(buyerMutation.isPending || sellerMutation.isPending) && (
+                    <Loader2 className='ml-2 animate-spin' />
+>>>>>>> staging
                   )}
                 </Button>
               </div>
 
               {/* Login + Forgot Password */}
+<<<<<<< HEAD
               <div className="flex flex-col md:flex-row justify-between items-center text-lg text-secondary-foreground mt-6">
                 <div className="flex items-center space-x-1">
                   <span>Already have an account?</span>
@@ -334,6 +476,17 @@ export function SignUpForm() {
                 </div>
                 <Button asChild variant="link" className="text-blue px-1">
                   <Link to="/reset-password">Forgot Password?</Link>
+=======
+              <div className='flex flex-col md:flex-row justify-between items-center text-lg text-secondary-foreground mt-6'>
+                <div className='flex items-center space-x-1'>
+                  <span>Already have an account?</span>
+                  <Button asChild variant='link' className='text-blue px-1'>
+                    <Link to='/login'>Sign In</Link>
+                  </Button>
+                </div>
+                <Button asChild variant='link' className='text-blue px-1'>
+                  <Link to='/reset-password'>Forgot Password?</Link>
+>>>>>>> staging
                 </Button>
               </div>
             </form>
