@@ -21,11 +21,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import ErrorHolder from "@/ui/buyer/ErrorHolder";
-<<<<<<< HEAD
-=======
 import { UserActivityTracker } from "@/lib/activity-tracker/user-activity-tracker";
 import { facebookTracker } from "@/lib/activity-tracker/facebook-tracker";
->>>>>>> staging
 
 interface Product {
   _id: string;
@@ -42,10 +39,7 @@ interface Product {
 }
 
 function ProductDetails() {
-<<<<<<< HEAD
-=======
   const navigate = useNavigate();
->>>>>>> staging
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
 
@@ -65,14 +59,12 @@ function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState<string>("");
 
   // Get product quantity in cart
-  const cartItem = cartItems.find((item) => item._id === id);
+  const cartItem = cartItems.find((item: { _id: string | undefined; }) => item._id === id);
   const quantity = cartItem ? cartItem.quantity : localQuantity;
 
-<<<<<<< HEAD
-=======
   // facebook tracker
   const userActivityTracker = new UserActivityTracker([facebookTracker]);
-  const trackAddToCartClick = (addToCartClicked) => {
+  const trackAddToCartClick = (addToCartClicked: Product) => {
     console.log(addToCartClicked)
       userActivityTracker.trackActivity("track", "AddToCart", {
         product_name: addToCartClicked?.model,
@@ -81,10 +73,9 @@ function ProductDetails() {
       });
   }
 
->>>>>>> staging
   useEffect(() => {
     // Find the product by matching the id with the `id` in the products array
-    const foundProduct = products.find((p) => p._id === id);
+    const foundProduct = products.find((p: { _id: string | undefined; }) => p._id === id);
     setData(foundProduct ?? null); // Set the product or null if not found
   }, [id, products]); // Re-run effect when id or products change
 
@@ -98,16 +89,10 @@ function ProductDetails() {
         _id: data._id!,
         size: selectedSize,
         color: selectedColor,
-<<<<<<< HEAD
-        quantity,
-      })
-    );
-=======
         quantity: quantity,
       })
     );
     trackAddToCartClick(data)
->>>>>>> staging
     setShowOrderSuccess(true);
   };
   const handleAddToQuantity = () => {
@@ -132,11 +117,6 @@ function ProductDetails() {
       setLocalQuantity((prev) => prev + 1);
     }
   };
-<<<<<<< HEAD
-
-  return (
-    <div className='h-[100%] w-[93%] p-8'>
-=======
   // console.log(data)
 
   return (
@@ -147,7 +127,6 @@ function ProductDetails() {
       >
         <FaArrowLeft /> Back
       </button>
->>>>>>> staging
       {showErrorHolder && (
         <ErrorHolder
           message='Size/Color can not be empty!'
