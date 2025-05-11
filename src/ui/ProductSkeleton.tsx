@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link,useNavigate  } from "react-router-dom";
 import {
   addToCart,
   removeFromCart,
@@ -7,6 +7,8 @@ import { FaEllipsisV, FaShoppingCart, FaTrash } from "react-icons/fa";
 import { AppDispatch } from "@/store/store";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { UserActivityTracker } from "@/lib/activity-tracker/user-activity-tracker";
+import { facebookTracker } from "@/lib/activity-tracker/facebook-tracker";
 
 interface Product {
   size?: any;
@@ -29,6 +31,19 @@ interface ProductSkeletonProps {
 const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+
+  // activity tracking
+  const userActivityTracker = new UserActivityTracker([facebookTracker]);
+  const trackProductClick = (productClicked) => {
+    console.log(productClicked)
+    if (type !== 'cart'){ 
+      userActivityTracker.trackActivity("track", "ProductView", {
+        content_name: productClicked?.model,
+        content_id: productClicked?._id,
+      });
+    }
+  }
 
   const handleAddToCart = (e: React.MouseEvent) => {
     // prevent default navigation
@@ -78,6 +93,12 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
       <Link
         to={type === "cart" ? "" : `/dashboard/buyer/product/${product?._id}`}
         className='block w-fit'
+        onClick={(e) => {
+          if (type !== 'cart') { 
+            e.preventDefault();
+            trackProductClick(product); 
+            navigate(`/dashboard/buyer/product/${product?._id}`); 
+          }}}
       >
         <div className='relative bg-black text-white rounded-lg overflow-hidden w-fit'>
           {/* Product Image */}
@@ -89,7 +110,7 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
 
           <div className='absolute inset-0 bg-black bg-opacity-50 p-4 flex flex-col justify-end'>
             {/* Seller Info */}
-            {type == "cart" ? (
+            {/* {type == "cart" ? (
               ""
             ) : (
               <div className='flex items-center mb-2'>
@@ -102,7 +123,7 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
                   {product?.storeName}
                 </span>
               </div>
-            )}
+            )} */}
 
             {/* Product Details */}
             <h3 className='text-lg font-semibold'>{product?.model}</h3>

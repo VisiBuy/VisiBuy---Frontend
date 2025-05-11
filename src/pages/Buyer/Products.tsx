@@ -7,11 +7,6 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const BuyerProductsPage = () => {
-  console.log(import.meta.env)
-  console.log(import.meta.env.staging)
-  console.log(import.meta.env.production)
-  console.log(import.meta.env.VITE_REACT_APP_BASE_URL)
-
   const dispatch = useDispatch<AppDispatch>();
   const { products, loading, loadingMore, hasMore } = useSelector(
     (state: RootState) => state.buyer.product

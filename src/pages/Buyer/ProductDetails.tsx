@@ -19,6 +19,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import ErrorHolder from "@/ui/buyer/ErrorHolder";
+import { UserActivityTracker } from "@/lib/activity-tracker/user-activity-tracker";
+import { facebookTracker } from "@/lib/activity-tracker/facebook-tracker";
 
 interface Product {
   _id: string;
@@ -58,6 +60,17 @@ function ProductDetails() {
   const cartItem = cartItems.find((item) => item._id === id);
   const quantity = cartItem ? cartItem.quantity : localQuantity;
 
+  // facebook tracker
+  const userActivityTracker = new UserActivityTracker([facebookTracker]);
+  const trackAddToCartClick = (addToCartClicked) => {
+    console.log(addToCartClicked)
+      userActivityTracker.trackActivity("track", "AddToCart", {
+        product_name: addToCartClicked?.model,
+        product_id: addToCartClicked?._id,
+        product_price: addToCartClicked?.price,
+      });
+  }
+
   useEffect(() => {
     // Find the product by matching the id with the `id` in the products array
     const foundProduct = products.find((p) => p._id === id);
@@ -74,9 +87,10 @@ function ProductDetails() {
         _id: data._id!,
         size: selectedSize,
         color: selectedColor,
-        quantity,
+        quantity: quantity,
       })
     );
+    trackAddToCartClick(data)
     setShowOrderSuccess(true);
   };
   const handleAddToQuantity = () => {
@@ -101,6 +115,7 @@ function ProductDetails() {
       setLocalQuantity((prev) => prev + 1);
     }
   };
+  // console.log(data)
 
   return (
     <div className='h-[100%] w-[93%] p-8'>
