@@ -5,20 +5,16 @@ import {
 import { RootState } from "@/store/store";
 import OrderSuccess from "@/ui/buyer/OrderSuccess";
 import { useEffect, useState } from "react";
-<<<<<<< HEAD
-import { FaShoppingCart, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-=======
+// import { useParams } from "react-router-dom";
 import {
   FaShoppingCart,
   FaChevronLeft,
   FaChevronRight,
   FaArrowLeft,
 } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+
 import { useNavigate, useParams } from "react-router-dom";
->>>>>>> staging
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
