@@ -15,9 +15,9 @@ dist-ssr/
 # Environment files (for different environments)
 .env
 .env.local
-.env.development
 .env.production
 .env.test
+
 
 # Temporary files and directories
 *.local

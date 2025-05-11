@@ -7,6 +7,7 @@ export interface VerificationImage {
 }
 
 export interface VerificationResponse {
+  productId: string;
   productName: string;
   images: VerificationImage[];
   verificationId: string;

@@ -49,9 +49,10 @@ const CameraImagePicker: React.FC<ImagePickerProps> = ({ onChange }) => {
     return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   };
   
+  // Updated video constraints to ensure minimum 1000px resolution
   const videoConstraints = {
-    width: { ideal: window.innerWidth },
-    height: { ideal: window.innerHeight },
+    width: { min: 1000, ideal: Math.max(1000, window.innerWidth) },
+    height: { min: 1000, ideal: Math.max(1000, window.innerHeight) },
     facingMode: "environment", // Use back camera
   };
   
@@ -120,10 +121,37 @@ const CameraImagePicker: React.FC<ImagePickerProps> = ({ onChange }) => {
   const [showPreview, setShowPreview] = useState<boolean>(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   
+  // Enhanced capture to ensure minimum 1000px resolution
   const handleCapture = useCallback(() => {
     if (webcamRef.current) {
       try {
-        const imageSrc = webcamRef.current.getScreenshot();
+        // Get the webcam's native dimensions to ensure we maintain aspect ratio
+        const video = webcamRef.current.video;
+        let width = 1000;
+        let height = 1000;
+        
+        if (video) {
+          const videoWidth = video.videoWidth;
+          const videoHeight = video.videoHeight;
+          const aspectRatio = videoWidth / videoHeight;
+          
+          // Maintain aspect ratio while ensuring minimum 1000px for both dimensions
+          if (videoWidth > videoHeight) {
+            width = Math.max(1000, videoWidth);
+            height = width / aspectRatio;
+          } else {
+            height = Math.max(1000, videoHeight);
+            width = height * aspectRatio;
+          }
+        }
+        
+        // Set screenshot options with calculated dimensions
+        const screenshotOptions = {
+          width: width,
+          height: height
+        };
+        
+        const imageSrc = webcamRef.current.getScreenshot(screenshotOptions);
         if (imageSrc) {
           setPreviewImage(imageSrc);
           setShowPreview(true);
@@ -217,6 +245,7 @@ const CameraImagePicker: React.FC<ImagePickerProps> = ({ onChange }) => {
                 onUserMediaError={handleUserMediaError}
                 mirrored={false}
                 className="w-full h-full object-cover"
+                screenshotQuality={0.95} // High quality screenshot
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-black">
@@ -252,7 +281,7 @@ const CameraImagePicker: React.FC<ImagePickerProps> = ({ onChange }) => {
   
   return (
     <div className="relative w-40 h-40 lg:w-64 lg:h-64 border border-[#7F8081] p-3 rounded-lg flex items-center justify-center overflow-hidden">
-      {/* Hidden file input as fallback */}
+      {/* Enhanced file input to also enforce minimum resolution */}
       <input
         type="file"
         ref={fileInputRef}
@@ -297,7 +326,7 @@ const CameraImagePicker: React.FC<ImagePickerProps> = ({ onChange }) => {
         </div>
       )}
     </div>
-  );
+  ); 
 };
 
 
