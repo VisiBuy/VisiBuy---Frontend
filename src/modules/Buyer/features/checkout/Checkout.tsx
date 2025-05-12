@@ -5,7 +5,7 @@ import { AppDispatch, RootState } from "@/store/store";
 import OrderConfirmation from "../pop-up/OrderConfirmation";
 import { useNavigate, useParams } from "react-router-dom";
 import { removeFromCart } from "../cart/cartSlice";
-import {fetchBuyerInfo} from "../../lib/track-order/api"
+import { fetchBuyerInfo } from "../../lib/track-order/api";
 import { useQuery } from "@tanstack/react-query";
 
 interface CartItem {
@@ -25,17 +25,7 @@ const Checkout = () => {
     queryKey: ["buyer-info"],
     queryFn: fetchBuyerInfo,
   });
-  /* data:Object
-  address:"ife ile, Osun State"
-  created_at:"2025-02-11T12:01:55.898Z"
-  email:"ojodare73@gmail.com"
-  fullName:"Ojo Dare"
-  phone:"08100307953"
-  role:"buyer"
-  __v:0
-  _id:"67ab3c3383628619e86f3352" */
 
-  // console.log(buyerInfo, isLoading)
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
@@ -82,18 +72,18 @@ const Checkout = () => {
   }, [data]);
 
   if (
-  isLoading ||
-  !buyerInfo?.email ||
-  !buyerInfo.phone ||
-  !buyerInfo.fullName ||
-  !data
-) {
-  return (
-    <div className="p-6 text-gray-600 text-center">
-      Loading order and buyer info...
-    </div>
-  );
-}
+    isLoading ||
+    !buyerInfo?.email ||
+    !buyerInfo.phone ||
+    !buyerInfo.fullName ||
+    !data
+  ) {
+    return (
+      <div className="p-6 text-gray-600 text-center">
+        Loading order and buyer info...
+      </div>
+    );
+  }
 
   // Flutterwave payment config
   const flutterwaveConfig = {
@@ -105,10 +95,10 @@ const Checkout = () => {
     currency: "NGN",
     payment_options: "card,mobilemoney,ussd",
     customer: {
-    email: buyerInfo?.email || "",          // ⬅️ ensures it's always a string
-    phone_number: buyerInfo?.phone || "",   // ⬅️ same here
-    name: buyerInfo?.fullName || "",        // ⬅️ and here
-  },
+      email: buyerInfo?.email,
+      phone_number: buyerInfo?.phone,
+      name: buyerInfo?.fullName,
+    },
     customizations: {
       title: "VisiBuy Order Payment",
       description: `Complete your order payment for ${data?.model}`,
@@ -132,12 +122,12 @@ const Checkout = () => {
   };
 
   return (
-    <div className='p-6 fixed inset-0 bg-black bg-opacity-10 flex flex-col justify-center items-center'>
-      <h2 className='text-xl font-semibold'>Complete Your Order</h2>
+    <div className="p-6 fixed inset-0 bg-black bg-opacity-10 flex flex-col justify-center items-center">
+      <h2 className="text-xl font-semibold">Complete Your Order</h2>
 
       <FlutterWaveButton
         {...flutterwaveConfig}
-        className='mt-4 bg-green-600 text-white px-4 py-2 rounded-lg'
+        className="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg"
       />
 
       <OrderConfirmation
@@ -150,7 +140,7 @@ const Checkout = () => {
       />
 
       <button
-        className='text-center text-xl text-white bg-red-400 py-2 px-6 rounded mt-6'
+        className="text-center text-xl text-white bg-red-400 py-2 px-6 rounded mt-6"
         // onClick={() => navigate("/dashboard/buyer/carts")}
         onClick={() => navigate(-1)}
       >

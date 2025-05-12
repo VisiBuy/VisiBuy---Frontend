@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
 import { Button } from "@/ui/Button";
 import CartSummaryItem from "./CartSummaryItem";
-import { FaShieldAlt } from 'react-icons/fa';
+import { FaShieldAlt } from "react-icons/fa";
 import {
   calculateTotals,
   selectCartSummary,
@@ -31,6 +31,7 @@ const CartSummary = () => {
   const { subtotal, deliveryFee, vat, total } = useSelector(selectCartSummary);
 
   const [showDeliveryDetails, setShowDeliveryDetails] = useState(false);
+  const [showDeliveryAddress, setShowDeliveryAddress] = useState(false);
 
   // const products = useSelector(
   //   (state: RootState) => state.buyer.product.products
@@ -61,21 +62,21 @@ const CartSummary = () => {
   if (!data)
     return (
       <div>
-        <h2 className='mb-4 text-3xl font-bold font-montserrat'>
+        <h2 className="mb-4 text-3xl font-bold font-montserrat">
           Cart Summary
         </h2>
-        <div className='max-w-3xl mx-auto p-4 md:p-6 bg-white rounded-lg shadow-lg'>
-          <p className='text-gray-500 text-center'>Your cart is empty.</p>
+        <div className="max-w-3xl mx-auto p-4 md:p-6 bg-white rounded-lg shadow-lg">
+          <p className="text-gray-500 text-center">Your cart is empty.</p>
         </div>
       </div>
     );
 
   return (
     <div>
-      <h2 className='mb-4 text-3xl font-bold font-montserrat'>Cart Summary</h2>
-      <div className='max-w-3xl mx-auto p-4 md:p-6 bg-white rounded-lg shadow-lg'>
+      <h2 className="mb-4 text-3xl font-bold font-montserrat">Cart Summary</h2>
+      <div className="max-w-3xl mx-auto p-4 md:p-6 bg-white rounded-lg shadow-lg">
         {/* Cart Items */}
-        <div className='space-y-4'>
+        <div className="space-y-4">
           {/* {data > 0 ? (
           data.map((item) => )
         ) : (
@@ -85,36 +86,36 @@ const CartSummary = () => {
           <CartSummaryItem key={data._id} item={data} />
         </div>
 
-        {/* Delivery Details */}
-        <div className='mt-4'>
+        {/* Delivery Address */}
+        <div className="mt-4">
           <button
-            onClick={() => setShowDeliveryDetails(!showDeliveryDetails)}
-            className='text-sm font-medium flex items-center gap-2'
+            onClick={() => setShowDeliveryAddress(!showDeliveryAddress)}
+            className="text-sm font-medium flex items-center gap-2"
           >
-            {showDeliveryDetails
-              ? "▼ Hide Delivery Details"
-              : "▶ Add Delivery Details"}
+            {showDeliveryAddress
+              ? "▼ Hide Delivery Address"
+              : "▶ Add Delivery Address"}
           </button>
 
-          {showDeliveryDetails && (
-            <div className='mt-2 space-y-2 text-sm'>
-              <div className='flex justify-between'>
+          {showDeliveryAddress && (
+            <div className="mt-2 space-y-2 text-sm">
+              <div className="flex justify-between">
                 <span>Delivery</span>
                 <span>₦{deliveryFee.toFixed(2)}</span>
               </div>
-              <div className='flex justify-between'>
+              <div className="flex justify-between">
                 <span>VAT</span>
                 <span>₦{vat.toFixed(2)}</span>
               </div>
             </div>
           )}
         </div>
-        
+
         {/* Delivery Details */}
-        <div className='mt-4'>
+        <div className="mt-4">
           <button
             onClick={() => setShowDeliveryDetails(!showDeliveryDetails)}
-            className='text-sm font-medium flex items-center gap-2'
+            className="text-sm font-medium flex items-center gap-2"
           >
             {showDeliveryDetails
               ? "▼ Hide Delivery Details"
@@ -122,12 +123,12 @@ const CartSummary = () => {
           </button>
 
           {showDeliveryDetails && (
-            <div className='mt-2 space-y-2 text-sm'>
-              <div className='flex justify-between'>
+            <div className="mt-2 space-y-2 text-sm">
+              <div className="flex justify-between">
                 <span>Delivery</span>
                 <span>₦{deliveryFee.toFixed(2)}</span>
               </div>
-              <div className='flex justify-between'>
+              <div className="flex justify-between">
                 <span>VAT</span>
                 <span>₦{vat.toFixed(2)}</span>
               </div>
@@ -136,42 +137,41 @@ const CartSummary = () => {
         </div>
 
         {/* Summary */}
-        <div className='mt-4 border-t pt-4 text-sm'>
-          <div className='flex justify-between'>
+        <div className="mt-4 border-t pt-4 text-sm">
+          <div className="flex justify-between">
             <span>Sub Total</span>
             <span>₦{subtotal.toFixed(2)}</span>
           </div>
-          <div className='flex justify-between font-semibold text-lg'>
+          <div className="flex justify-between font-semibold text-lg">
             <span>Total</span>
             <span>₦{total.toFixed(2)}</span>
           </div>
         </div>
 
         {/* Actions */}
-        <div className='mt-4 flex justify-between'>
+        <div className="mt-4 flex justify-between">
           <Button
-            variant='outline'
+            variant="outline"
             onClick={() => history(-1)}
-            className='w-1/2 mr-2'
+            className="w-1/2 mr-2"
           >
             Cancel
           </Button>
           <Link
-            className='w-1/2  rounded'
+            className="w-1/2  rounded"
             to={`/dashboard/buyer/carts/checkout/${data._id}`}
           >
-            <Button className='w-full' variant='default'>
+            <Button className="w-full" variant="default">
               Pay Now
             </Button>
           </Link>
         </div>
         <div className="flex justify-center w-full mt-2">
-        <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-semibold cursor-pointer hover:bg-green-200 transition"
-      >
-        <FaShieldAlt className="text-green-600" />
-        Protected via Escrow
-      </div>
-      </div>
+          <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-semibold cursor-pointer hover:bg-green-200 transition">
+            <FaShieldAlt className="text-green-600" />
+            Protected via Escrow
+          </div>
+        </div>
       </div>
     </div>
   );

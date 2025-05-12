@@ -17,6 +17,7 @@ dist-ssr/
 .env.local
 .env.development
 .env.staging
+.env.production
 .env.test
 
 # Temporary files and directories
