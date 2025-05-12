@@ -13,11 +13,12 @@
     "jsx": "react-jsx",
     "incremental": true,
     "baseUrl": ".",
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "postcss.config.js", "react-app-env.d.ts"]
+  "include": ["src", "postcss.config.js", "react-app-env.d.ts"],
   // "include": [
   //   "src",
   //   "**/*.ts",
@@ -26,6 +27,5 @@
   //   "**/**/*.tsx",
   //   "postcss.config.js",
   //   "react-app-env.d.ts"]
-  ,
   "exclude": ["node_modules"]
 }
