@@ -6,11 +6,7 @@ import { HiArrowLeft } from "react-icons/hi";
 import VerifyButton from "../../modules/Buyer/features/track-order/components/VerifyButton";
 import VisualVerificationModal from "../../modules/Buyer/features/track-order/components/VisualVerificationModal";
 import FeedbackModal from "../../modules/Buyer/features/track-order/components/FeedbackModal";
-<<<<<<< HEAD
-import { getOrderHistory } from "@/modules/Buyer/models/track-order/trackOrderSlice";
-=======
 import { getOrderHistory } from "@/modules/Buyer/models/trackOrderSlice";
->>>>>>> staging
 import { verifyOrder } from "@/modules/Buyer/lib/track-order/api";
 import { Order } from "@/types/orders";
 import { normalizeOrder } from "@/modules/Buyer/lib/track-order/normalizeOrder";
@@ -24,37 +20,25 @@ const BuyerOrderDetailsPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const token = localStorage.getItem("auth-token") || "";
 
-<<<<<<< HEAD
-  const { orders, loading, error, pagination } = useSelector(
-=======
   const { orders, allOrders, loading, error, pagination } = useSelector(
->>>>>>> staging
     (state: any) => state.trackOrder
   );
 
   useEffect(() => {
-<<<<<<< HEAD
-    if (!orders.length || !orders.find((order: any) => order._id === orderId)) {
-=======
     if (
       !allOrders.find(
         (order: any) => order._id === orderId || order.orderId === orderId
       )
     ) {
->>>>>>> staging
       dispatch(getOrderHistory(pagination.currentPage));
     }
   }, [dispatch, orders.length, orderId, pagination.currentPage]);
 
   const orderDetails: Order | null = useMemo(() => {
     if (loading || !orders.length) return null;
-<<<<<<< HEAD
-    const foundOrder = orders.find((order: any) => order._id === orderId);
-=======
     const foundOrder = allOrders.find(
       (order: any) => order._id === orderId || order.orderId === orderId
     );
->>>>>>> staging
     return foundOrder ? normalizeOrder(foundOrder) : null;
   }, [orders, orderId, loading]);
 
@@ -76,27 +60,8 @@ const BuyerOrderDetailsPage = () => {
     return deliveryDate.toLocaleDateString();
   };
 
-<<<<<<< HEAD
-  // ✅ Function to get dynamic verification status
-  const getVerificationStatus = () => {
-    if (!orderDetails) return "Loading...";
-    if (orderDetails.order_status === "pending") {
-      return "Awaiting Verification";
-    }
-    // You can add more mappings if necessary
-    switch (orderDetails.order_status) {
-      case "accepted":
-        return "Accepted";
-      case "cancelled":
-        return "Cancelled";
-      default:
-        return orderDetails.order_status; // fallback to showing the raw status if no mapping
-    }
-  };
-=======
   
 
->>>>>>> staging
 
 
   return (
@@ -129,11 +94,7 @@ const BuyerOrderDetailsPage = () => {
         </span>
       </div>
 
-<<<<<<< HEAD
-      {loading && <p>Loading...</p>}
-=======
       {loading && <p></p>}
->>>>>>> staging
       {error && <p className="text-red-500">{error}</p>}
 
       {!loading && orderDetails ? (

@@ -1,7 +1,5 @@
 import { axiosWithAuth } from "@/lib/client";
 import { VerificationResponse, VerificationImage } from "@/types/VerificationImage";
-<<<<<<< HEAD
-=======
 import { BuyerInfo } from "@/types/buyerInfo";
 
 
@@ -19,7 +17,6 @@ export  const fetchBuyerInfo = async(): Promise<BuyerInfo> =>{
   }
 }
 
->>>>>>> staging
 
 /**
  * Track Order

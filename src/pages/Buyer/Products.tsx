@@ -18,8 +18,6 @@ const BuyerProductsPage = () => {
 
   const loader = useRef<HTMLDivElement | null>(null);
 
-<<<<<<< HEAD
-=======
   // Fetch products whenever the page number changes
   // useEffect(() => {
   //   // Start loading
@@ -42,7 +40,6 @@ const BuyerProductsPage = () => {
 
   // Intersection Observer to trigger fetching more products when scrolling to the bottom
 
->>>>>>> staging
   // Initial fetch
   useEffect(() => {
     if (products?.length === 0) {
@@ -84,14 +81,11 @@ const BuyerProductsPage = () => {
         <h2 className="text-3xl font-bold font-montserrat">Products</h2>
       </div>
 
-<<<<<<< HEAD
-=======
 
 
       {/* Product Grid using Tailwind CSS Masonry */}
       {/* {displayedProducts?.length > 0 ? ( */}
 
->>>>>>> staging
       {/* Products Grid */}
       {loading ? (
         <div className="flex justify-center items-center min-h-[300px]">
@@ -106,8 +100,6 @@ const BuyerProductsPage = () => {
           {displayedProducts.map((product) => (
             <ProductSkeleton type="prod" product={product} key={product._id} />
           ))}
-<<<<<<< HEAD
-=======
 
           {/* Loading More Skeletons */}
           {/* {loadingMore &&
@@ -129,7 +121,6 @@ const BuyerProductsPage = () => {
                 }}
               />
             ))}
->>>>>>> staging
         </div>
       ) : (
         <p className="text-center text-gray-500">No products available.</p>
