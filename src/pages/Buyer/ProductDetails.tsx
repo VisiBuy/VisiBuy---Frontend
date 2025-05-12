@@ -5,9 +5,6 @@ import {
 import { RootState } from "@/store/store";
 import OrderSuccess from "@/ui/buyer/OrderSuccess";
 import { useEffect, useState } from "react";
-import { FaShoppingCart, FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import {
   FaShoppingCart,
   FaChevronLeft,
@@ -80,24 +77,23 @@ const trackAddToCartClick = (addToCartClicked: Product) => {
   }, [id, products]); // Re-run effect when id or products change
 
   const handleOrderSuccess = () => {
-    console.log(quantity);
-    if (!data) return;
-    if (!selectedColor || !selectedSize) return setShowErrorHolder(true);
-    dispatch(
-      addToCart({
-        ...data,
-        _id: data._id!,
-        size: selectedSize,
-        color: selectedColor,
-dispatch(
-  addToCart({
-    product: data,
-    quantity: quantity,
-  })
-);
-trackAddToCartClick(data);
-    setShowOrderSuccess(true);
-  };
+  console.log(quantity);
+  if (!data) return;
+  if (!selectedColor || !selectedSize) return setShowErrorHolder(true);
+
+  dispatch(
+    addToCart({
+      ...data,
+      _id: data._id!,
+      size: selectedSize,
+      color: selectedColor,
+      quantity: quantity,
+    })
+  );
+
+  trackAddToCartClick(data);
+  setShowOrderSuccess(true);
+};
   const handleAddToQuantity = () => {
     // check if data exist
     if (!data || !data._id) return;
@@ -120,9 +116,9 @@ trackAddToCartClick(data);
       setLocalQuantity((prev) => prev + 1);
     }
   };
-return (
-  <div className='h-[100%] w-[93%] p-8'>
-  // console.log(data)
+// return (
+//   <div className='h-[100%] w-[93%] p-8'>
+//   // console.log(data)
 
   return (
     <div className='h-[100%] w-[93%] p-8'>

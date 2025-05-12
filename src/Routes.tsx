@@ -26,10 +26,7 @@ import BuyerOrderDetailsPage from "./pages/Buyer/OrderDetails";
 import BuyerCartPage from "./pages/Buyer/Cart";
 import BuyerCartSummaryPage from "./pages/Buyer/CartSummary";
 import BuyerNotificationsPage from "./pages/Buyer/Notifications";
-<<<<<<< HEAD
 import BuyerProfilePage from "./pages/Buyer/Profile";
-=======
->>>>>>> staging
 import BuyerProductDetails from "./pages/Buyer/ProductDetails";
 import Checkout from "./modules/Buyer/features/checkout/Checkout";
 import BuyerNotificationsDetailsPage from "./pages/Buyer/NotificationsDetails";
@@ -45,14 +42,11 @@ import { GetVerifiedPage } from "./pages/Seller/help-support/verification";
 import { CancelOrderPage } from "./pages/Seller/help-support/cancel-order";
 import { OrderManagementPage } from "./pages/Seller/help-support/order-management";
 import SearchResultsPage from "./pages/Buyer/SearchResultsPage";
-<<<<<<< HEAD
-=======
 import BuyerProfileLayout from "./layouts/buyer/BuyerProfileLayout";
 import BuyerAccountPage from "./pages/Buyer/BuyerAccount";
+import BuyerAddress from "./pages/Buyer/BuyerAddress";
 import BuyerSettings from "./pages/Buyer/BuyerSettings";
 import Favourites from "./pages/Buyer/Favourites";
-import BuyerAddress from "./pages/Buyer/BuyerAddress";
->>>>>>> staging
 
 const router = createHashRouter([
   {
@@ -170,10 +164,8 @@ const router = createHashRouter([
       { path: "notification", element: <BuyerNotificationsPage /> },
       { path: "notification/:id", element: <BuyerNotificationsDetailsPage /> },
       { path: "report", element: <FileDispute /> },
-<<<<<<< HEAD
       { path: "profile", element: <BuyerProfilePage /> },
       { path: "search", element: <SearchResultsPage /> },
-=======
       { path: "search", element: <SearchResultsPage /> },
     ],
   },
@@ -193,7 +185,6 @@ const router = createHashRouter([
       { path: "favourites", element: <Favourites /> },
       { path: "address", element: <BuyerAddress/> },
       { path: "settings", element: <BuyerSettings /> },
->>>>>>> staging
     ],
   },
 ]);
