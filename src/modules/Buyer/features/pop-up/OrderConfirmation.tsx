@@ -75,14 +75,7 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
     totalAmount: any;
     paymentStatus?: string;
   }) => {
-    // orderDetails, setOrderDetails] = useState({
-    //   // Generate unique order ID
-    //   // orderId: "VISI-" + Math.floor(100000 + Math.random() * 900000),
-    //   items: { _id: "", model: "", quantity: 1, price: 0 },
-    //   totalAmount: 0, // Default value
-    //   paymentStatus: "Pending",
-    // });
-    console.log(productPurchase);
+    // console.log(productPurchase);
     userActivityTracker.trackActivity("track", "Purchase", {
       product_id: productPurchase?.items._id,
       product_name: productPurchase?.items.model,

@@ -5,7 +5,7 @@ import { AppDispatch, RootState } from "@/store/store";
 import OrderConfirmation from "../pop-up/OrderConfirmation";
 import { useNavigate, useParams } from "react-router-dom";
 import { removeFromCart } from "../cart/cartSlice";
-import {fetchBuyerInfo} from "../../lib/track-order/api"
+import { fetchBuyerInfo } from "../../lib/track-order/api";
 import { useQuery } from "@tanstack/react-query";
 
 interface CartItem {
@@ -25,17 +25,6 @@ const Checkout = () => {
     queryKey: ["buyer-info"],
     queryFn: fetchBuyerInfo,
   });
-  /* data:Object
-  address:"ife ile, Osun State"
-  created_at:"2025-02-11T12:01:55.898Z"
-  email:"ojodare73@gmail.com"
-  fullName:"Ojo Dare"
-  phone:"08100307953"
-  role:"buyer"
-  __v:0
-  _id:"67ab3c3383628619e86f3352" */
-
-  // console.log(buyerInfo, isLoading)
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
@@ -91,9 +80,9 @@ const Checkout = () => {
     currency: "NGN",
     payment_options: "card,mobilemoney,ussd",
     customer: {
-      email: buyerInfo?.email,
-      phone_number: buyerInfo?.phone,
-      name: buyerInfo?.fullName,
+      email: buyerInfo?.email || "",
+      phone_number: buyerInfo?.phone || "",
+      name: buyerInfo?.fullName || "",
     },
     customizations: {
       title: "VisiBuy Order Payment",

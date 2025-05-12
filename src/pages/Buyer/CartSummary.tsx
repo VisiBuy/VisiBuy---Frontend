@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
 import { Button } from "@/ui/Button";
 import CartSummaryItem from "./CartSummaryItem";
-import { FaShieldAlt } from 'react-icons/fa';
+import { FaShieldAlt } from "react-icons/fa";
 import {
   calculateTotals,
   selectCartSummary,
@@ -109,7 +109,32 @@ const CartSummary = () => {
             </div>
           )}
         </div>
-        
+
+        {/* Delivery Details */}
+        <div className='mt-4'>
+          <button
+            onClick={() => setShowDeliveryDetails(!showDeliveryDetails)}
+            className='text-sm font-medium flex items-center gap-2'
+          >
+            {showDeliveryDetails
+              ? "▼ Hide Delivery Details"
+              : "▶ Add Delivery Details"}
+          </button>
+
+          {showDeliveryDetails && (
+            <div className='mt-2 space-y-2 text-sm'>
+              <div className='flex justify-between'>
+                <span>Delivery</span>
+                <span>₦{deliveryFee.toFixed(2)}</span>
+              </div>
+              <div className='flex justify-between'>
+                <span>VAT</span>
+                <span>₦{vat.toFixed(2)}</span>
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Delivery Details */}
         <div className='mt-4'>
           <button
@@ -165,13 +190,12 @@ const CartSummary = () => {
             </Button>
           </Link>
         </div>
-        <div className="flex justify-center w-full mt-2">
-        <div className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-semibold cursor-pointer hover:bg-green-200 transition"
-      >
-        <FaShieldAlt className="text-green-600" />
-        Protected via Escrow
-      </div>
-      </div>
+        <div className='flex justify-center w-full mt-2'>
+          <div className='inline-flex items-center justify-center gap-2 px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-semibold cursor-pointer hover:bg-green-200 transition'>
+            <FaShieldAlt className='text-green-600' />
+            Protected via Escrow
+          </div>
+        </div>
       </div>
     </div>
   );

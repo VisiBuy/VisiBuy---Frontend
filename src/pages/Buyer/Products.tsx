@@ -34,9 +34,7 @@ const BuyerProductsPage = () => {
   // Initial fetch
   useEffect(() => {
     if (products?.length === 0) {
-      dispatch(
-        fetchProducts({ page: 1, query: filters.search || "" })
-      );
+      dispatch(fetchProducts({ page: 1, query: filters.search || "" }));
     }
   }, [dispatch, products?.length, filters.search]);
 
@@ -63,37 +61,35 @@ const BuyerProductsPage = () => {
     return () => {
       if (currentLoader) {
         observer.unobserve(currentLoader);
-      }  
+      }
     };
-  }, [dispatch, loading, loadingMore, hasMore, currentPage,filters.search]);
+  }, [dispatch, loading, loadingMore, hasMore, currentPage, filters.search]);
 
   const displayedProducts = filtersApplied ? filteredProducts : products;
 
   return (
     <div>
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-3xl font-bold font-montserrat">Products</h2>
+      <div className='flex justify-between items-center mb-6'>
+        <h2 className='text-3xl font-bold font-montserrat'>Products</h2>
       </div>
-
-
 
       {/* Product Grid using Tailwind CSS Masonry */}
       {/* {displayedProducts?.length > 0 ? ( */}
 
       {/* Products Grid */}
       {loading ? (
-        <div className="flex justify-center items-center min-h-[300px]">
-          <LoadingSpinner size="large" isLoading={true} />{" "}
+        <div className='flex justify-center items-center min-h-[300px]'>
+          <LoadingSpinner size='large' isLoading={true} />{" "}
           {/* Spinner for loading */}
         </div>
       ) : displayedProducts?.length > 0 ? (
         <div
-          className="grid grid-rows-[repeat(auto-fit,minmax(200px,1fr))] auto-cols-[251px] justify-center md:flex md:justify-normal gap-6 p-6"
+          className='grid grid-rows-[repeat(auto-fit,minmax(200px,1fr))] auto-cols-[251px] justify-center md:flex md:justify-normal gap-6 p-6'
           style={{ flexWrap: "wrap" }}
         >
           {displayedProducts.map((product) => (
-            <ProductSkeleton type="prod" product={product} key={product._id} />
+            <ProductSkeleton type='prod' product={product} key={product._id} />
           ))}
 
           {/* Loading More Skeletons */}
@@ -118,16 +114,16 @@ const BuyerProductsPage = () => {
             ))}
         </div>
       ) : (
-        <p className="text-center text-gray-500">No products available.</p>
+        <p className='text-center text-gray-500'>No products available.</p>
       )}
 
       {/* Loader Ref */}
-      <div ref={loader} className="flex justify-center items-center h-16">
+      <div ref={loader} className='flex justify-center items-center h-16'>
         {loadingMore && (
-          <LoadingSpinner size="small" isLoading={true} /> // Show loading spinner while fetching more products
+          <LoadingSpinner size='small' isLoading={true} /> // Show loading spinner while fetching more products
         )}
         {!loadingMore && !hasMore && (
-          <span className="text-gray-400 text-sm">
+          <span className='text-gray-400 text-sm'>
             End of this week week Beta Drop
           </span>
         )}
