@@ -31,23 +31,14 @@ const BuyerProductsPage = () => {
   //     .finally(() => setLoading(false));
   // }, [dispatch, page]);
 
-  // Initial fetch (only once on mount)
-  // useEffect(() => {
-  //   if (products?.length === 0) {
-  //     dispatch(fetchProducts());
-  //   }
-  // }, [dispatch, products?.length]);
-
-  // Intersection Observer to trigger fetching more products when scrolling to the bottom
-
   // Initial fetch
   useEffect(() => {
     if (products?.length === 0) {
       dispatch(
-        fetchProducts({ page: currentPage, query: filters.search || "" })
-      ); // Fetch first page
+        fetchProducts({ page: 1, query: filters.search || "" })
+      );
     }
-  }, [dispatch, products?.length]);
+  }, [dispatch, products?.length, filters.search]);
 
   // Intersection Observer to fetch more products
   useEffect(() => {
@@ -56,7 +47,7 @@ const BuyerProductsPage = () => {
         if (entries[0].isIntersecting && !loading && !loadingMore && hasMore) {
           const nextPage = currentPage + 1;
           dispatch(
-            fetchProducts({ page: currentPage, query: filters.search || "" })
+            fetchProducts({ page: nextPage, query: filters.search || "" })
           );
           setCurrentPage(nextPage);
         }
@@ -65,12 +56,16 @@ const BuyerProductsPage = () => {
     );
 
     const currentLoader = loader.current;
-    if (currentLoader) observer.observe(currentLoader);
+    if (currentLoader) {
+      observer.observe(currentLoader);
+    }
 
     return () => {
-      if (currentLoader) observer.unobserve(currentLoader);
+      if (currentLoader) {
+        observer.unobserve(currentLoader);
+      }  
     };
-  }, [dispatch, loading, loadingMore, hasMore, currentPage]);
+  }, [dispatch, loading, loadingMore, hasMore, currentPage,filters.search]);
 
   const displayedProducts = filtersApplied ? filteredProducts : products;
 
@@ -133,7 +128,7 @@ const BuyerProductsPage = () => {
         )}
         {!loadingMore && !hasMore && (
           <span className="text-gray-400 text-sm">
-            No more products to load.
+            End of this week week Beta Drop
           </span>
         )}
       </div>

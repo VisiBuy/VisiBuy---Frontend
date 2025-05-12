@@ -33,13 +33,14 @@ interface OrderConfirmationProps {
     totalAmount: number;
     paymentStatus: string;
   };
+  userAddress: any;
 }
 
 const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
   isOpen,
   onClose,
   orderDetails,
-  userAddress
+  userAddress,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -69,7 +70,11 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
   //   console.log(data);
   // };
   const userActivityTracker = new UserActivityTracker([facebookTracker]);
-  const trackPurchaseProducts = (productPurchase) => {
+  const trackPurchaseProducts = (productPurchase: {
+    items: any;
+    totalAmount: any;
+    paymentStatus?: string;
+  }) => {
     // orderDetails, setOrderDetails] = useState({
     //   // Generate unique order ID
     //   // orderId: "VISI-" + Math.floor(100000 + Math.random() * 900000),
@@ -77,21 +82,21 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
     //   totalAmount: 0, // Default value
     //   paymentStatus: "Pending",
     // });
-    console.log(productPurchase)
-      userActivityTracker.trackActivity("track", "Purchase", {
-        product_id: productPurchase?.items._id,
-        product_name: productPurchase?.items.model,
-        product_quantity: productPurchase?.items.quantity,
-        value: productPurchase?.totalAmount,
-        currency: 'Naira'
-      });
-  }
+    console.log(productPurchase);
+    userActivityTracker.trackActivity("track", "Purchase", {
+      product_id: productPurchase?.items._id,
+      product_name: productPurchase?.items.model,
+      product_quantity: productPurchase?.items.quantity,
+      value: productPurchase?.totalAmount,
+      currency: "Naira",
+    });
+  };
 
   const sendData = async () => {
     const state = store.getState();
     const token = state.auth.token;
 
-    trackPurchaseProducts(orderDetails)
+    trackPurchaseProducts(orderDetails);
 
     const response = await fetch(`${process.env.REACT_APP_BASE_URL}order`, {
       method: "POST",
