@@ -1,19 +1,12 @@
 import { Link } from "react-router-dom";
 import { Order } from "@/types/orders";
 import { statusToClassName } from "@/modules/Buyer/lib/track-order/utils";
-<<<<<<< HEAD
-=======
 import { useMemo } from "react";
->>>>>>> staging
 
 interface OrderCardProps {
   order: Order;
 }
 
-<<<<<<< HEAD
-const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
-  const detailsUrl = `view/${order.orderId ?? "unknown"}`;
-=======
 const statusMap: Record<string, string> = {
   accepted: "Accepted",
   cancelled: "Cancelled",
@@ -31,7 +24,6 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
   );
 
   
->>>>>>> staging
 
   return (
     <Link to={detailsUrl} className="block">
@@ -42,21 +34,9 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
             Order #{order.orderNo ?? "N/A"}
           </h2>
           <span
-<<<<<<< HEAD
-            className={`text-sm md:text-lg font-normal font-OpenSans px-2 py-1 rounded-md ${statusToClassName(
-              order.order_status ?? "pending"
-            )}`}
-          >
-            {order.order_status === "accepted"
-              ? "Accepted"
-              : order.order_status === "cancelled"
-                ? "Cancelled"
-                : "Pending"}
-=======
             className={`text-sm md:text-lg font-normal font-OpenSans px-2 py-1 rounded-md ${statusClass}`}
           >
             {statusMap[order.order_status ?? "pending"]}
->>>>>>> staging
           </span>
         </div>
 

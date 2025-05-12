@@ -49,16 +49,10 @@ const CameraImagePicker: React.FC<ImagePickerProps> = ({ onChange }) => {
     return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   };
   
-<<<<<<< HEAD
-  const videoConstraints = {
-    width: { ideal: window.innerWidth },
-    height: { ideal: window.innerHeight },
-=======
   // Updated video constraints to ensure minimum 1000px resolution
   const videoConstraints = {
     width: { min: 1000, ideal: Math.max(1000, window.innerWidth) },
     height: { min: 1000, ideal: Math.max(1000, window.innerHeight) },
->>>>>>> staging
     facingMode: "environment", // Use back camera
   };
   
@@ -127,12 +121,6 @@ const CameraImagePicker: React.FC<ImagePickerProps> = ({ onChange }) => {
   const [showPreview, setShowPreview] = useState<boolean>(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   
-<<<<<<< HEAD
-  const handleCapture = useCallback(() => {
-    if (webcamRef.current) {
-      try {
-        const imageSrc = webcamRef.current.getScreenshot();
-=======
   // Enhanced capture to ensure minimum 1000px resolution
   const handleCapture = useCallback(() => {
     if (webcamRef.current) {
@@ -164,7 +152,6 @@ const CameraImagePicker: React.FC<ImagePickerProps> = ({ onChange }) => {
         };
         
         const imageSrc = webcamRef.current.getScreenshot(screenshotOptions);
->>>>>>> staging
         if (imageSrc) {
           setPreviewImage(imageSrc);
           setShowPreview(true);
@@ -258,10 +245,7 @@ const CameraImagePicker: React.FC<ImagePickerProps> = ({ onChange }) => {
                 onUserMediaError={handleUserMediaError}
                 mirrored={false}
                 className="w-full h-full object-cover"
-<<<<<<< HEAD
-=======
                 screenshotQuality={0.95} // High quality screenshot
->>>>>>> staging
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-black">
@@ -297,11 +281,7 @@ const CameraImagePicker: React.FC<ImagePickerProps> = ({ onChange }) => {
   
   return (
     <div className="relative w-40 h-40 lg:w-64 lg:h-64 border border-[#7F8081] p-3 rounded-lg flex items-center justify-center overflow-hidden">
-<<<<<<< HEAD
-      {/* Hidden file input as fallback */}
-=======
       {/* Enhanced file input to also enforce minimum resolution */}
->>>>>>> staging
       <input
         type="file"
         ref={fileInputRef}
@@ -346,11 +326,7 @@ const CameraImagePicker: React.FC<ImagePickerProps> = ({ onChange }) => {
         </div>
       )}
     </div>
-<<<<<<< HEAD
-  );
-=======
   ); 
->>>>>>> staging
 };
 
 

@@ -31,13 +31,11 @@ export interface AuthState {
   role: Role | null;
 }
 export interface LoginResponse {
+  email: string;
   msg: string;
   token: string;
   role: Role;
-<<<<<<< HEAD
-=======
-  email: string;
->>>>>>> staging
+  // email: string;
 }
 export interface LoginErrorResponse extends ErrorResponse {}
 export type Role = "buyer" | "seller" | "admin";

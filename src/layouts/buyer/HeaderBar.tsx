@@ -8,13 +8,10 @@ import logo from "../../assets/Buyer/logo.png";
 import { dashboardConfig } from "../../lib/config";
 import { RootState } from "@/store/store";
 import { useSelector } from "react-redux";
-<<<<<<< HEAD
-=======
 import ProfilePicture from "@/ui/buyer/header/ProfilePicture";
 import { useQuery } from "@tanstack/react-query";
 import { fetchBuyerInfo } from "@/modules/Buyer/lib/track-order/api";
 import { BuyerInfo } from "@/types/buyerInfo";
->>>>>>> staging
 
 interface HeaderBarProps {
   onMenuClick: () => void;
@@ -68,36 +65,6 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
     : { firstName: "", lastName: "" };
 
   const buyerConfig = dashboardConfig.getConfig("buyer");
-<<<<<<< HEAD
-  const homeUrl = buildUrl(buyerConfig.basePath, buyerConfig.routes.products);
-
-  return (
-    <>
-      <header className="bg-background fixed top-0 left-0 md:left-80 right-0 z-50 border border-gray-100 p-8">
-        <div className="flex justify-between items-center">
-          {/* Left Side: Menu Icon + Logo (wrapped in a Link to buyer home) */}
-          <div className="flex items-center gap-4">
-            <FaBars
-              className="text-4xl text-blue font-extrabold cursor-pointer sm:hidden"
-              onClick={onMenuClick} // Use the passed callback to open the sidebar
-            />
-            <Link to={homeUrl} className="block sm:hidden">
-              <img src={logo} alt="VisiBuy" className="h-6" />
-            </Link>
-          </div>
-
-          {/* Right Side: Cart, Dashboard, Profile */}
-          <div className="flex items-center gap-4">
-            {isLargeScreen && (
-              <SearchBox
-                placeholder="Search outlets/products"
-                onSearch={handleSearch}
-              />
-            )}
-            <CartIcon itemCount={cartItems.length} />
-            <DashboardButton />
-            <ProfilePicture imageSrc={profilepic} altText="User" />
-=======
   const homeUrl = `${buyerConfig.basePath.replace(/\/$/, "")}/${buyerConfig.routes.products.replace(/^\//, "")}`;
 
   return (
@@ -115,7 +82,6 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
             <span className="bg-blue-200 text-blue text-xs font-bold px-3 py-1 rounded-lg">
               Beta
             </span>
->>>>>>> staging
           </div>
         </div>
 

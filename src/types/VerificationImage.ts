@@ -7,10 +7,7 @@ export interface VerificationImage {
 }
 
 export interface VerificationResponse {
-<<<<<<< HEAD
-=======
   productId: string;
->>>>>>> staging
   productName: string;
   images: VerificationImage[];
   verificationId: string;

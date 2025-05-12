@@ -20,8 +20,6 @@ import { useLogin } from "../../mutations/use-login";
 import { Link } from "react-router-dom";
 import Icon from "../../../../ui/Icon";
 import { useId } from "react";
-<<<<<<< HEAD
-=======
 import { useNavigate } from "react-router-dom";
 import { UserActivityTracker } from "@/lib/activity-tracker/user-activity-tracker";
 import { facebookTracker } from "@/lib/activity-tracker/facebook-tracker";
@@ -30,16 +28,12 @@ import { facebookTracker } from "@/lib/activity-tracker/facebook-tracker";
 // Tracker Initialization
 const tracker = new UserActivityTracker([facebookTracker]);
 
->>>>>>> staging
 
 export function LoginForm() {
   const loginMutation = useLogin();
   const [showPassword, setShowPassword] = useState(false);
   const [isTypingDone, setIsTypingDone] = useState(false);
-<<<<<<< HEAD
-=======
   const navigate = useNavigate();
->>>>>>> staging
 
   const checkboxId = useId(); // Generate a unique ID for the checkbox
 
@@ -77,8 +71,6 @@ export function LoginForm() {
     form.formState.isSubmitting ||
     !form.formState.isValid;
 
-<<<<<<< HEAD
-=======
   // Track Activity and Redirect on Success
   useEffect(() => {
     if (loginMutation.isSuccess && loginMutation.data?.role === "buyer") {
@@ -90,7 +82,6 @@ export function LoginForm() {
     }
   }, [loginMutation.isSuccess, loginMutation.data, navigate]);
 
->>>>>>> staging
   return (
     <div className="w-full max-w-xl mx-auto flex flex-col items-center min-h-screen px-4">
       {/* Welcome Section */}
@@ -149,15 +140,9 @@ export function LoginForm() {
                       type={showPassword ? "text" : "password"}
                       icon={
                         <Icon
-<<<<<<< HEAD
-                          name="eye"
-                          className="h-6 w-6 cursor-pointer"
-                          onClick={() => setShowPassword((prev) => !prev)}
-=======
                           name={showPassword ? "eye-off" : "eye"}
                           className="h-6 w-6 cursor-pointer"
                           onClick={() => setShowPassword(!showPassword)}
->>>>>>> staging
                         />
                       }
                     />

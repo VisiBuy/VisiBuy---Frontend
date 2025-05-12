@@ -27,13 +27,8 @@ export const faqs: FaqProps[] = [
 
 export const Faq = () => {
   return (
-<<<<<<< HEAD
-    <div className=" mx-auto py-4 px-4 sm:px-6 lg:px-8">
-      <h2 className="text-3xl mb-8 font-Montserrat font-semibold">Payment</h2>
-=======
     <div className=' mx-auto py-4 px-4 sm:px-6 lg:px-8'>
       <h2 className='text-3xl mb-8 font-Montserrat font-semibold'>Payment</h2>
->>>>>>> staging
       <motion.dl
         className='space-y-8 '
         initial={{ opacity: 0, y: 20 }}

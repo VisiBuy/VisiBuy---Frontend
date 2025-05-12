@@ -72,8 +72,6 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
     }
   }, [isOpen, orderId]);
 
-<<<<<<< HEAD
-=======
 
   useEffect(() => {
   if (isOpen && verificationData?.productId) {
@@ -86,7 +84,6 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
 
 
   
->>>>>>> staging
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -131,8 +128,6 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
     colorsFromOrder.length > 0
       ? Array.from(new Set(colorsFromOrder))
       : colorsFromMetadata;
-<<<<<<< HEAD
-=======
   
   const handleApprove = () => {
     // Trigger Facebook Pixel custom event
@@ -152,7 +147,6 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
     onNo();
   };
 
->>>>>>> staging
 
   return (
     <>
@@ -280,21 +274,13 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
 
                   <div className="flex justify-end gap-6">
                     <button
-<<<<<<< HEAD
-                      onClick={onNo}
-=======
                       onClick={handleReject}
->>>>>>> staging
                       className="border border-black text-black font-OpenSans text-lg md:text-xl px-12 py-3 rounded-lg hover:bg-gray-100"
                     >
                       No
                     </button>
                     <button
-<<<<<<< HEAD
-                      onClick={onYes}
-=======
                       onClick={handleApprove}
->>>>>>> staging
                       className="bg-green-600 text-white text-lg md:text-xl px-12 py-3 font-OpenSans rounded-lg hover:bg-green-700"
                     >
                       Yes
@@ -327,12 +313,9 @@ const VisualVerificationModal: React.FC<VisualVerificationModalProps> = ({
 };
 
 export default VisualVerificationModal;
-<<<<<<< HEAD
-=======
 
 
 function fbq(arg0: string, arg1: string, arg2: { order_id: string; product_id: string; }) {
   throw new Error("Function not implemented.");
 }
 
->>>>>>> staging

@@ -20,11 +20,7 @@ const useOrderFilter = (
 
       const brand = order?.product?.brand?.toLowerCase?.() || "";
       const orderNo = order?.orderNo?.toLowerCase?.() || "";
-<<<<<<< HEAD
-      const query = searchQuery.toLowerCase();
-=======
       const query = searchQuery.trim().toLowerCase();
->>>>>>> staging
 
       const matchesSearch = brand.includes(query) || orderNo.includes(query);
 
@@ -39,14 +35,6 @@ const useOrderFilter = (
   }, [normalizedOrders, statusFilter, searchQuery]);
 
   return filteredOrders;
-<<<<<<< HEAD
-  
 };
 
-
-
-=======
-};
-
->>>>>>> staging
 export default useOrderFilter;
