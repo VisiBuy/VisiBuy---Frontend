@@ -13,6 +13,7 @@ export const PrivateRoute = ({
     localStorage.setItem("redirectPath", redirectPath);
     return <Navigate to="/login" />;
   }
+  // console.log('logger');
 
   return children;
 };

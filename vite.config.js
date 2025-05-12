@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
     plugins: [react(), tsconfigPaths()],
     optimizeDeps: {
       exclude: ["lucide-react"],
-    },
+    },    
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),

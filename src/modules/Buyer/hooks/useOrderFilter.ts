@@ -22,7 +22,6 @@ const useOrderFilter = (
       const orderNo = order?.orderNo?.toLowerCase?.() || "";
       const query = searchQuery.trim().toLowerCase();
 
-
       const matchesSearch = brand.includes(query) || orderNo.includes(query);
 
       return matchesStatus && matchesSearch;
@@ -36,9 +35,6 @@ const useOrderFilter = (
   }, [normalizedOrders, statusFilter, searchQuery]);
 
   return filteredOrders;
-  
 };
-
-
 
 export default useOrderFilter;

@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+import { motion } from "framer-motion";
+import { FaqItem } from "./faq-item";
+import { FaqProps } from "@/modules/Seller/models/feedback";
+=======
 <<<<<<<< HEAD:src1/modules/Seller/features/help-support/components/faq.tsx
 "use client";
 import { motion } from "framer-motion";
@@ -8,6 +13,7 @@ import { motion } from "framer-motion";
 import { FaqItem } from "./faq-item";
 import { FaqProps } from "@/modules/Seller/models/feedback";
 >>>>>>>> staging:src/modules/Seller/features/help-support/components/faq.tsx
+>>>>>>> staging
 
 export const faqs: FaqProps[] = [
   {
@@ -35,7 +41,12 @@ export const faqs: FaqProps[] = [
     question: "How do you say cheese to the camera?",
     answer:
       "Our programs can be taking in 3 forms depending on the proficiency level you want; Done For You, Done With You, and Do It Yourself",
+<<<<<<< HEAD
+  
+  },{
+=======
 ========
+>>>>>>> staging
     question: "Are there any fees?",
     answer:
       "Yes, Visibuy charges a 5% commission, and the payment gateway applies a small processing fee. These are deducted before payout.",
@@ -47,7 +58,10 @@ export const faqs: FaqProps[] = [
       <br/>🔄 This feature is coming in Visibuy 2.0 — account updates will be available soon.
 
       `,
+<<<<<<< HEAD
+=======
 >>>>>>>> staging:src/modules/Seller/features/help-support/components/faq.tsx
+>>>>>>> staging
   },
 ];
 
@@ -57,11 +71,17 @@ export const Faq = () => {
     <div className=' mx-auto py-4 px-4 sm:px-6 lg:px-8'>
       <h2 className='text-3xl mb-8 font-Montserrat font-semibold'>
         How to pay for your orders
+<<<<<<< HEAD
+    <div className=" mx-auto py-4 px-4 sm:px-6 lg:px-8">
+      <h2 className="text-3xl mb-8 font-Montserrat font-semibold">
+        Payment
+=======
 ========
     <div className=" mx-auto py-4 px-4 sm:px-6 lg:px-8">
       <h2 className="text-3xl mb-8 font-Montserrat font-semibold">
         Payment
 >>>>>>>> staging:src/modules/Seller/features/help-support/components/faq.tsx
+>>>>>>> staging
       </h2>
       <motion.dl
         className='space-y-8 '

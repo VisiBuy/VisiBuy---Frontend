@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { removeFromCart } from "../cart/cartSlice";
+import { UserActivityTracker } from "@/lib/activity-tracker/user-activity-tracker";
+import { facebookTracker } from "@/lib/activity-tracker/facebook-tracker";
 
 interface CartItem {
   _id: string;
@@ -37,6 +39,7 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
   isOpen,
   onClose,
   orderDetails,
+  userAddress
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -55,7 +58,7 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
 
   const orderData = {
     sneaker_id: orderDetails.items._id,
-    address: "23 online street, react state, javascript",
+    address: userAddress,
     size: data?.size,
     color: data?.color,
     quantity: orderDetails.items.quantity,
@@ -65,25 +68,46 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
   //   const data = await axiosWithAuth.post("order", orderData);
   //   console.log(data);
   // };
+  const userActivityTracker = new UserActivityTracker([facebookTracker]);
+  const trackPurchaseProducts = (productPurchase) => {
+    // orderDetails, setOrderDetails] = useState({
+    //   // Generate unique order ID
+    //   // orderId: "VISI-" + Math.floor(100000 + Math.random() * 900000),
+    //   items: { _id: "", model: "", quantity: 1, price: 0 },
+    //   totalAmount: 0, // Default value
+    //   paymentStatus: "Pending",
+    // });
+    console.log(productPurchase)
+      userActivityTracker.trackActivity("track", "Purchase", {
+        product_id: productPurchase?.items._id,
+        product_name: productPurchase?.items.model,
+        product_quantity: productPurchase?.items.quantity,
+        value: productPurchase?.totalAmount,
+        currency: 'Naira'
+      });
+  }
+
   const sendData = async () => {
     const state = store.getState();
     const token = state.auth.token;
 
+    trackPurchaseProducts(orderDetails)
+
     const response = await fetch(`${process.env.REACT_APP_BASE_URL}order`, {
-      method: "POST", // Specify method
+      method: "POST",
       headers: {
-        "Content-Type": "application/json", // Set content type
+        "Content-Type": "application/json",
         "auth-token": `${token}`,
       },
-      body: JSON.stringify(orderData), // Convert to JSON string
+      body: JSON.stringify(orderData),
     });
 
-    const data = await response.json(); // Parse response
+    const data = await response.json();
     console.log("Response:", data);
     console.log(orderData);
   };
 
-  sendData();
+  // sendData();
 
   return (
     <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center'>
@@ -124,6 +148,7 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
           <button
             onClick={() => {
               navigate(-1);
+              sendData();
               dispatch(removeFromCart(orderDetails.items._id));
             }}
             className='mt-4 w-[48%] bg-white-600 text-green-600 py-2 rounded-lg hover:bg-green-300 hover:text-white border-2 border-green-300'

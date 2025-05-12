@@ -37,6 +37,7 @@ export function SignUpForm() {
   const sellerMutation = useCreateSeller();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  
   useEffect(() => {
     if (sellerMutation.isSuccess || buyerMutation.isSuccess) {
       toast({
@@ -81,7 +82,6 @@ export function SignUpForm() {
     const userActivityTracker = new UserActivityTracker([facebookTracker]); // array of trackers to send data
     try {
       if (role === "buyer") {
-        
         await buyerMutation.mutateAsync(values);
         userActivityTracker.trackActivity("track", "CompleteRegistration", {
           content_name: "Signup",
@@ -109,14 +109,14 @@ export function SignUpForm() {
   };
 
   return (
-    <div className="w-full flex justify-center items-center px-4 py-16">
-      <div className="w-full max-w-2xl">
-        <h2 className="auth-heading">Create your account.</h2>
-        <p className="text-secondary-foreground text-lg md:text-xl font-OpenSans mt-2 text-center">
+    <div className='w-full flex justify-center items-center px-4 py-16'>
+      <div className='w-full max-w-2xl'>
+        <h2 className='auth-heading'>Create your account.</h2>
+        <p className='text-secondary-foreground text-lg md:text-xl font-OpenSans mt-2 text-center'>
           Shop with certainty using VisiBuy.
         </p>
 
-        <div className="flex justify-center mt-6">
+        <div className='flex justify-center mt-6'>
           <Button
             className={cn(
               "rounded-none border border-blue rounded-l-lg",
@@ -137,20 +137,20 @@ export function SignUpForm() {
           </Button>
         </div>
 
-        <div className="border border-border p-6 md:p-8 mt-8 rounded-2xl bg-white">
+        <div className='border border-border p-6 md:p-8 mt-8 rounded-2xl bg-white'>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               {/* Full Name */}
               <FormField
                 control={form.control}
-                name="fullName"
+                name='fullName'
                 render={({ field }) => (
-                  <FormItem className="py-2">
-                    <FormLabel className="text-xl !text-left block">
-                      Full Name<span className="text-destructive ml-1">*</span>
+                  <FormItem className='py-2'>
+                    <FormLabel className='text-xl !text-left block'>
+                      Full Name<span className='text-destructive ml-1'>*</span>
                     </FormLabel>
                     <FormControl>
-                      <Input placeholder="Full Name" {...field} />
+                      <Input placeholder='Full Name' {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -160,17 +160,17 @@ export function SignUpForm() {
               {/* Email */}
               <FormField
                 control={form.control}
-                name="email"
+                name='email'
                 render={({ field }) => (
-                  <FormItem className="py-2">
-                    <FormLabel className="text-xl !text-left block">
-                      Email<span className="text-destructive ml-1">*</span>
+                  <FormItem className='py-2'>
+                    <FormLabel className='text-xl !text-left block'>
+                      Email<span className='text-destructive ml-1'>*</span>
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Email"
+                        placeholder='Email'
                         {...field}
-                        icon={<Icon name="mail" className="h-6 w-6" />}
+                        icon={<Icon name='mail' className='h-6 w-6' />}
                       />
                     </FormControl>
                     <FormMessage />
@@ -181,17 +181,17 @@ export function SignUpForm() {
               {/* Phone */}
               <FormField
                 control={form.control}
-                name="phone"
+                name='phone'
                 render={({ field }) => (
-                  <FormItem className="py-2">
-                    <FormLabel className="text-xl !text-left block">
-                      Phone<span className="text-destructive ml-1">*</span>
+                  <FormItem className='py-2'>
+                    <FormLabel className='text-xl !text-left block'>
+                      Phone<span className='text-destructive ml-1'>*</span>
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Phone number"
+                        placeholder='Phone number'
                         {...field}
-                        icon={<Icon name="phone" className="h-6 w-6" />}
+                        icon={<Icon name='phone' className='h-6 w-6' />}
                       />
                     </FormControl>
                     <FormMessage />
@@ -202,14 +202,14 @@ export function SignUpForm() {
               {/* Address */}
               <FormField
                 control={form.control}
-                name="address"
+                name='address'
                 render={({ field }) => (
-                  <FormItem className="py-2">
-                    <FormLabel className="text-xl !text-left block">
-                      Address<span className="text-destructive ml-1">*</span>
+                  <FormItem className='py-2'>
+                    <FormLabel className='text-xl !text-left block'>
+                      Address<span className='text-destructive ml-1'>*</span>
                     </FormLabel>
                     <FormControl>
-                      <Input placeholder="Address" {...field} />
+                      <Input placeholder='Address' {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -219,21 +219,21 @@ export function SignUpForm() {
               {/* Password */}
               <FormField
                 control={form.control}
-                name="pass"
+                name='pass'
                 render={({ field }) => (
-                  <FormItem className="py-2">
-                    <FormLabel className="text-xl !text-left block">
-                      Password<span className="text-destructive ml-1">*</span>
+                  <FormItem className='py-2'>
+                    <FormLabel className='text-xl !text-left block'>
+                      Password<span className='text-destructive ml-1'>*</span>
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Password"
+                        placeholder='Password'
                         type={showPassword ? "text" : "password"}
                         {...field}
                         icon={
                           <Icon
                             name={showPassword ? "eye-off" : "eye"}
-                            className="h-6 w-6 cursor-pointer"
+                            className='h-6 w-6 cursor-pointer'
                             onClick={() => setShowPassword(!showPassword)}
                           />
                         }
@@ -247,22 +247,22 @@ export function SignUpForm() {
               {/* Confirm Password */}
               <FormField
                 control={form.control}
-                name="confirmPassword"
+                name='confirmPassword'
                 render={({ field }) => (
-                  <FormItem className="py-2">
-                    <FormLabel className="text-xl !text-left block">
+                  <FormItem className='py-2'>
+                    <FormLabel className='text-xl !text-left block'>
                       Confirm Password
-                      <span className="text-destructive ml-1">*</span>
+                      <span className='text-destructive ml-1'>*</span>
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Confirm password"
+                        placeholder='Confirm password'
                         type={showConfirmPassword ? "text" : "password"}
                         {...field}
                         icon={
                           <Icon
                             name={showConfirmPassword ? "eye-off" : "eye"}
-                            className="h-6 w-6 cursor-pointer"
+                            className='h-6 w-6 cursor-pointer'
                             onClick={() =>
                               setShowConfirmPassword(!showConfirmPassword)
                             }
@@ -278,25 +278,25 @@ export function SignUpForm() {
               {/* Terms and Conditions */}
               <FormField
                 control={form.control}
-                name="tos"
+                name='tos'
                 render={({ field }) => (
-                  <FormItem className="py-2">
+                  <FormItem className='py-2'>
                     <FormControl>
-                      <div className="flex items-start gap-2">
+                      <div className='flex items-start gap-2'>
                         <Checkbox
                           checked={field.value}
                           onCheckedChange={field.onChange}
-                          id="tos"
-                          className="mt-1"
+                          id='tos'
+                          className='mt-1'
                         />
-                        <label htmlFor="tos" className="text-base text-left">
+                        <label htmlFor='tos' className='text-base text-left'>
                           By selecting the box, you agree to the{" "}
                           <Button
                             asChild
-                            variant="link"
-                            className="inline px-1 text-blue"
+                            variant='link'
+                            className='inline px-1 text-blue'
                           >
-                            <Link to="/login">Terms & Conditions</Link>
+                            <Link to='/login'>Terms & Conditions</Link>
                           </Button>{" "}
                           of VisiBuy.
                         </label>
@@ -308,33 +308,33 @@ export function SignUpForm() {
               />
 
               {/* Submit Button */}
-              <div className="pt-6">
+              <div className='pt-6'>
                 <Button
                   disabled={
                     buyerMutation.isPending ||
                     sellerMutation.isPending ||
                     !form.formState.isValid
                   }
-                  type="submit"
-                  className="w-full h-14 text-lg"
+                  type='submit'
+                  className='w-full h-14 text-lg'
                 >
                   Sign Up
                   {(buyerMutation.isPending || sellerMutation.isPending) && (
-                    <Loader2 className="ml-2 animate-spin" />
+                    <Loader2 className='ml-2 animate-spin' />
                   )}
                 </Button>
               </div>
 
               {/* Login + Forgot Password */}
-              <div className="flex flex-col md:flex-row justify-between items-center text-lg text-secondary-foreground mt-6">
-                <div className="flex items-center space-x-1">
+              <div className='flex flex-col md:flex-row justify-between items-center text-lg text-secondary-foreground mt-6'>
+                <div className='flex items-center space-x-1'>
                   <span>Already have an account?</span>
-                  <Button asChild variant="link" className="text-blue px-1">
-                    <Link to="/login">Sign In</Link>
+                  <Button asChild variant='link' className='text-blue px-1'>
+                    <Link to='/login'>Sign In</Link>
                   </Button>
                 </div>
-                <Button asChild variant="link" className="text-blue px-1">
-                  <Link to="/reset-password">Forgot Password?</Link>
+                <Button asChild variant='link' className='text-blue px-1'>
+                  <Link to='/reset-password'>Forgot Password?</Link>
                 </Button>
               </div>
             </form>

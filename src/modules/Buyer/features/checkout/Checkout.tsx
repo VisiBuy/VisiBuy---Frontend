@@ -5,6 +5,8 @@ import { AppDispatch, RootState } from "@/store/store";
 import OrderConfirmation from "../pop-up/OrderConfirmation";
 import { useNavigate, useParams } from "react-router-dom";
 import { removeFromCart } from "../cart/cartSlice";
+import {fetchBuyerInfo} from "../../lib/track-order/api"
+import { useQuery } from "@tanstack/react-query";
 
 interface CartItem {
   _id: string;
@@ -19,6 +21,11 @@ interface CartItem {
 }
 
 const Checkout = () => {
+  const { data: buyerInfo, isLoading } = useQuery({
+    queryKey: ["buyer-info"],
+    queryFn: fetchBuyerInfo,
+  });
+
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
@@ -66,7 +73,7 @@ const Checkout = () => {
 
   // Flutterwave payment config
   const flutterwaveConfig = {
-    public_key: "FLWPUBK_TEST-d9c9a5938f9d56e031129288f4f30553-X",
+    public_key: import.meta.env.REACT_APP_FLW_PUBLIC_KEY,
     // process.env.REACT_APP_FLW_PUBLIC_TEST_KEY || "FLWPUBK_TEST-XXXXXXXXX",
     // Unique transaction reference
     tx_ref: "VISIBUY-" + Date.now(),
@@ -74,9 +81,9 @@ const Checkout = () => {
     currency: "NGN",
     payment_options: "card,mobilemoney,ussd",
     customer: {
-      email: user?.email ?? "default@example.com",
-      phone_number: user?.phone ?? "0000000000",
-      name: user?.fullName ?? "John Doe",
+      email: buyerInfo?.email,
+      phone_number: buyerInfo?.phone,
+      name: buyerInfo?.fullName,
     },
     customizations: {
       title: "VisiBuy Order Payment",
@@ -115,6 +122,7 @@ const Checkout = () => {
           setIsOrderPlaced(false);
         }}
         orderDetails={orderDetails}
+        userAddress={buyerInfo?.address}
       />
 
       <button
