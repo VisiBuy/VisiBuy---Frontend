@@ -26,7 +26,10 @@ import BuyerOrderDetailsPage from "./pages/Buyer/OrderDetails";
 import BuyerCartPage from "./pages/Buyer/Cart";
 import BuyerCartSummaryPage from "./pages/Buyer/CartSummary";
 import BuyerNotificationsPage from "./pages/Buyer/Notifications";
+<<<<<<< HEAD
 import BuyerProfilePage from "./pages/Buyer/Profile";
+=======
+>>>>>>> staging
 import BuyerProductDetails from "./pages/Buyer/ProductDetails";
 import Checkout from "./modules/Buyer/features/checkout/Checkout";
 import BuyerNotificationsDetailsPage from "./pages/Buyer/NotificationsDetails";

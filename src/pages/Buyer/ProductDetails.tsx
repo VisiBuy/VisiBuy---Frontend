@@ -5,15 +5,16 @@ import {
 import { RootState } from "@/store/store";
 import OrderSuccess from "@/ui/buyer/OrderSuccess";
 import { useEffect, useState } from "react";
+import { FaShoppingCart, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   FaShoppingCart,
   FaChevronLeft,
   FaChevronRight,
   FaArrowLeft,
 } from "react-icons/fa";
-
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
@@ -23,7 +24,6 @@ import "swiper/css/pagination";
 import ErrorHolder from "@/ui/buyer/ErrorHolder";
 import { UserActivityTracker } from "@/lib/activity-tracker/user-activity-tracker";
 import { facebookTracker } from "@/lib/activity-tracker/facebook-tracker";
-
 interface Product {
   _id: string;
   brand: string;
@@ -39,7 +39,7 @@ interface Product {
 }
 
 function ProductDetails() {
-  const navigate = useNavigate();
+const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
 
@@ -62,9 +62,9 @@ function ProductDetails() {
   const cartItem = cartItems.find((item: { _id: string | undefined; }) => item._id === id);
   const quantity = cartItem ? cartItem.quantity : localQuantity;
 
-  // facebook tracker
-  const userActivityTracker = new UserActivityTracker([facebookTracker]);
-  const trackAddToCartClick = (addToCartClicked: Product) => {
+// facebook tracker
+const userActivityTracker = new UserActivityTracker([facebookTracker]);
+const trackAddToCartClick = (addToCartClicked: Product) => {
     console.log(addToCartClicked)
       userActivityTracker.trackActivity("track", "AddToCart", {
         product_name: addToCartClicked?.model,
@@ -89,10 +89,13 @@ function ProductDetails() {
         _id: data._id!,
         size: selectedSize,
         color: selectedColor,
-        quantity: quantity,
-      })
-    );
-    trackAddToCartClick(data)
+dispatch(
+  addToCart({
+    product: data,
+    quantity: quantity,
+  })
+);
+trackAddToCartClick(data);
     setShowOrderSuccess(true);
   };
   const handleAddToQuantity = () => {
@@ -117,6 +120,8 @@ function ProductDetails() {
       setLocalQuantity((prev) => prev + 1);
     }
   };
+return (
+  <div className='h-[100%] w-[93%] p-8'>
   // console.log(data)
 
   return (
