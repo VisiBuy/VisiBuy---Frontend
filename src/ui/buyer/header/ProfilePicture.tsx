@@ -15,17 +15,9 @@ const ProfilePicture = ({
 
   return (
     <Link to={profilePath}>
-<<<<<<< HEAD
-      <img
-        src={imageSrc}
-        alt={altText}
-        className="w-12 h-12 md:w-14 md:h-14 rounded-full border-none"
-      />
-=======
       <div className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-blue flex items-center justify-center bg-transparent text-blue font-bold text-2xl md:text-3xl">
         {initials}
       </div>
->>>>>>> staging
     </Link>
   );
 };

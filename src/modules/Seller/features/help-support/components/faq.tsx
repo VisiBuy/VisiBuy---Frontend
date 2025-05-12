@@ -17,10 +17,6 @@ export const faqs: FaqProps[] = [
     question: "How do I change my payout account?",
     answer: `Go to your Seller Dashboard > Settings > Payout Details. You can update your bank name, account number, and account holder name.
       <br/>🔄 This feature is coming in Visibuy 2.0 — account updates will be available soon.
-<<<<<<< HEAD
-
-=======
->>>>>>> staging
       `,
   },
 ];
