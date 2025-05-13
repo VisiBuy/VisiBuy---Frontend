@@ -35,20 +35,14 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
 
   // activity tracking
   const userActivityTracker = new UserActivityTracker([facebookTracker]);
-
   const trackProductClick = (productClicked: { model: any; _id: any; }) => {
     console.log(productClicked)
     if (type !== 'cart'){ 
       userActivityTracker.trackActivity("track", "ProductView", {
-
         content_name: productClicked?.model,
         content_id: productClicked?._id,
       });
     }
-
-  }
-
-
   };
 
   // const handleAddToCart = (e: React.MouseEvent) => {
