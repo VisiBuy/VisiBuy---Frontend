@@ -15,17 +15,11 @@ dist-ssr/
 # Environment files (for different environments)
 .env
 .env.local
-<<<<<<< HEAD
+.env.development
+.env.staging
 .env.production
 .env.test
 
-
-=======
-.env.development
-.env.staging
-.env.test
-
->>>>>>> master
 # Temporary files and directories
 *.local
 src1/
