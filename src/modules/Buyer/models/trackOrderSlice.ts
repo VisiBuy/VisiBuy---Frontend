@@ -20,23 +20,38 @@ export const getOrderHistory = createAsyncThunk(
     }
 
     return allOrders;
-  }
+  },
 );
+
+interface TrackOrderState {
+  allOrders: Order[];
+  orders: Order[];
+  loading: boolean;
+  error: string | null;
+  pagination: {
+    currentPage: number;
+    totalPages: number;
+    pageSize: number;
+    totalItems: number;
+  };
+}
+
+const initialState: TrackOrderState = {
+  allOrders: [],
+  orders: [],
+  loading: false,
+  error: null,
+  pagination: {
+    currentPage: 1,
+    totalPages: 1,
+    pageSize: 10,
+    totalItems: 0,
+  },
+};
 
 const trackOrderSlice = createSlice({
   name: "trackOrder",
-  initialState: {
-    allOrders: [] as Order[], // all sorted orders
-    orders: [] as Order[], // visible orders per page
-    loading: false,
-    error: null as string | null,
-    pagination: {
-      currentPage: 1,
-      totalPages: 1,
-      pageSize: 10,
-      totalItems: 0,
-    },
-  },
+  initialState,
   reducers: {
     setPage: (state, action) => {
       state.pagination.currentPage = action.payload;
@@ -62,13 +77,13 @@ const trackOrderSlice = createSlice({
           .sort(
             (a, b) =>
               new Date(b.created_at).getTime() -
-              new Date(a.created_at).getTime()
+              new Date(a.created_at).getTime(),
           );
 
         state.allOrders = sortedOrders;
         state.pagination.totalItems = sortedOrders.length;
         state.pagination.totalPages = Math.ceil(
-          sortedOrders.length / state.pagination.pageSize
+          sortedOrders.length / state.pagination.pageSize,
         );
         state.pagination.currentPage = 1;
 

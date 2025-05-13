@@ -8,8 +8,8 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react(), tsconfigPaths()],
     optimizeDeps: {
-      include: ["lucide-react"]
-    },    
+      include: ["lucide-react"],
+    },
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
