@@ -20,7 +20,6 @@ dist-ssr/
 .env.production
 .env.test
 
-
 # Temporary files and directories
 *.local
 src1/
