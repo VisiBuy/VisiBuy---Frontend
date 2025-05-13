@@ -17,15 +17,17 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "src",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/**/*.ts",
-    "**/**/*.tsx",
-    "postcss.config.js",
-    "react-app-env.d.ts"
-  ],
+
+  "include": ["src", "postcss.config.js", "react-app-env.d.ts"],
+  // "include": [
+  //   "src",
+  //   "**/*.ts",
+  //   "**/*.tsx",
+  //   "**/**/*.ts",
+  //   "**/**/*.tsx",
+  //   "postcss.config.js",
+  //   "react-app-env.d.ts"]
+
   "exclude": ["node_modules"]
 }
 

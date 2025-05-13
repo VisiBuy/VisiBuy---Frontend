@@ -12,6 +12,7 @@ export const FaqItem = ({ question, answer }: FaqProps) => {
         className="flex justify-between items-start w-full text-left"
         onClick={() => setIsOpen(!isOpen)}
       >
+
         <span className="text-foreground text-2xl text-left font-Montserrat font-medium">
           {question}
         </span>
