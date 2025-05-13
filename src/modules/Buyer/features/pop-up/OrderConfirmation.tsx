@@ -33,7 +33,9 @@ interface OrderConfirmationProps {
     totalAmount: number;
     paymentStatus: string;
   };
-  userAddress: any;
+
+  userAddress: string;
+
 }
 
 const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
@@ -70,6 +72,7 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
   //   console.log(data);
   // };
   const userActivityTracker = new UserActivityTracker([facebookTracker]);
+
   const trackPurchaseProducts = (productPurchase: {
     items: any;
     totalAmount: any;
@@ -84,6 +87,7 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
       currency: "Naira",
     });
   };
+
 
   const sendData = async () => {
     const state = store.getState();

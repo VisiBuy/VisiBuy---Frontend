@@ -21,7 +21,6 @@ import "swiper/css/pagination";
 import ErrorHolder from "@/ui/buyer/ErrorHolder";
 import { UserActivityTracker } from "@/lib/activity-tracker/user-activity-tracker";
 import { facebookTracker } from "@/lib/activity-tracker/facebook-tracker";
-
 interface Product {
   _id: string;
   brand: string;
@@ -37,7 +36,7 @@ interface Product {
 }
 
 function ProductDetails() {
-  const navigate = useNavigate();
+const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
 
@@ -57,6 +56,7 @@ function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState<string>("");
 
   // Get product quantity in cart
+
   const cartItem = cartItems.find(
     (item: { _id: string | undefined }) => item._id === id,
   );
@@ -78,25 +78,29 @@ function ProductDetails() {
     const foundProduct = products.find(
       (p: { _id: string | undefined }) => p._id === id,
     );
+
     setData(foundProduct ?? null); // Set the product or null if not found
   }, [id, products]); // Re-run effect when id or products change
 
   const handleOrderSuccess = () => {
-    console.log(quantity);
-    if (!data) return;
-    if (!selectedColor || !selectedSize) return setShowErrorHolder(true);
-    dispatch(
-      addToCart({
-        ...data,
-        _id: data._id!,
-        size: selectedSize,
-        color: selectedColor,
-        quantity: quantity,
-      }),
-    );
-    trackAddToCartClick(data);
-    setShowOrderSuccess(true);
-  };
+
+  console.log(quantity);
+  if (!data) return;
+  if (!selectedColor || !selectedSize) return setShowErrorHolder(true);
+
+  dispatch(
+    addToCart({
+      ...data,
+      _id: data._id!,
+      size: selectedSize,
+      color: selectedColor,
+      quantity: quantity,
+    })
+  );
+
+  trackAddToCartClick(data);
+  setShowOrderSuccess(true);
+};
   const handleAddToQuantity = () => {
     // check if data exist
     if (!data || !data._id) return;
@@ -119,6 +123,7 @@ function ProductDetails() {
       setLocalQuantity((prev) => prev + 1);
     }
   };
+
 
   return (
     <div className="h-[100%] w-[93%] p-8">

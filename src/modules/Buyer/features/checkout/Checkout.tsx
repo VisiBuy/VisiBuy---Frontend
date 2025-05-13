@@ -78,18 +78,20 @@ const Checkout = () => {
   }, [data]);
 
   if (
-    isLoading ||
-    !buyerInfo?.email ||
-    !buyerInfo.phone ||
-    !buyerInfo.fullName ||
-    !data
-  ) {
-    return (
-      <div className="p-6 text-gray-600 text-center">
-        Loading order and buyer info...
-      </div>
-    );
-  }
+
+
+  isLoading ||
+  !buyerInfo?.email ||
+  !buyerInfo.phone ||
+  !buyerInfo.fullName ||
+  !data
+) {
+  return (
+    <div className="p-6 text-gray-600 text-center">
+      Loading order and buyer info...
+    </div>
+  );
+}
 
   // Flutterwave payment config
   const flutterwaveConfig = {
@@ -105,10 +107,11 @@ const Checkout = () => {
     currency: "NGN",
     payment_options: "card,mobilemoney,ussd",
     customer: {
-      email: buyerInfo?.email || "",
-      phone_number: buyerInfo?.phone || "",
-      name: buyerInfo?.fullName || "",
-    },
+
+    email: buyerInfo?.email || "",          // ⬅️ ensures it's always a string
+    phone_number: buyerInfo?.phone || "",   // ⬅️ same here
+    name: buyerInfo?.fullName || "",        // ⬅️ and here
+  },
     customizations: {
       title: "VisiBuy Order Payment",
       description: `Complete your order payment for ${data?.model}`,
