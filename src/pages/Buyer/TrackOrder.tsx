@@ -103,7 +103,7 @@ const BuyerTrackOrderPage = () => {
                   </div>
                 ) : error ? (
                   <p className='text-red-500'>{error}</p>
-                ) : allOrders.length === 0 ? (
+                ) : allOrders?.length === 0 ? (
                   <p>No orders yet.</p>
                 ) : paginatedOrders.length > 0 ? (
                   paginatedOrders.map((order) => (

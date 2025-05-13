@@ -62,14 +62,14 @@ function ProductDetails() {
 
   // facebook tracker
   const userActivityTracker = new UserActivityTracker([facebookTracker]);
-  const trackAddToCartClick = (addToCartClicked) => {
-    console.log(addToCartClicked)
-      userActivityTracker.trackActivity("track", "AddToCart", {
-        product_name: addToCartClicked?.model,
-        product_id: addToCartClicked?._id,
-        product_price: addToCartClicked?.price,
-      });
-  }
+  const trackAddToCartClick = (addToCartClicked: Product) => {
+    console.log(addToCartClicked);
+    userActivityTracker.trackActivity("Cart", "AddToCart", {
+      product_name: addToCartClicked?.model,
+      product_id: addToCartClicked?._id,
+      product_price: addToCartClicked?.price,
+    });
+  };
 
   useEffect(() => {
     // Find the product by matching the id with the `id` in the products array
@@ -90,7 +90,7 @@ function ProductDetails() {
         quantity: quantity,
       })
     );
-    trackAddToCartClick(data)
+    trackAddToCartClick(data);
     setShowOrderSuccess(true);
   };
   const handleAddToQuantity = () => {

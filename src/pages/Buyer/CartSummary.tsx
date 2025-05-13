@@ -9,6 +9,8 @@ import {
   selectCartSummary,
 } from "@/modules/Buyer/features/cart/cartSummarySlice";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { fetchBuyerInfo } from "../../modules/Buyer/lib/track-order/api";
+import { useQuery } from "@tanstack/react-query";
 
 interface CartItem {
   _id: string;
@@ -27,10 +29,18 @@ const CartSummary = () => {
   const history = useNavigate();
   const { id } = useParams();
 
+  const { data: buyerInfo, isLoading } = useQuery({
+    queryKey: ["buyer-info"],
+    queryFn: fetchBuyerInfo,
+  });
+
+  // console.log(buyerInfo);
+
   const cartItems = useSelector((state: RootState) => state.buyer.cart.items);
   const { subtotal, deliveryFee, vat, total } = useSelector(selectCartSummary);
 
   const [showDeliveryDetails, setShowDeliveryDetails] = useState(false);
+  const [showDeliveryAddress, setShowDeliveryAddress] = useState(false);
 
   // const products = useSelector(
   //   (state: RootState) => state.buyer.product.products
@@ -85,26 +95,22 @@ const CartSummary = () => {
           <CartSummaryItem key={data._id} item={data} />
         </div>
 
-        {/* Delivery Details */}
+        {/* Delivery Address */}
         <div className='mt-4'>
           <button
-            onClick={() => setShowDeliveryDetails(!showDeliveryDetails)}
+            onClick={() => setShowDeliveryAddress(!showDeliveryAddress)}
             className='text-sm font-medium flex items-center gap-2'
           >
-            {showDeliveryDetails
-              ? "▼ Hide Delivery Details"
-              : "▶ Add Delivery Details"}
+            {showDeliveryAddress
+              ? "▼ Hide Delivery Address"
+              : "▶ Show Delivery Address"}
           </button>
 
-          {showDeliveryDetails && (
+          {showDeliveryAddress && (
             <div className='mt-2 space-y-2 text-sm'>
               <div className='flex justify-between'>
-                <span>Delivery</span>
-                <span>₦{deliveryFee.toFixed(2)}</span>
-              </div>
-              <div className='flex justify-between'>
-                <span>VAT</span>
-                <span>₦{vat.toFixed(2)}</span>
+                <span>Address</span>
+                <span>{buyerInfo?.address}</span>
               </div>
             </div>
           )}
@@ -118,32 +124,7 @@ const CartSummary = () => {
           >
             {showDeliveryDetails
               ? "▼ Hide Delivery Details"
-              : "▶ Add Delivery Details"}
-          </button>
-
-          {showDeliveryDetails && (
-            <div className='mt-2 space-y-2 text-sm'>
-              <div className='flex justify-between'>
-                <span>Delivery</span>
-                <span>₦{deliveryFee.toFixed(2)}</span>
-              </div>
-              <div className='flex justify-between'>
-                <span>VAT</span>
-                <span>₦{vat.toFixed(2)}</span>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Delivery Details */}
-        <div className='mt-4'>
-          <button
-            onClick={() => setShowDeliveryDetails(!showDeliveryDetails)}
-            className='text-sm font-medium flex items-center gap-2'
-          >
-            {showDeliveryDetails
-              ? "▼ Hide Delivery Details"
-              : "▶ Add Delivery Details"}
+              : "▶ Show Delivery Details"}
           </button>
 
           {showDeliveryDetails && (

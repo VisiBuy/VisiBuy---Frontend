@@ -76,7 +76,7 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
     paymentStatus?: string;
   }) => {
     // console.log(productPurchase);
-    userActivityTracker.trackActivity("track", "Purchase", {
+    userActivityTracker.trackActivity("Purchase", "ProductPurchased", {
       product_id: productPurchase?.items._id,
       product_name: productPurchase?.items.model,
       product_quantity: productPurchase?.items.quantity,

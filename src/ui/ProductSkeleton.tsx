@@ -1,4 +1,4 @@
-import { Link,useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   addToCart,
   removeFromCart,
@@ -35,34 +35,34 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
 
   // activity tracking
   const userActivityTracker = new UserActivityTracker([facebookTracker]);
-  const trackProductClick = (productClicked) => {
-    console.log(productClicked)
-    if (type !== 'cart'){ 
-      userActivityTracker.trackActivity("track", "ProductView", {
+  const trackProductClick = (productClicked: Product) => {
+    console.log(productClicked);
+    if (type !== "cart") {
+      userActivityTracker.trackActivity("ProductView", "Products", {
         content_name: productClicked?.model,
         content_id: productClicked?._id,
       });
     }
-  }
-
-  const handleAddToCart = (e: React.MouseEvent) => {
-    // prevent default navigation
-    e.preventDefault();
-
-    dispatch(
-      addToCart({
-        _id: product._id,
-        brand: product.brand,
-        price: product.price,
-        quantity: 1,
-        images: product.images,
-        model: product.model,
-        storeName: product.storeName,
-        color: undefined,
-        sizes: undefined,
-      })
-    );
   };
+
+  // const handleAddToCart = (e: React.MouseEvent) => {
+  //   // prevent default navigation
+  //   e.preventDefault();
+
+  //   dispatch(
+  //     addToCart({
+  //       _id: product._id,
+  //       brand: product.brand,
+  //       price: product.price,
+  //       quantity: 1,
+  //       images: product.images,
+  //       model: product.model,
+  //       storeName: product.storeName,
+  //       color: undefined,
+  //       sizes: undefined,
+  //     })
+  //   );
+  // };
   const handleRemoveFromCart = (e: React.MouseEvent) => {
     e.preventDefault();
 
@@ -94,11 +94,12 @@ const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ product, type }) => {
         to={type === "cart" ? "" : `/dashboard/buyer/product/${product?._id}`}
         className='block w-fit'
         onClick={(e) => {
-          if (type !== 'cart') { 
+          if (type !== "cart") {
             e.preventDefault();
-            trackProductClick(product); 
-            navigate(`/dashboard/buyer/product/${product?._id}`); 
-          }}}
+            trackProductClick(product);
+            navigate(`/dashboard/buyer/product/${product?._id}`);
+          }
+        }}
       >
         <div className='relative bg-black text-white rounded-lg overflow-hidden w-fit'>
           {/* Product Image */}

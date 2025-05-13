@@ -7,6 +7,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { removeFromCart } from "../cart/cartSlice";
 import { fetchBuyerInfo } from "../../lib/track-order/api";
 import { useQuery } from "@tanstack/react-query";
+import {
+  calculateTotals,
+  selectCartSummary,
+} from "@/modules/Buyer/features/cart/cartSummarySlice";
 
 interface CartItem {
   _id: string;
@@ -31,6 +35,9 @@ const Checkout = () => {
   // Get user & cart details from Redux
   const user = useSelector((state: RootState) => state.auth.user);
   const cartProduct = useSelector((state: RootState) => state.buyer.cart.items);
+
+  const { subtotal, deliveryFee, vat, total } = useSelector(selectCartSummary);
+  console.log(total);
 
   const [data, setData] = useState<CartItem | null>(null);
   useEffect(() => {
@@ -64,7 +71,7 @@ const Checkout = () => {
       setOrderDetails({
         // orderId: "VISI-" + Math.floor(100000 + Math.random() * 900000),
         items: data,
-        totalAmount: data.price * (data.quantity ?? 1), // Handle potential undefined quantity
+        totalAmount: total, // Handle potential undefined quantity
         paymentStatus: "Pending",
       });
     }
@@ -72,7 +79,10 @@ const Checkout = () => {
 
   // Flutterwave payment config
   const flutterwaveConfig = {
-    public_key: import.meta.env.REACT_APP_FLW_PUBLIC_KEY,
+    public_key:
+      import.meta.env.REACT_APP_FLW_PUBLIC_KEY ||
+      process.env.REACT_APP_FLW_PUBLIC_KEY ||
+      "FLWPUBK_TEST-d9c9a5938f9d56e031129288f4f30553-X",
     // process.env.REACT_APP_FLW_PUBLIC_TEST_KEY || "FLWPUBK_TEST-XXXXXXXXX",
     // Unique transaction reference
     tx_ref: "VISIBUY-" + Date.now(),
