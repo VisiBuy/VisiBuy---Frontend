@@ -14,7 +14,7 @@ const FileDispute = () => {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -28,7 +28,6 @@ const FileDispute = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
   };
 
   return (

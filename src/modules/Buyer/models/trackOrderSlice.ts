@@ -20,7 +20,7 @@ export const getOrderHistory = createAsyncThunk(
     }
 
     return allOrders;
-  }
+  },
 );
 
 interface TrackOrderState {
@@ -77,13 +77,13 @@ const trackOrderSlice = createSlice({
           .sort(
             (a, b) =>
               new Date(b.created_at).getTime() -
-              new Date(a.created_at).getTime()
+              new Date(a.created_at).getTime(),
           );
 
         state.allOrders = sortedOrders;
         state.pagination.totalItems = sortedOrders.length;
         state.pagination.totalPages = Math.ceil(
-          sortedOrders.length / state.pagination.pageSize
+          sortedOrders.length / state.pagination.pageSize,
         );
         state.pagination.currentPage = 1;
 

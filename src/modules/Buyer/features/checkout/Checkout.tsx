@@ -77,12 +77,27 @@ const Checkout = () => {
     }
   }, [data]);
 
+  if (
+    isLoading ||
+    !buyerInfo?.email ||
+    !buyerInfo.phone ||
+    !buyerInfo.fullName ||
+    !data
+  ) {
+    return (
+      <div className="p-6 text-gray-600 text-center">
+        Loading order and buyer info...
+      </div>
+    );
+  }
+
   // Flutterwave payment config
   const flutterwaveConfig = {
-    public_key:
-      import.meta.env.REACT_APP_FLW_PUBLIC_KEY ||
-      process.env.REACT_APP_FLW_PUBLIC_KEY,
-      // "FLWPUBK_TEST-d9c9a5938f9d56e031129288f4f30553-X",
+    public_key: "FLWPUBK-464c9219dcb2652176b8f03d0a310652-X",
+    // import.meta.env.REACT_APP_FLW_PUBLIC_KEY ||
+    // process.env.REACT_APP_FLW_PUBLIC_KEY ||
+
+    // "FLWPUBK_TEST-d9c9a5938f9d56e031129288f4f30553-X",
     // process.env.REACT_APP_FLW_PUBLIC_TEST_KEY || "FLWPUBK_TEST-XXXXXXXXX",
     // Unique transaction reference
     tx_ref: "VISIBUY-" + Date.now(),
@@ -115,15 +130,15 @@ const Checkout = () => {
       console.log("Payment modal closed"); // Add this to handle modal close event
     },
   };
-  console.log(flutterwaveConfig.public_key)
+  console.log(flutterwaveConfig.public_key);
 
   return (
-    <div className='p-6 fixed inset-0 bg-black bg-opacity-10 flex flex-col justify-center items-center'>
-      <h2 className='text-xl font-semibold'>Complete Your Order</h2>
+    <div className="p-6 fixed inset-0 bg-black bg-opacity-10 flex flex-col justify-center items-center">
+      <h2 className="text-xl font-semibold">Complete Your Order</h2>
 
       <FlutterWaveButton
         {...flutterwaveConfig}
-        className='mt-4 bg-green-600 text-white px-4 py-2 rounded-lg'
+        className="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg"
       />
 
       <OrderConfirmation
@@ -136,7 +151,7 @@ const Checkout = () => {
       />
 
       <button
-        className='text-center text-xl text-white bg-red-400 py-2 px-6 rounded mt-6'
+        className="text-center text-xl text-white bg-red-400 py-2 px-6 rounded mt-6"
         // onClick={() => navigate("/dashboard/buyer/carts")}
         onClick={() => navigate(-1)}
       >

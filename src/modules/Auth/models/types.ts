@@ -31,6 +31,7 @@ export interface AuthState {
   role: Role | null;
 }
 export interface LoginResponse {
+  email: string;
   msg: string;
   token: string;
   role: Role;

@@ -61,7 +61,7 @@ export const fetchProducts = createAsyncThunk(
       console.error("Error fetching products:", error);
       throw error;
     }
-  }
+  },
 );
 
 const productSlice = createSlice({
@@ -99,19 +99,19 @@ const productSlice = createSlice({
         if (action.payload) {
           const existingIds = new Set(state.products.map((p) => p._id));
           const uniqueNewProducts = action.payload.products.filter(
-            (p) => !existingIds.has(p._id)
+            (p: { _id: string }) => !existingIds.has(p._id),
           );
-      
+
           state.products = [...state.products, ...uniqueNewProducts];
           state.loading = false;
           state.loadingMore = false;
           state.hasMore = action.payload.hasMore;
-      
+
           if (action.payload.hasMore) {
             state.page = action.meta.arg.page + 1;
           }
         }
-      })      
+      })
       .addCase(fetchProducts.rejected, (state) => {
         state.loading = false;
         state.loadingMore = false;
