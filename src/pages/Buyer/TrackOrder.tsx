@@ -18,7 +18,7 @@ const BuyerTrackOrderPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const location = useLocation();
   const { allOrders, loading, error } = useSelector(
-    (state: RootState) => state.trackOrder
+    (state: RootState) => state.trackOrder,
   );
 
   const { statusFilter, searchQuery, handleStatusChange, handleSearch } =
@@ -27,7 +27,7 @@ const BuyerTrackOrderPage = () => {
   const filteredOrders = useOrderFilter(
     allOrders ?? [],
     statusFilter,
-    searchQuery
+    searchQuery,
   );
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,7 +39,7 @@ const BuyerTrackOrderPage = () => {
   const totalPages = Math.ceil(filteredOrders.length / ORDERS_PER_PAGE);
   const paginatedOrders = filteredOrders.slice(
     (currentPage - 1) * ORDERS_PER_PAGE,
-    currentPage * ORDERS_PER_PAGE
+    currentPage * ORDERS_PER_PAGE,
   );
 
   useEffect(() => {
@@ -75,35 +75,35 @@ const BuyerTrackOrderPage = () => {
 
   return (
     <ErrorBoundary>
-      <div className='flex flex-col gap-12 p-10'>
+      <div className="flex flex-col gap-12 p-10">
         {isViewingOrder ? (
           <Outlet />
         ) : (
           <>
-            <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
-              <div className='flex flex-wrap sm:flex-nowrap gap-2 sm:gap-4 w-full'>
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-wrap sm:flex-nowrap gap-2 sm:gap-4 w-full">
                 <OrderStatusButtons
                   currentStatus={statusFilter}
                   onStatusChange={handleStatusChange}
                   statusCounts={statusCounts}
-                  className='flex-1 whitespace-nowrap overflow-x-auto'
+                  className="flex-1 whitespace-nowrap overflow-x-auto"
                 />
               </div>
               <SearchOrder
                 onSearch={handleSearch}
-                className='w-full sm:w-auto'
+                className="w-full sm:w-auto"
               />
             </div>
 
-            <div className='flex gap-24'>
-              <div className='flex-1 flex flex-col gap-4'>
+            <div className="flex gap-24">
+              <div className="flex-1 flex flex-col gap-4">
                 {loading ? (
-                  <div className='flex justify-center items-center min-h-[300px]'>
-                    <LoadingSpinner isLoading={true} size='large' />
+                  <div className="flex justify-center items-center min-h-[300px]">
+                    <LoadingSpinner isLoading={true} size="large" />
                   </div>
                 ) : error ? (
-                  <p className='text-red-500'>{error}</p>
-                ) : allOrders.length === 0 ? (
+                  <p className="text-red-500">{error}</p>
+                ) : allOrders?.length === 0 ? (
                   <p>No orders yet.</p>
                 ) : paginatedOrders.length > 0 ? (
                   paginatedOrders.map((order) => (
@@ -113,29 +113,29 @@ const BuyerTrackOrderPage = () => {
                   <p>No orders found for the current filter or search.</p>
                 )}
               </div>
-              <div className='w-96 hidden lg:block'>
+              <div className="w-96 hidden lg:block">
                 {/* Optional: PurchasingHistory */}
               </div>
             </div>
 
             {!loading && filteredOrders.length > 10 && (
-              <div className='flex justify-center mt-4 gap-4'>
+              <div className="flex justify-center mt-4 gap-4">
                 <button
                   disabled={currentPage === 1}
                   onClick={() => setCurrentPage(currentPage - 1)}
-                  className='px-4 py-2 button-text rounded disabled:opacity-50'
+                  className="px-4 py-2 button-text rounded disabled:opacity-50"
                 >
                   Previous
                 </button>
 
-                <span className='font-OpenSans font-bold text-blue text-xl'>
+                <span className="font-OpenSans font-bold text-blue text-xl">
                   Page {currentPage} of {totalPages}
                 </span>
 
                 <button
                   disabled={currentPage >= totalPages}
                   onClick={() => setCurrentPage(currentPage + 1)}
-                  className='px-4 py-2 button-text rounded disabled:opacity-50'
+                  className="px-4 py-2 button-text rounded disabled:opacity-50"
                 >
                   Next
                 </button>

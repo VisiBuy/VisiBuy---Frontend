@@ -7,23 +7,51 @@ export const faqs: FaqProps[] = [
   {
     question: "When do I get paid?",
     answer:
-      "You’ll receive payment within 7 working days after the buyer receives and confirms the product. All transactions are processed weekly.",
+      "You’ll receive payment within 7 working days after the buyer receives and confirms th
   },
   {
+    question: "What payment methods are accepted on Visibuy?",
+    answer:
+      "Our programs can be taking in 3 forms depending on the proficiency level you want; Done For You, Done With You, and Do It Yourself",
+  },
+    {
+    question: "What payment methods are accepted on Visibuy?",
+    answer:
+      "Our programs can be taking in 3 forms depending on the proficiency level you want; Done For You, Done With You, and Do It Yourself",
+  },
+  {
+    question: "What payment methods are accepted on Visibuy?",
+    answer:
+      "Our programs can be taking in 3 forms depending on the proficiency level you want; Done For You, Done With You, and Do It Yourself",
+  },
+  {
+    question: "How do you say cheese to the camera?",
+    answer:
+      "Our programs can be taking in 3 forms depending on the proficiency level you want; Done For You, Done With You, and Do It Yourself",
+  },{
+
     question: "Are there any fees?",
     answer:
       "Yes, Visibuy charges a 5% commission, and the payment gateway applies a small processing fee. These are deducted before payout.",
   },
   {
     question: "How do I change my payout account?",
-    answer: `Go to your Seller Dashboard > Settings > Payout Details. You can update your bank name, account number, and account holder name.
-<br/>🔄 This feature is coming in Visibuy 2.0 — account updates will be available soon.`,
+
+    answer:
+      `Go to your Seller Dashboard > Settings > Payout Details. You can update your bank name, account number, and account holder name.
+      <br/>🔄 This feature is coming in Visibuy 2.0 — account updates will be available soon.
+
+      `,
+
   },
 ];
 
 export const Faq = () => {
   return (
-    <div className="mx-auto py-4 px-4 sm:px-6 lg:px-8">
+
+
+    <div className=" mx-auto py-4 px-4 sm:px-6 lg:px-8">
+
       <h2 className="text-3xl mb-8 font-Montserrat font-semibold">
         Payment
       </h2>
