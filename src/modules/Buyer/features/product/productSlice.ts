@@ -41,7 +41,7 @@ export const fetchProducts = createAsyncThunk(
       const response = await axiosWithAuth.get("list", {
         params: {
           page,
-          pageSize: 6,
+          pageSize: 12,
           q: query || "",
         },
       });
@@ -56,7 +56,7 @@ export const fetchProducts = createAsyncThunk(
       // Set price range dynamically
       dispatch(setPriceRange([minPrice, maxPrice]));
 
-      return { products: data, hasMore: data.length === 10 };
+      return { products: data, hasMore: data.length === 12 };
     } catch (error) {
       console.error("Error fetching products:", error);
       throw error;
@@ -83,18 +83,35 @@ const productSlice = createSlice({
           state.loading = true;
         }
       })
+      // .addCase(fetchProducts.fulfilled, (state, action) => {
+      //   if (action.payload) {
+      //     state.products = [...state.products, ...action.payload.products];
+      //     state.loading = false;
+      //     state.loadingMore = false;
+      //     state.hasMore = action.payload.hasMore;
+
+      //     if (action.payload.hasMore) {
+      //       state.page = action.meta.arg.page + 1;
+      //     }
+      //   }
+      // })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         if (action.payload) {
-          state.products = [...state.products, ...action.payload.products];
+          const existingIds = new Set(state.products.map((p) => p._id));
+          const uniqueNewProducts = action.payload.products.filter(
+            (p) => !existingIds.has(p._id)
+          );
+      
+          state.products = [...state.products, ...uniqueNewProducts];
           state.loading = false;
           state.loadingMore = false;
           state.hasMore = action.payload.hasMore;
-
+      
           if (action.payload.hasMore) {
             state.page = action.meta.arg.page + 1;
           }
         }
-      })
+      })      
       .addCase(fetchProducts.rejected, (state) => {
         state.loading = false;
         state.loadingMore = false;

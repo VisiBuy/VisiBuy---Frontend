@@ -81,7 +81,7 @@ const trackOrderSlice = createSlice({
           );
 
         state.allOrders = sortedOrders;
-        state.pagination.totalItems = sortedOrders?.length;
+        state.pagination.totalItems = sortedOrders.length;
         state.pagination.totalPages = Math.ceil(
           sortedOrders.length / state.pagination.pageSize
         );

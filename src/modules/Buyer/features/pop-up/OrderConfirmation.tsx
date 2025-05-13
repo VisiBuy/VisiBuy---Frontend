@@ -145,7 +145,7 @@ const OrderConfirmation: React.FC<OrderConfirmationProps> = ({
         <div className='flex gap-2'>
           <button
             onClick={() => {
-              navigate(-1);
+              navigate('/dashboard/buyer/carts');
               sendData();
               dispatch(removeFromCart(orderDetails.items._id));
             }}

@@ -38,6 +38,8 @@ const BuyerProductsPage = () => {
     }
   }, [dispatch, products?.length, filters.search]);
 
+  console.log(products)
+
   // Intersection Observer to fetch more products
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -52,7 +54,9 @@ const BuyerProductsPage = () => {
       },
       { threshold: 1.0 }
     );
-
+    console.log(products)
+    console.log(hasMore)
+  
     const currentLoader = loader.current;
     if (currentLoader) {
       observer.observe(currentLoader);
@@ -97,7 +101,7 @@ const BuyerProductsPage = () => {
             [...Array(3)].map((_, idx) => (
               <ProductSkeleton key={`skeleton-${idx}`} type="skeleton" />
             ))} */}
-          {loading &&
+          {/* {loading &&
             [...Array(3)].map((_, i) => (
               <ProductSkeleton
                 key={`loading-${i}`}
@@ -111,7 +115,7 @@ const BuyerProductsPage = () => {
                   price: 0,
                 }}
               />
-            ))}
+            ))} */}
         </div>
       ) : (
         <p className='text-center text-gray-500'>No products available.</p>
@@ -124,7 +128,7 @@ const BuyerProductsPage = () => {
         )}
         {!loadingMore && !hasMore && (
           <span className='text-gray-400 text-sm'>
-            End of this week week Beta Drop
+            End of this week Beta Drop
           </span>
         )}
       </div>

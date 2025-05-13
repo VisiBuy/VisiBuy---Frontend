@@ -81,8 +81,8 @@ const Checkout = () => {
   const flutterwaveConfig = {
     public_key:
       import.meta.env.REACT_APP_FLW_PUBLIC_KEY ||
-      process.env.REACT_APP_FLW_PUBLIC_KEY ||
-      "FLWPUBK_TEST-d9c9a5938f9d56e031129288f4f30553-X",
+      process.env.REACT_APP_FLW_PUBLIC_KEY,
+      // "FLWPUBK_TEST-d9c9a5938f9d56e031129288f4f30553-X",
     // process.env.REACT_APP_FLW_PUBLIC_TEST_KEY || "FLWPUBK_TEST-XXXXXXXXX",
     // Unique transaction reference
     tx_ref: "VISIBUY-" + Date.now(),
@@ -115,6 +115,7 @@ const Checkout = () => {
       console.log("Payment modal closed"); // Add this to handle modal close event
     },
   };
+  console.log(flutterwaveConfig.public_key)
 
   return (
     <div className='p-6 fixed inset-0 bg-black bg-opacity-10 flex flex-col justify-center items-center'>
