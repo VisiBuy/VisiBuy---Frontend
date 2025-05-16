@@ -26,7 +26,6 @@ import BuyerOrderDetailsPage from "./pages/Buyer/OrderDetails";
 import BuyerCartPage from "./pages/Buyer/Cart";
 import BuyerCartSummaryPage from "./pages/Buyer/CartSummary";
 import BuyerNotificationsPage from "./pages/Buyer/Notifications";
-import BuyerProfilePage from "./pages/Buyer/Profile";
 import BuyerProductDetails from "./pages/Buyer/ProductDetails";
 import Checkout from "./modules/Buyer/features/checkout/Checkout";
 import BuyerNotificationsDetailsPage from "./pages/Buyer/NotificationsDetails";
@@ -160,7 +159,6 @@ const router = createHashRouter([
       { path: "notification", element: <BuyerNotificationsPage /> },
       { path: "notification/:id", element: <BuyerNotificationsDetailsPage /> },
       { path: "report", element: <FileDispute /> },
-      { path: "profile", element: <BuyerProfilePage /> },
       { path: "search", element: <SearchResultsPage /> },
       { path: "search", element: <SearchResultsPage /> },
     ],
