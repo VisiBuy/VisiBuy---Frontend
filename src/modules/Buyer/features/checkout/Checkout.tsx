@@ -107,10 +107,11 @@ const Checkout = () => {
     currency: "NGN",
     payment_options: "card,mobilemoney,ussd",
     customer: {
-      email: buyerInfo?.email || "", // ⬅️ ensures it's always a string
-      phone_number: buyerInfo?.phone || "", // ⬅️ same here
-      name: buyerInfo?.fullName || "", // ⬅️ and here
-    },
+
+    email: buyerInfo?.email || "",          // ⬅️ ensures it's always a string
+    phone_number: buyerInfo?.phone || "",   // ⬅️ same here
+    name: buyerInfo?.fullName || "",        // ⬅️ and here
+  },
     customizations: {
       title: "VisiBuy Order Payment",
       description: `Complete your order payment for ${data?.model}`,
