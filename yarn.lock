@@ -1406,7 +1406,6 @@
   resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-18.3.6.tgz"
   integrity sha512-nf22//wEbKXusP6E9pfOCDwFdHAX4u172eaJI4YkDRQEZiorm6KfYnSC2SWLDMVWUOWPERmJnN0ujeAfTBLvrw==
 
-<<<<<<< HEAD
 "@types/react-icons@^3.0.0":
   version "3.0.0"
   resolved "https://registry.npmjs.org/@types/react-icons/-/react-icons-3.0.0.tgz"
@@ -1415,9 +1414,6 @@
     react-icons "*"
 
 "@types/react@*", "@types/react@^16 || ^17 || ^18 || ^19", "@types/react@^18.0.0", "@types/react@^18.2.25 || ^19", "@types/react@^18.3.3":
-=======
-"@types/react@^18.3.3":
->>>>>>> e423b8feab64983036f8d23005fe421de9e40250
   version "18.3.20"
   resolved "https://registry.npmjs.org/@types/react/-/react-18.3.20.tgz"
   integrity sha512-IPaCZN7PShZK/3t6Q87pfTkRm6oLTd4vztyoj+cbHUF1g3FfVb2tFIL79uCRKEfv16AhqDMBywP2VW3KIZUvcg==
