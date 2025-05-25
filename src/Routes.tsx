@@ -43,9 +43,9 @@ import { OrderManagementPage } from "./pages/Seller/help-support/order-managemen
 import SearchResultsPage from "./pages/Buyer/SearchResultsPage";
 import BuyerProfileLayout from "./layouts/buyer/BuyerProfileLayout";
 import BuyerAccountPage from "./pages/Buyer/BuyerAccount";
+import BuyerAddress from "./pages/Buyer/BuyerAddress";
 import BuyerSettings from "./pages/Buyer/BuyerSettings";
 import Favourites from "./pages/Buyer/Favourites";
-import BuyerAddress from "./pages/Buyer/BuyerAddress";
 
 const router = createHashRouter([
   {
@@ -145,7 +145,6 @@ const router = createHashRouter([
     children: [
       { index: true, element: <BuyerProductsPage /> },
       { path: "analytics", element: <BuyerDashboardPage /> },
-
       {
         path: "track-order",
         element: <BuyerTrackOrderPage />,
@@ -153,16 +152,14 @@ const router = createHashRouter([
           { path: "view/:orderId", element: <BuyerOrderDetailsPage /> },
         ],
       },
-
       { path: "product/:id", element: <BuyerProductDetails /> },
-
       { path: "carts", element: <BuyerCartPage /> },
       { path: "carts/summary/:id", element: <BuyerCartSummaryPage /> },
       { path: "carts/checkout/:id", element: <Checkout /> },
-
       { path: "notification", element: <BuyerNotificationsPage /> },
       { path: "notification/:id", element: <BuyerNotificationsDetailsPage /> },
       { path: "report", element: <FileDispute /> },
+      { path: "search", element: <SearchResultsPage /> },
       { path: "search", element: <SearchResultsPage /> },
     ],
   },
@@ -180,7 +177,7 @@ const router = createHashRouter([
         element: <BuyerAccountPage />,
       },
       { path: "favourites", element: <Favourites /> },
-      { path: "address", element: <BuyerAddress/> },
+      { path: "address", element: <BuyerAddress /> },
       { path: "settings", element: <BuyerSettings /> },
     ],
   },

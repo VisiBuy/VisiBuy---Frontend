@@ -5,8 +5,12 @@ import { AppDispatch, RootState } from "@/store/store";
 import OrderConfirmation from "../pop-up/OrderConfirmation";
 import { useNavigate, useParams } from "react-router-dom";
 import { removeFromCart } from "../cart/cartSlice";
-import {fetchBuyerInfo} from "../../lib/track-order/api"
+import { fetchBuyerInfo } from "../../lib/track-order/api";
 import { useQuery } from "@tanstack/react-query";
+import {
+  calculateTotals,
+  selectCartSummary,
+} from "@/modules/Buyer/features/cart/cartSummarySlice";
 
 interface CartItem {
   _id: string;
@@ -32,6 +36,9 @@ const Checkout = () => {
   // Get user & cart details from Redux
   const user = useSelector((state: RootState) => state.auth.user);
   const cartProduct = useSelector((state: RootState) => state.buyer.cart.items);
+
+  const { subtotal, deliveryFee, vat, total } = useSelector(selectCartSummary);
+  console.log(total);
 
   const [data, setData] = useState<CartItem | null>(null);
   useEffect(() => {
@@ -65,15 +72,35 @@ const Checkout = () => {
       setOrderDetails({
         // orderId: "VISI-" + Math.floor(100000 + Math.random() * 900000),
         items: data,
-        totalAmount: data.price * (data.quantity ?? 1), // Handle potential undefined quantity
+        totalAmount: total, // Handle potential undefined quantity
         paymentStatus: "Pending",
       });
     }
   }, [data]);
 
+  if (
+
+
+  isLoading ||
+  !buyerInfo?.email ||
+  !buyerInfo.phone ||
+  !buyerInfo.fullName ||
+  !data
+) {
+  return (
+    <div className="p-6 text-gray-600 text-center">
+      Loading order and buyer info...
+    </div>
+  );
+}
+
   // Flutterwave payment config
   const flutterwaveConfig = {
-    public_key: import.meta.env.REACT_APP_FLW_PUBLIC_KEY,
+    public_key: import.meta.env.VITE_FLW_PUBLIC_KEY,
+    // import.meta.env.REACT_APP_FLW_PUBLIC_KEY ||
+    // process.env.REACT_APP_FLW_PUBLIC_KEY ||
+
+    // "FLWPUBK_TEST-d9c9a5938f9d56e031129288f4f30553-X",
     // process.env.REACT_APP_FLW_PUBLIC_TEST_KEY || "FLWPUBK_TEST-XXXXXXXXX",
     // Unique transaction reference
     tx_ref: "VISIBUY-" + Date.now(),
@@ -81,10 +108,11 @@ const Checkout = () => {
     currency: "NGN",
     payment_options: "card,mobilemoney,ussd",
     customer: {
-      email: buyerInfo?.email,
-      phone_number: buyerInfo?.phone,
-      name: buyerInfo?.fullName,
-    },
+
+    email: buyerInfo?.email || "",          // ⬅️ ensures it's always a string
+    phone_number: buyerInfo?.phone || "",   // ⬅️ same here
+    name: buyerInfo?.fullName || "",        // ⬅️ and here
+  },
     customizations: {
       title: "VisiBuy Order Payment",
       description: `Complete your order payment for ${data?.model}`,
@@ -108,12 +136,12 @@ const Checkout = () => {
   };
 
   return (
-    <div className='p-6 fixed inset-0 bg-black bg-opacity-10 flex flex-col justify-center items-center'>
-      <h2 className='text-xl font-semibold'>Complete Your Order</h2>
+    <div className="p-6 fixed inset-0 bg-black bg-opacity-10 flex flex-col justify-center items-center">
+      <h2 className="text-xl font-semibold">Complete Your Order</h2>
 
       <FlutterWaveButton
         {...flutterwaveConfig}
-        className='mt-4 bg-green-600 text-white px-4 py-2 rounded-lg'
+        className="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg"
       />
 
       <OrderConfirmation
@@ -126,7 +154,7 @@ const Checkout = () => {
       />
 
       <button
-        className='text-center text-xl text-white bg-red-400 py-2 px-6 rounded mt-6'
+        className="text-center text-xl text-white bg-red-400 py-2 px-6 rounded mt-6"
         // onClick={() => navigate("/dashboard/buyer/carts")}
         onClick={() => navigate(-1)}
       >

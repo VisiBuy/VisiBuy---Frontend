@@ -2,7 +2,7 @@
 
 const BuyerProfilePage = () => {
   return (
-    <div>Profile</div>
+    <div>Not Found. Check Back Later</div>
   )
 }
 
