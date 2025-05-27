@@ -160,7 +160,7 @@ const router = createHashRouter([
       { path: "notification/:id", element: <BuyerNotificationsDetailsPage /> },
       { path: "report", element: <FileDispute /> },
       { path: "search", element: <SearchResultsPage /> },
-      { path: "search", element: <SearchResultsPage /> },
+      
     ],
   },
   // Buyer Profile Route (separate from dashboard layout)
