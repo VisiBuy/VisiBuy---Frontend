@@ -3,6 +3,7 @@ import {
   SignupCredentials,
   LoginCredentials,
   Role,
+  IUpdateUser,
 } from "@/modules/Auth/models/types";
 import { transformUserData } from "./transofmers";
 
@@ -26,5 +27,16 @@ async function getCurrentUser(role: Role) {
 async function logout() {
   await AuthApi.logout();
 }
+async function updateSeller(payload: IUpdateUser) {
+  const response = await AuthApi.updateSeller(payload);
+  return response;
+}
 
-export default { login, logout, registerSeller, registerBuyer, getCurrentUser };
+export default {
+  login,
+  logout,
+  registerSeller,
+  registerBuyer,
+  getCurrentUser,
+  updateSeller,
+};

@@ -20,6 +20,7 @@ export interface User {
   fullName: string;
   role: Role;
   phone?: string;
+  hasCompletedOnboarding: boolean;
 }
 
 export interface AuthState {
@@ -45,7 +46,8 @@ export type RegisterResponse = {
   token: string;
 };
 
-export interface SignupUser extends Omit<User, "role"> {
+export interface SignupUser
+  extends Omit<User, "role" | "hasCompletedOnboarding"> {
   address: string;
   email: string;
   pass: string;
@@ -53,6 +55,7 @@ export interface SignupUser extends Omit<User, "role"> {
   phone: string;
   tos: boolean;
 }
+export interface IUpdateUser extends Partial<User> {}
 export const LoginSchema: ZodType<LoginCredentials> = z.object({
   email: z
     .string({
@@ -91,7 +94,7 @@ export const SignupUserSchema: ZodType<SignupUser> = z
         required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Firstname"),
         invalid_type_error: RESPONSE_ERROR_INVALID_DETAILS.replace(
           "{{FIELD}}",
-          "Full Name"
+          "Full Name",
         ),
       })
       .min(2, {
@@ -106,7 +109,7 @@ export const SignupUserSchema: ZodType<SignupUser> = z
         required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Address"),
         invalid_type_error: RESPONSE_ERROR_INVALID_DETAILS.replace(
           "{{FIELD}}",
-          "Address"
+          "Address",
         ),
       })
       .min(8, {
@@ -121,7 +124,7 @@ export const SignupUserSchema: ZodType<SignupUser> = z
         required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Phone"),
         invalid_type_error: RESPONSE_ERROR_INVALID_DETAILS.replace(
           "{{FIELD}}",
-          "Phone"
+          "Phone",
         ),
       })
       .min(2, {

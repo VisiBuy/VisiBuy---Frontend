@@ -6,27 +6,28 @@ import {
   Role,
   RegisterResponse,
   SignupCredentials,
+  IUpdateUser,
 } from "@/modules/Auth/models/types";
 import { apiClient, axiosWithAuth } from "@/lib/client";
 class AuthApiAdapter implements AuthRepository {
-  async  registerBuyer(payload:SignupCredentials): Promise<RegisterResponse> {
+  async registerBuyer(payload: SignupCredentials): Promise<RegisterResponse> {
     const response = await apiClient.post<RegisterResponse>(
-        "/auth/register/buyer",
-        payload
-      );
-      return response.data;
+      "/auth/register/buyer",
+      payload,
+    );
+    return response.data;
   }
-  async registerSeller(data:SignupCredentials): Promise<RegisterResponse> {
+  async registerSeller(data: SignupCredentials): Promise<RegisterResponse> {
     const response = await apiClient.post<RegisterResponse>(
-        "/auth/register/seller",
-        data
-      );
-      return response.data;
+      "/auth/register/seller",
+      data,
+    );
+    return response.data;
   }
   async loginAsBuyer(credentials: LoginCredentials): Promise<LoginResponse> {
     const response = await apiClient.post<LoginResponse>(
       "/auth/login",
-      credentials
+      credentials,
     );
     return response.data;
   }
@@ -34,23 +35,25 @@ class AuthApiAdapter implements AuthRepository {
   async loginAsSeller(credentials: LoginCredentials): Promise<LoginResponse> {
     const response = await apiClient.post<LoginResponse>(
       "/auth/login",
-      credentials
+      credentials,
     );
     return response.data;
   }
-  async getUser( role:Role): Promise<User> {
-    const response = await axiosWithAuth.get(
-        `/user/${role}`,
-      );
-      return response.data;  
+  async getUser(role: Role): Promise<User> {
+    const response = await axiosWithAuth.get(`/user/${role}`);
+    return response.data;
   }
-  async getCurrentUser(role:Role): Promise<User> {
-    const response = await this.getUser(role)
-    return response;  
+  async getCurrentUser(role: Role): Promise<User> {
+    const response = await this.getUser(role);
+    return response;
   }
   async logout(): Promise<void> {
-    const response = await apiClient.post('/logout')
-    return;  
+    const response = await apiClient.post("/logout");
+    return;
+  }
+  async updateSeller(payload: IUpdateUser): Promise<void> {
+    const response = await axiosWithAuth.put("/user/seller", payload);
+    return response.data;
   }
 }
 export default new AuthApiAdapter();
