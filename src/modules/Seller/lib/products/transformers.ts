@@ -15,7 +15,7 @@ export function transformSellerProduct(productdata: any): ISellerProduct[] | [] 
       size: product.size,
       stock_status: product.stock_status,
       images: product.images,
-      seller_img:"/sneaker.png"
+      seller_img:product.images[0]??"/sneaker.png"
     };
   });
 }

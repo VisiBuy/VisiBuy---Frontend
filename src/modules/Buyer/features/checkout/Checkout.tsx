@@ -95,7 +95,7 @@ const Checkout = () => {
 
   // Flutterwave payment config
   const flutterwaveConfig = {
-    public_key: "FLWPUBK-464c9219dcb2652176b8f03d0a310652-X",
+    public_key: import.meta.env.VITE_FLW_PUBLIC_KEY,
     // import.meta.env.REACT_APP_FLW_PUBLIC_KEY ||
     // process.env.REACT_APP_FLW_PUBLIC_KEY ||
 

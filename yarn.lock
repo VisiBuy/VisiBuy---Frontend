@@ -1414,8 +1414,11 @@
     react-icons "*"
 
 "@types/react@*", "@types/react@^16 || ^17 || ^18 || ^19", "@types/react@^18.0.0", "@types/react@^18.2.25 || ^19", "@types/react@^18.3.3":
+<<<<<<< HEAD
+=======
 "@types/react@^18.3.3":
 
+>>>>>>> 01bbeb1ecdb66c243ba3ec2aab06da9f57c683c9
   version "18.3.20"
   resolved "https://registry.npmjs.org/@types/react/-/react-18.3.20.tgz"
   integrity sha512-IPaCZN7PShZK/3t6Q87pfTkRm6oLTd4vztyoj+cbHUF1g3FfVb2tFIL79uCRKEfv16AhqDMBywP2VW3KIZUvcg==
