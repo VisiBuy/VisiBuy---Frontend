@@ -14,6 +14,7 @@ import { getOrderHistory } from "@/modules/Buyer/models/trackOrderSlice";
 import { RootState } from "@/store/store";
 import useOrderFilter from "@/modules/Buyer/hooks/useOrderFilter";
 import ErrorBoundary from "@/common/components/ErrorBoundary";
+import EmptyState from "@/common/components/EmptyState";
 
 
 const COLORS = ["#FFBB28", "#FF8042", "#00C49F", "#0088FE", "#FF3B30"];
@@ -91,15 +92,12 @@ const BuyerDashboardPage = () => {
     }
   }, [normalizedOrders]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p className="text-red-500">{error}</p>;
+  if (loading) return <p></p>;
 
   return (
     <ErrorBoundary>
       {analytics.totalOrders === 0 ? (
-        <div className="p-6 text-center text-xl text-gray-600">
-          No orders yet
-        </div>
+        <EmptyState message="You have no order history yet." />
       ) : (
         <motion.div
           initial={{ opacity: 0, y: 30 }}

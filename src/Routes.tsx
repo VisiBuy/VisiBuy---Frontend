@@ -160,25 +160,24 @@ const router = createHashRouter([
       { path: "notification/:id", element: <BuyerNotificationsDetailsPage /> },
       { path: "report", element: <FileDispute /> },
       { path: "search", element: <SearchResultsPage /> },
-      
-    ],
-  },
-  // Buyer Profile Route (separate from dashboard layout)
-  {
-    path: "dashboard/buyer/profile",
-    element: (
-      <PrivateRoute>
-        <BuyerProfileLayout />
-      </PrivateRoute>
-    ),
-    children: [
+      { path: "search", element: <SearchResultsPage /> },
       {
-        path: "account",
-        element: <BuyerAccountPage />,
+        path: "dashboard/buyer/profile",
+        element: (
+          <PrivateRoute>
+            <BuyerProfileLayout />
+          </PrivateRoute>
+        ),
+        children: [
+          {
+            path: "account",
+            element: <BuyerAccountPage />,
+          },
+          { path: "favourites", element: <Favourites /> },
+          { path: "address", element: <BuyerAddress /> },
+          { path: "settings", element: <BuyerSettings /> },
+        ],
       },
-      { path: "favourites", element: <Favourites /> },
-      { path: "address", element: <BuyerAddress /> },
-      { path: "settings", element: <BuyerSettings /> },
     ],
   },
 ]);

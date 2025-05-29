@@ -19,6 +19,25 @@ export  const fetchBuyerInfo = async(): Promise<BuyerInfo> =>{
 
 
 /**
+ * Update Buyer Onboarding Status
+ * PUT /user/buyer
+ */
+export const updateBuyerOnboardingStatus = async (
+  hasCompleted: boolean
+): Promise<{ message: string }> => {
+  try {
+    const response = await axiosWithAuth.put("/user/buyer", {
+      hasCompletedOnboarding: hasCompleted,
+    });
+    return response.data;
+  } catch (error: any) {
+    console.error("❌ Error updating onboarding status:", error.response?.data || error);
+    throw new Error(error.response?.data?.message || "Failed to update onboarding status");
+  }
+};
+
+
+/**
  * Track Order
  * GET /order/history
  */
@@ -29,24 +48,6 @@ export async function fetchOrderHistory(page = 1) {
   } catch (error) {
     console.error("Error fetching order history:", error);
     throw new Error("Failed to fetch order history");
-  }
-}
-
-/**
- * Update Order Status
- * POST /update/status
- */
-export async function updateOrderStatus(orderId: string, status: "accepted" | "dispatched" | "delivered" | "cancelled") {
-  try {
-    const response = await axiosWithAuth.post("/update/status", {
-      order_id: orderId,
-      status,
-    });
-    console.log("✅ Update Order Status Response:", response.data);
-    return response.data;
-  } catch (error: any) {
-    console.error("❌ Error updating order status:", error.response?.data || error);
-    throw new Error(error.response?.data?.message || "Failed to update order status");
   }
 }
 
@@ -97,7 +98,7 @@ export async function verifyOrder(
  * GET /image?order_id=...
  */
 export async function fetchVerificationImages(
-  orderId: string
+  orderId: string,
 ): Promise<VerificationResponse> {
   if (!orderId || typeof orderId !== "string") {
     console.error("Invalid Order ID:", orderId);
@@ -111,18 +112,18 @@ export async function fetchVerificationImages(
 
     const data = response.data;
 
-    // Transform raw response to match your component's expected structure
     const images: VerificationImage[] = (data.urls.urls || []).map(
       (img: any) => ({
         imageUrl: img.viewUrl,
-        sneakerName: "", // if not available in backend
-        size: "", // if not available in backend
-        color: "", // if not available in backend
-        verifiedDate: "", // if not available in backend
-      })
+        sneakerName: "", // optional placeholder
+        size: "",
+        color: "",
+        verifiedDate: "",
+      }),
     );
 
     return {
+      productId: data?.urls?.productId || "N/A", // ✅ Ensure productId is included
       productName: data?.urls?.productName || "Product",
       images,
       verificationId: data?.urls?._id || "N/A",
@@ -130,11 +131,12 @@ export async function fetchVerificationImages(
   } catch (error: any) {
     console.error(
       "❌ Error fetching verification images:",
-      error.response?.data || error
+      error.response?.data || error,
     );
 
     if (error.response?.status === 404) {
       return {
+        productId: "N/A", // ✅ Add fallback
         productName: "Not Found",
         images: [],
         verificationId: "N/A",
@@ -142,10 +144,11 @@ export async function fetchVerificationImages(
     }
 
     throw new Error(
-      error.response?.data?.message || "Failed to fetch verification images"
+      error.response?.data?.message || "Failed to fetch verification images",
     );
   }
 }
+
 
 
 

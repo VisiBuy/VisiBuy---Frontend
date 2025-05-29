@@ -16,13 +16,16 @@ const authSlice = createSlice({
   reducers: {
     setCredentials: (
       state,
-      action: PayloadAction<{ user?: User; token?: string; role?: Role }>
+      action: PayloadAction<{ user?: User; token?: string; role?: Role }>,
     ) => {
       const { user, token, role } = action.payload;
       state.user = user || state.user; // selective update
       state.token = token ?? state.token;
-      state.isAuthenticated = true
-      state.role = role?.toLowerCase() as Role || state.role;
+      state.isAuthenticated = true;
+      state.role = (role?.toLowerCase() as Role) || state.role;
+    },
+    setUser: (state, action: PayloadAction<User | null>) => {
+      state.user = action.payload;
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
@@ -39,6 +42,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, setLoading, setError, logout } =
+export const { setCredentials, setUser, setLoading, setError, logout } =
   authSlice.actions;
 export default authSlice.reducer;

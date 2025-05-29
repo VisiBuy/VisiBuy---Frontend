@@ -6,7 +6,7 @@ import {
   Role,
   RegisterResponse,
   SignupCredentials,
-  IUpdateUser,
+  UpdateBuyerPayload,
 } from "@/modules/Auth/models/types";
 import { apiClient, axiosWithAuth } from "@/lib/client";
 class AuthApiAdapter implements AuthRepository {
@@ -47,13 +47,12 @@ class AuthApiAdapter implements AuthRepository {
     const response = await this.getUser(role);
     return response;
   }
+  async updateBuyer(payload: UpdateBuyerPayload) {
+    return await axiosWithAuth.put("/user/buyer", payload);
+  }
   async logout(): Promise<void> {
     const response = await apiClient.post("/logout");
     return;
-  }
-  async updateSeller(payload: IUpdateUser): Promise<void> {
-    const response = await axiosWithAuth.put("/user/seller", payload);
-    return response.data;
   }
 }
 export default new AuthApiAdapter();

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate} from "react-router-dom";
 import clsx from "clsx";
 import { RxCross2 } from "react-icons/rx";
 import { FaSignOutAlt } from "react-icons/fa";
@@ -7,6 +7,7 @@ import { dashboardConfig } from "../../../lib/config";
 import { useNotifications } from "@/context/notifications/NotificationsContext";
 import { MainNav, SubNav } from "@/modules/Buyer/components/BuyerNavItems";
 import { buildUrl } from "./DesktopSideBar";
+import { useLogout } from "@/modules/Auth/mutations/use-logout";
 
 interface MobileSideBarProps {
   isOpen: boolean;
@@ -17,7 +18,15 @@ const MobileSideBar: React.FC<MobileSideBarProps> = ({ isOpen, onClose }) => {
   const location = useLocation();
   const buyerConfig = dashboardConfig.getConfig("buyer");
   const { basePath } = buyerConfig;
-
+  const navigate = useNavigate();
+      const { mutate: logoutMutate } = useLogout();
+  
+      const handleLogout = () => {
+        logoutMutate();
+        localStorage.clear();
+        navigate("/login");
+  };
+  
   // ✅ Get the unread notifications count
   const { unreadCount } = useNotifications();
 
@@ -100,7 +109,7 @@ const MobileSideBar: React.FC<MobileSideBarProps> = ({ isOpen, onClose }) => {
         {/* Logout */}
         <div className="mt-auto">
           <button
-            onClick={onClose}
+            onClick={handleLogout}
             className="flex items-center gap-4 font-OpenSans text-2xl text-red-500 font-bold"
           >
             <FaSignOutAlt size={20} /> <span>LogOut</span>
