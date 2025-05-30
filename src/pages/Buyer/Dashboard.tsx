@@ -94,7 +94,7 @@ const BuyerDashboardPage = () => {
     }
   }, [normalizedOrders]);
 
-  if (loading) return <p></p>;
+  if (loading) return <p> Loading Analytics... </p>;
 
   return (
     <ErrorBoundary>
