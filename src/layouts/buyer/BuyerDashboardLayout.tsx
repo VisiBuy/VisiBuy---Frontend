@@ -8,19 +8,40 @@ import HeaderBar from "../../layouts/buyer/HeaderBar";
 import MobileSideBar from "../../ui/buyer/sidebar/MobileSideBar";
 import OnboardingModal from "@/common/components/OnboardingModal";
 import { NotificationsProvider } from "@/context/notifications/NotificationsContext";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/modules/Auth/features/slices";
+import AuthService from "@/modules/Auth/lib/service";
+
 
 const BuyerDashboardLayout = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const user = useSelector((state: RootState) => state.auth.user);
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const freshUser = await AuthService.getCurrentUser("buyer");
+        dispatch(setUser(freshUser));
+      } catch (err) {
+        console.error("Failed to fetch user:", err);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
 
   useEffect(() => {
     if (user && !user.hasCompletedOnboarding) {
+      console.log("👤 User state:", user);
+      console.log("👤 User state:", user.hasCompletedOnboarding);
       setShowOnboarding(true);
     } else {
       setShowOnboarding(false);
     }
-  }, [user?.hasCompletedOnboarding]);
+  }, [user]);
 
   return (
     <NotificationsProvider>
