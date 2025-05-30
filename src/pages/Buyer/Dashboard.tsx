@@ -16,7 +16,6 @@ import useOrderFilter from "@/modules/Buyer/hooks/useOrderFilter";
 import ErrorBoundary from "@/common/components/ErrorBoundary";
 import EmptyState from "@/common/components/EmptyState";
 
-
 const COLORS = ["#FFBB28", "#FF8042", "#00C49F", "#0088FE", "#FF3B30"];
 interface AnalyticsData {
   totalOrders: number;
@@ -28,7 +27,7 @@ interface AnalyticsData {
 const BuyerDashboardPage = () => {
   const dispatch = useAppDispatch();
   const { allOrders, loading, error } = useAppSelector(
-    (state: RootState) => state.trackOrder
+    (state: RootState) => state.trackOrder,
   );
 
   const normalizedOrders = useOrderFilter(allOrders, "all", ""); // Replace raw orders
@@ -50,8 +49,7 @@ const BuyerDashboardPage = () => {
       const totalSpent = normalizedOrders.reduce(
         (sum, order) =>
           sum + (order.product?.price || 0) * (order.product?.quantity || 1),
-        0
-        
+        0,
       );
 
       const productCountMap: Record<string, number> = {};
@@ -76,8 +74,12 @@ const BuyerDashboardPage = () => {
         name,
         value,
       }));
-      const content_ids = normalizedOrders.map((order) => order.product?.productId).filter(Boolean);
-      const order_ids = normalizedOrders.map((order) => order.orderId).filter(Boolean);
+      const content_ids = normalizedOrders
+        .map((order) => order.product?.productId)
+        .filter(Boolean);
+      const order_ids = normalizedOrders
+        .map((order) => order.orderId)
+        .filter(Boolean);
 
       if (typeof window !== "undefined" && window.fbq) {
         window.fbq("trackCustom", "OrderAnalyticsUpdated", {

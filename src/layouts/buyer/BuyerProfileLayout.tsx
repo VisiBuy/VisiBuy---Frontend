@@ -13,13 +13,13 @@ import clsx from "clsx";
 import ProfileHeader from "./ProfileHeader";
 import { fetchBuyerInfo } from "@/modules/Buyer/lib/track-order/api";
 import { NotificationsProvider } from "@/context/notifications/NotificationsContext";
-import { useLogout } from "@/modules/Auth/mutations/use-logout";
+import { handleLogout } from "@/lib/handleLogout";
 
 const BuyerProfileLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const { mutate: logoutMutate } = useLogout();
+  
 
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -38,11 +38,7 @@ const BuyerProfileLayout = () => {
     { name: "Settings", path: "settings", icon: <FaCog /> },
   ];
 
-  const handleLogout = () => {
-    logoutMutate();
-    localStorage.clear();
-    navigate("/login");
-  };
+ 
 
   useEffect(() => {
     const handleResize = () => setIsSmallScreen(window.innerWidth < 768);
