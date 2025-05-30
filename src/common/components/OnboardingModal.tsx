@@ -30,7 +30,7 @@ const slides = [
         through Visual Verification
         <br />
         <br />
-        With our “<strong>What You See Is What You Get</strong>” process, you
+        With our “<strong>What You See Is What You Get</strong>” promise, you
         can visually confirm your product before it ships.
         <br />
         <br />
@@ -106,10 +106,10 @@ const slides = [
     title: "Approve or Cancel",
     body: (
       <>
-        Once you click <strong>Yes</strong> on the verification modal, ur order
+        Once you click <strong>Yes</strong> on the verification modal, your order
         will be automatically approved and ready to be shipped.
         <br />
-        And once you click <strong>No</strong> on the verification modal, ur order will be
+        And once you click <strong>No</strong> on the verification modal, your order will be
         automatically cancelled and your money will be refunded.
       </>
     ),
