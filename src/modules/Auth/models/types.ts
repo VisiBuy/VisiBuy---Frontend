@@ -167,7 +167,12 @@ export const SignupUserSchema: ZodType<SignupUser> = z
     message: VALIDATION_NOT_MATCH.replace("{{FIELD}}", "Password"),
   });
 
-export const UpdateBuyerSchema = z.object({
+
+  export const UpdateBuyerSchema = z.object({
+    hasCompletedOnboarding: z.literal(true),
+  });
+
+  export const UpdateSellerSchema = z.object({
     hasCompletedOnboarding: z.literal(true),
   });
   
@@ -176,4 +181,10 @@ export type SignupCredentials = z.infer<typeof SignupUserSchema>;
 export type BuyerSchema = z.infer<typeof SignupUserSchema>;
 export type SellerSchema = z.infer<typeof SignupUserSchema>;
 export type UpdateBuyerPayload = z.infer<typeof UpdateBuyerSchema>;
+export type UpdateSellerPayload = z.infer<typeof UpdateSellerSchema>;
+export type RoleUpdatePayloadMap = {
+  buyer: UpdateBuyerPayload;
+  seller: UpdateSellerPayload;
+  admin: never;
+};
 
