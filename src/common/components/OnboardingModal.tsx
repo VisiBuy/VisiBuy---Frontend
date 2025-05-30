@@ -252,6 +252,19 @@ export default function OnboardingModal({onFinish}:{onFinish: any}) {
                 : `Step ${step + 1}`}
           </button>
         </div>
+
+        {/* Finish Button */}
+        {step === totalSteps - 1 && (
+          <div className="mt-4 flex justify-center">
+            <button
+              onClick={completeOnboarding}
+              disabled={loading}
+              className="px-6 py-2 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition"
+            >
+              {loading ? "Finishing..." : "Finish Onboarding"}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
