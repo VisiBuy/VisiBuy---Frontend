@@ -47,13 +47,11 @@ class AuthApiAdapter implements AuthRepository {
     const response = await this.getUser(role);
     return response;
   }
-  async logout(): Promise<void> {
-    const response = await apiClient.post("/logout");
-    return;
+  async updateUser<T>(role: Role, payload: T): Promise<void> {
+    await axiosWithAuth.put(`/user/${role}`, payload);
   }
-  async updateSeller(payload: IUpdateUser): Promise<void> {
-    const response = await axiosWithAuth.put("/user/seller", payload);
-    return response.data;
+  async logout(): Promise<void> {
+   await apiClient.post("/logout");
   }
 }
 export default new AuthApiAdapter();
