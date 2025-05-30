@@ -228,34 +228,30 @@ export default function OnboardingModal({onFinish}:{onFinish: any}) {
         </div>
 
         {/* Step Navigator Buttons */}
-        <div className="mt-4 flex justify-center flex-wrap gap-3">
-          {slides.map((_, index) => (
+        <div className="mt-4 flex justify-between items-center">
+          {/* Back button appears when step > 0 */}
+          {step > 0 && (
             <button
-              key={index}
-              onClick={() => setStep(index)}
-              className={`px-4 py-2 rounded-md font-OpenSans font-semibold transition ${
-                index === step
-                  ? "bg-blue text-white"
-                  : "bg-blue-100 text-blue-800 hover:bg-blue-200"
-              }`}
+              onClick={prevStep}
+              className="px-4 py-2 bg-blue-100 text-blue-800 font-OpenSans rounded-md hover:bg-blue-200 transition"
             >
-              Step {index + 1}
+              Back
             </button>
-          ))}
-        </div>
+          )}
 
-        {/* Finish Button */}
-        {step === totalSteps - 1 && (
-          <div className="mt-4 flex justify-center">
-            <button
-              onClick={completeOnboarding}
-              disabled={loading}
-              className="px-6 py-2 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition"
-            >
-              {loading ? "Finishing..." : "Finish Onboarding"}
-            </button>
-          </div>
-        )}
+          {/* Step button or Finish */}
+          <button
+            onClick={nextStep}
+            disabled={loading}
+            className="px-4 py-2 bg-blue text-white rounded-md font-OpenSans font-semibold hover:bg-blue-700 transition"
+          >
+            {loading
+              ? "Finishing..."
+              : step === totalSteps - 1
+                ? `Step ${step + 1} → Finish `
+                : `Step ${step + 1}`}
+          </button>
+        </div>
       </div>
     </div>
   );
