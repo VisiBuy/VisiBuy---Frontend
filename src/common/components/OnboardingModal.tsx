@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { setUser } from "@/modules/Auth/features/slices";
-import { useDispatch, UseDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import AuthService from "@/modules/Auth/lib/service";
 import {
   VisibuyWelcomeImage,
@@ -145,7 +145,7 @@ export default function OnboardingModal({onFinish}:{onFinish: any}) {
   const completeOnboarding = async () => {
     try {
       setLoading(true);
-      await AuthService.updateBuyer({ hasCompletedOnboarding: true });
+      await AuthService.updateUser("buyer", { hasCompletedOnboarding: true });
       const updatedUser = await AuthService.getCurrentUser("buyer");
       dispatch(setUser(updatedUser));
       await queryClient.invalidateQueries();
@@ -181,7 +181,9 @@ export default function OnboardingModal({onFinish}:{onFinish: any}) {
 
         {/* Slide Content */}
         <div className="flex-1 overflow-y-auto pr-1">
-          <h2 className="text-2xl font-Montserrat font-bold mb-4">{currentSlide.title}</h2>
+          <h2 className="text-2xl font-Montserrat font-bold mb-4">
+            {currentSlide.title}
+          </h2>
           <div className="mb-6 text-base font-OpenSans leading-relaxed">
             {currentSlide.body}
           </div>
@@ -225,30 +227,35 @@ export default function OnboardingModal({onFinish}:{onFinish: any}) {
           )}
         </div>
 
-        {/* Navigation Buttons */}
-        <div className="mt-4 flex justify-between items-center">
-          <div>
-            {step > 0 && (
-              <button
-                onClick={prevStep}
-                className="px-4 py-2 bg-blue-100 text-blue-800 font-OpenSans rounded-md hover:bg-blue-200 transition"
-              >
-                Back
-              </button>
-            )}
-          </div>
-          <button
-            onClick={nextStep}
-            disabled={loading}
-            className="px-4 py-2 bg-blue text-white rounded-md font-OpenSans font-semibold hover:bg-blue-700 transition"
-          >
-            {loading
-              ? "Finishing..."
-              : step === totalSteps - 1
-                ? "Finish"
-                : "Next"}
-          </button>
+        {/* Step Navigator Buttons */}
+        <div className="mt-4 flex justify-center flex-wrap gap-3">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setStep(index)}
+              className={`px-4 py-2 rounded-md font-OpenSans font-semibold transition ${
+                index === step
+                  ? "bg-blue text-white"
+                  : "bg-blue-100 text-blue-800 hover:bg-blue-200"
+              }`}
+            >
+              Step {index + 1}
+            </button>
+          ))}
         </div>
+
+        {/* Finish Button */}
+        {step === totalSteps - 1 && (
+          <div className="mt-4 flex justify-center">
+            <button
+              onClick={completeOnboarding}
+              disabled={loading}
+              className="px-6 py-2 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 transition"
+            >
+              {loading ? "Finishing..." : "Finish Onboarding"}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -21,7 +21,6 @@ const BuyerDashboardLayout = () => {
       setShowOnboarding(false);
     }
   }, [user?.hasCompletedOnboarding]);
-  
 
   return (
     <NotificationsProvider>

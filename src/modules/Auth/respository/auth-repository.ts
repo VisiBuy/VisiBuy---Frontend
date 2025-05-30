@@ -1,7 +1,7 @@
 import {
   BuyerSchema,
-  IUpdateUser,
   LoginCredentials,
+  RoleUpdatePayloadMap,
   LoginResponse,
   RegisterResponse,
   Role,
@@ -17,7 +17,10 @@ interface AuthRepository {
   getUser(token: string, role: Role): Promise<User>;
   getCurrentUser(token: string, role: Role): Promise<User>;
   logout(): Promise<void>;
-  updateSeller(payload: IUpdateUser): Promise<void>;
+  updateUser<K extends keyof RoleUpdatePayloadMap>(
+    role: K,
+    payload: RoleUpdatePayloadMap[K],
+  ): Promise<void>;
 }
 
 export default AuthRepository;
