@@ -8,6 +8,7 @@ import {
   calculateTotals,
   selectCartSummary,
 } from "@/modules/Buyer/features/cart/cartSummarySlice";
+import DiscountForm from "@/modules/Buyer/features/discount/DiscountForm";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { fetchBuyerInfo } from "../../modules/Buyer/lib/track-order/api";
 import { useQuery } from "@tanstack/react-query";
@@ -28,12 +29,18 @@ const CartSummary = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const { id } = useParams();
+  // const { data, error } = useSelector(
+  //   (state: RootState) => state.buyer.discount,
+  // );const { data: discount }
+  const { data: discount } = useSelector(
+    (state: RootState) => state.buyer.discount,
+  );
+  console.log(discount);
 
   const { data: buyerInfo, isLoading } = useQuery({
     queryKey: ["buyer-info"],
     queryFn: fetchBuyerInfo,
   });
-
   // console.log(buyerInfo);
 
   const cartItems = useSelector((state: RootState) => state.buyer.cart.items);
@@ -41,6 +48,12 @@ const CartSummary = () => {
 
   const [showDeliveryDetails, setShowDeliveryDetails] = useState(false);
   const [showDeliveryAddress, setShowDeliveryAddress] = useState(false);
+  const [showDiscountForm, setShowDiscountForm] = useState(false);
+
+  const discountAmount =
+    discount?.type === "percentage"
+      ? (discount.value / 100) * subtotal
+      : discount?.value || 0;
 
   // const products = useSelector(
   //   (state: RootState) => state.buyer.product.products
@@ -56,7 +69,7 @@ const CartSummary = () => {
   // Recalculate totals whenever the cart changes
   useEffect(() => {
     if (data) {
-      dispatch(calculateTotals(data));
+      dispatch(calculateTotals({ item: data, discount }));
     }
   }, [data, dispatch]);
 
@@ -141,12 +154,38 @@ const CartSummary = () => {
           )}
         </div>
 
+        {/* Discount Form */}
+        <div className="mt-4">
+          <button
+            onClick={() => setShowDiscountForm(!showDiscountForm)}
+            className="text-sm font-medium flex items-center gap-2"
+          >
+            {showDiscountForm
+              ? "▼ Hide Discount Form"
+              : "▶ Show Discount Form"}
+          </button>
+
+          {showDiscountForm && <DiscountForm />}
+        </div>
+
         {/* Summary */}
-        <div className="mt-4 border-t pt-4 text-sm">
+        <div className="mt-4 border-t pt-4 text-sm space-y-1">
           <div className="flex justify-between">
             <span>Sub Total</span>
             <span>₦{subtotal.toFixed(2)}</span>
+            {/* {discount ? (
+              <span>₦{discountedSubtotal.toFixed(2)}</span>
+            ) : (
+              <span>₦{subtotal.toFixed(2)}</span>
+            )} */}
           </div>
+          {discount && (
+            <div className="flex justify-between text-green-600">
+              <span>Discount ({discount.code})</span>
+              <span>-₦{discountAmount.toFixed(2)}</span>
+            </div>
+          )}
+          <hr />
           <div className="flex justify-between font-semibold text-lg">
             <span>Total</span>
             <span>₦{total.toFixed(2)}</span>

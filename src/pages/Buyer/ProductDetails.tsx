@@ -4,6 +4,7 @@ import {
 } from "@/modules/Buyer/features/cart/cartSlice";
 import { RootState } from "@/store/store";
 import OrderSuccess from "@/ui/buyer/OrderSuccess";
+import TrustMessage from "@/ui/TrustMessage";
 import { useEffect, useState } from "react";
 import {
   FaShoppingCart,
@@ -21,6 +22,7 @@ import "swiper/css/pagination";
 import ErrorHolder from "@/ui/buyer/ErrorHolder";
 import { UserActivityTracker } from "@/lib/activity-tracker/user-activity-tracker";
 import { facebookTracker } from "@/lib/activity-tracker/facebook-tracker";
+
 interface Product {
   _id: string;
   brand: string;
@@ -123,7 +125,6 @@ const navigate = useNavigate();
       setLocalQuantity((prev) => prev + 1);
     }
   };
-
 
   return (
     <div className="h-[100%] w-[93%] p-8">
@@ -335,6 +336,7 @@ const navigate = useNavigate();
               <FaShoppingCart className="text-white" size={14} /> Add To Cart
             </button>
           </div>
+          <TrustMessage/>
         </div>
       </div>
     </div>
