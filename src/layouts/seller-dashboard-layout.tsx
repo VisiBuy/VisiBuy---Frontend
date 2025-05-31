@@ -27,6 +27,7 @@ import { FaHamburger } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
 import { SellerMobileSideBar } from "./seller-mobile-sidebar";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import SellerOnboardingModal from "@/modules/Seller/components/seller-onboarding-modal";
 
 const navlinks: NavItemProps[] = [
   { name: "Products", href: "products", iconName: "briefcase" },
@@ -161,6 +162,7 @@ export function SellerDashboardLayout() {
           <Outlet />
           <Toaster />
           <AddProductModal />
+          <SellerOnboardingModal/>
         </main>
       </div>
       <SellerMobileSideBar
