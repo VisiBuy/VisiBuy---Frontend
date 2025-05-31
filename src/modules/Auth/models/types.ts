@@ -20,6 +20,7 @@ export interface User {
   fullName: string;
   role: Role;
   phone?: string;
+  hasCompletedOnboarding?: boolean;
 }
 
 export interface AuthState {
@@ -35,7 +36,6 @@ export interface LoginResponse {
   msg: string;
   token: string;
   role: Role;
-  // email: string;
 }
 export interface LoginErrorResponse extends ErrorResponse {}
 export type Role = "buyer" | "seller" | "admin";
@@ -167,6 +167,24 @@ export const SignupUserSchema: ZodType<SignupUser> = z
     message: VALIDATION_NOT_MATCH.replace("{{FIELD}}", "Password"),
   });
 
+
+  export const UpdateBuyerSchema = z.object({
+    hasCompletedOnboarding: z.literal(true),
+  });
+
+  export const UpdateSellerSchema = z.object({
+    hasCompletedOnboarding: z.literal(true),
+  });
+  
+
 export type SignupCredentials = z.infer<typeof SignupUserSchema>;
 export type BuyerSchema = z.infer<typeof SignupUserSchema>;
 export type SellerSchema = z.infer<typeof SignupUserSchema>;
+export type UpdateBuyerPayload = z.infer<typeof UpdateBuyerSchema>;
+export type UpdateSellerPayload = z.infer<typeof UpdateSellerSchema>;
+export type RoleUpdatePayloadMap = {
+  buyer: UpdateBuyerPayload;
+  seller: UpdateSellerPayload;
+  admin: never;
+};
+

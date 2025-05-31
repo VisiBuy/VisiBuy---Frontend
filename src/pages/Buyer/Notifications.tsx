@@ -3,7 +3,7 @@ import { useNotifications } from "@/context/notifications/NotificationsContext";
 import { CheckCircle } from "lucide-react";
 
 interface Notification {
-  id: string; 
+  id: string;
   message: string;
   timestamp: string;
   read: boolean;
@@ -16,7 +16,7 @@ const BuyerNotificationsPage = () => {
 
   const handleOpenNotification = (id: string) => {
     markAsRead(id); // Mark notification as read
-    navigate(`/dashboard/buyer/notification/${id}`); 
+    navigate(`/dashboard/buyer/notification/${id}`);
   };
 
   return (
@@ -30,7 +30,7 @@ const BuyerNotificationsPage = () => {
               <li
                 key={notification._id} // Use _id here
                 className="flex justify-between items-center p-4 transition-all hover:bg-gray-50 cursor-pointer"
-                onClick={() => handleOpenNotification(notification._id)} 
+                onClick={() => handleOpenNotification(notification._id)}
               >
                 <div className="flex-1">
                   <p

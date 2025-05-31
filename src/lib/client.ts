@@ -17,7 +17,7 @@ axiosWithAuth.interceptors.request.use(
     const state = store.getState();
     const token = state.auth.token;
     // save last accessed path
-    localStorage.setItem('redirectPath', window.location.hash + window.location.search);
+    localStorage.setItem('redirectPath', '/'+window.location.pathname + window.location.search);
     if (token) {
       config.headers['auth-token'] = `${token}`;
     }
