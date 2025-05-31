@@ -4,12 +4,13 @@ import {
   LoginCredentials,
   Role,
   UpdateBuyerPayload,
-  UpdateSellerPayload
+  UpdateSellerPayload,
+  IResetPassword,
+  IForgotPassword,
 } from "@/modules/Auth/models/types";
 import { transformUserData } from "./transofmers";
 
-
-type UpdatePayload = UpdateBuyerPayload | UpdateSellerPayload;
+export type UpdatePayload = UpdateBuyerPayload | UpdateSellerPayload;
 
 async function login(credentials: LoginCredentials) {
   if (credentials.role === "buyer") {
@@ -29,10 +30,25 @@ async function getCurrentUser(role: Role) {
   return await transformUserData(response);
 }
 async function updateUser(role: Role, payload: UpdatePayload) {
-  return await AuthApi.updateUser(role as any, payload); 
+  return await AuthApi.updateUser(role as any, payload);
+}
+async function forgotPassword(payload: IForgotPassword) {
+  return await AuthApi.forgotPassword(payload);
+}
+async function resetPassword(payload: IResetPassword) {
+  return await AuthApi.resetPassword(payload);
 }
 async function logout() {
   await AuthApi.logout();
 }
 
-export default { login, logout, registerSeller, registerBuyer, getCurrentUser };
+export default {
+  login,
+  logout,
+  registerSeller,
+  registerBuyer,
+  getCurrentUser,
+  updateUser,
+  resetPassword,
+  forgotPassword,
+};

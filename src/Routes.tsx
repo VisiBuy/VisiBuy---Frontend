@@ -10,7 +10,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AppLayout from "./ui/AppLayout";
 import { LoginPage } from "./pages/Login";
 import { SignUpPage } from "./pages/SignUpPage";
-import { PassowordRestPage } from "./pages/PasswordResetPage";
+import { PassowordForgotPage} from "./pages/PasswordForgotPage";
 import { SellerDashboardLayout } from "./layouts/seller-dashboard-layout";
 import { SellerProductPage } from "./pages/Seller/Product";
 import { FeedbackPage } from "./pages/Seller/Feedback";
@@ -46,6 +46,7 @@ import BuyerAccountPage from "./pages/Buyer/BuyerAccount";
 import BuyerAddress from "./pages/Buyer/BuyerAddress";
 import BuyerSettings from "./pages/Buyer/BuyerSettings";
 import Favourites from "./pages/Buyer/Favourites";
+import { PassowordResetPage } from "./pages/PasswordResetPage";
 
 const router = createHashRouter([
   {
@@ -89,7 +90,9 @@ const router = createHashRouter([
   },
   { path: "/login", element: <LoginPage /> },
   { path: "/signup", element: <SignUpPage /> },
-  { path: "/reset-password", element: <PassowordRestPage /> },
+  { path: "/reset-password", element: <PassowordResetPage /> },
+  { path: "/password-recovery", element: <PassowordForgotPage /> },
+  
   {
     path: "/dashboard/seller",
 

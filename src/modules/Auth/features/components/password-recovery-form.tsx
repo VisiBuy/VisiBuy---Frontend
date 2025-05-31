@@ -1,7 +1,11 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { LoginErrorResponse, LoginSchema } from "../../models/types";
+import {
+  ForgotPasswordSchema,
+  LoginErrorResponse,
+  LoginSchema,
+} from "../../models/types";
 import {
   Form,
   FormControl,
@@ -18,22 +22,20 @@ import { Checkbox } from "../../../../ui/Checkbox";
 import { useLogin } from "../../mutations/use-login";
 import { Link } from "react-router-dom";
 import Icon from "../../../../ui/Icon";
+import { useForgotPassword } from "../../mutations/use-forogot-password";
 
-export function PasswordResetForm() {
+export function PasswordForgotForm() {
   const { toast, toasts } = useToast();
-  const loginMutation = useLogin();
-  const form = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema),
+  const forgotPasswordMutation = useForgotPassword();
+  const form = useForm<z.infer<typeof ForgotPasswordSchema>>({
+    resolver: zodResolver(ForgotPasswordSchema),
     defaultValues: {
-      password: "",
       email: "",
-      role: "seller",
-      isRemeberChecked: false,
     },
   });
-  const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
+  const onSubmit = async (values: z.infer<typeof ForgotPasswordSchema>) => {
     try {
-      await loginMutation.mutateAsync(values);
+      await forgotPasswordMutation.mutateAsync(values);
     } catch (error: any) {
       console.log(error?.response.data.msg);
       toast({
@@ -46,9 +48,7 @@ export function PasswordResetForm() {
   };
   return (
     <div className="w-full max-w-xl mx-auto">
-      <h2 className="auth-heading mt-10">
-        Forgot password?
-      </h2>
+      <h2 className="auth-heading mt-10">Forgot password?</h2>
       <p className="text-secondary-foreground text-lg sm:text-xl font-OpenSans mt-4">
         Enter registered email address of your account and we’ll send you a
         password reset link.
@@ -78,13 +78,15 @@ export function PasswordResetForm() {
 
             <div className="pt-4">
               <Button
-                disabled={loginMutation.isPending || !form.formState.isValid}
+                disabled={
+                  forgotPasswordMutation.isPending || !form.formState.isValid
+                }
                 type="submit"
                 className="w-full px-12 h-16 text-xl"
                 size="sm"
               >
                 Reset Password
-                {loginMutation.isPending && (
+                {forgotPasswordMutation.isPending && (
                   <Loader2 className="ml-2 animate-spin" />
                 )}
               </Button>
