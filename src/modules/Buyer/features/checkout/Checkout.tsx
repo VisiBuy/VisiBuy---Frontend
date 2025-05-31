@@ -29,7 +29,6 @@ const Checkout = () => {
     queryKey: ["buyer-info"],
     queryFn: fetchBuyerInfo,
   });
-
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();

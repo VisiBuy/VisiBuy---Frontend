@@ -37,10 +37,6 @@ async function forgotPassword(payload: IForgotPassword) {
 }
 async function resetPassword(payload: IResetPassword) {
   return await AuthApi.resetPassword(payload);
-}
-async function logout() {
-  await AuthApi.logout();
-}
 
 export default {
   login,
