@@ -14,7 +14,14 @@ export interface LoginCredentials {
   role: Role;
   isRememberChecked?: boolean;
 }
-
+export interface IForgotPassword {
+  email: string;
+}
+export interface IResetPassword {
+  pass: string;
+  confirmPass: string;
+  resetToken: string;
+}
 export interface User {
   email: string;
   fullName: string;
@@ -45,7 +52,8 @@ export type RegisterResponse = {
   token: string;
 };
 
-export interface SignupUser extends Omit<User, "role"> {
+export interface SignupUser
+  extends Omit<User, "role" | "hasCompletedOnboarding"> {
   address: string;
   email: string;
   pass: string;
@@ -53,6 +61,51 @@ export interface SignupUser extends Omit<User, "role"> {
   phone: string;
   tos: boolean;
 }
+export interface IUpdateUser extends Partial<User> {}
+export const ResetPasswordSchema: ZodType<IResetPassword> = z
+  .object({
+    pass: z
+      .string({
+        required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Password"),
+      })
+      .min(8, {
+        message: VALIDATION_MIN_LENGTH.replace("{{FIELD}}", "Password"),
+      }),
+    confirmPass: z
+      .string({
+        required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Password"),
+      })
+      .min(8, {
+        message: VALIDATION_MIN_LENGTH.replace("{{FIELD}}", "Password"),
+      }),
+    resetToken: z
+      .string({
+        required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Reset Token"),
+      })
+      .min(2, {
+        message: VALIDATION_MIN_LENGTH.replace("{{FIELD}}", "Reset Token"),
+      }),
+  })
+  .refine((val) => val.pass === val.confirmPass, {
+    path: ["confirmPass"],
+    message: VALIDATION_NOT_MATCH.replace("{{FIELD}}", "Password"),
+  });
+
+export const ForgotPasswordSchema: ZodType<IForgotPassword> = z.object({
+  email: z
+    .string({
+      required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Email"),
+    })
+    .email({
+      message: RESPONSE_ERROR_INVALID_DETAILS.replace("{{FIELD}}", "Email"),
+    })
+    .min(2, {
+      message: VALIDATION_MIN_LENGTH.replace("{{FIELD}}", "Email"),
+    })
+    .max(100, {
+      message: VALIDATION_MAX_LENGTH.replace("{{FIELD}}", "Email"),
+    }),
+});
 export const LoginSchema: ZodType<LoginCredentials> = z.object({
   email: z
     .string({
@@ -91,7 +144,7 @@ export const SignupUserSchema: ZodType<SignupUser> = z
         required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Firstname"),
         invalid_type_error: RESPONSE_ERROR_INVALID_DETAILS.replace(
           "{{FIELD}}",
-          "Full Name"
+          "Full Name",
         ),
       })
       .min(2, {
@@ -106,7 +159,7 @@ export const SignupUserSchema: ZodType<SignupUser> = z
         required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Address"),
         invalid_type_error: RESPONSE_ERROR_INVALID_DETAILS.replace(
           "{{FIELD}}",
-          "Address"
+          "Address",
         ),
       })
       .min(8, {
@@ -121,7 +174,7 @@ export const SignupUserSchema: ZodType<SignupUser> = z
         required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Phone"),
         invalid_type_error: RESPONSE_ERROR_INVALID_DETAILS.replace(
           "{{FIELD}}",
-          "Phone"
+          "Phone",
         ),
       })
       .min(2, {
@@ -167,15 +220,13 @@ export const SignupUserSchema: ZodType<SignupUser> = z
     message: VALIDATION_NOT_MATCH.replace("{{FIELD}}", "Password"),
   });
 
+export const UpdateBuyerSchema = z.object({
+  hasCompletedOnboarding: z.literal(true),
+});
 
-  export const UpdateBuyerSchema = z.object({
-    hasCompletedOnboarding: z.literal(true),
-  });
-
-  export const UpdateSellerSchema = z.object({
-    hasCompletedOnboarding: z.literal(true),
-  });
-  
+export const UpdateSellerSchema = z.object({
+  hasCompletedOnboarding: z.literal(true),
+});
 
 export type SignupCredentials = z.infer<typeof SignupUserSchema>;
 export type BuyerSchema = z.infer<typeof SignupUserSchema>;
@@ -187,4 +238,3 @@ export type RoleUpdatePayloadMap = {
   seller: UpdateSellerPayload;
   admin: never;
 };
-
