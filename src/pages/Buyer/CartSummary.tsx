@@ -43,6 +43,13 @@ const CartSummary = () => {
   });
   // console.log(buyerInfo);
 
+  const { data: buyerInfo, isLoading } = useQuery({
+    queryKey: ["buyer-info"],
+    queryFn: fetchBuyerInfo,
+  });
+
+  // console.log(buyerInfo);
+
   const cartItems = useSelector((state: RootState) => state.buyer.cart.items);
   const { subtotal, deliveryFee, vat, total } = useSelector(selectCartSummary);
 

@@ -19,7 +19,6 @@
     }
   },
   "include": ["src", "postcss.config.js", "react-app-env.d.ts", "vite-env.d.ts"],
-
   // "include": [
   //   "src",
   //   "**/*.ts",
