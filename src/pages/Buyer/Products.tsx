@@ -38,7 +38,6 @@ const BuyerProductsPage = () => {
     }
   }, [dispatch, products?.length, filters.search]);
 
-  console.log(products);
 
   // Intersection Observer to fetch more products
   useEffect(() => {
@@ -54,8 +53,7 @@ const BuyerProductsPage = () => {
       },
       { threshold: 1.0 },
     );
-    console.log(products);
-    console.log(hasMore);
+   
 
     const currentLoader = loader.current;
     if (currentLoader) {

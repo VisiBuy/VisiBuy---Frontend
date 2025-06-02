@@ -30,7 +30,7 @@ const slides = [
         through Visual Verification
         <br />
         <br />
-        With our “<strong>What You See Is What You Get</strong>” process, you
+        With our “<strong>What You See Is What You Get</strong>” promise, you
         can visually confirm your product before it ships.
         <br />
         <br />
@@ -106,10 +106,10 @@ const slides = [
     title: "Approve or Cancel",
     body: (
       <>
-        Once you click <strong>Yes</strong> on the verification modal, ur order
+        Once you click <strong>Yes</strong> on the verification modal, your order
         will be automatically approved and ready to be shipped.
         <br />
-        And once you click <strong>No</strong> on the verification modal, ur order will be
+        And once you click <strong>No</strong> on the verification modal, your order will be
         automatically cancelled and your money will be refunded.
       </>
     ),
@@ -228,20 +228,29 @@ export default function OnboardingModal({onFinish}:{onFinish: any}) {
         </div>
 
         {/* Step Navigator Buttons */}
-        <div className="mt-4 flex justify-center flex-wrap gap-3">
-          {slides.map((_, index) => (
+        <div className="mt-4 flex justify-between items-center">
+          {/* Back button appears when step > 0 */}
+          {step > 0 && (
             <button
-              key={index}
-              onClick={() => setStep(index)}
-              className={`px-4 py-2 rounded-md font-OpenSans font-semibold transition ${
-                index === step
-                  ? "bg-blue text-white"
-                  : "bg-blue-100 text-blue-800 hover:bg-blue-200"
-              }`}
+              onClick={prevStep}
+              className="px-4 py-2 bg-blue-100 text-blue-800 font-OpenSans rounded-md hover:bg-blue-200 transition"
             >
-              Step {index + 1}
+              Back
             </button>
-          ))}
+          )}
+
+          {/* Step button or Finish */}
+          <button
+            onClick={nextStep}
+            disabled={loading}
+            className="px-4 py-2 bg-blue text-white rounded-md font-OpenSans font-semibold hover:bg-blue-700 transition"
+          >
+            {loading
+              ? "Finishing..."
+              : step === totalSteps - 1
+                ? `Step ${step + 1} → Finish `
+                : `Step ${step + 1}`}
+          </button>
         </div>
 
         {/* Finish Button */}
