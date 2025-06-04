@@ -36,7 +36,10 @@ const SellerOnboardingModal = () => {
   const handleUpdateSellerOnboarding = async () => {
     try {
       await updateSellerOnboardingMutatuion.mutateAsync({
-        hasCompletedOnboarding: true,
+        role: "seller",
+        payload: {
+          hasCompletedOnboarding: true,
+        },
       });
     } catch (error: any) {
       toast({
@@ -81,7 +84,7 @@ const SellerOnboardingModal = () => {
       tip: "Show both shoes side by side for size comparison",
       isPhotoStep: true,
       photoExample:
-        "https://res.cloudinary.com/dqv9t8nri/image/upload/v1748348729/sneaker-back-view_h7lgv5.jpg",
+        "https://res.cloudinary.com/dqv9t8nri/image/upload/v1748348729/sneaker-full-view_dzovjz.jpg",
     },
     {
       title: "2. Sole View",
@@ -113,7 +116,7 @@ const SellerOnboardingModal = () => {
       tip: "Show craftsmanship details - quality matters to buyers",
       isPhotoStep: true,
       photoExample:
-        "https://res.cloudinary.com/dqv9t8nri/image/upload/v1748348729/sneaker-full-view_dzovjz.jpg",
+        "https://res.cloudinary.com/dqv9t8nri/image/upload/v1748348729/sneaker-back-view_h7lgv5.jpg",
     },
     {
       title: "Upload. Approve. Deliver. Get Paid.",
