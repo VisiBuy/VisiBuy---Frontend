@@ -47,6 +47,7 @@ import BuyerAddress from "./pages/Buyer/BuyerAddress";
 import BuyerSettings from "./pages/Buyer/BuyerSettings";
 import Favourites from "./pages/Buyer/Favourites";
 import { PassowordResetPage } from "./pages/PasswordResetPage";
+import RefundPolicyPage from "./pages/RefundPolicy";
 
 const router = createHashRouter([
   {
@@ -80,6 +81,10 @@ const router = createHashRouter([
       {
         path: "/privacy-policy",
         element: <PrivacyPolicy />,
+      },
+      {
+        path: "/refund-policy",
+        element: <RefundPolicyPage />,
       },
       {
         // Catch-all route for undefined paths (404)
