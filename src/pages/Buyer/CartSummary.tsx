@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
 import { Button } from "@/ui/Button";
 import CartSummaryItem from "./CartSummaryItem";
-import { FaShieldAlt } from "react-icons/fa";
+import { FaShieldAlt } from 'react-icons/fa';
 import {
-  calculateTotals,
+  calculateTotals, 
   selectCartSummary,
 } from "@/modules/Buyer/features/cart/cartSummarySlice";
 import DiscountForm from "@/modules/Buyer/features/discount/DiscountForm";
@@ -43,10 +43,7 @@ const CartSummary = () => {
   });
   // console.log(buyerInfo);
 
-  const { data: buyerInfo, isLoading } = useQuery({
-    queryKey: ["buyer-info"],
-    queryFn: fetchBuyerInfo,
-  });
+  
 
   // console.log(buyerInfo);
 
