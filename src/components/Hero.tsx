@@ -23,12 +23,12 @@ const Hero = () => {
         <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-black rounded-full"></div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 pt-20 pb-16">
+      <div className="relative z-10 container mx-auto px-4 pt-32 lg:pt-20 pb-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
           {/* Left Content */}
           <div className="text-black space-y-8 animate-fade-in">
             <div className="space-y-4">
-              <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
+              <h1 className="text-4xl lg:text-7xl font-bold leading-tight">
                 What You See Is
                 <span className="block text-visibuy-blue">What You Get</span>
               </h1>
