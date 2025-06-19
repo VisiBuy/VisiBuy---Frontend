@@ -1,320 +1,241 @@
-import React from 'react';
-import { Clock, Shield, AlertCircle, CheckCircle, XCircle, Mail, Phone, FileText } from 'lucide-react';
+import { Button } from "@/ui/Button";
+import { CheckCircle, Clock, Shield } from "lucide-react";
 
-const RefundPolicyPage: React.FC = () => {
+const RefundPolicy = () => {
+  const refundReasons = [
+    {
+      icon: CheckCircle,
+      title: "Item Doesn't Match Photos",
+      description:
+        "If the delivered item differs from the approved verification photos, you get a full refund immediately.",
+    },
+    {
+      icon: Shield,
+      title: "Quality Issues",
+      description:
+        "Items with defects not visible in verification photos are eligible for full refunds.",
+    },
+    {
+      icon: Clock,
+      title: "Delivery Issues",
+      description:
+        "Late delivery or failure to deliver results in automatic refund processing.",
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-white mt-40">
-      {/* Header */}
-      <header className="bg-[#007AFF] text-white">
-        <div className="max-w-6xl mx-auto px-6 py-12">
-          <div className="flex items-center gap-4">
-            <div className="bg-white/20 p-3 rounded-lg">
-              <Shield className="w-8 h-8 text-white" />
-            </div>
-            <div>
-              <h1 className="text-4xl font-bold">Refund & Returns Policy</h1>
-              <p className="text-indigo-100 mt-2 text-lg">Effective Date: 5th June 2025</p>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <div className="max-w-6xl mx-auto px-6 py-12">
-        {/* Introduction */}
-        <div className="mb-12">
-          <div className="flex items-start gap-4 mb-6">
-            <FileText className="w-6 h-6 text-indigo-600 mt-1 flex-shrink-0" />
-            <h2 className="text-2xl font-bold text-gray-900">Policy Overview</h2>
-          </div>
-          <div className="border-l-4 border-indigo-600 pl-6">
-            <p className="text-gray-700 leading-relaxed text-lg">
-              This Refund & Returns Policy applies to all transactions made through the Visibuy platform operated by 
-              <span className="font-semibold text-indigo-600"> Visibuy Technologies Ltd</span>. By placing an order on the Platform, 
-              buyers agree to the terms set out below.
+    <div className="min-h-screen bg-background">
+      {/* Hero Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-5xl lg:text-6xl font-bold text-black mb-6">
+              Refund <span className="text-visibuy-blue">Policy</span>
+            </h1>
+            <p className="text-xl text-black/70 mb-8">
+              Your money is protected with our comprehensive refund guarantee.
             </p>
-          </div>
-        </div>
-
-        {/* Refund Eligibility */}
-        <div className="mb-12">
-          <div className="flex items-start gap-4 mb-8">
-            <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" />
-            <h2 className="text-3xl font-bold text-gray-900">1. Refund Eligibility</h2>
-          </div>
-          
-          <div className="bg-blue-50 border-l-4 border-blue-500 p-6 mb-8">
-            <h3 className="text-xl font-semibold text-blue-900 mb-3">Escrow-Based Payments</h3>
-            <p className="text-blue-800 text-lg">
-              All payments made on Visibuy are held in escrow until you complete visual verification and approve the item for delivery.
-            </p>
-          </div>
-
-          <h3 className="text-xl font-semibold text-gray-900 mb-6">When a Refund is Allowed</h3>
-          <p className="text-gray-700 mb-6 text-lg">You are eligible for a full refund <strong>only if</strong>:</p>
-          
-          <div className="space-y-4">
-            <div className="flex items-start gap-4 p-4 bg-green-50 border-l-4 border-green-500">
-              <CheckCircle className="w-6 h-6 text-green-600 mt-0.5 flex-shrink-0" />
-              <p className="text-green-800 text-lg">
-                You <strong>decline the product during the visual verification phase</strong>, citing valid reasons 
-                (e.g., mismatch, damage, or incorrect item).
-              </p>
-            </div>
-            <div className="flex items-start gap-4 p-4 bg-green-50 border-l-4 border-green-500">
-              <CheckCircle className="w-6 h-6 text-green-600 mt-0.5 flex-shrink-0" />
-              <p className="text-green-800 text-lg">
-                The seller <strong>fails to upload verification media</strong> within the required timeframe.
-              </p>
-            </div>
-            <div className="flex items-start gap-4 p-4 bg-green-50 border-l-4 border-green-500">
-              <CheckCircle className="w-6 h-6 text-green-600 mt-0.5 flex-shrink-0" />
-              <p className="text-green-800 text-lg">
-                The seller <strong>cancels the order</strong> before verification or shipping.
+            <div className="bg-visibuy-green/10 rounded-2xl p-6 border border-visibuy-green/20">
+              <p className="text-lg text-black font-semibold">
+                100% Money-Back Guarantee - No Questions Asked
               </p>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Visual Verification */}
-        <div className="mb-12">
-          <div className="flex items-start gap-4 mb-8">
-            <Clock className="w-6 h-6 text-orange-600 mt-1 flex-shrink-0" />
-            <h2 className="text-3xl font-bold text-gray-900">2. Visual Verification and Buyer Approval</h2>
+      {/* Refund Reasons */}
+      <section className="py-20 bg-visibuy-blue-light">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl lg:text-5xl font-bold text-black mb-4">
+                When You Get a Full Refund
+              </h2>
+              <p className="text-xl text-black/70">
+                We believe in complete transparency and customer protection
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {refundReasons.map((reason, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-2xl p-8 text-center"
+                >
+                  <div className="bg-visibuy-green/10 rounded-2xl p-6 mb-6 inline-block">
+                    <reason.icon className="w-8 h-8 text-visibuy-green" />
+                  </div>
+                  <h3 className="text-xl font-bold text-black mb-4">
+                    {reason.title}
+                  </h3>
+                  <p className="text-black/70 leading-relaxed">
+                    {reason.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
-          
-          <div className="bg-orange-50 border-l-4 border-orange-500 p-6">
-            <p className="text-orange-900 mb-6 text-lg">Once you receive the visual verification (photo or video) from the seller:</p>
-            <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <Clock className="w-6 h-6 text-orange-600" />
-                <p className="text-orange-800 text-lg">
-                  You must <strong>approve or reject</strong> the item within <strong className="text-red-600 text-xl">6 hours</strong> of receiving it.
+        </div>
+      </section>
+
+      {/* Policy Details */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto space-y-12">
+            {/* How Refunds Work */}
+            <div className="bg-visibuy-blue-light rounded-2xl p-8">
+              <h2 className="text-3xl font-bold text-black mb-6">
+                How Our Refund Process Works
+              </h2>
+              <div className="space-y-6">
+                <div className="flex items-start space-x-4">
+                  <div className="bg-visibuy-green text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">
+                    1
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-black mb-2">
+                      Payment Protection
+                    </h3>
+                    <p className="text-black/80">
+                      Your money is held safely in escrow until you approve the
+                      verification photos.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <div className="bg-visibuy-green text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">
+                    2
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-black mb-2">
+                      Verification Stage
+                    </h3>
+                    <p className="text-black/80">
+                      If you're not satisfied with the photos, we don't ship and
+                      you get a full refund.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <div className="bg-visibuy-green text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">
+                    3
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-black mb-2">
+                      Post-Delivery Protection
+                    </h3>
+                    <p className="text-black/80">
+                      If the delivered item doesn't match approved photos, we
+                      provide immediate refunds.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Refund Timeline */}
+            <div className="bg-white border border-visibuy-gray rounded-2xl p-8">
+              <h2 className="text-3xl font-bold text-black mb-6">
+                Refund Timeline
+              </h2>
+              <div className="space-y-4 text-black/80">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <h3 className="font-semibold text-black mb-3">
+                      Pre-Delivery Refunds
+                    </h3>
+                    <ul className="list-disc pl-6 space-y-2">
+                      <li>Instant refund if photos are rejected</li>
+                      <li>Immediate processing for order cancellations</li>
+                      <li>No waiting period required</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-black mb-3">
+                      Post-Delivery Refunds
+                    </h3>
+                    <ul className="list-disc pl-6 space-y-2">
+                      <li>24-48 hours for refund approval</li>
+                      <li>3-5 business days for processing</li>
+                      <li>Same payment method as original purchase</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* What's Not Covered */}
+            <div className="bg-white border border-visibuy-gray rounded-2xl p-8">
+              <h2 className="text-3xl font-bold text-black mb-6">
+                What's Not Covered
+              </h2>
+              <div className="space-y-4 text-black/80">
+                <p>Our refund policy doesn't cover:</p>
+                <ul className="list-disc pl-6 space-y-2">
+                  <li>Change of mind after approving verification photos</li>
+                  <li>Damage caused by misuse after delivery</li>
+                  <li>
+                    Items that match the approved verification photos exactly
+                  </li>
+                  <li>
+                    Custom or personalized items (unless they don't match
+                    specifications)
+                  </li>
+                </ul>
+                <p className="mt-4 font-medium">
+                  However, we're always willing to work with you to find a
+                  solution that makes you happy!
                 </p>
               </div>
-              <div className="flex items-center gap-4">
-                <AlertCircle className="w-6 h-6 text-red-600" />
-                <p className="text-orange-800 text-lg">
-                  <strong>Failure to respond</strong> within this timeframe may result in <strong>automatic approval</strong> and release of funds.
-                </p>
+            </div>
+
+            {/* How to Request a Refund */}
+            <div className="bg-visibuy-green/10 rounded-2xl p-8 border border-visibuy-green/20">
+              <h2 className="text-3xl font-bold text-black mb-6">
+                How to Request a Refund
+              </h2>
+              <div className="space-y-4 text-black/80">
+                <p>Getting a refund is simple:</p>
+                <ol className="list-decimal pl-6 space-y-2">
+                  <li>Contact our support team via WhatsApp or email</li>
+                  <li>Provide your order number and reason for refund</li>
+                  <li>Our team will review and process your request</li>
+                  <li>Receive confirmation and refund timeline</li>
+                </ol>
+                <div className="mt-6 p-4 bg-white rounded-lg">
+                  <p className="font-semibold text-black">
+                    Contact Information:
+                  </p>
+                  <p>WhatsApp: +234 (0) 123 456 7890</p>
+                  <p>Email: refunds@visibuy.com</p>
+                  <p>Available 24/7 for immediate assistance</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Returns After Delivery */}
-        <div className="mb-12">
-          <div className="flex items-start gap-4 mb-8">
-            <XCircle className="w-6 h-6 text-red-600 mt-1 flex-shrink-0" />
-            <h2 className="text-3xl font-bold text-gray-900">3. Returns After Delivery</h2>
-          </div>
-          
-          <div className="bg-red-50 border-l-4 border-red-500 p-6 mb-8">
-            <p className="text-red-900 font-semibold mb-3 text-lg">Due to our visual verification model:</p>
-            <p className="text-red-800 mb-4 text-lg">
-              <strong>All sales are final once approved</strong> and the item is shipped.
+      {/* CTA Section */}
+      <section className="py-20 bg-black text-white">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              Shop Risk-Free Today
+            </h2>
+            <p className="text-xl mb-8 opacity-90">
+              With our comprehensive refund policy, you can shop with complete
+              confidence knowing your money is always protected.
             </p>
-            <p className="text-red-800 text-lg">
-              Visibuy does <strong>not accept returns or refunds</strong> after delivery unless:
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            <div className="flex items-start gap-4 p-4 bg-yellow-50 border-l-4 border-yellow-500">
-              <AlertCircle className="w-6 h-6 text-yellow-600 mt-0.5 flex-shrink-0" />
-              <p className="text-yellow-800 text-lg">
-                The seller delivers an item <strong>significantly different</strong> from the verified media.
-              </p>
-            </div>
-            <div className="flex items-start gap-4 p-4 bg-yellow-50 border-l-4 border-yellow-500">
-              <AlertCircle className="w-6 h-6 text-yellow-600 mt-0.5 flex-shrink-0" />
-              <p className="text-yellow-800 text-lg">
-                The item is damaged <strong>in transit</strong> and reported immediately upon delivery with photo evidence.
-              </p>
-            </div>
-          </div>
-
-          <p className="text-gray-600 mt-6 text-base italic">
-            In such cases, Visibuy will investigate the matter and determine the refund eligibility on a case-by-case basis.
-          </p>
-        </div>
-
-        {/* Non-Refundable Situations */}
-        <div className="mb-12">
-          <div className="flex items-start gap-4 mb-8">
-            <XCircle className="w-6 h-6 text-red-600 mt-1 flex-shrink-0" />
-            <h2 className="text-3xl font-bold text-gray-900">4. Non-Refundable Situations</h2>
-          </div>
-          
-          <p className="text-gray-700 mb-6 text-lg">Refunds will <strong>not</strong> be issued in the following situations:</p>
-          
-          <div className="space-y-4">
-            <div className="flex items-start gap-4 p-4 bg-red-50 border-l-4 border-red-500">
-              <XCircle className="w-6 h-6 text-red-600 mt-0.5 flex-shrink-0" />
-              <p className="text-red-800 text-lg">You approved the product during the verification step and later changed your mind.</p>
-            </div>
-            <div className="flex items-start gap-4 p-4 bg-red-50 border-l-4 border-red-500">
-              <XCircle className="w-6 h-6 text-red-600 mt-0.5 flex-shrink-0" />
-              <p className="text-red-800 text-lg">You fail to respond within the allotted verification timeframe.</p>
-            </div>
-            <div className="flex items-start gap-4 p-4 bg-red-50 border-l-4 border-red-500">
-              <XCircle className="w-6 h-6 text-red-600 mt-0.5 flex-shrink-0" />
-              <p className="text-red-800 text-lg">The product was accurately verified but did not meet personal preference after approval.</p>
-            </div>
-            <div className="flex items-start gap-4 p-4 bg-red-50 border-l-4 border-red-500">
-              <XCircle className="w-6 h-6 text-red-600 mt-0.5 flex-shrink-0" />
-              <p className="text-red-800 text-lg">You provide incorrect delivery information or fail to receive the item due to absence or refusal.</p>
-            </div>
+            <Button className="bg-visibuy-green hover:bg-visibuy-green/90 text-white text-lg px-8 py-6 rounded-2xl">
+              Start Shopping Safely
+            </Button>
           </div>
         </div>
-
-        {/* Refund Processing */}
-        <div className="mb-12">
-          <div className="flex items-start gap-4 mb-8">
-            <Clock className="w-6 h-6 text-blue-600 mt-1 flex-shrink-0" />
-            <h2 className="text-3xl font-bold text-gray-900">5. Refund Processing</h2>
-          </div>
-          
-          <p className="text-gray-700 mb-6 text-lg">If eligible:</p>
-          
-          <div className="space-y-6">
-            <div className="bg-green-50 border-l-4 border-green-500 p-6">
-              <h3 className="font-semibold text-green-900 mb-3 text-xl">Fast Track Refunds</h3>
-              <p className="text-green-800 text-lg">
-                Refunds for <strong>declined items during the escrow verification phase</strong> are processed 
-                <strong> almost instantly</strong> and typically reflect within a few minutes to a few hours, 
-                depending on your payment provider.
-              </p>
-            </div>
-            <div className="bg-blue-50 border-l-4 border-blue-500 p-6">
-              <h3 className="font-semibold text-blue-900 mb-3 text-xl">Standard Refunds</h3>
-              <p className="text-blue-800 text-lg">
-                Other approved refunds will be processed within <strong>5–7 business days</strong>.
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-8 p-6 bg-gray-50 border-l-4 border-gray-400">
-            <h4 className="font-semibold text-gray-900 mb-4 text-lg">Important Notes:</h4>
-            <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <span className="w-3 h-3 bg-gray-600 rounded-full mt-2 flex-shrink-0"></span>
-                <p className="text-gray-700 text-lg">Refunds will be made to the <strong>original payment method</strong>.</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="w-3 h-3 bg-gray-600 rounded-full mt-2 flex-shrink-0"></span>
-                <p className="text-gray-700 text-lg">Refund processing time may vary depending on your bank or payment provider.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Disputes and Resolution */}
-        <div className="mb-12">
-          <div className="flex items-start gap-4 mb-8">
-            <AlertCircle className="w-6 h-6 text-purple-600 mt-1 flex-shrink-0" />
-            <h2 className="text-3xl font-bold text-gray-900">6. Disputes and Resolution</h2>
-          </div>
-          
-          <div className="bg-purple-50 border-l-4 border-purple-500 p-6 mb-8">
-            <p className="text-purple-900 text-lg">
-              If you believe an item was approved or delivered in error, please contact Visibuy Support at 
-              <strong className="text-purple-700"> tech@visibuy.com.ng</strong> within <strong>24 hours</strong> of delivery.
-            </p>
-          </div>
-
-          <h3 className="font-semibold text-gray-900 mb-6 text-xl">Visibuy reserves the right to:</h3>
-          <div className="space-y-3">
-            <div className="flex items-center gap-4 p-4 bg-gray-50 border-l-4 border-gray-400">
-              <CheckCircle className="w-5 h-5 text-gray-600" />
-              <span className="text-gray-700 text-lg">Review all verification and order data</span>
-            </div>
-            <div className="flex items-center gap-4 p-4 bg-gray-50 border-l-4 border-gray-400">
-              <CheckCircle className="w-5 h-5 text-gray-600" />
-              <span className="text-gray-700 text-lg">Contact the seller for clarifications</span>
-            </div>
-            <div className="flex items-center gap-4 p-4 bg-gray-50 border-l-4 border-gray-400">
-              <CheckCircle className="w-5 h-5 text-gray-600" />
-              <span className="text-gray-700 text-lg">Make a final determination on refund or resolution</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Seller Responsibilities */}
-        <div className="mb-12">
-          <div className="flex items-start gap-4 mb-8">
-            <Shield className="w-6 h-6 text-indigo-600 mt-1 flex-shrink-0" />
-            <h2 className="text-3xl font-bold text-gray-900">7. Seller Responsibilities</h2>
-          </div>
-          
-          <p className="text-gray-700 mb-6 text-lg">Sellers on Visibuy are required to:</p>
-          
-          <div className="space-y-4">
-            <div className="flex items-start gap-4 p-4 bg-indigo-50 border-l-4 border-indigo-500">
-              <CheckCircle className="w-6 h-6 text-indigo-600 mt-0.5 flex-shrink-0" />
-              <p className="text-indigo-800 text-lg">Accurately display the product during the visual verification process</p>
-            </div>
-            <div className="flex items-start gap-4 p-4 bg-indigo-50 border-l-4 border-indigo-500">
-              <CheckCircle className="w-6 h-6 text-indigo-600 mt-0.5 flex-shrink-0" />
-              <p className="text-indigo-800 text-lg">Ship the exact item shown and verified</p>
-            </div>
-            <div className="flex items-start gap-4 p-4 bg-indigo-50 border-l-4 border-indigo-500">
-              <CheckCircle className="w-6 h-6 text-indigo-600 mt-0.5 flex-shrink-0" />
-              <p className="text-indigo-800 text-lg">Ensure packaging protects the item during transit</p>
-            </div>
-          </div>
-
-          <div className="mt-6 p-4 bg-red-50 border-l-4 border-red-500">
-            <p className="text-red-800 text-lg">
-              <strong>Failure to comply</strong> may result in penalties, suspension, or removal from the platform.
-            </p>
-          </div>
-        </div>
-
-        {/* Contact Information */}
-        <div className="bg-indigo-600 text-white p-8 mb-8">
-          <div className="flex items-start gap-4 mb-8">
-            <Mail className="w-6 h-6 mt-1 flex-shrink-0" />
-            <h2 className="text-3xl font-bold">8. Contact Us</h2>
-          </div>
-          
-          <p className="mb-8 text-lg opacity-90">
-            For any questions or support, reach out to our Customer Success team:
-          </p>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="flex items-center gap-4">
-              <Mail className="w-8 h-8 flex-shrink-0" />
-              <div>
-                <p className="font-semibold text-lg mb-1">Email Support</p>
-                <a href="mailto:tech@visibuy.com.ng" className="text-indigo-200 hover:text-white transition-colors text-lg">
-                  tech@visibuy.com.ng
-                </a>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <Phone className="w-8 h-8 flex-shrink-0" />
-              <div>
-                <p className="font-semibold text-lg mb-1">Phone Support</p>
-                <a href="tel:+2348061924490" className="text-indigo-200 hover:text-white transition-colors text-lg">
-                  +234 806 192 4490
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="p-6 bg-gray-50 border-l-4 border-gray-400">
-          <div className="text-center">
-            <p className="text-gray-600 text-base">
-              <strong>Visibuy Technologies Ltd</strong> reserves the right to amend this Refund & Returns Policy at any time. 
-              Any updates will be posted to the platform and take effect immediately upon publication.
-            </p>
-          </div>
-        </div>
-      </div>
+      </section>
     </div>
   );
 };
 
-export default RefundPolicyPage;
+export default RefundPolicy;

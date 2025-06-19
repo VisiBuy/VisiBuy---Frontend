@@ -2,7 +2,7 @@ function PrivacyPolicy() {
 	return (
 		<section className="pp-section">
 				<div className="pp-heading">
-					<h1>Privacy Policy for <br /> Visibuy Beta Program</h1>
+					<h1>Privacy Policy for <br /> Visibuy Technology Limited  Beta Program</h1>
 				</div>
 			<div className="pp-container">
 
@@ -12,14 +12,14 @@ function PrivacyPolicy() {
 					<p className="pp-description-text">
 						{" "}
                         <div>
-						Visibuy ("we," "our," or "us") is
+						Visibuy Technology Limited  ("we," "our," or "us") is
 						committed to protecting the privacy of users participating in the
-						Visibuy Beta Program ("the Program"). This Privacy Policy outlines
+						Visibuy Technology Limited  Beta Program ("the Program"). This Privacy Policy outlines
 						the types of information we collect, how we use and protect it, and
 						your rights concerning that information. By participating in the
 						Program, you agree to the terms of this policy.
                         </div> <div><span className="pp-number">1.</span> <p>Information We
-						Collect In the course of providing the Visibuy Beta Program, we may
+						Collect In the course of providing the Visibuy Technology Limited  Beta Program, we may
 						collect and store the following types of information: a. Personal
 						Information Account Information: Your name, email address, phone
 						number, and other contact details provided when signing up for the
@@ -28,7 +28,7 @@ function PrivacyPolicy() {
 						confirmations. Verification Information: Photos or videos used to
 						visually verify products before delivery as part of the program's
 						core functionality. b. Automatically Collected Information Usage
-						Data: Data about how you interact with the Visibuy app, such as
+						Data: Data about how you interact with the Visibuy Technology Limited  app, such as
 						clicks, navigation patterns, and time spent on each page. Device
 						Information: Information about your device, including device type,
 						operating system, browser type, and IP address. c. Cookies and
@@ -62,7 +62,7 @@ function PrivacyPolicy() {
 						SSL, to secure data transmission and storage. However, no system is
 						completely secure, and we cannot guarantee absolute security.</p></div> <div><span className="pp-number">6.</span>
 						<p>User Consent and Opt-Out By signing up and participating in the
-						Visibuy Beta Program, you consent to the collection and use of your
+						Visibuy Technology Limited  Beta Program, you consent to the collection and use of your
 						data as outlined in this Privacy Policy. You may opt-out of data
 						collection or certain features at any time by adjusting your app
 						settings or contacting us at tech@visibuy.com.ng.</p></div> <div><span className="pp-number">7.</span> <p>Your Data
@@ -74,13 +74,13 @@ function PrivacyPolicy() {
 						subject to our legal or operational requirements. Opt-Out: You may
 						opt-out of receiving marketing communications or data collection for
 						specific features. To exercise any of these rights, please contact
-						us at tech@visibuy.com.ng.</p></div> <div><span className="pp-number">8.</span> <p>Data Relating to Minors The Visibuy
+						us at tech@visibuy.com.ng.</p></div> <div><span className="pp-number">8.</span> <p>Data Relating to Minors The Visibuy Technology Limited 
 						Beta Program is only available to individuals aged 18 and above. We
 						do not knowingly collect data from individuals under the age of 18.
 						If you believe we have inadvertently collected information from a
 						minor, please contact us, and we will take steps to delete the
 						information.</p></div> <div><span className="pp-number">9.</span> <p>Changes to This Privacy Policy We may update this
-						Privacy Policy as the Visibuy Beta Program evolves or as required by
+						Privacy Policy as the Visibuy Technology Limited  Beta Program evolves or as required by
 						law. If we make any significant changes, we will notify you through
 						email and in-app notifications. Your continued participation in the
 						beta program after such updates will constitute your acknowledgment
