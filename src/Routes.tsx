@@ -110,7 +110,6 @@ const router = createHashRouter([
   { path: "/signup", element: <SignUpPage /> },
   { path: "/reset-password", element: <PassowordResetPage /> },
   { path: "/password-recovery", element: <PassowordForgotPage /> },
-
   {
     path: "/dashboard/seller",
 
