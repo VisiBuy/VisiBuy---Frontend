@@ -125,15 +125,22 @@ const Header = () => {
               >
                 FAQ
               </Link>
+              <Link
+                to="/blog/visibuy-is-lauching"
+                className="block px-4 py-2 text-visibuy-dark-gray hover:text-visibuy-primary transition-colors font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
+              </Link>
               <div className="px-4 py-2 space-y-2">
                 <Button
                   variant="outline"
-                  className="w-full border-visibuy-primary text-visibuy-primary hover:bg-visibuy-primary hover:text-white"
+                  className="w-full border-visibuy-green text-visibuy-green hover:bg-visibuy-green  hover:text-white h-12"
                 >
                   Login
                 </Button>
-                <Button className="w-full bg-visibuy-primary hover:bg-visibuy-primary/90 text-white">
-                  Get Started
+                <Button className="w-full bg-visibuy-green hover:bg-visibuy-green/90 text-white hover:text-white text-lg h-12">
+                <Link to="/signup">Get Started</Link>
                 </Button>
               </div>
             </nav>

@@ -50,6 +50,7 @@ import RefundPolicyPage from "./pages/RefundPolicy";
 import TermsOfService from "./pages/TOS";
 import VerificationGuide from "./pages/VerificationGuide";
 import BlogPost from "./pages/Blog";
+import LegalInformation from "./pages/LegalInformation";
 
 const router = createHashRouter([
   {
@@ -88,6 +89,7 @@ const router = createHashRouter([
         path: "refund-policy",
         element: <RefundPolicyPage />,
       },
+      { path: "legal-information", element: <LegalInformation /> },
       {
         path: "verification-guide",
         element: <VerificationGuide />,

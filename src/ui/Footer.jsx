@@ -70,7 +70,7 @@ function Footer() {
         <p className="footer_heading">Resources</p>
         <ul className="footer_nav">
           <li>
-          <Link
+            <Link
               to="/blog/visibuy-is-lauching"
               className="text-visibuy-dark-gray hover:text-visibuy-primary transition-colors font-medium"
             >
@@ -101,10 +101,15 @@ function Footer() {
             </Link>
           </li>
           <li>
-						<Link to="/verification-guide" className="footer_link">
-							Verification Guide
-						</Link>
-					</li>
+            <Link to="/verification-guide" className="footer_link">
+              Verification Guide
+            </Link>
+          </li>
+          <li>
+            <Link to="/legal-information" className="footer_link">
+              Legal Information
+            </Link>
+          </li>
         </ul>
       </div>
     </div>
