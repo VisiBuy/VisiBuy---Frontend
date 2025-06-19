@@ -10,6 +10,9 @@ interface SellerProductRespository {
   getProductList: (
     queryParams: ISellerProductQueryParams
   ) => Promise<QueryResult<ISellerProduct>>;
+  getPublicProductList: (
+    queryParams: ISellerProductQueryParams
+  ) => Promise<QueryResult<ISellerProduct>>;
   createProduct: (productData: FormData) => Promise<any>;
 }
 

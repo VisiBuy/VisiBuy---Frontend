@@ -4,8 +4,9 @@ import ProductRespository from "../respository/product-repository";
 
 class ProductApiAdapter implements ProductRespository {
   async getProduct() {}
-  async getProductList(queryParams :ProductQueryParams): Promise<QueryResult<IProduct[]>> {
-    
-  }
+  async getProductList(
+    queryParams: ProductQueryParams,
+  ): Promise<QueryResult<IProduct[]>> {}
+  
 }
 export default new ProductApiAdapter();

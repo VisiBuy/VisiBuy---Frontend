@@ -45,15 +45,42 @@
     --radius: 0.5rem;
     --font-Montserrat: "Montserrat", sans-serif;
     --font-OpenSans: "Open Sans", sans-serif;
+
+    /* Custom Visibuy Colors */
+    --visibuy-blue: 213 100% 50%; /* #007aff */
+    --visibuy-blue-light: 213 100% 90%; /* #c8e2ff */
+    --visibuy-green: 134 61% 41%; /* #28a745 */
+    --visibuy-gray: 0 0% 85%; /* #d9d9d9 */
+    --visibuy-gold: 45 76% 52%; /* #e4a826 */
+    --visibuy-black: 0 0% 0%; /* #000000 */
+    --visibuy-white: 0 0% 100%; /* #ffffff */
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 213 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 213 100% 90%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 0 0% 85%;
+    --sidebar-ring: 213 100% 50%;
   }
 }
 
 @layer base {
+ 
   * {
     box-sizing: border-box;
   }
   :root {
     --font-Montserrat: "Montserrat", sans-serif;
+  }
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    /* font-size: 1.6rem; */
   }
 }
 
@@ -64,6 +91,7 @@
 }
 
 @layer utilities {
+
   .button-text {
     @apply bg-blue-200 text-blue font-semibold font-Montserrat;
   }
@@ -77,4 +105,70 @@
   .btn-role-inactive {
     @apply bg-light-background text-secondary-foreground hover:bg-gray-200 hover:text-black;
   }
+  .bg-visibuy-blue {
+    background-color: hsl(var(--visibuy-blue));
+  }
+  .bg-visibuy-blue-light {
+    background-color: hsl(var(--visibuy-blue-light));
+  }
+  .bg-visibuy-green {
+    background-color: hsl(var(--visibuy-green));
+  }
+  .bg-visibuy-gray {
+    background-color: hsl(var(--visibuy-gray));
+  }
+  .bg-visibuy-gold {
+    background-color: hsl(var(--visibuy-gold));
+  }
+  .bg-visibuy-black {
+    background-color: hsl(var(--visibuy-black));
+  }
+  .bg-visibuy-white {
+    background-color: hsl(var(--visibuy-white));
+  }
+
+  .text-visibuy-blue {
+    color: hsl(var(--visibuy-blue));
+  }
+  .text-visibuy-blue-light {
+    color: hsl(var(--visibuy-blue-light));
+  }
+  .text-visibuy-green {
+    color: hsl(var(--visibuy-green));
+  }
+  .text-visibuy-gray {
+    color: hsl(var(--visibuy-gray));
+  }
+  .text-visibuy-gold {
+    color: hsl(var(--visibuy-gold));
+  }
+  .text-visibuy-black {
+    color: hsl(var(--visibuy-black));
+  }
+  .text-visibuy-white {
+    color: hsl(var(--visibuy-white));
+  }
+
+  .border-visibuy-blue {
+    border-color: hsl(var(--visibuy-blue));
+  }
+  .border-visibuy-blue-light {
+    border-color: hsl(var(--visibuy-blue-light));
+  }
+  .border-visibuy-green {
+    border-color: hsl(var(--visibuy-green));
+  }
+  .border-visibuy-gray {
+    border-color: hsl(var(--visibuy-gray));
+  }
+  .border-visibuy-gold {
+    border-color: hsl(var(--visibuy-gold));
+  }
+  .border-visibuy-black {
+    border-color: hsl(var(--visibuy-black));
+  }
+  .border-visibuy-white {
+    border-color: hsl(var(--visibuy-white));
+  }
+  
 }

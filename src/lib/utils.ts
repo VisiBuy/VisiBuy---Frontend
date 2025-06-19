@@ -89,7 +89,7 @@ export function formatCurrency(
   const wholeWithCommas = wholePart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   // Combine parts
-  const formatted = `${wholeWithCommas}.${decimalPart}`;
+  const formatted = decimalPart ? `${wholeWithCommas}.${decimalPart}` : wholeWithCommas;
 
   // Add symbol if needed
   return includeSymbol ? `${symbol}${formatted}` : formatted;
