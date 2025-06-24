@@ -52,14 +52,14 @@ function Footer() {
           <li>
             {/* Added Visibuy FAQ link */}
             <Link
-              to="https://visibuy.zohodesk.com/portal/"
+              to="/faq"
               className="footer_link"
             >
               FAQ
             </Link>
           </li>
           <li>
-            <Link to="/pricings" className="footer_link">
+            <Link to="/pricing" className="footer_link">
               Pricing
             </Link>
           </li>
@@ -97,7 +97,17 @@ function Footer() {
 
           <li>
             <Link to="/refund-policy" className="footer_link">
-              Refund Ploicy
+              Refund Policy
+            </Link>
+          </li>
+          <li>
+            <Link to="/verification-guide" className="footer_link">
+              Verification Guide
+            </Link>
+          </li>
+          <li>
+            <Link to="/legal-information" className="footer_link">
+              Legal Information
             </Link>
           </li>
           <li>
