@@ -3,7 +3,7 @@ import { Badge } from "@/ui/Badge";
 import { Shield, Eye, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
+import { Link as ScrollLink } from "react-scroll";
 const Hero = () => {
   const [selectedImage, setSelectedImage] = useState(0);
 
@@ -48,19 +48,28 @@ const Hero = () => {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                size="lg"
-                className="bg-visibuy-green text-white hover:bg-visibuy-green/90 text-lg px-8 py-6 font-semibold transition-all hover:scale-105"
+              <Link to="/login">
+                <Button
+                  size="lg"
+                  className="bg-visibuy-green text-white hover:bg-visibuy-green/90 text-lg px-8 py-6 font-semibold transition-all hover:scale-105"
+                >
+                  🛍️ Shop Now
+                </Button>
+              </Link>
+              <ScrollLink
+                to="how-it-works"
+                smooth={true}
+                duration={500}
+                offset={-80} // adjust if you have fixed headers
               >
-                🛍️ Shop Now
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-black text-black hover:bg-black hover:text-white text-lg px-8 py-6 font-semibold transition-all hover:scale-105"
-              >
-                👀 How It Works
-              </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-2 border-black text-black hover:bg-black hover:text-white text-lg px-8 py-6 font-semibold transition-all hover:scale-105"
+                >
+                  👀 How It Works
+                </Button>
+              </ScrollLink>
             </div>
 
             {/* Trust Strip */}
@@ -118,7 +127,7 @@ const Hero = () => {
               </div>
               <p className="text-xs text-visibuy-green mt-2 font-semibold">
                 ✅ 5 verification photos approved
-              </p> 
+              </p>
             </div>
           </div>
         </div>
