@@ -1,7 +1,7 @@
 import { ISellerProduct } from "../../models/product";
 
 export function transformSellerProduct(productdata: any): ISellerProduct[] | [] {
-  const products = productdata?.products;
+  const products = productdata?.products || productdata?.sneakers;
  
   if(products.length === 0) return []
   return products.map((product: any, index: any) => {

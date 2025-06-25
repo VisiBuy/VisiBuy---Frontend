@@ -4,19 +4,22 @@ import Footer from "./Footer";
 import Header from "./Header";
 
 function AppLayout() {
-	return (
-		<>
-			<main className="container" style={{paddingLeft:'0',maxWidth:'1600px'}}>
-				<Header />
-			</main>
-				<div>
-				<Outlet />
-				</div>
-			<footer className="footer">
-				<Footer />
-			</footer>
-		</>
-	);
+  return (
+    <main
+      className=" font-Montserrat visibuy"
+      id="visibuy"
+      style={{ paddingLeft: "0", maxWidth: "1600px" }}
+    >
+      <Header />
+
+      <div>
+        <Outlet />
+      </div>
+      <footer className="footer">
+        <Footer />
+      </footer>
+    </main>
+  );
 }
 
 export default AppLayout;

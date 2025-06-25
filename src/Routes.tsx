@@ -1,16 +1,15 @@
-import { createHashRouter } from "react-router-dom";
+import { createHashRouter,createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import PageNotFound from "./pages/PageNotFound";
-import FAQ from "./pages/FAQ";
+import FAQPage from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import AboutUs from "./pages/AboutUs";
 import Pricing from "./pages/Pricing";
-import TOS from "./pages/TOS";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AppLayout from "./ui/AppLayout";
 import { LoginPage } from "./pages/Login";
 import { SignUpPage } from "./pages/SignUpPage";
-import { PassowordForgotPage} from "./pages/PasswordForgotPage";
+import { PassowordForgotPage } from "./pages/PasswordForgotPage";
 import { SellerDashboardLayout } from "./layouts/seller-dashboard-layout";
 import { SellerProductPage } from "./pages/Seller/Product";
 import { FeedbackPage } from "./pages/Seller/Feedback";
@@ -48,8 +47,12 @@ import BuyerSettings from "./pages/Buyer/BuyerSettings";
 import Favourites from "./pages/Buyer/Favourites";
 import { PassowordResetPage } from "./pages/PasswordResetPage";
 import RefundPolicyPage from "./pages/RefundPolicy";
+import TermsOfService from "./pages/TOS";
+import VerificationGuide from "./pages/VerificationGuide";
+import BlogPost from "./pages/Blog";
+import LegalInformation from "./pages/LegalInformation";
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     element: <AppLayout />,
     errorElement: <PageNotFound />, // This will show when no routes match or an error occurs
@@ -59,45 +62,55 @@ const router = createHashRouter([
         element: <Home />,
       },
       {
-        path: "/faq",
-        element: <FAQ />,
+        path: "faq",
+        element: <FAQPage />,
       },
       {
-        path: "/blog",
+        path: "blog",
         element: <Blog />,
       },
       {
-        path: "/pricing",
+        path: "pricing",
         element: <Pricing />,
       },
       {
-        path: "/about",
+        path: "about",
         element: <AboutUs />,
       },
       {
-        path: "/tos",
-        element: <TOS />,
+        path: "terms-of-service",
+        element: <TermsOfService />,
       },
       {
-        path: "/privacy-policy",
+        path: "privacy-policy",
         element: <PrivacyPolicy />,
       },
       {
-        path: "/refund-policy",
+        path: "refund-policy",
         element: <RefundPolicyPage />,
       },
+      { path: "legal-information", element: <LegalInformation /> },
       {
-        // Catch-all route for undefined paths (404)
-        path: "*",
-        element: <PageNotFound />,
+        path: "verification-guide",
+        element: <VerificationGuide />,
+      },
+      {
+        path: "blog",
+        children: [
+          {
+            path: "visibuy-is-lauching",
+            element: <BlogPost />,
+          },
+        ],
       },
     ],
   },
+
   { path: "/login", element: <LoginPage /> },
   { path: "/signup", element: <SignUpPage /> },
   { path: "/reset-password", element: <PassowordResetPage /> },
   { path: "/password-recovery", element: <PassowordForgotPage /> },
-  
+
   {
     path: "/dashboard/seller",
 
@@ -168,7 +181,6 @@ const router = createHashRouter([
       { path: "notification/:id", element: <BuyerNotificationsDetailsPage /> },
       { path: "report", element: <FileDispute /> },
       { path: "search", element: <SearchResultsPage /> },
-      
     ],
   },
   // Buyer Profile Route (separate from dashboard layout)
@@ -188,6 +200,11 @@ const router = createHashRouter([
       { path: "address", element: <BuyerAddress /> },
       { path: "settings", element: <BuyerSettings /> },
     ],
+  },
+  {
+    // Catch-all route for undefined paths (404)
+    path: "*",
+    element: <PageNotFound />,
   },
 ]);
 

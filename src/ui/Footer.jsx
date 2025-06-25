@@ -52,14 +52,14 @@ function Footer() {
           <li>
             {/* Added Visibuy FAQ link */}
             <Link
-              to="https://visibuy.zohodesk.com/portal/"
+              to="/faq"
               className="footer_link"
             >
               FAQ
             </Link>
           </li>
           <li>
-            <Link to="/pricings" className="footer_link">
+            <Link to="/pricing" className="footer_link">
               Pricing
             </Link>
           </li>
@@ -70,7 +70,10 @@ function Footer() {
         <p className="footer_heading">Resources</p>
         <ul className="footer_nav">
           <li>
-            <Link to="/blogs" className="footer_link">
+            <Link
+              to="/blog/visibuy-is-lauching"
+              className="text-visibuy-dark-gray hover:text-visibuy-primary transition-colors font-medium"
+            >
               Blog
             </Link>
           </li>
@@ -86,7 +89,7 @@ function Footer() {
             </Link>
           </li>
           <li>
-            <Link to="/terms">Terms of Service</Link>
+            <Link to="/terms-of-service">Terms of Service</Link>
           </li>
           <li>
             <Link to="/privacy-policy">Privacy Policy</Link>
@@ -94,14 +97,29 @@ function Footer() {
 
           <li>
             <Link to="/refund-policy" className="footer_link">
-              Refund Ploicy
+              Refund Policy
             </Link>
           </li>
-          {/* <li>
-						<Link to="/privacy-policy" className="footer_link">
-							Privacy Policy
-						</Link>
-					</li> */}
+          <li>
+            <Link to="/verification-guide" className="footer_link">
+              Verification Guide
+            </Link>
+          </li>
+          <li>
+            <Link to="/legal-information" className="footer_link">
+              Legal Information
+            </Link>
+          </li>
+          <li>
+            <Link to="/verification-guide" className="footer_link">
+              Verification Guide
+            </Link>
+          </li>
+          <li>
+            <Link to="/legal-information" className="footer_link">
+              Legal Information
+            </Link>
+          </li>
         </ul>
       </div>
     </div>
