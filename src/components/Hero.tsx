@@ -118,7 +118,7 @@ const Hero = () => {
               </div>
               <p className="text-xs text-visibuy-green mt-2 font-semibold">
                 ✅ 5 verification photos approved
-              </p>
+              </p> 
             </div>
           </div>
         </div>
