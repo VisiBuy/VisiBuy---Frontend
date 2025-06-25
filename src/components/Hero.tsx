@@ -8,11 +8,11 @@ const Hero = () => {
   const [selectedImage, setSelectedImage] = useState(0);
 
   const sneakerImages = [
-    "src/assets/onboarding/logo-and-size.jpg",
-    "src/assets/onboarding/material-and-stitching.jpg",
-    "src/assets/onboarding/side-view.jpg",
-    "src/assets/onboarding/sole-closeup.jpg",
-    "src/assets/onboarding/top-down-view.jpg",
+    "/logo-and-size.jpg",
+    "/material-and-stitching.jpg",
+    "/side-view.jpg",
+    "/sole-closeup.jpg",
+    "/top-down-view.jpg",
   ];
 
   return (
