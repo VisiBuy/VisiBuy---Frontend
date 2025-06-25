@@ -21,8 +21,11 @@ const FAQPage = () => {
       faqs: [
         {
           question: "What is Visibuy?",
-          answer:
-            "Visibuy is a fashion-focused e-commerce platform where buyers can visually verify their orders before delivery. It connects buyers, sellers, and riders to create a more trustworthy online shopping experience. Visibuy is a marketplace built around visual trust — we don't just list products, we let buyers verify every transaction.",
+          answer: `Visibuy is an infrastructure layer for trusted e-commerce transactions, enabling visual verification before delivery.
+                     It provides the tools and workflow that allow buyers to see and approve their exact order — across fashion and other categories — before it ships.
+
+                   By linking buyers, sellers, and logistics partners through a visual trust protocol, Visibuy transforms traditional e-commerce into a transparent, buyer-verified experience.
+                   Whether integrated into marketplaces or used independently, Visibuy powers a new standard of order accuracy, trust, and post-purchase satisfaction.`,
         },
         {
           question: "How does Visibuy work?",
