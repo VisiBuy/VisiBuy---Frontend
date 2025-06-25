@@ -76,8 +76,12 @@ const FAQPage = () => {
         },
         {
           question: "How long does verification take?",
-          answer:
-            "Verification on Visibuy is structured for speed without compromising accuracy: Sellers have up to 6 hours to upload verification photos or videos after an order is placed. Buyers have up to 6 hours to review and approve (or reject) the item once verification content is uploaded. ⏳ Our system is designed to self-optimize over time, reducing these timeframes as we learn from real usage — so future verification can happen even faster, with more precision. ⚠️ If the seller fails to upload verification within 6 hours, the order is automatically cancelled and the buyer receives a full refund. ⚠️ If the buyer does not respond within 6 hours, the order is automatically approved and dispatched as verified.",
+          answer: `Verification on Visibuy is structured for speed without compromising accuracy: 
+            Sellers have up to 6 hours to upload verification photos or videos after an order is placed. 
+            Buyers have up to 6 hours to review and approve (or reject) the item once verification content is uploaded. 
+            ⏳ Our system is designed to self-optimize over time, reducing these timeframes as we learn from real usage — so future verification can happen even faster, with more precision. 
+            ⚠️ If the seller fails to upload verification within 6 hours, the order is automatically cancelled and the buyer receives a full refund. 
+            ⚠️ If the buyer does not respond within 6 hours, the order is automatically approved and dispatched as verified.`,
         },
         {
           question: "What if the seller doesn't provide good photos?",
@@ -93,6 +97,20 @@ const FAQPage = () => {
           question: "Is it safe to shop on Visibuy?",
           answer:
             "Yes. Your payment is protected by escrow, and the visual verification process ensures you only receive what you approved.",
+        },
+        {
+          question:
+            "Do buyers have to verify every product before it’s delivered?",
+          answer: `Not necessarily.<br/>
+
+As Visibuy evolves and our Visual Verification Engine (VVE) gets smarter, buyers won’t always need to manually approve every order. <br/>
+
+Instead, you’ll be able to set your preferences — whether you care more about the product’s size, color, brand tag, or overall condition — and VVE will handle the verification on your behalf.<br/>
+
+You’ll still receive a visual proof of the product (photos or video), but with AI and automation, you can shop with less back-and-forth and more peace of mind.<br/>
+
+In short: <br/>
+You stay in control — but you won’t always need to be hands-on.`,
         },
       ],
     },
@@ -134,8 +152,11 @@ const FAQPage = () => {
       faqs: [
         {
           question: "What is the Visibuy Logistics Network (VLN)?",
-          answer:
-            "The Visibuy Logistics Network (VLN) is a visual verification cloud infrastructure that seamlessly connects sellers, warehousing partners, and logistics providers to ensure every product sold on Visibuy is authenticated, verified, and traceable — even when sellers do not have physical access to inventory. VLN enables: Warehousing personnel to capture standardized product visuals on behalf of sellers. Logistics agents to securely deliver only verified items using QR/NFC protocols. Sellers to meet Visibuy's verification standards without owning stock. Through this connected network, VLN enforces Visibuy's promise of trust, accuracy, and transparency in every order.",
+          answer: `The Visibuy Logistics Network (VLN) is a visual verification cloud infrastructure that seamlessly connects sellers, warehousing partners, and logistics providers to ensure every product sold on Visibuy is authenticated, verified, and traceable — even when sellers do not have physical access to inventory. 
+            VLN enables: Warehousing personnel to capture standardized product visuals on behalf of sellers. 
+            Logistics agents to securely deliver only verified items using QR/NFC protocols. 
+            Sellers to meet Visibuy's verification standards without owning stock. 
+            Through this connected network, VLN enforces Visibuy's promise of trust, accuracy, and transparency in every order.`,
         },
         {
           question: "Who handles delivery and warehousing?",
@@ -145,8 +166,7 @@ const FAQPage = () => {
         {
           question:
             "Can I become a delivery or warehousing partner in the VLN?",
-          answer:
-            "Yes. You can apply to become a VLN partner using https://forms.gle/ifLgp7DjapjBGWcb8. However, the network is currently in private beta and available by invitation only. We will reach out to you when ready to deploy VLN in your facility.",
+          answer: `Yes. You can apply to become a VLN partner using <a class="underline via-visibuy-blue"  href='https://forms.gle/ifLgp7DjapjBGWcb8'>click here</a>. However, the network is currently in private beta and available by invitation only. We will reach out to you when ready to deploy VLN in your facility.`,
         },
         {
           question: "Can I track my delivery or stored item?",
@@ -253,7 +273,9 @@ const FAQPage = () => {
 
                         {openIndex === globalIndex && (
                           <div className="px-6 pb-6 text-black/80 leading-relaxed animate-fade-in whitespace-pre-line">
-                            {faq.answer}
+                            <div
+                              dangerouslySetInnerHTML={{ __html: faq.answer }}
+                            />
                           </div>
                         )}
                       </div>

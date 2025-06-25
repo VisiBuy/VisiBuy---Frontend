@@ -1,4 +1,4 @@
-import { createHashRouter } from "react-router-dom";
+import { createHashRouter,createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import PageNotFound from "./pages/PageNotFound";
 import FAQPage from "./pages/FAQ";
@@ -52,7 +52,7 @@ import VerificationGuide from "./pages/VerificationGuide";
 import BlogPost from "./pages/Blog";
 import LegalInformation from "./pages/LegalInformation";
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     element: <AppLayout />,
     errorElement: <PageNotFound />, // This will show when no routes match or an error occurs

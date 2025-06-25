@@ -91,7 +91,7 @@ const WhyVisibuy = () => {
           </div>
 
           <p className="mt-8 text-lg opacity-90 max-w-2xl leading-tight mx-auto">
-          VVE is Visibuy’s proprietary AI-powered system for product verification. It uses advanced computer vision to detect mismatches, flag counterfeit items, and ensure that seller-uploaded images match verified standards. Each verification is logged with a unique ID on a tamper-proof blockchain, ensuring trust, traceability, and accountability. (Coming Soon)
+          VVE is the brain behind every verified order — AI-powered, human-approved.(Coming Soon)
           </p>
         </div>
       </div>

@@ -8,7 +8,7 @@ import { currencyFormmater, formatCurrency } from "@/lib/utils";
 const SneakerDrop = () => {
   const { data, error, isError, isLoading } = useGetPublicProducts({
     page: 1,
-    pageSize: 10,
+    pageSize: 6,
   });
   if (isError) {
     return (
