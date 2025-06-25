@@ -110,7 +110,7 @@ const Hero = () => {
                   >
                     <img
                       src={image}
-                      alt={`Verification photo ${index + 1}`}
+                      alt={`Verification image ${index + 1}`}
                       className="w-full h-full object-cover"
                     />
                   </button>
