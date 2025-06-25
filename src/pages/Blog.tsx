@@ -5,21 +5,10 @@ import { Link } from "react-router-dom";
 const BlogPost = () => {
   return (
     <div className="min-h-screen bg-background">
-      {/* Back Navigation */}
-      <section className="pt-20 pb-8 bg-white">
-        <div className="container mx-auto px-4">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-visibuy-blue hover:text-visibuy-blue/80 transition-colors mb-6"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Home
-          </Link>
-        </div>
-      </section>
+     
 
       {/* Article Header */}
-      <section className="pb-12 bg-white">
+      <section className="pt-32 pb-12 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-4xl lg:text-5xl font-bold text-black mb-6 leading-tight">

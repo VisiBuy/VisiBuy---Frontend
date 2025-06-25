@@ -110,6 +110,16 @@ function Footer() {
               Legal Information
             </Link>
           </li>
+          <li>
+            <Link to="/verification-guide" className="footer_link">
+              Verification Guide
+            </Link>
+          </li>
+          <li>
+            <Link to="/legal-information" className="footer_link">
+              Legal Information
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

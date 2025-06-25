@@ -2,7 +2,34 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "./Button";
+import { NavItem } from "./NavItem";
 
+export const navLinks = [
+  {
+    name: "Home",
+    href: "/",
+  },
+  {
+    name: "About",
+    href: "/about",
+  },
+  {
+    name: "Pricing",
+    href: "/pricing",
+  },
+  {
+    name: "Guide",
+    href: "/verification-guide",
+  },
+  {
+    name: "FAQ",
+    href: "/faq",
+  },
+  {
+    name: "Blog",
+    href: "/blog/visibuy-is-lauching",
+  },
+];
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -22,42 +49,9 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link
-              to="/"
-              className="text-visibuy-dark-gray hover:text-visibuy-primary transition-colors font-medium"
-            >
-              Home
-            </Link>
-            <Link
-              to="/about"
-              className="text-visibuy-dark-gray hover:text-visibuy-primary transition-colors font-medium"
-            >
-              About
-            </Link>
-            <Link
-              to="/pricing"
-              className="text-visibuy-dark-gray hover:text-visibuy-primary transition-colors font-medium"
-            >
-              Pricing
-            </Link>
-            <Link
-              to="/verification-guide"
-              className="text-visibuy-dark-gray hover:text-visibuy-primary transition-colors font-medium"
-            >
-              Guide
-            </Link>
-            <Link
-              to="/faq"
-              className="text-visibuy-dark-gray hover:text-visibuy-primary transition-colors font-medium"
-            >
-              FAQ
-            </Link>
-            <Link
-              to="/blog/visibuy-is-lauching"
-              className="text-visibuy-dark-gray hover:text-visibuy-primary transition-colors font-medium"
-            >
-              Blog
-            </Link>
+            {navLinks.map(({ name, href }) => (
+              <NavItem key={name} href={href} name={name} />
+            ))}
           </nav>
 
           {/* CTA Buttons */}
@@ -140,7 +134,7 @@ const Header = () => {
                   Login
                 </Button>
                 <Button className="w-full bg-visibuy-green hover:bg-visibuy-green/90 text-white hover:text-white text-lg h-12">
-                <Link to="/signup">Get Started</Link>
+                  <Link to="/signup">Get Started</Link>
                 </Button>
               </div>
             </nav>

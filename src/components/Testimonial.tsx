@@ -13,7 +13,7 @@ const Testimonials = () => {
       location: "Port Harcourt",
       avatar: "/review2.jpg",
       quote:
-        "VisiBuy’s delivery service really stands out with its visual verification system. It lets customers confirm the condition and contents of their package before it gets to them. This is a big deal, especially for valuable or fragile items, because you’ll know for sure that what you’re getting is exactly what you ordered. No more surprises or disappointments!",
+        "I no fit believe say dem actually show me real photos before delivery. This na the future!",
       rating: 5,
     },
     {
