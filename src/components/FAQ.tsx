@@ -20,7 +20,7 @@ const FAQ = () => {
     },
     {
       question: "How long does verification take?",
-      answer: "Sellers typically upload verification photos within 24-48 hours. You then have 24 hours to approve or request new photos."
+      answer: "Sellers typically upload verification photos within 6 hours. You then have 6 hours to approve or request new photos."
     },
     {
       question: "What if the delivered item doesn't match approved photos?",
