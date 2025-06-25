@@ -8,10 +8,11 @@ const Hero = () => {
   const [selectedImage, setSelectedImage] = useState(0);
 
   const sneakerImages = [
-    "/sideview.png",
-    "/frontview.png",
-    "/soleview.png",
-    "/backview.png",
+    "src/assets/onboarding/logo-and-size.jpg",
+    "src/assets/onboarding/material-and-stitching.jpg",
+    "src/assets/onboarding/side-view.jpg",
+    "src/assets/onboarding/sole-closeup.jpg",
+    "src/assets/onboarding/top-down-view.jpg",
   ];
 
   return (
@@ -97,7 +98,7 @@ const Hero = () => {
               </h3>
               <p className="text-black opacity-70">₦85,000</p>
               <div className="mt-4 flex gap-2">
-                {sneakerImages.slice(0, 4).map((image, index) => (
+                {sneakerImages.slice(0, 5).map((image, index) => (
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
@@ -109,15 +110,15 @@ const Hero = () => {
                   >
                     <img
                       src={image}
-                      alt={`Verification photo ${index + 1}`}
+                      alt={`Verification image ${index + 1}`}
                       className="w-full h-full object-cover"
                     />
                   </button>
                 ))}
               </div>
               <p className="text-xs text-visibuy-green mt-2 font-semibold">
-                ✅ 4 verification photos approved
-              </p>
+                ✅ 5 verification photos approved
+              </p> 
             </div>
           </div>
         </div>

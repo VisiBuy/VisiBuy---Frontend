@@ -735,7 +735,7 @@ const VerificationGuide = () => {
                 VERIFICATION GUIDE
               </Badge>
               <h1 className="text-4xl md:text-5xl font-bold text-visibuy-dark-gray mb-6">
-                Fashion Verification Guide
+                Visibuy Verification Guide
               </h1>
               <p className="text-xl text-visibuy-dark-gray/80 mb-8">
                 Your 5-Angle Photo Checklist for Accurate Orders
