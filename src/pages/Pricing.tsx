@@ -21,6 +21,26 @@ import {
   DialogTrigger,
 } from "@/ui/Dialog";
 
+const FeatureModal = ({
+  title,
+  description,
+  children,
+}: {
+  title: string;
+  description: string;
+  children: React.ReactNode;
+}) => (
+  <Dialog>
+    <DialogTrigger asChild>{children}</DialogTrigger>
+    <DialogContent className="max-w-md">
+      <DialogHeader>
+        <DialogTitle className="text-visibuy-green">{title}</DialogTitle>
+      </DialogHeader>
+      <p className="text-visibuy-dark-gray">{description}</p>
+    </DialogContent>
+  </Dialog>
+);
+
 const Pricing = () => {
   const [activeTab, setActiveTab] = useState<"sellers" | "buyers">("sellers");
 
@@ -95,25 +115,7 @@ const Pricing = () => {
     },
   ];
 
-  const FeatureModal = ({
-    title,
-    description,
-    children,
-  }: {
-    title: string;
-    description: string;
-    children: React.ReactNode;
-  }) => (
-    <Dialog>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-md">
-        <DialogHeader>
-          <DialogTitle className="text-visibuy-green">{title}</DialogTitle>
-        </DialogHeader>
-        <p className="text-visibuy-dark-gray">{description}</p>
-      </DialogContent>
-    </Dialog>
-  );
+ 
 
   return (
     <div className="min-h-screen bg-visibuy-light-shade">
@@ -454,7 +456,7 @@ const Pricing = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <FeatureModal
               title="Remote Seller Support"
-              description="A Visibuy+ benefit that allows warehouse staff to take product photos for sellers without physical access to inventory. Perfect for dropshippers."
+              description="A Visibuy+ benefit that allows warehouse staff to take verification photos for sellers without physical access to inventory. Perfect for dropshippers."
             >
               <div className="bg-visibuy-light-blue-tint rounded-xl p-6 cursor-pointer hover:shadow-lg transition-shadow">
                 <Truck className="w-12 h-12 text-visibuy-green mb-4" />
