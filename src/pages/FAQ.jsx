@@ -313,9 +313,9 @@ You stay in control — but you won’t always need to be hands-on.`,
                   Reach us via in-app chat or email at tech@visibuy.com.ng for
                   immediate assistance.
                 </p>
-                <Button className="bg-visibuy-green hover:bg-visibuy-green/90 text-white w-full">
+                <Link to="mailto:tech@visibuy.com.ng"><Button className="bg-visibuy-green hover:bg-visibuy-green/90 hover:text-white text-white w-full">
                   Contact Support
-                </Button>
+                </Button></Link>
               </div>
 
               <div className="bg-visibuy-blue-light rounded-2xl p-8">
@@ -327,9 +327,9 @@ You stay in control — but you won’t always need to be hands-on.`,
                   Need help with photo uploads? View our step-by-step
                   verification guide.
                 </p>
-                <Button className="bg-visibuy-green hover:bg-visibuy-green/90 text-white w-full">
+                <Link to="/verification-guide"><Button className="bg-visibuy-green hover:bg-visibuy-green/90 hover:text-white text-white w-full">
                   View Guide
-                </Button>
+                </Button></Link>
               </div>
             </div>
 
@@ -351,15 +351,7 @@ You stay in control — but you won’t always need to be hands-on.`,
               </div>
             </div>
 
-            <div className="mt-8 text-sm text-black/60">
-              <p>
-                🧭 Need help with photo uploads? View the{" "}
-                <span className="text-visibuy-blue font-semibold">
-                  Visibuy Fashion Verification Guide
-                </span>{" "}
-                for step-by-step instructions.
-              </p>
-            </div>
+            
           </div>
         </div>
       </section>
