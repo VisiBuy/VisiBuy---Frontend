@@ -40,7 +40,6 @@ const FeatureModal = ({
     </DialogContent>
   </Dialog>
 );
-
 const Pricing = () => {
   const [activeTab, setActiveTab] = useState<"sellers" | "buyers">("sellers");
 
