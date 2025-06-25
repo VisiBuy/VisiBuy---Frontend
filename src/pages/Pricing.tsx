@@ -40,7 +40,6 @@ const FeatureModal = ({
     </DialogContent>
   </Dialog>
 );
-
 const Pricing = () => {
   const [activeTab, setActiveTab] = useState<"sellers" | "buyers">("sellers");
 
@@ -115,7 +114,25 @@ const Pricing = () => {
     },
   ];
 
- 
+  const FeatureModal = ({
+    title,
+    description,
+    children,
+  }: {
+    title: string;
+    description: string;
+    children: React.ReactNode;
+  }) => (
+    <Dialog>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent className="max-w-md">
+        <DialogHeader>
+          <DialogTitle className="text-visibuy-green">{title}</DialogTitle>
+        </DialogHeader>
+        <p className="text-visibuy-dark-gray">{description}</p>
+      </DialogContent>
+    </Dialog>
+  );
 
   return (
     <div className="min-h-screen bg-visibuy-light-shade">
