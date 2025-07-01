@@ -882,10 +882,10 @@ const VerificationGuide = () => {
         {/* CTA Section */}
         <section className="py-16 bg-visibuy-green text-white">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-4">
+            <h2 className="text-3xl font-bold mb-4 leading-tight">
               Ready to Start Selling or Buying?
             </h2>
-            <p className="text-xl mb-8 opacity-90">
+            <p className="text-xl mb-8 opacity-90 leading-tight">
               Join thousands of users who trust Visibuy for authentic fashion
               verification
             </p>
