@@ -39,7 +39,8 @@ function Footer() {
 						</a>
 					</li> */}
         </ul>
-
+        <p className="footer_link text-sm">1A, Ezeorah Street, Ijegun Imore, New Satellite Town, Lagos</p>
+        <p className="footer_link text-sm">Christ Holy Church Rd, Elelenwo</p>
         <p className="copyright">
           &copy; <span className="year">2024 - {currentYear}</span> VisiBuy. All
           rights reserved.
