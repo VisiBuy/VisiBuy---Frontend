@@ -131,7 +131,7 @@ const Header = () => {
                   variant="outline"
                   className="w-full border-visibuy-green text-visibuy-green hover:bg-visibuy-green  hover:text-white h-12"
                 >
-                  Login
+                  <Link to="/login">Login</Link>
                 </Button>
                 <Button className="w-full bg-visibuy-green hover:bg-visibuy-green/90 text-white hover:text-white text-lg h-12">
                   <Link to="/signup">Get Started</Link>

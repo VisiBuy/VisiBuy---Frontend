@@ -22,13 +22,10 @@ export function useLogin() {
       dispatch(setCredentials(data));
       dispatch(setError(null));
 
-      let redirectPath = localStorage.getItem("redirectPath");
+      let redirectPath = localStorage.getItem("returnPath");
 
       if (redirectPath) {
-        if (!redirectPath.startsWith("#")) {
-          redirectPath = "/";
-        }
-        localStorage.removeItem("redirectPath");
+        localStorage.removeItem("returnPath");
         navigate(redirectPath);
       } else {
         const role = data.role.toLowerCase();
