@@ -39,8 +39,12 @@ function Footer() {
 						</a>
 					</li> */}
         </ul>
-        <p className="footer_link text-sm">1A, Ezeorah Street, Ijegun Imore, New Satellite Town, Lagos</p>
-        <p className="footer_link text-sm">Christ Holy Church Rd, Elelenwo</p>
+        <p className="footer_link text-sm leading-tight">
+          1A, Ezeorah Street, Ijegun Imore, New Satellite Town, Lagos
+        </p>
+        <p className="footer_link text-sm leading-tight">
+          Christ Holy Church Rd, Elelenwo Port harcourt, Rivers State
+        </p>
         <p className="copyright">
           &copy; <span className="year">2024 - {currentYear}</span> VisiBuy. All
           rights reserved.
@@ -52,10 +56,7 @@ function Footer() {
         <ul className="footer_nav">
           <li>
             {/* Added Visibuy FAQ link */}
-            <Link
-              to="/faq"
-              className="footer_link"
-            >
+            <Link to="/faq" className="footer_link">
               FAQ
             </Link>
           </li>
@@ -99,16 +100,6 @@ function Footer() {
           <li>
             <Link to="/refund-policy" className="footer_link">
               Refund Policy
-            </Link>
-          </li>
-          <li>
-            <Link to="/verification-guide" className="footer_link">
-              Verification Guide
-            </Link>
-          </li>
-          <li>
-            <Link to="/legal-information" className="footer_link">
-              Legal Information
             </Link>
           </li>
           <li>
