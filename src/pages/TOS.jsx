@@ -126,7 +126,7 @@ const TermsOfService = () => {
                 <p>If you have any questions about these Terms of Service, please contact us:</p>
                 <ul className="space-y-2">
                   <li>Email: legal@visibuy.com</li>
-                  <li>Phone: +234 (0) 123 456 7890</li>
+                  <li>Phone: +234 806 192 4490</li>
                   <li>Address: Lagos, Nigeria</li>
                 </ul>
               </div>

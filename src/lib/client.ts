@@ -16,6 +16,7 @@ axiosWithAuth.interceptors.request.use(
   (config:InternalAxiosRequestConfig) => {
     const state = store.getState();
     const token = state.auth.token;
+    
     if (token) {
       config.headers['auth-token'] = `${token}`;
     }
