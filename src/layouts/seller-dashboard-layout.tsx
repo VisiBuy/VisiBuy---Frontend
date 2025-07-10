@@ -72,7 +72,7 @@ export function SellerDashboardLayout() {
     },
     [searchParams]
   );
-  
+   
   return (
     <section className="flex min-h-screen relative">
       {/* Hidden on Mobile */}
