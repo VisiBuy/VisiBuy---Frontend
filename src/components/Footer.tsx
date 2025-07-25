@@ -53,6 +53,17 @@ const Footer = () => {
                   Blog
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://developers.visibuy.com.ng/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-visibuy-light-shade hover:text-white transition-colors"
+                >
+                  Visual Verification API
+                </a>
+              </li>
+
             </ul>
           </div>
 
