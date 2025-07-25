@@ -46,7 +46,7 @@ export const fetchProducts = createAsyncThunk(
         },
       });
       const data = response.data.sneakers;
-      console.log("Fetched products:", data);
+  
 
       // Extract min & max prices
       const prices = data.map((p: any) => p.price);

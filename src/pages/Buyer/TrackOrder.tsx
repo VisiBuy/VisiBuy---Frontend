@@ -11,6 +11,7 @@ import useOrderFilter from "@/modules/Buyer/hooks/useOrderFilter";
 import LoadingSpinner from "@/ui/LoadingSpinner";
 import { FilterStatus } from "@/modules/Buyer/features/track-order/components/OrderStatusButtons";
 import ErrorBoundary from "@/common/components/ErrorBoundary";
+import EmptyState from "@/common/components/EmptyState";
 
 const ORDERS_PER_PAGE = 10;
 
@@ -103,8 +104,8 @@ const BuyerTrackOrderPage = () => {
                   </div>
                 ) : error ? (
                   <p className="text-red-500">{error}</p>
-                ) : allOrders?.length === 0 ? (
-                  <p>No orders yet.</p>
+                ) : allOrders.length === 0 ? (
+                  <EmptyState message="You have no orders yet." />
                 ) : paginatedOrders.length > 0 ? (
                   paginatedOrders.map((order) => (
                     <OrderCard key={order.orderId} order={order} />

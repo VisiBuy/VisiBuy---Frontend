@@ -9,10 +9,17 @@ async function getProductList(queryParams: ISellerProductQueryParams) {
     totalPages: response.totalPages,
   };
 }
+async function getPublicProductList(queryParams: ISellerProductQueryParams) {
+  const response = await SellerProductApi.getPublicProductList(queryParams);
+  return {
+    data: transformSellerProduct(response),
+    totalPages: response.totalPages,
+  };
+}
 
 async function createProduct(productData: FormData) {
   const response = await SellerProductApi.createProduct(productData);
   return response;
 }
 
-export default { getProductList, createProduct };
+export default { getProductList, createProduct,getPublicProductList };

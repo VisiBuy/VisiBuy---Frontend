@@ -200,7 +200,7 @@ export function LoginForm() {
             </div>
 
             <Button asChild variant="link" className="h-2 text-blue">
-              <Link to="/reset-password" className="text-xl font-OpenSans">
+              <Link to="/password-recovery" className="text-xl font-OpenSans">
                 Forgot Password
               </Link>
             </Button>

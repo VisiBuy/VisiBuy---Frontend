@@ -27,6 +27,8 @@ import { FaHamburger } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
 import { SellerMobileSideBar } from "./seller-mobile-sidebar";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import SellerOnboardingModal from "@/modules/Seller/components/seller-onboarding-modal";
+import { handleLogout } from "@/lib/handleLogout";
 
 const navlinks: NavItemProps[] = [
   { name: "Products", href: "products", iconName: "briefcase" },
@@ -70,11 +72,7 @@ export function SellerDashboardLayout() {
     },
     [searchParams]
   );
-  const handleLogout = () => {
-    localStorage.removeItem('redirectPath');
-    dispatch(logout());
-    navigate("/login");
-  };
+   
   return (
     <section className="flex min-h-screen relative">
       {/* Hidden on Mobile */}
@@ -161,6 +159,7 @@ export function SellerDashboardLayout() {
           <Outlet />
           <Toaster />
           <AddProductModal />
+          <SellerOnboardingModal/>
         </main>
       </div>
       <SellerMobileSideBar

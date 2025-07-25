@@ -7,6 +7,7 @@ export const transformUserData = async (data: any) => {
     address: user?.address,
     phone: user?.phone,
     role: user?.role,
+    hasCompletedOnboarding:user?.hasCompletedOnboarding
   };
 };
  

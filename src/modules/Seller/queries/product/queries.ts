@@ -10,3 +10,10 @@ export function useGetProducts(queryParams: ISellerProductQueryParams) {
     queryFn: () => SellerProductService.getProductList(queryParams),
   });
 }
+
+export function useGetPublicProducts(queryParams: ISellerProductQueryParams) {
+  return useQuery({
+    queryKey: ["public_products"],
+    queryFn: () => SellerProductService.getPublicProductList(queryParams),
+  });
+}

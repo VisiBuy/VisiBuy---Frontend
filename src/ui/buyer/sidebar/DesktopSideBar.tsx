@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import clsx from "clsx";
 import { FaSignOutAlt } from "react-icons/fa";
 import { dashboardConfig } from "../../../lib/config";
@@ -9,6 +9,8 @@ import {
   SubNav,
 } from "../../../modules/Buyer/components/BuyerNavItems";
 import { useNotifications } from "@/context/notifications/NotificationsContext";
+import { handleLogout } from "@/lib/handleLogout";
+
 
 
 // Helper function to build a proper URL from the basePath and the relative path.
@@ -28,7 +30,6 @@ const DesktopSideBar = () => {
     const { basePath, routes } = buyerConfig;
     const location = useLocation();
     const { unreadCount } = useNotifications();
-
 
     return (
       <aside className="bg-white h-screen w-80 hidden sm:flex flex-col justify-between px-8 pt-10 pb-24 border border-gray-100">
@@ -117,7 +118,7 @@ const DesktopSideBar = () => {
 
         {/* Logout */}
         <div>
-          <button className="flex items-center gap-6 text-red-500 text-2xl font-bold">
+          <button className="flex items-center gap-6 text-red-500 text-2xl font-bold" onClick={handleLogout}>
             <FaSignOutAlt size={20} /> <span>LogOut</span>
           </button>
         </div>

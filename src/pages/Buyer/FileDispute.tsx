@@ -31,10 +31,10 @@ const FileDispute = () => {
   };
 
   return (
-<div className="min-h-screen flex w-full items-center justify-center bg-blue p-4">
+<div className="min-h-screen flex w-full items-center justify-center p-4 relative">
       <div
         className="max-w-4xl w-full bg-white shadow-lg rounded-lg px-8 py-10
-        animate-fadeInUp transition-all duration-700"
+        animate-fadeInUp transition-all duration-700 fixed top-52 -z-10 md:top-40"
       >
         <h2 className="text-3xl font-Montserrat font-bold mb-8 text-center text-gray-800">
           File a Dispute Report
@@ -83,7 +83,7 @@ const FileDispute = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 transition-colors duration-300 text-white font-semibold py-3 rounded-md"
+            className="w-full bg-blue hover:bg-gray-300 transition-colors duration-300 text-white hover:text-blue text-lg font-bold py-3 rounded-md"
           >
             Submit Dispute
           </button>
