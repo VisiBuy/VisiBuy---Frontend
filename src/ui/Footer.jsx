@@ -79,6 +79,19 @@ function Footer() {
               Blog
             </Link>
           </li>
+          <li>
+            <a
+              href="https://developers.visibuy.com.ng/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-visibuy-dark-gray hover:text-visibuy-primary transition-colors font-medium"
+            >
+              Visual Verification API
+              <span className="ml-2 text-xs border border-visibuy-primary text-visibuy-primary px-2 py-0.5 rounded">
+                Developer Preview
+              </span>
+            </a>
+          </li>
         </ul>
       </div>
 
