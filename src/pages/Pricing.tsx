@@ -79,6 +79,7 @@ const Pricing = () => {
     { name: "Video Verification", free: false, plus: true },
     { name: "Request Additional Photos", free: false, plus: true },
     { name: "Request Size Measurements", free: false, plus: true },
+    { name: "Verify Off-Platform Sellers", free: false, plus: true },
     { name: "Early Access to Drops", free: false, plus: true },
     { name: "Verified Shopper Badge", free: false, plus: true },
     { name: "Priority Support", free: false, plus: true },
@@ -107,6 +108,12 @@ const Pricing = () => {
       answer:
         "Yes. You can switch between Free and Visibuy+ anytime from your dashboard.",
     },
+    {
+      question: "Can I verify products from Instagram or Facebook sellers using Visibuy?",
+      answer:
+        "Yes. With Visibuy+, you can request photo or video verification for products sold by social or off-platform sellers — like those on Instagram, Facebook, or WhatsApp. Simply provide seller details, and we'll help ensure it's legit before you pay.",
+    },
+
     {
       question: "What is VLN (Visibuy Logistics Network)?",
       answer:
@@ -324,8 +331,7 @@ const Pricing = () => {
                 Buyer Pricing Plans
               </h2>
               <p className="text-xl text-visibuy-dark-gray/70">
-                Perfect for fashion lovers who value control, perks, and early
-                access.
+                Perfect for serious shoppers who value control, perks, and early access — no matter what they’re buying.
               </p>
             </div>
 
