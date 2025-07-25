@@ -12,7 +12,7 @@ const BlogPost = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-4xl lg:text-5xl font-bold text-black mb-6 leading-tight">
-              Visibuy is Launching: The Future of Fashion Shopping is Here
+              Visibuy is Live: The Safer, Smarter Way to Shop Online
             </h1>
 
             <div className="flex items-center gap-6 text-black/60 mb-8">
@@ -44,7 +44,7 @@ const BlogPost = () => {
 
                 <p className="text-lg text-black/80 mb-8 leading-relaxed">
                   Our mission is simple: to eliminate the guesswork in online
-                  fashion shopping by letting buyers verify their orders before
+                  shopping by letting buyers verify their orders before
                   delivery. No more "what I ordered vs. what I got." No more
                   surprises. Just peace of mind, powered by visual verification.
                 </p>
@@ -54,7 +54,7 @@ const BlogPost = () => {
                 </h2>
 
                 <p className="text-lg text-black/80 mb-6 leading-relaxed">
-                  Online fashion shopping in Nigeria has grown rapidly, but it
+                  Online shopping in Nigeria has grown rapidly, but it
                   still suffers from a fundamental flaw: buyers don't always
                   receive what they paid for. This leads to frustration,
                   returns, and mistrust. We're changing that.
@@ -90,8 +90,7 @@ const BlogPost = () => {
                 </div>
 
                 <p className="text-xl font-semibold text-black my-8 leading-relaxed">
-                  This is not just another e-commerce platform. It's the first
-                  verification-first fashion ecosystem in Africa.
+                  Not just another e-commerce site — it’s Africa’s first verification-first ecosystem for everything you shop online.
                 </p>
 
                 <h2 className="text-3xl font-bold text-black mb-6 mt-12">
@@ -108,7 +107,7 @@ const BlogPost = () => {
                         Order
                       </h3>
                       <p className="text-lg text-black/80">
-                        Choose your fashion item and pay securely
+                        Choose your item and pay securely
                         (escrow-protected).
                       </p>
                     </div>
@@ -155,7 +154,7 @@ const BlogPost = () => {
                     to="/verification-guide"
                     className="text-visibuy-blue hover:underline"
                   >
-                    Fashion Verification Guide
+                    Visibuy Verification Guide
                   </Link>
                   , and{" "}
                   <Link
@@ -203,7 +202,7 @@ const BlogPost = () => {
                 </h2>
 
                 <p className="text-lg text-black/80 mb-6 leading-relaxed">
-                  We're also inviting fashion sellers and logistics partners to
+                  We're also inviting sellers and logistics partners to
                   join the future of verified e-commerce. Visibuy helps sellers
                   gain customer trust instantly, and offers tools to streamline
                   fulfillment.
@@ -236,14 +235,14 @@ const BlogPost = () => {
 
                 <p className="text-lg text-black/80 mb-6 leading-relaxed">
                   We're now live, with hundreds of users already shopping
-                  verified fashion. As we expand, we'll keep improving VVE,
+                  verified product. As we expand, we'll keep improving VVE,
                   growing the Visibuy Logistics Network, and launching more
                   tools that empower both buyers and sellers.
                 </p>
 
                 <p className="text-lg text-black/80 mb-8 leading-relaxed">
                   This is just the beginning. Visibuy is on a mission to
-                  redefine trust in online fashion shopping. And we want you on
+                  redefine trust in online shopping. And we want you on
                   this journey.
                 </p>
 
