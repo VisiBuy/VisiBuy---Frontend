@@ -6,6 +6,9 @@ import {
   Role,
   RegisterResponse,
   SignupCredentials,
+  IUpdateUser,
+  IResetPassword,
+  IForgotPassword,
 } from "@/modules/Auth/models/types";
 import { apiClient, axiosWithAuth } from "@/lib/client";
 class AuthApiAdapter implements AuthRepository {
@@ -49,8 +52,18 @@ class AuthApiAdapter implements AuthRepository {
   async updateUser<T>(role: Role, payload: T): Promise<void> {
     await axiosWithAuth.put(`/user/${role}`, payload);
   }
+  async resetPassword(payload: IResetPassword): Promise<void> {
+    await apiClient.post(`/reset-password`, payload, {
+      headers: {
+        "auth-token": payload.resetToken,
+      },
+    });
+  }
+  async forgotPassword(payload: IForgotPassword): Promise<void> {
+    await apiClient.post(`/forgot-password`, payload);
+  }
   async logout(): Promise<void> {
-   await apiClient.post("/logout");
+    await apiClient.post("/logout");
   }
 }
 export default new AuthApiAdapter();

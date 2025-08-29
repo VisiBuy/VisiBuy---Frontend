@@ -23,12 +23,13 @@ export interface ProductDto {
   price: number;
   description: string;
   stock_status: "in_stock" | "out_stock";
-  images?: File[];
+  images?: File[] | string[];
 }
 export type ImageUploadSchema = z.infer<typeof ImageMetadataSchema>;
 export interface ISellerProduct extends ProductDto {
   store_name: string;
   seller_img: string;
+  
 }
 // FileList with file type validation
 const ImageFileListSchema = z.custom<File>(
@@ -41,7 +42,7 @@ const ImageFileListSchema = z.custom<File>(
   },
   {
     message: "Expected a FileList containing only image files",
-  }
+  },
 );
 
 export const ImageMetadataSchema = z.object({
@@ -61,7 +62,7 @@ export const AddProductSchema = z.object({
       z
         .string()
         .min(1, "sneaker color cannot be empty")
-        .max(100, " sneaker color is too long")
+        .max(100, " sneaker color is too long"),
     )
     .min(1, "Color must contain at least one sneaker color"),
   brand: z
@@ -93,7 +94,7 @@ export const AddProductSchema = z.object({
           required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Size"),
           invalid_type_error: VALIDATION_INVALID_FIELD.replace(
             "{{FIELD}}",
-            "Size"
+            "Size",
           ),
         })
         .refine((val) => !isNaN(Number(val)), {
@@ -104,7 +105,7 @@ export const AddProductSchema = z.object({
         })
         .refine((val) => Number(val) <= 100, {
           message: "Size is too high",
-        })
+        }),
     )
     .min(1, "Size must contain at least one sneaker size"),
 
@@ -113,7 +114,7 @@ export const AddProductSchema = z.object({
       required_error: VALIDATION_REQUIRED.replace("{{FIELD}}", "Price"),
       invalid_type_error: VALIDATION_INVALID_FIELD.replace(
         "{{FIELD}}",
-        "Price"
+        "Price",
       ),
     })
     .positive("Price must be positive")

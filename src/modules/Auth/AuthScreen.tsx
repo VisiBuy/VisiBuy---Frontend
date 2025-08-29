@@ -3,7 +3,7 @@ import lockIcon from "/lock.png";
 import { Toaster } from "../../ui/Toaster";
 
 type AuthScreenProps = {
-  title: "Sign Up" | "Login" | "Password Recovery";
+  title: "Sign Up" | "Login" | "Password Recovery" | "Password Reset";
   formComponent: React.ReactNode;
 };
 

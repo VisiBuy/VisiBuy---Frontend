@@ -10,7 +10,7 @@ import SellerProductRespository from "@/modules/Seller/respository/seller-produc
 class SellerProductApiAdapter implements SellerProductRespository {
   async getProduct() {}
   async getProductList(
-    queryParams: ISellerProductQueryParams
+    queryParams: ISellerProductQueryParams,
   ): Promise<QueryResult<ISellerProduct>> {
     const searchParams = new URLSearchParams();
 
@@ -21,7 +21,26 @@ class SellerProductApiAdapter implements SellerProductRespository {
       }
     });
     const response = await axiosWithAuth.get(
-      `/seller/products?${searchParams.toString()}`
+      `/seller/products?${searchParams.toString()}`,
+    );
+    return {
+      totalPages: response.data.pagination.totalPages,
+      ...response.data,
+    };
+  }
+  async getPublicProductList(
+    queryParams: ISellerProductQueryParams,
+  ): Promise<QueryResult<ISellerProduct>> {
+    const searchParams = new URLSearchParams();
+
+    // Add all defined query parameters
+    Object.entries(queryParams).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        searchParams.append(key, String(value));
+      }
+    });
+    const response = await axiosWithAuth.get(
+      `/public/products?${searchParams.toString()}`,
     );
     return {
       totalPages: response.data.pagination.totalPages,
@@ -29,7 +48,7 @@ class SellerProductApiAdapter implements SellerProductRespository {
     };
   }
   async createProduct(productData: FormData) {
-    console.log(productData,'ds')
+    console.log(productData, "ds");
     const response = await axiosWithAuth.post("/create-product", productData);
     return response.data;
   }
