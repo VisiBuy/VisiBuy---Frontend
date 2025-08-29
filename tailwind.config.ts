@@ -24,7 +24,7 @@ const config: Config = {
       colors: {
         "visibuy-blue": "#007aff",
         "visibuy-black": "#000000",
-        "visibuy-gold":"#e4a826",
+        "visibuy-gold": "#e4a826",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         background: "hsl(var(--background))",
@@ -92,6 +92,7 @@ const config: Config = {
           "light-shade": "#F1F1F1", // Light Shade
           "dark-gray": "#333333", // Dark Gray
           "light-blue-tint": "#CCE3FF", // Light Blue Tint
+          "neon-blue": "#00FFFF",
         },
       },
       borderRadius: {
@@ -136,6 +137,70 @@ const config: Config = {
             height: "0",
           },
         },
+        marquee: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+        "bubble-float": {
+          "0%": {
+            transform: "translateY(100vh) scale(0)",
+            opacity: "0",
+          },
+          "10%": {
+            opacity: "0.6",
+          },
+          "90%": {
+            opacity: "0.6",
+          },
+          "100%": {
+            transform: "translateY(-100px) scale(1)",
+            opacity: "0",
+          },
+        },
+        "bubble-float-slow": {
+          "0%": {
+            transform: "translateY(100vh) scale(0) rotate(0deg)",
+            opacity: "0",
+          },
+          "10%": {
+            opacity: "0.8",
+          },
+          "90%": {
+            opacity: "0.8",
+          },
+          "100%": {
+            transform: "translateY(-100px) scale(1) rotate(360deg)",
+            opacity: "0",
+          },
+        },
+        "fade-in": {
+          from: {
+            opacity: "0",
+            transform: "translateY(30px)",
+          },
+          to: {
+            opacity: "1",
+            transform: "translateY(0)",
+          },
+        },
+        "scale-in": {
+          from: {
+            opacity: "0",
+            transform: "scale(0.8)",
+          },
+          to: {
+            opacity: "1",
+            transform: "scale(1)",
+          },
+        },
+        "delivery-ride": {
+          "0%": {
+            transform: "translateX(-100px) translateY(-50%)",
+          },
+          "100%": {
+            transform: "translateX(calc(100vw + 100px)) translateY(-50%)",
+          },
+        },
       },
       animation: {
         rotation: "rotation 1s linear infinite",
@@ -144,6 +209,12 @@ const config: Config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "bounce-slow": "bounce 5s infinite",
+        marquee: "marquee 15s linear infinite",
+        "bubble-float": "bubble-float linear infinite",
+        "bubble-float-slow": "bubble-float-slow linear infinite",
+        "fade-in": "fade-in 1s ease-out",
+        "scale-in": "scale-in 1s ease-out 0.3s both",
+        "delivery-ride": "delivery-ride 15s linear infinite",
       },
     },
   },

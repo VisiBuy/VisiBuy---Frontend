@@ -1,3 +1,6 @@
+import { Star, CheckCircle2, Flag, PartyPopper } from "lucide-react";
+import { motion } from "framer-motion";
+
 const Testimonials = () => {
   const testimonials = [
     {
@@ -24,96 +27,75 @@ const Testimonials = () => {
         "I recently used Visibuy for my online shopping, and I was really impressed! What I ordered matched exactly what I received—no surprises. I especially loved the personalized feature that allowed me to verify my order before delivery. It gave me peace of mind, especially for my new dress that I was excited about. I highly recommend Visibuy; they truly deliver on their promise!",
       rating: 5,
     },
-    // {
-    //   name: "Emeka",
-    //   location: "Lagos",
-    //   avatar: "🧔🏾‍♂️",
-    //   quote:
-    //     "I no fit believe say dem actually show me real photos before delivery. This na the future!",
-    //   rating: 5,
-    // },
-    // {
-    //   name: "Adunni",
-    //   location: "Ibadan",
-    //   avatar: "👩🏾‍🦱",
-    //   quote:
-    //     "My Ankara fabric come exactly as I see am for photo. Visibuy don change the game!",
-    //   rating: 5,
-    // },
-    // {
-    //   name: "David",
-    //   location: "Enugu",
-    //   avatar: "👨🏾‍💻",
-    //   quote:
-    //     "Tech guy wey dey appreciate good innovation. This verification system na next level!",
-    //   rating: 5,
-    // },
   ];
 
   return (
-    <section className="py-20 bg-visibuy-white">
+    <section className="py-20 bg-visibuy-white overflow-hidden">
       <div className="container mx-auto px-4">
+        {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-visibuy-black mb-4 leading-tight">
-            Real People, Real{" "}
+            Real <span className="text-blue">People</span>, Real{" "}
             <span className="text-visibuy-gold">Confidence</span>
           </h2>
-          <p className="text-xl text-visibuy-black/70 leading-tight">
-            Hear from our verified community across Nigeria 🇳🇬
+          <p className="text-xl text-visibuy-black/70 leading-tight flex items-center justify-center gap-2">
+            Hear from our verified community across Nigeria{" "}
+            <Flag className="w-5 h-5 text-green-600" />
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
+        {/* Infinite scroll testimonials */}
+        <motion.div
+          className="flex gap-8"
+          animate={{ x: ["100%", "-100%"] }}
+          transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+        >
+          {[...testimonials, ...testimonials].map((testimonial, index) => (
             <div
               key={index}
-              className="bg-visibuy-blue-light rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group"
+              className="bg-visibuy-blue min-w-[300px] max-w-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group"
             >
               <div className="flex items-center mb-4">
                 <div
-                  className={`w-12 h-12  bg-no-repeat bg-cover rounded-full flex items-center justify-center text-2xl mr-4`}
+                  className="w-12 h-12 bg-no-repeat bg-cover rounded-full mr-4"
                   style={{
                     backgroundImage: `url(${testimonial.avatar})`,
                   }}
                 ></div>
                 <div>
-                  <h4 className="font-bold text-visibuy-black">
-                    {testimonial.name}
-                  </h4>
-                  <p className="text-sm text-visibuy-black/70">
-                    {testimonial.location}
-                  </p>
+                  <h4 className="font-bold text-white">{testimonial.name}</h4>
+                  <p className="text-sm text-white">{testimonial.location}</p>
                 </div>
               </div>
 
               <div className="flex mb-3">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <span key={i} className="text-visibuy-gold text-lg">
-                    ⭐
-                  </span>
+                  <Star
+                    key={i}
+                    className="w-5 h-5 text-visibuy-gold fill-visibuy-gold"
+                  />
                 ))}
               </div>
 
-              <blockquote className="text-visibuy-black/80 italic leading-relaxed">
+              <blockquote className="text-white italic leading-relaxed">
                 "{testimonial.quote}"
               </blockquote>
 
-              <div className="mt-4 flex items-center text-sm text-visibuy-green">
-                <span className="mr-1">✅</span>
+              <div className="mt-4 flex items-center text-sm text-white">
+                <CheckCircle2 className="w-4 h-4 mr-1" />
                 Verified Purchase
               </div>
             </div>
           ))}
-        </div>
+        </motion.div>
 
+        {/* Bottom CTA */}
         <div className="text-center mt-12">
-          <div className="inline-flex items-center bg-visibuy-blue-light rounded-full px-6 py-3 shadow-lg">
-            <span className="text-3xl mr-3">🎉</span>
+          <div className="inline-flex items-center bg-visibuy-primary rounded-full px-6 py-3 shadow-lg">
+            <PartyPopper className="w-6 h-6 mr-3 text-yellow-300" />
             <div className="text-left">
-              <div className="font-bold text-visibuy-black">
-                10,000+ Happy Customers
-              </div>
-              <div className="text-sm text-visibuy-black/70">
+              <div className="font-bold text-white">10,000+ Happy Customers</div>
+              <div className="text-sm text-white">
                 Join the verified community
               </div>
             </div>

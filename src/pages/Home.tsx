@@ -11,12 +11,15 @@ import SneakerDrop from "@/components/SneakerDrop";
 import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Testimonials from "@/components/Testimonial";
+import DisclaimerBanner from "@/components/DisclaimerBanner";
+import DeliveryProcess from "@/components/DeliveryProcess";
 
 function Home() {
   return (
     <>
+      {/* <DisclaimerBanner /> */}
       <Hero/>
-      <CulturalShowcase />
+      <DeliveryProcess />
       <HowItWorks />
       <WhyVisibuy/>
       <SneakerDrop/>

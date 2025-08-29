@@ -1,102 +1,158 @@
-import { Shield, Eye, Ban, Truck } from "lucide-react";
+import { Shield, Eye, Ban, Truck, Bot, Camera, Brain } from "lucide-react"
+import { Link } from "react-router-dom"
 
 const WhyVisibuy = () => {
   const features = [
     {
       icon: Eye,
       title: "See Before Delivery",
-      description: "Real product photos sent to you before dispatch",
-      color: "text-visibuy-blue",
+      description:
+        "Real product photos sent to you before dispatch. No more surprises, just transparency.",
+      bg: "bg-visibuy-primary",
     },
     {
       icon: Ban,
       title: "No More Disappointments",
-      description: "End the 'What I Ordered vs What I Got' nightmare",
-      color: "text-visibuy-gold",
+      description:
+        "End the 'What I Ordered vs What I Got' nightmare with our verification system.",
+      bg: "bg-yellow-400",
     },
     {
       icon: Shield,
       title: "Only Verified Listings",
-      description: "Every seller verified, every product authentic",
-      color: "text-visibuy-green",
+      description:
+        "Every seller verified, every product authentic. Trust built into every transaction.",
+      bg: "bg-yellow-500",
     },
     {
       icon: Truck,
       title: "Trusted Rider Network",
-      description: "Real-time delivery updates and GPS tracking",
-      color: "text-visibuy-black",
+      description:
+        "Real-time delivery updates and GPS tracking for complete peace of mind.",
+      bg: "bg-blue",
     },
-  ];
+  ]
 
   return (
-    <section className="py-20 bg-visibuy-blue-light">
+    <section className="py-16 sm:py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-visibuy-black mb-4">
-            Why <span className="text-visibuy-blue">Visibuy</span>?
-          </h2>
-          <p className="text-xl text-visibuy-black/70 max-w-2xl mx-auto leading-relaxed">
-            Trust in Every Pixel — We're changing how Nigeria shops online, one
-            verified order at a time.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="bg-visibuy-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 text-center group hover:scale-105"
+        {/* Header Section */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-16 lg:mb-20">
+          {/* Left Text */}
+          <div className="space-y-6 sm:space-y-8 text-center lg:text-left">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+              WHY{" "}
+              <span className="px-3 sm:px-4 py-1 bg-blue text-white rounded-md">
+                VISIBUY
+              </span>
+            </h2>
+            <p className="text-base sm:text-lg text-gray-600 max-w-md mx-auto lg:mx-0">
+              We're revolutionizing online shopping in Nigeria through
+              transparency, verification, and trust. Every order is a promise
+              kept, every delivery is exactly what you expected.
+            </p>
+            <Link
+              to="/login"
+              className="inline-block bg-blue text-white px-6 py-3 rounded-xl font-semibold hover:scale-105 transition text-sm sm:text-base"
             >
-              <div
-                className={`w-16 h-16 ${feature.color.replace("text-", "bg-")}/10 rounded-full flex items-center justify-center mb-6 mx-auto`}
-              >
-                <feature.icon className={`w-8 h-8 ${feature.color}`} />
-              </div>
+              SHOP NOW
+            </Link>
+          </div>
 
-              <h3 className="text-xl font-bold text-visibuy-black mb-3">
-                {feature.title}
-              </h3>
-              <p className="text-visibuy-black/70 leading-relaxed">
-                {feature.description}
-              </p>
-            </div>
-          ))}
+          {/* Right Features */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-1">
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                className={`rounded-2xl p-5 sm:p-6 ${feature.bg} hover:shadow-lg transition`}
+              >
+                <div className="mb-3 sm:mb-4">
+                  <feature.icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                </div>
+                <h3 className="text-base sm:text-lg font-bold text-white mb-1 sm:mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-xs sm:text-sm italic text-white leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* VVE Section */}
-        <div className="mt-20 bg-gradient-to-r from-visibuy-blue to-visibuy-black rounded-3xl p-8 lg:p-12 text-visibuy-white text-center">
-          <h3 className="text-3xl lg:text-4xl font-bold mb-4">
-            Powered by <span className="text-visibuy-gold">VVE</span>
+        {/* Powered by VVE Section */}
+        <div className="bg-black rounded-2xl sm:rounded-3xl p-8 sm:p-12 text-white">
+          <h3 className="text-3xl sm:text-4xl text-center font-bold mb-4">
+            Powered by{" "}
+            <span className="bg-gradient-to-r from-blue-400 to-blue bg-clip-text text-transparent">
+              VVE
+            </span>
           </h3>
-          <p className="text-xl mb-8 opacity-90">Visual Verification Engine</p>
+          <p className="text-blue font-bold mb-2 text-center">
+            Visual Verification Engine
+          </p>
+          <p className="text-gray-300 mb-8 max-w-xl text-center mx-auto text-sm sm:text-base">
+            Our proprietary AI system ensures every product matches its listing
+            through advanced computer vision and human verification layers.
+          </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
-            <div className="bg-visibuy-white/20 backdrop-blur-sm rounded-lg p-4">
-              <div className="text-2xl mb-2">🤖</div>
-              <div className="font-semibold">AI + Computer Vision</div>
+          <div className="grid sm:grid-cols-3 gap-6 mb-6">
+            <div className="flex items-start gap-3 sm:gap-4">
+              <div className="bg-blue-500/20 p-2 sm:p-3 rounded-xl">
+                <Bot className="w-5 h-5 sm:w-6 sm:h-6 text-blue" />
+              </div>
+              <div>
+                <div className="font-semibold text-sm sm:text-base">
+                  AI + Computer Vision
+                </div>
+                <div className="text-xs sm:text-sm text-gray-400">
+                  Advanced image analysis
+                </div>
+              </div>
             </div>
-            <div className="bg-visibuy-white/20 backdrop-blur-sm rounded-lg p-4">
-              <div className="text-2xl mb-2">📷</div>
-              <div className="font-semibold">Real-time Photo Verification</div>
+            <div className="flex items-start gap-3 sm:gap-4">
+              <div className="bg-blue-500/20 p-2 sm:p-3 rounded-xl">
+                <Camera className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
+              </div>
+              <div>
+                <div className="font-semibold text-sm sm:text-base">
+                  Real-time Verification
+                </div>
+                <div className="text-xs sm:text-sm text-gray-400">
+                  Instant photo validation
+                </div>
+              </div>
             </div>
-            <div className="bg-visibuy-white/20 backdrop-blur-sm rounded-lg p-4">
-              <div className="text-2xl mb-2">🧠</div>
-              <div className="font-semibold">Buyer Approval Layer</div>
-            </div>
-            <div className="bg-visibuy-white/20 backdrop-blur-sm rounded-lg p-4">
-              <div className="text-2xl mb-2">💾</div>
-              <div className="font-semibold">Blockchain Logs</div>
-              <div className="text-xs opacity-75 mt-1">(Coming Soon)</div>
+            <div className="flex items-start gap-3 sm:gap-4">
+              <div className="bg-blue-500/20 p-2 sm:p-3 rounded-xl">
+                <Brain className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
+              </div>
+              <div>
+                <div className="font-semibold text-sm sm:text-base">
+                  Human Approval
+                </div>
+                <div className="text-xs sm:text-sm text-gray-400">
+                  Your final decision matters
+                </div>
+              </div>
             </div>
           </div>
 
-          <p className="mt-8 text-lg opacity-90 max-w-2xl leading-tight mx-auto">
-          VVE is the brain behind every verified order — AI-powered, human-approved.(Coming Soon)
-          </p>
+          <div className="pt-4 text-center">
+            <div className="text-xl sm:text-2xl text-blue font-bold">
+              COMING SOON!!!
+            </div>
+            <div className="font-semibold text-sm sm:text-base">
+              Blockchain Integration
+            </div>
+            <div className="text-xs sm:text-sm text-gray-400">
+              Immutable verification records
+            </div>
+          </div>
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default WhyVisibuy;
+export default WhyVisibuy

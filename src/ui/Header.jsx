@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "./Button";
@@ -30,11 +30,38 @@ export const navLinks = [
     href: "/blog/visibuy-is-lauching",
   },
 ];
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [disclaimerVisible, setDisclaimerVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        // Scrolling down - hide disclaimer
+        setDisclaimerVisible(false);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up - show disclaimer
+        setDisclaimerVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-visibuy-light-shade">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur-sm border-b border-visibuy-light-shade transition-all duration-300 ease-in-out ${
+        disclaimerVisible ? "top-10" : "top-0"
+      }`}
+    >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -44,7 +71,7 @@ const Header = () => {
               alt="visibuy_logo"
               src="./VisiBuy - Black.png"
               width={120}
-            ></img>
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -58,7 +85,7 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-4">
             <Button
               variant="outline"
-              className="border-visibuy-green text-visibuy-green hover:bg-visibuy-green  hover:text-white py-2 text-lg h-12 "
+              className="border-visibuy-green text-visibuy-green hover:bg-visibuy-green hover:text-white py-2 text-lg h-12 bg-transparent"
             >
               <Link to="/login">Login</Link>
             </Button>
@@ -129,7 +156,7 @@ const Header = () => {
               <div className="px-4 py-2 space-y-2">
                 <Button
                   variant="outline"
-                  className="w-full border-visibuy-green text-visibuy-green hover:bg-visibuy-green  hover:text-white h-12"
+                  className="w-full border-visibuy-green text-visibuy-green hover:bg-visibuy-green hover:text-white h-12 bg-transparent"
                 >
                   <Link to="/login">Login</Link>
                 </Button>
